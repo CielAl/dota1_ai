@@ -1,0 +1,45 @@
+12170c12170,12172
+< set udg_NotSpellsMax=66
+---
+> set udg_NotSpells[67]=1093752645
+> set udg_NotSpells[68]=1093752642
+> set udg_NotSpellsMax=68
+19020c19022,19023
+< if(indexId==indexid_aegis)and IsFlyingCourier(u)then
+---
+> if(indexId==indexid_aegis)and(IsFlyingCourier(u)or IsSpiritBear(u))then
+> if IsFlyingCourier(u)then
+19021a19025
+> endif
+19831a19836,19847
+> elseif indexId==indexid_mantastyleranged then
+> set tt_player1=GetItemPlayer(Item)
+> call RemoveItem(Item)
+> set newItem=CreateItem(Item_Dummy[indexid_yasha],x,y)
+> call SetItemPlayer(newItem,tt_player1,false)
+> call SetItemUserData(newItem,1)
+> set newItem=CreateItem(Item_Dummy[indexid_ultimateorb],x,y)
+> call SetItemPlayer(newItem,tt_player1,false)
+> call SetItemUserData(newItem,1)
+> set newItem=CreateItem(Item_Dummy[indexid_recipe_mantastyle],x,y)
+> call SetItemPlayer(newItem,tt_player1,false)
+> call SetItemUserData(newItem,1)
+22715c22731
+< if GetUnitState(Target,UNIT_STATE_LIFE)>(150.0/8.0)then
+---
+> if GetUnitState(Target,UNIT_STATE_LIFE)>(150.0/8.0+0.5)then
+23345c23361
+< if indexId==indexid_mantastyle and(LoadBoolean(hash_main,(GetHandleId(Source)),(129)))==true then
+---
+> if(indexId==indexid_mantastyle or indexId==indexid_mantastyleranged)and(LoadBoolean(hash_main,(GetHandleId(Source)),(129)))==true then
+50111a50128
+> call SetUnitPosition(Bear,GetUnitX(UnitVar),GetUnitY(UnitVar))
+50229c50246,50247
+< if GetWidgetLife(GetEnumItem())>0 then
+---
+> local integer indexId=GetIndex(GetEnumItem())
+> if GetWidgetLife(GetEnumItem())>0 and indexId!=indexid_aegis then
+62476c62494
+< return abilityId!=1093679446 and abilityId!=1093677622 and abilityId!=1093684314 and abilityId!=1093685582 and abilityId!=1093685065 and abilityId!=1093682265 and abilityId!=1095263841
+---
+> return abilityId!=1093679446 and abilityId!=1093677622 and abilityId!=1093684314 and abilityId!=1093685582 and abilityId!=1093685065 and abilityId!=1093682265 and abilityId!=1093752642 and abilityId!=1095263841

@@ -1,0 +1,526 @@
+3027,3069d3026
+< unit quest_rune1
+< unit quest_rune2
+< unit quest_frog1
+< unit quest_frog2
+< unit quest_frog3
+< unit quest_frog4
+< unit quest_frog5
+< unit quest_frog6
+< unit quest_frog7
+< unit quest_frog8
+< unit quest_frog9
+< unit quest_frog10
+< boolean quest_frogfound1=false
+< boolean quest_frogfound2=false
+< boolean quest_frogfound3=false
+< boolean quest_frogfound4=false
+< boolean quest_frogfound5=false
+< boolean quest_frogfound6=false
+< boolean quest_frogfound7=false
+< boolean quest_frogfound8=false
+< boolean quest_frogfound9=false
+< boolean quest_frogfound10=false
+< constant integer abilityid_supernova=1093751371
+< constant integer unitid_fx_ground=1747993176
+< constant integer unitid_fx_sun_1=1747993178
+< unit supernova_source
+< unit supernova_caster
+< real supernova_x
+< real supernova_y
+< trigger phoenix_fxloop
+< trigger phoenix_ailoop
+< trigger phoenix_regenloop
+< unit phoenix_source
+< unit phoenix_caster
+< constant real phoenix_center_x=6834
+< constant real phoenix_center_y=-7275
+< constant real phoenix_center_x2=6889
+< constant real phoenix_center_y2=-7878
+< constant real phoenix_center_x3=7372
+< constant real phoenix_center_y3=-7305
+< boolean phoenix_incinerate=false
+< real phoenix_lasthurt
+< boolean phoenix_phase2=false
+5146c5103
+< set gg_rct_Bad_33=Rect(-7744.0,4704.0,-7296.0,5600.0)
+---
+> set gg_rct_Bad_33=Rect(-7744.0,3936.0,-7328.0,5600.0)
+8751a8709,8724
+> function ItemToMuteId takes item whichItem returns integer
+> local integer itemId
+> local integer i=1
+> if whichItem==null then
+> return-2
+> endif
+> set itemId=GetItemTypeId(whichItem)
+> loop
+> exitwhen i>Item_Max
+> if Item_Mute[i]==itemId then
+> return i
+> endif
+> set i=i+1
+> endloop
+> return-1
+> endfunction
+13122c13095
+< return GetOwningPlayer(GetTriggerUnit())!=udg_NeutralHostile and IsUnitType(GetTriggerUnit(),UNIT_TYPE_HERO)==true and IsUnitIllusion(GetTriggerUnit())==false and HaveSavedBoolean(hash_main,GetHandleId(GetTriggerUnit()),85)==false and IsRealHero2(GetTriggerUnit())
+---
+> return IsUnitType(GetTriggerUnit(),UNIT_TYPE_HERO)==true and IsUnitIllusion(GetTriggerUnit())==false and HaveSavedBoolean(hash_main,GetHandleId(GetTriggerUnit()),85)==false and IsRealHero2(GetTriggerUnit())
+14396c14369
+< if IsUnitType(GetTriggerUnit(),UNIT_TYPE_HERO)==true and GetOwningPlayer(GetTriggerUnit())!=udg_NeutralHostile then
+---
+> if IsUnitType(GetTriggerUnit(),UNIT_TYPE_HERO)==true then
+14604,14605d14576
+< elseif GetUnitTypeId(KillHero)==1160786502 then
+< call DisplayTimedTextToForceEx(udg_AllMsgPlayers,10.00,(udg_Colors[GetPlayerId(DeadPlayer)]+(PlayerNames[GetPlayerId((DeadPlayer))])+"|r has been killed by Phoenix"))
+14678,14680d14648
+< if GetUnitTypeId(KillHero)==1160786502 then
+< set KillPlayerString=udg_Colors[0]+GetObjectName(1160786502)+"|r"
+< endif
+16503,16510d16470
+< set Item_Dummy[Item_Max]=1227902297
+< set Item_Real[Item_Max]=1227902296
+< set Item_Unit[Item_Max]=0
+< set Item_Mute[Item_Max]=1227902298
+< set Item_Icon[Item_Max]="ReplaceableTextures\\CommandButtons\\BTNMedalionOfCourage.blp"
+< set Item_Cooldown[Item_Max]=20
+< set indexid_phoenixblade=Item_Max
+< set Item_Max=Item_Max+1
+19104a19065,19067
+> function CourierFakedItems_IsFlaggedSecondary takes integer indexId returns boolean
+> return indexId==indexid_gemoftruesight or indexId==indexid_gemoftruesightcourier
+> endfunction
+19110a19074,19075
+> local integer fakeIndexId=ItemToMuteId(whichItem)
+> local boolean foundFake=false
+19120a19086,19088
+> if indexId==indexid_shivasguardcourier then
+> set newIndex=indexid_shivasguard
+> endif
+19124,19125c19092,19094
+< if indexId==indexid_shivasguardcourier then
+< set newIndex=indexid_shivasguard
+---
+> if fakeIndexId==indexid_gemoftruesightcourier then
+> set newIndex=indexid_gemoftruesight
+> set foundFake=true
+19129a19099,19101
+> if foundFake then
+> set tt_item1=UnitAddItemById(Hero,Item_Mute[newIndex])
+> else
+19130a19103
+> endif
+19150a19124,19127
+> if fakeIndexId==indexid_gemoftruesight then
+> set newIndex=indexid_gemoftruesightcourier
+> set foundFake=true
+> endif
+19153a19131,19133
+> if foundFake then
+> set tt_item1=UnitAddItemById(Hero,Item_Mute[newIndex])
+> else
+19154a19135
+> endif
+19164c19145
+< if CourierFakedItems_IsFlagged(ItemToIndex(Item))then
+---
+> if CourierFakedItems_IsFlagged(ItemToIndex(Item))or CourierFakedItems_IsFlaggedSecondary(ItemToMuteId(Item))then
+19457a19439
+> if IsDead(GetTriggerUnit())==false then
+19459a19442
+> endif
+28903c28886
+< if IsUnitAlly(GetTriggerUnit(),GetOwningPlayer(GetAttacker()))and GetUnitTypeId(GetTriggerUnit())!=1966092621 and GetUnitTypeId(GetTriggerUnit())!=1966092622 then
+---
+> if IsUnitAlly(GetTriggerUnit(),GetOwningPlayer(GetAttacker()))then
+35055a35039,35040
+> call SetPlayerState(udg_SentPlayers[1],PLAYER_STATE_RESOURCE_GOLD,0)
+> call SetPlayerState(udg_ScourgePlayers[1],PLAYER_STATE_RESOURCE_GOLD,0)
+40386,40703d40370
+< function Quest_ExtraStep takes nothing returns nothing
+< endfunction
+< function Quest_FrogDeath takes nothing returns boolean
+< if GetTriggerUnit()==quest_frog1 then
+< set quest_frogfound1=true
+< elseif GetTriggerUnit()==quest_frog2 then
+< set quest_frogfound2=true
+< elseif GetTriggerUnit()==quest_frog3 then
+< set quest_frogfound3=true
+< elseif GetTriggerUnit()==quest_frog4 then
+< set quest_frogfound4=true
+< elseif GetTriggerUnit()==quest_frog5 then
+< set quest_frogfound5=true
+< elseif GetTriggerUnit()==quest_frog6 then
+< set quest_frogfound6=true
+< elseif GetTriggerUnit()==quest_frog7 then
+< set quest_frogfound7=true
+< elseif GetTriggerUnit()==quest_frog8 then
+< set quest_frogfound8=true
+< elseif GetTriggerUnit()==quest_frog9 then
+< set quest_frogfound9=true
+< elseif GetTriggerUnit()==quest_frog10 then
+< set quest_frogfound10=true
+< endif
+< if quest_frogfound1==true and quest_frogfound2==true and quest_frogfound3==true and quest_frogfound4==true and quest_frogfound5==true and quest_frogfound6==true and quest_frogfound7==true and quest_frogfound8==true and quest_frogfound9==true and quest_frogfound10==true then
+< call SoundForAll(udg_SentPlayers[1],"Sound\\Interface\\Rescue.wav")
+< call ExecuteFunc("Phoenix_Combat_Start")
+< endif
+< return false
+< endfunction
+< function Quest_RunesDeath takes nothing returns boolean
+< local trigger t
+< call SoundForAll(udg_SentPlayers[1],"Sound\\Interface\\Rescue.wav")
+< call ShowUnit(GetTriggerUnit(),false)
+< if GetTriggerUnit()==quest_rune1 then
+< set quest_frog1=CreateUnit(udg_NeutralPassive,1852207727,-1077,1897,0)
+< set quest_frog2=CreateUnit(udg_NeutralPassive,1852207727,60,3085,0)
+< set quest_frog3=CreateUnit(udg_NeutralPassive,1852207727,4795,1320,0)
+< set quest_frog4=CreateUnit(udg_NeutralPassive,1852207727,-3745,1275,0)
+< set quest_frog5=CreateUnit(udg_NeutralPassive,1852207727,5160,6830,0)
+< set t=CreateTrigger()
+< call TriggerRegisterUnitEvent(t,quest_frog1,EVENT_UNIT_DEATH)
+< call TriggerRegisterUnitEvent(t,quest_frog2,EVENT_UNIT_DEATH)
+< call TriggerRegisterUnitEvent(t,quest_frog3,EVENT_UNIT_DEATH)
+< call TriggerRegisterUnitEvent(t,quest_frog4,EVENT_UNIT_DEATH)
+< call TriggerRegisterUnitEvent(t,quest_frog5,EVENT_UNIT_DEATH)
+< call TriggerAddCondition(t,Condition(function Quest_FrogDeath))
+< else
+< set quest_frog6=CreateUnit(udg_NeutralPassive,1852207727,3848,-3972,0)
+< set quest_frog7=CreateUnit(udg_NeutralPassive,1852207727,-1212,-4930,0)
+< set quest_frog8=CreateUnit(udg_NeutralPassive,1852207727,-2210,-7590,0)
+< set quest_frog9=CreateUnit(udg_NeutralPassive,1852207727,-5646,-7530,0)
+< set quest_frog10=CreateUnit(udg_NeutralPassive,1852207727,-266,-4786,0)
+< set t=CreateTrigger()
+< call TriggerRegisterUnitEvent(t,quest_frog6,EVENT_UNIT_DEATH)
+< call TriggerRegisterUnitEvent(t,quest_frog7,EVENT_UNIT_DEATH)
+< call TriggerRegisterUnitEvent(t,quest_frog8,EVENT_UNIT_DEATH)
+< call TriggerRegisterUnitEvent(t,quest_frog9,EVENT_UNIT_DEATH)
+< call TriggerRegisterUnitEvent(t,quest_frog10,EVENT_UNIT_DEATH)
+< call TriggerAddCondition(t,Condition(function Quest_FrogDeath))
+< endif
+< return false
+< endfunction
+< function Quest_SpawnRunes takes nothing returns boolean
+< local trigger t=CreateTrigger()
+< call ShowUnit(GetTriggerUnit(),false)
+< call SoundForAll(udg_SentPlayers[1],"Sound\\Interface\\Rescue.wav")
+< set quest_rune1=CreateUnit(udg_NeutralPassive,1966092621,128.0,7232.0,270.000)
+< set quest_rune2=CreateUnit(udg_NeutralPassive,1966092621,3136.0,-7872.0,270.000)
+< call TriggerRegisterUnitEvent(t,quest_rune1,EVENT_UNIT_DEATH)
+< call TriggerRegisterUnitEvent(t,quest_rune2,EVENT_UNIT_DEATH)
+< call TriggerAddCondition(t,Condition(function Quest_RunesDeath))
+< set t=null
+< return false
+< endfunction
+< function Quest_PreSpawnRunes takes nothing returns nothing
+< local trigger t=CreateTrigger()
+< local unit Doodad=CreateUnit(udg_NeutralPassive,1966092622,-1152.0,1984.0,270.00)
+< call TriggerRegisterUnitEvent(t,Doodad,EVENT_UNIT_DEATH)
+< call TriggerAddCondition(t,Condition(function Quest_SpawnRunes))
+< set t=null
+< endfunction
+< function Phoenix_Incinerate takes nothing returns nothing
+< local unit Source=phoenix_source
+< local unit Target=GetEnumUnit()
+< call DamageTarget(Source,Target,DAMAGE_MAGICAL,300)
+< call DamageTarget(Source,Target,DAMAGE_PHYSICAL,300)
+< call TimedLifeUnitEffect("Doodads\\Cinematic\\FireTrapUp\\FireTrapUp.mdl",Target,"origin",1)
+< set Source=null
+< set Target=null
+< endfunction
+< function Supernova_Stun takes nothing returns nothing
+< local unit Source=supernova_source
+< local unit Target=GetEnumUnit()
+< local real x=supernova_x
+< local real y=supernova_y
+< if GetOwningPlayer(Target)==udg_NeutralHostile then
+< set Source=null
+< set Target=null
+< return
+< endif
+< call SetUnitX(supernova_caster,GetUnitX(Target))
+< call SetUnitY(supernova_caster,GetUnitY(Target))
+< call IssueTargetOrder(supernova_caster,"thunderbolt",Target)
+< call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Orc\\FeralSpirit\\feralspiritdone.mdl",Target,"origin"))
+< set Source=null
+< set Target=null
+< endfunction
+< function Supernova_End takes nothing returns boolean
+< local trigger t=GetTriggeringTrigger()
+< local integer Cache=GetHandleId(t)
+< local unit Source=(LoadUnitHandle(hash_main,(Cache),(2)))
+< local unit Ground=(LoadUnitHandle(hash_main,(Cache),(588)))
+< local unit Sun=(LoadUnitHandle(hash_main,(Cache),(589)))
+< local real x=(LoadReal(hash_main,(Cache),(6)))
+< local real y=(LoadReal(hash_main,(Cache),(7)))
+< local group g
+< if GetTriggerEventId()==EVENT_UNIT_DEATH then
+< call StopSound(gg_snd_VolcanoLoop,false,false)
+< call ShowUnit(Ground,false)
+< call FlushChildHashtable(hash_main,(Cache))
+< call CleanTrigger(t)
+< else
+< if GetTriggerEvalCount(t)==1 then
+< call SetUnitFlyHeight(Sun,0,200)
+< elseif GetTriggerEvalCount(t)==2 then
+< call PauseUnit(Sun,false)
+< call UnitApplyTimedLife(Sun,1112820806,0.1)
+< call StopSound(gg_snd_VolcanoLoop,false,false)
+< call StartSound(gg_snd_ThunderClapCaster)
+< call DestroyEffect(AddSpecialEffect("war3mapImported\\FireNova2.mdx",GetUnitX(Ground),GetUnitY(Ground)))
+< call FlushChildHashtable(hash_main,(Cache))
+< call CleanTrigger(t)
+< call ShowUnit(Ground,false)
+< set g=GetAvailableGroup()
+< set tt_unit1=Source
+< set supernova_caster=CreateUnit(udg_NeutralHostile,1697656901,0,0,0)
+< call UnitAddAbility(supernova_caster,1093753158)
+< set supernova_source=Source
+< set supernova_x=GetUnitX(Ground)
+< set supernova_y=GetUnitY(Ground)
+< call GroupEnumUnitsInRange(g,GetUnitX(Ground),GetUnitY(Ground),99999,Condition(function GenericCondition_EnemyUnitsEx))
+< call ForGroup(g,function Supernova_Stun)
+< call KillGroup(g)
+< endif
+< endif
+< set t=null
+< set Source=null
+< set Ground=null
+< set Sun=null
+< return false
+< endfunction
+< function Phoenix_SpawnSupernova takes unit Source,real x,real y returns nothing
+< local trigger t=CreateTrigger()
+< local integer Cache=GetHandleId(t)
+< local unit Ground
+< local unit Sun
+< set Ground=CreateUnit(GetOwningPlayer(Source),unitid_fx_ground,x,y,0)
+< set Sun=CreateUnit(GetOwningPlayer(Source),unitid_fx_sun_1,x,y,0)
+< call TimedReveal(udg_ScourgePlayers[1],5,x,y,500)
+< call TimedReveal(udg_SentPlayers[1],5,x,y,500)
+< call PingMinimapEx(x,y,6,255,0,0,false)
+< call StartSound(gg_snd_VolcanoLoop)
+< call UnitRemoveAbility(Sun,1098015094)
+< call PauseUnit(Sun,true)
+< call UnitApplyTimedLife(Ground,1112820806,8.1)
+< call UnitApplyTimedLife(Sun,1112820806,8.1)
+< call TriggerRegisterTimerEvent(t,7.2,false)
+< call TriggerRegisterTimerEvent(t,8,false)
+< call TriggerAddCondition(t,Condition(function Supernova_End))
+< call TriggerRegisterUnitEvent(t,Sun,EVENT_UNIT_DEATH)
+< call SaveUnitHandle(hash_main,(Cache),(2),(Source))
+< call SaveUnitHandle(hash_main,(Cache),(588),(Ground))
+< call SaveUnitHandle(hash_main,(Cache),(589),(Sun))
+< call SaveReal(hash_main,(Cache),(6),((GetUnitX(Source))*1.0))
+< call SaveReal(hash_main,(Cache),(7),((GetUnitY(Source))*1.0))
+< set t=null
+< set Source=null
+< set Ground=null
+< set Sun=null
+< endfunction
+< function Phoenix_Victory takes nothing returns boolean
+< local item newItem
+< local real x=GetUnitX(phoenix_source)
+< local real y=GetUnitY(phoenix_source)
+< call DisableTrigger(phoenix_fxloop)
+< call DisableTrigger(phoenix_ailoop)
+< call DisableTrigger(phoenix_regenloop)
+< call KillUnit(phoenix_caster)
+< set newItem=CreateItem(Item_Dummy[indexid_phoenixblade],x,y)
+< call SetItemPlayer(newItem,udg_SentPlayers[1],false)
+< call SetItemUserData(newItem,1)
+< set newItem=CreateItem(Item_Dummy[indexid_phoenixblade],x,y)
+< call SetItemPlayer(newItem,udg_SentPlayers[1],false)
+< call SetItemUserData(newItem,1)
+< set newItem=CreateItem(Item_Dummy[indexid_phoenixblade],x,y)
+< call SetItemPlayer(newItem,udg_SentPlayers[1],false)
+< call SetItemUserData(newItem,1)
+< set newItem=CreateItem(Item_Dummy[indexid_phoenixblade],x,y)
+< call SetItemPlayer(newItem,udg_SentPlayers[1],false)
+< call SetItemUserData(newItem,1)
+< set newItem=CreateItem(Item_Dummy[indexid_phoenixblade],x,y)
+< call SetItemPlayer(newItem,udg_SentPlayers[1],false)
+< call SetItemUserData(newItem,1)
+< return false
+< endfunction
+< function Phoenix_RegenLoop takes nothing returns boolean
+< local unit Phoenix=phoenix_source
+< if GetTriggerEventId()==EVENT_UNIT_DAMAGED then
+< if GetEventDamage()>20 then
+< set phoenix_lasthurt=(TimerGetElapsed(udg_GameTimer))
+< endif
+< elseif(TimerGetElapsed(udg_GameTimer))>phoenix_lasthurt+5 then
+< call SetUnitState(Phoenix,UNIT_STATE_LIFE,GetUnitState(Phoenix,UNIT_STATE_LIFE)+GetUnitState(Phoenix,UNIT_STATE_MAX_LIFE)*0.04)
+< endif
+< set Phoenix=null
+< return false
+< endfunction
+< function Phoenix_AILoop takes nothing returns boolean
+< local unit Phoenix=phoenix_source
+< local integer Count=GetTriggerEvalCount(phoenix_ailoop)
+< local group g
+< if ModuloInteger(Count,20)==0 then
+< call Phoenix_SpawnSupernova(Phoenix,phoenix_center_x,phoenix_center_y)
+< if phoenix_phase2 then
+< call Phoenix_SpawnSupernova(Phoenix,phoenix_center_x2,phoenix_center_y2)
+< call Phoenix_SpawnSupernova(Phoenix,phoenix_center_x3,phoenix_center_y3)
+< endif
+< endif
+< if ModuloInteger(Count,5)==0 then
+< call UnitRemoveBuffs(Phoenix,true,true)
+< endif
+< if ModuloInteger(Count,10)==0 then
+< if phoenix_incinerate then
+< set phoenix_incinerate=false
+< else
+< set phoenix_incinerate=true
+< endif
+< endif
+< if phoenix_incinerate then
+< set tt_unit1=Phoenix
+< set g=GetAvailableGroup()
+< call GroupEnumUnitsInRange(g,GetUnitX(Phoenix),GetUnitY(Phoenix),800,Condition(function GenericCondition_EnemyUnitsEx))
+< call ForGroup(g,function Phoenix_Incinerate)
+< call KillGroup(g)
+< endif
+< set Phoenix=null
+< set g=null
+< return false
+< endfunction
+< function Phoenix_FXLoop takes nothing returns boolean
+< local unit Phoenix=phoenix_source
+< local unit Caster=phoenix_caster
+< call SetUnitX(Caster,GetUnitX(Phoenix))
+< call SetUnitY(Caster,GetUnitY(Phoenix))
+< if phoenix_incinerate then
+< call ShowUnit(Caster,true)
+< else
+< call ShowUnit(Caster,false)
+< endif
+< set Phoenix=null
+< set Caster=null
+< return false
+< endfunction
+< function Phoenix_Egg takes nothing returns boolean
+< if GetUnitTypeId(GetTriggerUnit())==1160786503 and GetSpellAbilityId()==1097885816 then
+< set phoenix_phase2=true
+< call UnitRemoveAbility(phoenix_source,1097885816)
+< call UnitAddAbility(phoenix_source,1093753159)
+< endif
+< return false
+< endfunction
+< function Phoenix_Spawn_KillAll takes nothing returns nothing
+< call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Orc\\FeralSpirit\\feralspiritdone.mdl",GetEnumUnit(),"origin"))
+< call DamageTarget(phoenix_source,GetEnumUnit(),DAMAGE_MAGICAL,20000)
+< endfunction
+< function Phoenix_Combat_Start takes nothing returns nothing
+< local unit Phoenix
+< local unit Caster
+< local trigger t=CreateTrigger()
+< local group g=GetAvailableGroup()
+< call GroupEnumUnitsInRange(g,0,0,99999,Condition(function GenericCondition_AllHeroes))
+< set Phoenix=CreateUnit(udg_NeutralHostile,1160786502,7190,-7780,180)
+< set Caster=CreateUnit(GetOwningPlayer(Phoenix),1747993420,GetUnitX(Phoenix),GetUnitY(Phoenix),0)
+< call TriggerRegisterUnitEvent(t,Phoenix,EVENT_UNIT_SPELL_FINISH)
+< call TriggerAddCondition(t,Condition(function Phoenix_Egg))
+< call UnitAddAbility(Phoenix,1097885816)
+< call UnitMakeAbilityPermanent(Phoenix,true,1097885816)
+< set phoenix_source=Phoenix
+< set phoenix_caster=Caster
+< call ForGroup(g,function Phoenix_Spawn_KillAll)
+< call KillGroup(g)
+< set phoenix_fxloop=CreateTrigger()
+< call TriggerRegisterTimerEvent(phoenix_fxloop,0.02,true)
+< call TriggerAddCondition(phoenix_fxloop,Condition(function Phoenix_FXLoop))
+< set phoenix_ailoop=CreateTrigger()
+< call TriggerRegisterTimerEvent(phoenix_ailoop,1,true)
+< call TriggerAddCondition(phoenix_ailoop,Condition(function Phoenix_AILoop))
+< set phoenix_regenloop=CreateTrigger()
+< call TriggerRegisterTimerEvent(phoenix_regenloop,1,true)
+< call TriggerRegisterUnitEvent(phoenix_regenloop,Phoenix,EVENT_UNIT_DAMAGED)
+< call TriggerAddCondition(phoenix_regenloop,Condition(function Phoenix_RegenLoop))
+< set t=CreateTrigger()
+< call TriggerRegisterUnitEvent(t,Phoenix,EVENT_UNIT_DEATH)
+< call TriggerAddCondition(t,Condition(function Phoenix_Victory))
+< set Caster=null
+< set Phoenix=null
+< endfunction
+< function Phoenix_Quest_Start takes nothing returns boolean
+< call Quest_PreSpawnRunes()
+< return false
+< endfunction
+< function InitTrig_Phoenix_Spawn takes nothing returns nothing
+< local trigger t=CreateTrigger()
+< call TriggerRegisterTimerEvent(t,5,false)
+< call TriggerAddCondition(t,Condition(function Phoenix_Quest_Start))
+< set t=null
+< endfunction
+45946c45613
+< if(GetSpellAbilityId()==abilityid_souleater or GetSpellAbilityId()==abilityid_souleaterupgrade)and(GetUnitAbilityLevel((GetSpellTargetUnit()),buffid_linkensphere)>0)==false and GetOwningPlayer(GetSpellTargetUnit())!=udg_NeutralHostile then
+---
+> if(GetSpellAbilityId()==abilityid_souleater or GetSpellAbilityId()==abilityid_souleaterupgrade)and(GetUnitAbilityLevel((GetSpellTargetUnit()),buffid_linkensphere)>0)==false then
+46149c45816
+< call AddAttackSpeedBonus(Hero,Level*Level_Percent*2)
+---
+> call AddAttackSpeedBonus(Hero,Level*Level_Percent*3)
+48197c47864
+< if GetOwningPlayer(GetSpellTargetUnit())==GetOwningPlayer(GetTriggerUnit())or GetOwningPlayer(GetSpellTargetUnit())==udg_NeutralHostile then
+---
+> if GetOwningPlayer(GetSpellTargetUnit())==GetOwningPlayer(GetTriggerUnit())then
+50799c50466
+< if IsRealSummoned(GetEnumUnit())or GetUnitTypeId(GetEnumUnit())==1160786502 then
+---
+> if IsRealSummoned(GetEnumUnit())then
+53784d53450
+< if GetUnitTypeId(GetEnumUnit())!=1160786502 then
+53787d53452
+< endif
+54550a54216,54220
+> elseif Count==0 then
+> call SetUnitTurnSpeed(Target,GetUnitDefaultTurnSpeed(Target))
+> call SaveInteger(hash_main,(GetHandleId(Target)),(281),(0))
+> call FlushChildHashtable(hash_main,(Cache))
+> call CleanTrigger(t)
+54563,54567d54232
+< elseif Count==0 then
+< call SetUnitTurnSpeed(Target,GetUnitDefaultTurnSpeed(Target))
+< call SaveInteger(hash_main,(GetHandleId(Target)),(281),(0))
+< call FlushChildHashtable(hash_main,(Cache))
+< call CleanTrigger(t)
+56134d55798
+< if GetOwningPlayer(Target)!=udg_NeutralHostile then
+56136d55799
+< endif
+60874d60536
+< if GetUnitTypeId(Target)!=1160786502 then
+60878d60539
+< endif
+61096c60757
+< return(GetSpellAbilityId()==1093678647 or GetSpellAbilityId()==1093679184)and(GetUnitAbilityLevel((GetSpellTargetUnit()),buffid_linkensphere)>0)==false and GetOwningPlayer(GetSpellTargetUnit())!=udg_NeutralHostile
+---
+> return(GetSpellAbilityId()==1093678647 or GetSpellAbilityId()==1093679184)and(GetUnitAbilityLevel((GetSpellTargetUnit()),buffid_linkensphere)>0)==false
+64269,64270c63930,63935
+< call SetUnitX(Target,x+Rate*Cos(Angle))
+< call SetUnitY(Target,y+Rate*Sin(Angle))
+---
+> set x=SafeX(x+Rate*Cos(Angle))
+> set y=SafeY(y+Rate*Sin(Angle))
+> if(IsPointInRegion(region_badplaces,((x)*1.0),((y)*1.0)))==false then
+> call SetUnitX(Target,x)
+> call SetUnitY(Target,y)
+> endif
+64794c64459
+< if GetSpellAbilityId()==abilityid_sunder and GetOwningPlayer(GetSpellTargetUnit())!=udg_NeutralHostile then
+---
+> if GetSpellAbilityId()==abilityid_sunder then
+68655c68320
+< if GetUnitAbilityLevel(GetAttacker(),abilityid_essenceshift)>0 and IsUnitType(GetTriggerUnit(),UNIT_TYPE_HERO)==true and IsUnitType(GetTriggerUnit(),UNIT_TYPE_STRUCTURE)==false and GetAttacker()==(LoadUnitHandle(hash_main,(GetHandleId(GetTriggeringTrigger())),(14)))and GetUnitTypeId(GetTriggerUnit())!=1848651852 and IsUnitEnemy(GetTriggerUnit(),GetOwningPlayer(GetAttacker()))and GetUnitTypeId(GetTriggerUnit())!=1160786502 then
+---
+> if GetUnitAbilityLevel(GetAttacker(),abilityid_essenceshift)>0 and IsUnitType(GetTriggerUnit(),UNIT_TYPE_HERO)==true and IsUnitType(GetTriggerUnit(),UNIT_TYPE_STRUCTURE)==false and GetAttacker()==(LoadUnitHandle(hash_main,(GetHandleId(GetTriggeringTrigger())),(14)))and GetUnitTypeId(GetTriggerUnit())!=1848651852 and IsUnitEnemy(GetTriggerUnit(),GetOwningPlayer(GetAttacker()))then
+69180d68844
+< if GetOwningPlayer(Target)!=udg_NeutralHostile then
+69183d68846
+< endif
+71162d70824
+< call InitTrig_Phoenix_Spawn()
