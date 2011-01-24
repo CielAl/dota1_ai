@@ -3189,4 +3189,4 @@
 > call InitTrig_Custom_Pick_Up_Item()
 > call InitTrig_Staff_of_Healing()
 69572a71162
-> call InitTrig_Phoenix_Spawn()
+> call InitTrig_Phoenix_Spawn()
