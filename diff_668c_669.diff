@@ -225,58 +225,6 @@
 > set mbitem=null
 5242a5357
 > set mbitem=null
-5517c5632
-< if id==1164277357 or id==1311781442 or id==1311781175 or id==1211119684 or id==1211119683 or id==1211119668 or id==1211119682 or id==1311781171 or id==1311781172 or id==1311781173 or id==1160786511 then
----
-> if id==1164277357 or id==1160786518 or id==1160786519 or id==1160786517 or id==1311781442 or id==1311781175 or id==1211119684 or id==1211119683 or id==1211119668 or id==1211119682 or id==1311781171 or id==1311781172 or id==1311781173 or id==1160786511 then
-5520c5635
-< if id==1311781192 or id==1311781204 or id==1311781194 or id==1211117637 or id==1211117639 or id==1211117638 or id==1211119433 or id==1160786229 then
----
-> if id==1311781192 or id==1311781204 or id==1311781194 or id==1211117637 or id==1211117639 or id==1211117638 or id==1211119433 or id==1160786229 or id==1211122513 then
-6181,6182c6296,6297
-< function IsCourier takes unit whichUnit returns boolean
-< return GetUnitTypeId(whichUnit)==unitid_goodcourier1 or GetUnitTypeId(whichUnit)==unitid_goodcourier2 or GetUnitTypeId(whichUnit)==unitid_goodcourier3 or GetUnitTypeId(whichUnit)==unitid_goodcourier4 or GetUnitTypeId(whichUnit)==unitid_goodcourier5 or GetUnitTypeId(whichUnit)==unitid_badcourier1 or GetUnitTypeId(whichUnit)==unitid_badcourier2 or GetUnitTypeId(whichUnit)==unitid_badcourier3 or GetUnitTypeId(whichUnit)==unitid_badcourier4 or GetUnitTypeId(whichUnit)==unitid_badcourier5 or GetUnitTypeId(whichUnit)==unitid_goodcourier0 or GetUnitTypeId(whichUnit)==unitid_badcourier0 or GetUnitTypeId(whichUnit)==unitid_jokecourier1 or GetUnitTypeId(whichUnit)==unitid_jokecourier2 or GetUnitTypeId(whichUnit)==unitid_jokecourier3 or GetUnitTypeId(whichUnit)==unitid_flyingcourier1 or GetUnitTypeId(whichUnit)==unitid_flyingcourier2
----
-> function IsBasicCourier takes unit whichUnit returns boolean
-> return GetUnitTypeId(whichUnit)==unitid_goodcourier1 or GetUnitTypeId(whichUnit)==unitid_goodcourier2 or GetUnitTypeId(whichUnit)==unitid_goodcourier3 or GetUnitTypeId(whichUnit)==unitid_goodcourier4 or GetUnitTypeId(whichUnit)==unitid_goodcourier5 or GetUnitTypeId(whichUnit)==unitid_goodcourier6 or GetUnitTypeId(whichUnit)==unitid_badcourier1 or GetUnitTypeId(whichUnit)==unitid_badcourier2 or GetUnitTypeId(whichUnit)==unitid_badcourier3 or GetUnitTypeId(whichUnit)==unitid_badcourier4 or GetUnitTypeId(whichUnit)==unitid_badcourier5 or GetUnitTypeId(whichUnit)==unitid_jokecourier1 or GetUnitTypeId(whichUnit)==unitid_jokecourier2
-6186a6302,6304
-> function IsCourier takes unit whichUnit returns boolean
-> return IsBasicCourier(whichUnit)or IsFlyingCourier(whichUnit)
-> endfunction
-6710a6829,6844
-> function TextTagOnUnitExForAllied takes player p,string text,real duration,unit target,real size,integer r,integer g,integer b,integer a returns nothing
-> local texttag tt=CreateTextTag()
-> call SetTextTagText(tt,text,size)
-> call SetTextTagPosUnit(tt,target,64)
-> call SetTextTagColor(tt,r,g,b,a)
-> call SetTextTagVelocity(tt,0,0.0355)
-> call SetTextTagFadepoint(tt,2)
-> call SetTextTagPermanent(tt,false)
-> call SetTextTagLifespan(tt,duration)
-> if IsPlayerAlly(GetLocalPlayer(),p)==true then
-> call SetTextTagVisibility(tt,true)
-> else
-> call SetTextTagVisibility(tt,false)
-> endif
-> set tt=null
-> endfunction
-7262a7397,7412
-> function GenericCondition_AlliedHeroesEx2 takes nothing returns boolean
-> return IsUnitType(GetFilterUnit(),UNIT_TYPE_HERO)==true and IsUnitEnemy(tt_unit1,GetOwningPlayer(GetFilterUnit()))==false
-> endfunction
-> function PlaySoundForNearbyPlayers_Play takes nothing returns nothing
-> call PlaySoundForPlayerEx(tt_soundhandle,GetOwningPlayer(GetEnumUnit()))
-> endfunction
-> function PlaySoundForNearbyPlayers takes unit Source,sound soundHandle,real x,real y,real r returns nothing
-> local group g=GetAvailableGroup()
-> set tt_unit1=Source
-> set tt_soundhandle=soundHandle
-> call GroupEnumUnitsInRange(g,x,y,r,Condition(function GenericCondition_AlliedHeroesEx2))
-> call GroupRemoveUnit(g,Source)
-> call ForGroup(g,function PlaySoundForNearbyPlayers_Play)
-> call KillGroup(g)
-> set g=null
-> endfunction
 7499a7650,7849
 > function InitTrig_Globals takes nothing returns nothing
 > endfunction
@@ -393,9 +341,6 @@
 > function InitTrig_Regions takes nothing returns nothing
 > call IntializeRegions()
 > endfunction
-> function IsSpiritBear takes unit Unit returns boolean
-> return GetUnitTypeId(Unit)==1848651828 or GetUnitTypeId(Unit)==1848652088 or GetUnitTypeId(Unit)==1848652099 or GetUnitTypeId(Unit)==1848652103
-> endfunction
 > function LockAllItems takes player p returns nothing
 > local unit Hero=udg_Hero[GetPlayerId(p)]
 > local integer i=0
@@ -421,74 +366,6 @@
 > endloop
 > set Hero=null
 > set Item=null
-> endfunction
-> function IsNotAttackable takes unit u returns boolean
-> return GetUnitAbilityLevel(u,1097167980)>0 or GetUnitAbilityLevel(u,1113815395)>0 or GetUnitAbilityLevel(u,1113815346)>0 or GetUnitAbilityLevel(u,1110454606)>0
-> endfunction
-> function IsStunned takes unit u returns boolean
-> return(GetUnitAbilityLevel((u),(1112560453))>0)or(GetUnitAbilityLevel((u),(1110456633))>0)or(GetUnitAbilityLevel((u),(1112757326))>0)or(GetUnitAbilityLevel((u),(1110459206))>0)or(GetUnitAbilityLevel((u),(1110458957))>0)or(GetUnitAbilityLevel((u),(1111844210))>0)or(GetUnitAbilityLevel((u),(1110454583))>0)or(GetUnitAbilityLevel((u),(1110455885))>0)or(GetUnitAbilityLevel((u),(1110456142))>0)or(GetUnitAbilityLevel((u),(1110456403))>0)or(GetUnitAbilityLevel((u),(1110454353))>0)or(GetUnitAbilityLevel((u),(1110455382))>0)or(GetUnitAbilityLevel((u),(1110456114))>0)or(GetUnitAbilityLevel((u),(1112891758))>0)or(GetUnitAbilityLevel((u),(1110456629))>0)or(GetUnitAbilityLevel((u),(1110455113))>0)or(GetUnitAbilityLevel((u),(1110455859))>0)or(GetUnitAbilityLevel((u),(1113943655))>0)or(GetUnitAbilityLevel((u),(1110458692))>0)or(GetUnitAbilityLevel((u),(1110458693))>0)or(GetUnitAbilityLevel((u),(1110458949))>0)or(GetUnitAbilityLevel((u),(1110458950))>0)or(GetUnitAbilityLevel((u),(1110454328))>0)or(GetUnitAbilityLevel((u),(1110455362))>0)or(GetUnitAbilityLevel((u),(1110454854))>0)or(GetUnitAbilityLevel((u),(1112896368))>0)or(GetUnitAbilityLevel((u),(1112896372))>0)or(GetUnitAbilityLevel((u),(1110459460))>0)or((LoadInteger(hash_main,(GetHandleId((u))),((4293))))==HERO_STATE_ON)==true
-> endfunction
-> function SetTime takes integer Minutes,integer Seconds,boolean extraColor returns nothing
-> local integer x=0
-> loop
-> exitwhen x>15
-> call SetPlayerState(Player(x),PLAYER_STATE_RESOURCE_LUMBER,Minutes)
-> call SetPlayerState(Player(x),PLAYER_STATE_RESOURCE_FOOD_USED,Seconds)
-> set x=x+1
-> endloop
-> endfunction
-> function IsRealSummoned takes unit u returns boolean
-> local integer id=GetUnitTypeId(u)
-> return id==1848652343 or id==unitid_gargoyle_a_1 or id==unitid_gargoyle_a_2 or id==unitid_gargoyle_a_3 or id==unitid_gargoyle_b_1 or id==unitid_gargoyle_b_2 or id==unitid_gargoyle_b_3 or id==unitid_gargoyle_a_1_stone or id==unitid_gargoyle_a_2_stone or id==unitid_gargoyle_a_3_stone or id==unitid_gargoyle_b_1_stone or id==unitid_gargoyle_b_2_stone or id==unitid_gargoyle_b_3_stone
-> endfunction
-> function SetUnitInvulnerable2 takes unit u,boolean b returns nothing
-> call SetUnitInvulnerable(u,b)
-> call SaveBoolean(hash_main,(GetHandleId(u)),(509),(b))
-> endfunction
-> function IsInvulnerable2 takes unit u returns boolean
-> return(LoadBoolean(hash_main,(GetHandleId(u)),(509)))or GetUnitAbilityLevel(u,1098282348)>0
-> endfunction
-> function FindClearLocation takes real x,real y returns location
-> local real NewX
-> local real NewY
-> local integer i=0
-> loop
-> exitwhen i>40
-> set NewX=x+i*20
-> set NewY=y+i*20
-> if IsPointInRegion(region_badplaces,NewX,NewY)==false then
-> return Location(NewX,NewY)
-> endif
-> set NewX=x+i*20
-> set NewY=y-i*20
-> if IsPointInRegion(region_badplaces,NewX,NewY)==false then
-> return Location(NewX,NewY)
-> endif
-> set NewX=x-i*20
-> set NewY=y+i*20
-> if IsPointInRegion(region_badplaces,NewX,NewY)==false then
-> return Location(NewX,NewY)
-> endif
-> set NewX=x-i*20
-> set NewY=y-i*20
-> if IsPointInRegion(region_badplaces,NewX,NewY)==false then
-> return Location(NewX,NewY)
-> endif
-> set i=i+1
-> endloop
-> return Location(x,y)
-> endfunction
-7501c7851
-< return GetUnitAbilityLevel(u,1110455864)>0 or GetUnitAbilityLevel(u,1110456148)>0 or GetUnitAbilityLevel(u,1110456118)>0 or GetUnitAbilityLevel(u,1112504171)>0 or GetUnitAbilityLevel(u,1110455378)>0 or GetUnitAbilityLevel(u,1110458677)>0 or GetUnitAbilityLevel(u,1110454609)>0 or GetUnitAbilityLevel(u,1110454326)>0 or GetUnitAbilityLevel(u,1114205814)>0 or GetUnitAbilityLevel(u,1097886070)>0 or GetUnitAbilityLevel(u,1093677617)>0 or GetUnitAbilityLevel(u,1093684020)>0 or GetUnitAbilityLevel(u,1093687362)>0 or GetUnitAbilityLevel(u,1093687858)>0 or GetUnitAbilityLevel(u,1093748545)>0 or GetUnitAbilityLevel(u,1093748823)>0 or GetUnitAbilityLevel(u,1093748824)>0 or GetUnitAbilityLevel(u,1093677130)>0
----
-> return GetUnitAbilityLevel(u,1110455864)>0 or GetUnitAbilityLevel(u,1110456148)>0 or GetUnitAbilityLevel(u,1110456118)>0 or GetUnitAbilityLevel(u,1112504171)>0 or GetUnitAbilityLevel(u,1110455378)>0 or GetUnitAbilityLevel(u,1110458677)>0 or GetUnitAbilityLevel(u,1110454609)>0 or GetUnitAbilityLevel(u,1110454326)>0 or GetUnitAbilityLevel(u,1114205814)>0 or GetUnitAbilityLevel(u,1097886070)>0 or GetUnitAbilityLevel(u,1093677617)>0 or GetUnitAbilityLevel(u,1093684020)>0 or GetUnitAbilityLevel(u,1093687362)>0 or GetUnitAbilityLevel(u,1093687858)>0 or GetUnitAbilityLevel(u,1093748545)>0 or GetUnitAbilityLevel(u,1093748823)>0 or GetUnitAbilityLevel(u,1093748824)>0 or GetUnitAbilityLevel(u,1093677130)>0 or GetUnitAbilityLevel(u,1110456395)>0 or GetUnitAbilityLevel(u,1110456408)>0 or GetUnitAbilityLevel(u,1110455097)>0 or GetUnitAbilityLevel(u,1110454347)>0 or GetUnitAbilityLevel(u,1112041075)>0 or GetUnitAbilityLevel(u,1093743664)>0 or GetUnitAbilityLevel(u,1110454833)>0 or GetUnitAbilityLevel(u,1093687876)>0
-7521a7872,7874
-> function GenericCondition_EnemySiegeEx takes nothing returns boolean
-> return IsUnitEnemy(tt_unit1,GetOwningPlayer(GetFilterUnit()))and(GetUnitTypeId(GetFilterUnit())==1700946284 or GetUnitTypeId(GetFilterUnit())==1970107511)
-> endfunction
-7632a7986,7988
-> function GenericCondition_EnemyUnitsExVisibleAttackable takes nothing returns boolean
-> return((IsUnitEnemy(tt_unit1,GetOwningPlayer(GetFilterUnit()))and(GetUnitAbilityLevel(GetFilterUnit(),1093678162)==0 and IsUnitType(GetFilterUnit(),UNIT_TYPE_STRUCTURE)==false and IsDead(GetFilterUnit())==false)and(IsUnitType(GetFilterUnit(),UNIT_TYPE_ANCIENT)==false or GenericCondition_IsBear(GetFilterUnit())))and IsUnitVisible(GetFilterUnit(),GetOwningPlayer(tt_unit1)))and IsNotAttackable(GetFilterUnit())==false
 > endfunction
 7648,7762d8003
 < function InitTrig_Globals takes nothing returns nothing
@@ -605,10 +482,6 @@
 < endfunction
 < function InitTrig_Regions takes nothing returns nothing
 < call IntializeRegions()
-< endfunction
-7950,7956c8191,8196
-< function IsSpiritBear takes unit Unit returns boolean
-< return GetUnitTypeId(Unit)==1848651828 or GetUnitTypeId(Unit)==1848652088 or GetUnitTypeId(Unit)==1848652099 or GetUnitTypeId(Unit)==1848652103
 < endfunction
 < function LockAllItems takes player p returns nothing
 < local unit Hero=udg_Hero[GetPlayerId(p)]
@@ -733,10 +606,6 @@
 8383a8583,8584
 > elseif unitId==1164799855 then
 > return abilityid_aghanimsscepter_enchantress
-8402c8603
-< elseif indexId==indexid_aghanimsscepterpuck or indexId==indexid_aghanimsscepterwarlock or indexId==indexid_aghanimsscepterrazor or indexId==indexid_aghanimsscepterviper or indexId==indexid_aghanimssceptertiny or indexId==indexid_aghanimsscepterdestroyer then
----
-> elseif indexId==indexid_aghanimsscepterpuck or indexId==indexid_aghanimsscepterwarlock or indexId==indexid_aghanimsscepterrazor or indexId==indexid_aghanimsscepterviper or indexId==indexid_aghanimssceptertiny or indexId==indexid_aghanimsscepterdestroyer or indexId==indexid_aghanimsscepterenchantress then
 9757a9959
 > call UnitAddAbility(COP1,abilityid_fortify1)
 9765a9968
@@ -757,106 +626,10 @@
 > call UnitAddAbility(COP9,abilityid_fortify2)
 9829a10040
 > call UnitAddAbility(COP10,abilityid_fortify2)
-10640c10851
-< set HeroIcon[29]="ReplaceableTextures\\CommandButtons\\BTNRazorManeChief.blp"
----
-> set HeroIcon[29]="ReplaceableTextures\\CommandButtons\\BTNRazorback.blp"
-10642c10853
-< call RegisterHeroScale(HeroID[29],1.5,DummyID[29])
----
-> call RegisterHeroScale(HeroID[29],1.65,DummyID[29])
-10902c11113
-< set HeroIcon[50]="ReplaceableTextures\\CommandButtons\\BTNWisp.blp"
----
-> set HeroIcon[50]="ReplaceableTextures\\CommandButtons\\BTNWispHero.blp"
-11519a11731,11733
-> call RegisterHeroScale(1160786518,1,DummyID[99])
-> call RegisterHeroScale(1160786519,1,DummyID[99])
-> call RegisterHeroScale(1160786517,1,DummyID[99])
-11867c12081
-< return id==abilityid_shadowpoison_explode or id==abilityid_oscillation_in or id==abilityid_oscillation_out or id==abilityid_shadowpoison_explode or id==1093678667 or id==1093752391 or id==abilityid_overcharge
----
-> return id==abilityid_shadowpoison_explode or id==abilityid_oscillation_in or id==abilityid_oscillation_out or id==abilityid_shadowpoison_explode or id==1093678667 or id==1093752391 or id==abilityid_overcharge or id==1093752646
-12487a12702
-> call ExecuteFunc("Register_WrathOfNature")
 12610a12826
 > call ExecuteFunc("Register_Bloodrage")
 12817a13034
 > call ExecuteFunc("Register_Reincarnation")
-12905c13122
-< return IsUnitType(GetTriggerUnit(),UNIT_TYPE_HERO)==true and IsUnitIllusion(GetTriggerUnit())==false and HaveSavedBoolean(hash_main,GetHandleId(GetTriggerUnit()),85)==false and IsRealHero2(GetTriggerUnit())
----
-> return GetOwningPlayer(GetTriggerUnit())!=udg_NeutralHostile and IsUnitType(GetTriggerUnit(),UNIT_TYPE_HERO)==true and IsUnitIllusion(GetTriggerUnit())==false and HaveSavedBoolean(hash_main,GetHandleId(GetTriggerUnit()),85)==false and IsRealHero2(GetTriggerUnit())
-13219,13223c13436,13440
-< call SaveInteger(hash_abilities,(1093684561),(2),(150))
-< call SaveInteger(hash_abilities,(1093684561),(3),(120))
-< call SaveInteger(hash_abilities,(1093747254),(1),(150))
-< call SaveInteger(hash_abilities,(1093747254),(2),(120))
-< call SaveInteger(hash_abilities,(1093747254),(3),(90))
----
-> call SaveInteger(hash_abilities,(1093684561),(2),(160))
-> call SaveInteger(hash_abilities,(1093684561),(3),(140))
-> call SaveInteger(hash_abilities,(1093747254),(1),(160))
-> call SaveInteger(hash_abilities,(1093747254),(2),(140))
-> call SaveInteger(hash_abilities,(1093747254),(3),(120))
-13272,13274c13489,13491
-< call SaveInteger(hash_abilities,(1093750098),(1),(15))
-< call SaveInteger(hash_abilities,(1093750098),(2),(15))
-< call SaveInteger(hash_abilities,(1093750098),(3),(15))
----
-> call SaveInteger(hash_abilities,(1093750098),(1),(10))
-> call SaveInteger(hash_abilities,(1093750098),(2),(10))
-> call SaveInteger(hash_abilities,(1093750098),(3),(10))
-13437,13442c13654,13659
-< call SaveInteger(hash_abilities,(1093678936),(1),(90))
-< call SaveInteger(hash_abilities,(1093678936),(2),(60))
-< call SaveInteger(hash_abilities,(1093678936),(3),(60))
-< call SaveInteger(hash_abilities,(1093681484),(1),(90))
-< call SaveInteger(hash_abilities,(1093681484),(2),(60))
-< call SaveInteger(hash_abilities,(1093681484),(3),(60))
----
-> call SaveInteger(hash_abilities,(1093752632),(1),(90))
-> call SaveInteger(hash_abilities,(1093752632),(2),(60))
-> call SaveInteger(hash_abilities,(1093752632),(3),(60))
-> call SaveInteger(hash_abilities,(1093752633),(1),(90))
-> call SaveInteger(hash_abilities,(1093752633),(2),(60))
-> call SaveInteger(hash_abilities,(1093752633),(3),(60))
-13473,13474c13690,13691
-< call SaveInteger(hash_abilities,(1093686854),(1),(30))
-< call SaveInteger(hash_abilities,(1093686854),(2),(25))
----
-> call SaveInteger(hash_abilities,(1093686854),(1),(22))
-> call SaveInteger(hash_abilities,(1093686854),(2),(17))
-13565,13567c13782,13784
-< call SaveInteger(hash_abilities,(1093681478),(1),(120))
-< call SaveInteger(hash_abilities,(1093681478),(2),(100))
-< call SaveInteger(hash_abilities,(1093681478),(3),(80))
----
-> call SaveInteger(hash_abilities,(1093681478),(1),(100))
-> call SaveInteger(hash_abilities,(1093681478),(2),(70))
-> call SaveInteger(hash_abilities,(1093681478),(3),(40))
-13574,13579c13791,13796
-< call SaveInteger(hash_abilities,(1093751874),(1),(80))
-< call SaveInteger(hash_abilities,(1093751874),(2),(60))
-< call SaveInteger(hash_abilities,(1093751874),(3),(40))
-< call SaveInteger(hash_abilities,(1093752118),(1),(50))
-< call SaveInteger(hash_abilities,(1093752118),(2),(50))
-< call SaveInteger(hash_abilities,(1093752118),(3),(50))
----
-> call SaveInteger(hash_abilities,(1093751874),(1),(90))
-> call SaveInteger(hash_abilities,(1093751874),(2),(75))
-> call SaveInteger(hash_abilities,(1093751874),(3),(60))
-> call SaveInteger(hash_abilities,(1093752118),(1),(75))
-> call SaveInteger(hash_abilities,(1093752118),(2),(75))
-> call SaveInteger(hash_abilities,(1093752118),(3),(75))
-14026c14243
-< if DistanceBetweenUnits(Techies,Dying)>1000 then
----
-> if DistanceBetweenUnits(Techies,Dying)>1200 then
-14179c14396
-< if IsUnitType(GetTriggerUnit(),UNIT_TYPE_HERO)==true then
----
-> if IsUnitType(GetTriggerUnit(),UNIT_TYPE_HERO)==true and GetOwningPlayer(GetTriggerUnit())!=udg_NeutralHostile then
 14189a14407,14471
 > function GiveBonusXPGold_Count takes nothing returns nothing
 > if(GetUnitTypeId((GetEnumUnit()))==1211117642)==false then
@@ -1009,113 +782,6 @@
 < call TriggerRegisterPlayerUnitEvent(t,udg_ScourgePlayers[4],EVENT_PLAYER_UNIT_DEATH,Condition(function GenericCondition_True))
 < call TriggerRegisterPlayerUnitEvent(t,udg_ScourgePlayers[5],EVENT_PLAYER_UNIT_DEATH,Condition(function GenericCondition_True))
 < call TriggerAddCondition(t,Condition(function GiveBonusXPGold))
-15042a15259,15266
-> set Item_Dummy[Item_Max]=1227902291
-> set Item_Real[Item_Max]=1227902290
-> set Item_Unit[Item_Max]=0
-> set Item_Mute[Item_Max]=1227902292
-> set Item_Icon[Item_Max]="ReplaceableTextures\\CommandButtons\\BTNGem.blp"
-> set Item_Cooldown[Item_Max]=0
-> set indexid_gemoftruesightcourier=Item_Max
-> set Item_Max=Item_Max+1
-15400c15624
-< set Item_Cooldown[Item_Max]=25
----
-> set Item_Cooldown[Item_Max]=30
-15846c16070
-< set Item_Cooldown[Item_Max]=50
----
-> set Item_Cooldown[Item_Max]=35
-15848a16073,16080
-> set Item_Dummy[Item_Max]=1227902294
-> set Item_Real[Item_Max]=1227902293
-> set Item_Unit[Item_Max]=0
-> set Item_Mute[Item_Max]=1227902295
-> set Item_Icon[Item_Max]="ReplaceableTextures\\CommandButtons\\BTNINV_ThrowingAxe_02.blp"
-> set Item_Cooldown[Item_Max]=50
-> set indexid_mantastyleranged=Item_Max
-> set Item_Max=Item_Max+1
-16196c16428
-< set Item_Cooldown[Item_Max]=12
----
-> set Item_Cooldown[Item_Max]=8
-16260c16492
-< set Item_Cooldown[Item_Max]=40
----
-> set Item_Cooldown[Item_Max]=30
-16270a16503,16510
-> set Item_Dummy[Item_Max]=1227902297
-> set Item_Real[Item_Max]=1227902296
-> set Item_Unit[Item_Max]=0
-> set Item_Mute[Item_Max]=1227902298
-> set Item_Icon[Item_Max]="ReplaceableTextures\\CommandButtons\\BTNMedalionOfCourage.blp"
-> set Item_Cooldown[Item_Max]=20
-> set indexid_phoenixblade=Item_Max
-> set Item_Max=Item_Max+1
-16557,16558d16796
-< set Item_Dummy[Item_Max]=1227896654
-< set Item_Real[Item_Max]=1227896886
-16560d16797
-< set Item_Mute[Item_Max]=1227900237
-16570,16571c16807,16808
-< set Item_Dummy[Item_Max]=1227901237
-< set Item_Real[Item_Max]=1227901236
----
-> set Item_Dummy[Item_Max]=0
-> set Item_Real[Item_Max]=0
-16573c16810
-< set Item_Mute[Item_Max]=1227901767
----
-> set Item_Mute[Item_Max]=0
-16985c17222
-< set Recipe_Component_2[Recipe_Max]=indexid_bladesofattack
----
-> set Recipe_Component_2[Recipe_Max]=indexid_nulltalisman
-17060d17296
-< set Recipe_Component_5[Recipe_Max]=indexid_recipe_eyeofskadi
-17067d17302
-< set Recipe_Component_5[Recipe_Max]=indexid_recipe_eyeofskadi
-17075,17087c17310
-< set Recipe_Component_1[Recipe_Max]=indexid_bladeofalacrity
-< set Recipe_Component_2[Recipe_Max]=indexid_ogreaxe
-< set Recipe_Component_3[Recipe_Max]=indexid_pointbooster
-< set Recipe_Component_4[Recipe_Max]=indexid_recipe_aghanimsscepter
-< set Recipe_Result[Recipe_Max]=indexid_aghanimsscepter
-< set Recipe_Max=Recipe_Max+1
-< set Recipe_Component_1[Recipe_Max]=indexid_bladeofalacrity
-< set Recipe_Component_2[Recipe_Max]=indexid_staffofwizardry
-< set Recipe_Component_3[Recipe_Max]=indexid_pointbooster
-< set Recipe_Component_4[Recipe_Max]=indexid_recipe_aghanimsscepter
-< set Recipe_Result[Recipe_Max]=indexid_aghanimsscepter
-< set Recipe_Max=Recipe_Max+1
-< set Recipe_Component_1[Recipe_Max]=indexid_staffofwizardry
----
-> set Recipe_Component_1[Recipe_Max]=indexid_pointbooster
-17089,17090c17312,17313
-< set Recipe_Component_3[Recipe_Max]=indexid_pointbooster
-< set Recipe_Component_4[Recipe_Max]=indexid_recipe_aghanimsscepter
----
-> set Recipe_Component_3[Recipe_Max]=indexid_bladeofalacrity
-> set Recipe_Component_4[Recipe_Max]=indexid_staffofwizardry
-17151c17374
-< set Recipe_Component_3[Recipe_Max]=indexid_helmofironwill
----
-> set Recipe_Component_3[Recipe_Max]=indexid_ringofhealth
-17155,17159d17377
-< set Recipe_Component_1[Recipe_Max]=indexid_ringofhealth
-< set Recipe_Component_2[Recipe_Max]=indexid_helmofironwill
-< set Recipe_Component_3[Recipe_Max]=indexid_planeswalkercloak
-< set Recipe_Result[Recipe_Max]=indexid_hoodofdefiance
-< set Recipe_Max=Recipe_Max+1
-17598a17817,17824
-> set Item_Max=Item_Max+1
-> set Item_Dummy[Item_Max]=1227902287
-> set Item_Real[Item_Max]=1227902288
-> set Item_Unit[Item_Max]=0
-> set Item_Mute[Item_Max]=1227902289
-> set Item_Icon[Item_Max]="ReplaceableTextures\\CommandButtons\\BTNINV_Wand_05.blp"
-> set Item_Cooldown[Item_Max]=60
-> set indexid_aghanimsscepterenchantress=Item_Max
 18499,18510c18725,18930
 < set x=UnitItem_GetBestXOld(GetSellingUnit(),u)
 < set y=UnitItem_GetBestYOld(GetSellingUnit(),u)
@@ -1735,48 +1401,6 @@
 > call PlaySoundForNearbyPlayers(Hero,gg_snd_Hint,x,y,2400)
 21475a21883
 > call StickyNapalm_SetSlow(Hero,0,0)
-21606a22015,22032
-> function IsRealDamageEvent takes unit u,real d returns boolean
-> if IsUnitType(u,UNIT_TYPE_HERO)or GetUnitAbilityLevel(u,1093678162)>0 then
-> return d>5
-> endif
-> return true
-> endfunction
-> function FindViableDamageSource takes unit u returns unit
-> local group g
-> if GetUnitAbilityLevel(u,1093678162)==0 then
-> return u
-> endif
-> set tt_unit1=mjollnir_source
-> set g=GetAvailableGroup()
-> call GroupEnumUnitsInRange(g,GetUnitX(u),GetUnitY(u),900,Condition(function GenericCondition_EnemyUnitsEx))
-> set mjollnir_target=FirstOfGroup(g)
-> call KillGroup(g)
-> return mjollnir_target
-> endfunction
-21612c22038
-< if GetTriggerEventId()!=EVENT_UNIT_ATTACKED then
----
-> if GetTriggerEventId()!=EVENT_UNIT_DAMAGED then
-21620c22046,22047
-< call IssueTargetOrder(Caster,"forkedlightning",GetAttacker())
----
-> set mjollnir_source=Source
-> if IssueTargetOrder(Caster,"forkedlightning",FindViableDamageSource(GetEventDamageSource()))then
-21622a22050
-> endif
-21628c22056
-< if(GetTriggerEventId()==EVENT_UNIT_ATTACKED and GetRandomInt(1,100)<21 and((LoadInteger(hash_main,(GetHandleId((GetTriggerUnit()))),((4257))))==HERO_STATE_ON)==false)or GetTriggerEventId()!=EVENT_UNIT_ATTACKED then
----
-> if(GetTriggerEventId()==EVENT_UNIT_DAMAGED and IsRealDamageEvent(GetEventDamageSource(),GetEventDamage())and GetRandomInt(1,100)<21 and((LoadInteger(hash_main,(GetHandleId((GetTriggerUnit()))),((4257))))==HERO_STATE_ON)==false)or GetTriggerEventId()!=EVENT_UNIT_DAMAGED then
-21637a22066,22068
-> if Target==null then
-> set Target=Source
-> endif
-21640c22071
-< call TriggerRegisterUnitEvent(t,Target,EVENT_UNIT_ATTACKED)
----
-> call TriggerRegisterUnitEvent(t,Target,EVENT_UNIT_DAMAGED)
 21805a22237
 > if IsUnitVisible(GetTriggerUnit(),GetOwningPlayer(GetEnumUnit()))==true then
 21820a22253
@@ -2525,35 +2149,6 @@
 > call SaveUnitHandle(hash_main,(Cache),(2),(Hawk))
 > call TriggerAddCondition(t,Condition(function CallOfTheWild_Check))
 > endif
-44022a44994,45001
-> function Impetus_GetLevel takes unit u returns integer
-> local integer Level=GetUnitAbilityLevel(u,abilityid_impetus)
-> if Level>0 then
-> return Level
-> endif
-> set Level=GetUnitAbilityLevel(u,abilityid_impetus_upgrade)
-> return Level
-> endfunction
-44025c45004
-< if GetUnitAbilityLevel(GetTriggerUnit(),buffid_impetus)>0 and GetUnitAbilityLevel(GetEventDamageSource(),abilityid_impetus)>0 and(LoadUnitHandle(hash_main,(GetHandleId(GetTriggeringTrigger())),(2)))==GetEventDamageSource()then
----
-> if GetUnitAbilityLevel(GetTriggerUnit(),buffid_impetus)>0 and Impetus_GetLevel(GetEventDamageSource())>0 and(LoadUnitHandle(hash_main,(GetHandleId(GetTriggeringTrigger())),(2)))==GetEventDamageSource()then
-44027c45006
-< set d=(0.10+0.05*I2R(GetUnitAbilityLevel(GetEventDamageSource(),abilityid_impetus)))*ImpDist(GetUnitX(GetTriggerUnit()),GetUnitY(GetTriggerUnit()),GetUnitX(GetEventDamageSource()),GetUnitY(GetEventDamageSource()))
----
-> set d=(0.10+0.05*I2R(Impetus_GetLevel(GetEventDamageSource())))*ImpDist(GetUnitX(GetTriggerUnit()),GetUnitY(GetTriggerUnit()),GetUnitX(GetEventDamageSource()),GetUnitY(GetEventDamageSource()))
-44061c45040
-< if GetUnitAbilityLevel(GetAttacker(),abilityid_impetus)>0 and(LoadBoolean(hash_main,(GetHandleId(GetTriggeringTrigger())),(263)))and IsUnitType(GetTriggerUnit(),UNIT_TYPE_STRUCTURE)==false and GetAttacker()==(LoadUnitHandle(hash_main,(GetHandleId(GetTriggeringTrigger())),(14)))then
----
-> if Impetus_GetLevel(GetAttacker())>0 and(LoadBoolean(hash_main,(GetHandleId(GetTriggeringTrigger())),(263)))and IsUnitType(GetTriggerUnit(),UNIT_TYPE_STRUCTURE)==false and GetAttacker()==(LoadUnitHandle(hash_main,(GetHandleId(GetTriggeringTrigger())),(14)))then
-44070c45049
-< elseif GetTriggerEventId()==EVENT_UNIT_SPELL_EFFECT and GetSpellAbilityId()==abilityid_impetus then
----
-> elseif GetTriggerEventId()==EVENT_UNIT_SPELL_EFFECT and(GetSpellAbilityId()==abilityid_impetus or GetSpellAbilityId()==abilityid_impetus_upgrade)then
-44085c45064
-< if GetLearnedSkill()==abilityid_impetus and IsUnitIllusion(GetTriggerUnit())==false and GetUnitAbilityLevel(GetTriggerUnit(),abilityid_impetus)==1 then
----
-> if(GetLearnedSkill()==abilityid_impetus or GetLearnedSkill()==abilityid_impetus_upgrade)and IsUnitIllusion(GetTriggerUnit())==false and Impetus_GetLevel(GetTriggerUnit())==1 then
 44098a45078,45088
 > function Enchant_Remove takes nothing returns boolean
 > local trigger t=GetTriggeringTrigger()
@@ -2669,42 +2264,10 @@
 < endfunction
 45043d46107
 < call BurningSpear_RestoreMana(GetTriggerUnit())
-45135a46200,46203
-> local integer Loops=6
-> if GetUnitAbilityLevel(Source,abilityid_macropyre)==0 then
-> set Loops=9
-> endif
-45137c46205
-< if Count==(3+3)then
----
-> if Count==(Loops)then
-45252a46321
-> local group g2=GetAvailableGroup()
-45256a46326,46327
-> call GroupEnumUnitsInRange(g2,x,y,200,Condition(function GenericCondition_EnemySiegeEx))
-> call GroupAddGroup(g2,g)
-45258a46330
-> call KillGroup(g2)
-45260a46333
-> set g2=null
-45607c46680
-< call GroupEnumUnitsInRange(g,GetUnitX(Hero),GetUnitY(Hero),450,Condition(function GenericCondition_EnemyUnitsExVisible))
----
-> call GroupEnumUnitsInRange(g,GetUnitX(Hero),GetUnitY(Hero),450,Condition(function GenericCondition_EnemyUnitsExVisibleAttackable))
 45725c46798
 < return GetUnitTypeId(GetSummonedUnit())==1865429059
 ---
 > return GetUnitTypeId(GetSummonedUnit())==1865429059 or GetUnitTypeId(GetSummonedUnit())==1865429319 or GetUnitTypeId(GetSummonedUnit())==1865429320 or GetUnitTypeId(GetSummonedUnit())==1865429321
-45767a46841,46849
-> function Recall_FindTarget takes nothing returns nothing
-> local unit Target=GetEnumUnit()
-> local real d=DistanceBetweenXY(GetUnitX(Target),GetUnitY(Target),recall_x,recall_y)
-> if d<recall_distance then
-> set recall_target=GetEnumUnit()
-> set recall_distance=d
-> endif
-> set Target=null
-> endfunction
 45771,45772c46853,46854
 < local trigger t=CreateTrigger()
 < local integer Cache=GetHandleId(t)
