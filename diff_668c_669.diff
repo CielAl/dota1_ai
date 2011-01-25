@@ -58,10 +58,6 @@
 < real array TP_Location_Y
 < real array Blink_Location_X
 < real array Blink_Location_Y
-2490c2507
-< constant real armlet_drain=35
----
-> constant real armlet_drain=37
 2513a2531
 > constant integer unitid_goodcourier6=1848659013
 2524c2542,2543
@@ -2707,16 +2703,6 @@
 < if GetSpellAbilityId()==abilityid_dismemberupgrade or GetSpellAbilityId()==abilityid_dismember then
 ---
 > if GetSpellAbilityId()==abilityid_dismemberupgrade and(GetUnitAbilityLevel((GetSpellTargetUnit()),buffid_linkensphere)>0)==false then
-61596c63006
-< elseif Count>200 then
----
-> elseif Count>160 then
-61603,61604c63013,63014
-< call StaticLink_AddDamage(Source,(Level*5)*R2I(Count/20))
-< call StaticLink_RemoveDamage(Target,(Level*5)*R2I(Count/20))
----
-> call StaticLink_AddDamage(Source,(Level*7)*R2I(Count/20))
-> call StaticLink_RemoveDamage(Target,(Level*7)*R2I(Count/20))
 62046c63456
 < set MaxIteration=MaxIteration+1
 ---
