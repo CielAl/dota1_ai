@@ -1590,23 +1590,6 @@
 < if IsUnitAlly(GetTriggerUnit(),GetOwningPlayer(GetAttacker()))then
 ---
 > if IsUnitAlly(GetTriggerUnit(),GetOwningPlayer(GetAttacker()))and GetUnitTypeId(GetTriggerUnit())!=1966092621 and GetUnitTypeId(GetTriggerUnit())!=1966092622 then
-30849a31410,31416
-> function Command_Movespeed_IsSylla takes unit u returns boolean
-> return GetUnitTypeId(u)==1311781199 or GetUnitTypeId(u)==1311781171 or GetUnitTypeId(u)==1311781172 or GetUnitTypeId(u)==1311781173
-> endfunction
-> function Command_Movespeed_GetBear takes unit u returns unit
-> local integer Cache=GetHandleId(GetOwningPlayer(u))
-> return(LoadUnitHandle(hash_main,(Cache),(333)))
-> endfunction
-30850a31418
-> local unit u
-30854a31423,31428
-> if Command_Movespeed_IsSylla(udg_Hero[GetPlayerId(GetTriggerPlayer())])then
-> set u=Command_Movespeed_GetBear(udg_Hero[GetPlayerId(GetTriggerPlayer())])
-> if u!=null then
-> call DisplayTimedTextToPlayer(GetTriggerPlayer(),0,udg_TextY,10.00,GetUnitName(u)+" "+GetObjectName(MSG_MOVEMENT)+" "+I2S(R2I(0.5+GetUnitMoveSpeed(u))))
-> endif
-> endif
 31811a32386,32393
 > elseif s=="-music other6"then
 > call Music_Set(gg_snd_Other6)
