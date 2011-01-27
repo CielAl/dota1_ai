@@ -1,11 +1,3 @@
-519a520,526
-> sound gg_snd_GyrocopterPissed1=null
-> string gg_snd_Other6
-> string gg_snd_Other7
-> string gg_snd_Other8
-> string gg_snd_Other9
-> sound gg_snd_SecretFound01=null
-> sound gg_snd_Hint=null
 534d540
 < trigger gg_trg_Generic_Condition=null
 537d542
@@ -130,11 +122,6 @@
 > boolean phoenix_phase2=false
 3046a3120
 > constant integer callofthewild_invis=1093752647
-3120a3195
-> constant integer abilityid_impetus_upgrade=1093752642
-3140a3216,3217
-> real sprout_x
-> real sprout_y
 3144a3222,3230
 > constant integer abilityid_wrathofnature=1093752632
 > constant integer abilityid_wrathofnatureupgrade=1093752633
@@ -182,28 +169,6 @@
 > constant integer greaterbash_stun=1093752657
 3803a3898
 > unit netherstrike_source
-4743a4841,4853
-> set gg_snd_GyrocopterPissed1=CreateSound("Units\\Human\\Gyrocopter\\GyrocopterPissed1.wav",false,true,true,10,10,"DefaultEAXON")
-> call SetSoundParamsFromLabel(gg_snd_GyrocopterPissed1,"GyrocopterPissed")
-> call SetSoundDuration(gg_snd_GyrocopterPissed1,3913)
-> set gg_snd_Other6="Sound\\Music\\mp3Music\\Tension.mp3"
-> set gg_snd_Other7="Sound\\Music\\mp3Music\\ArthasTheme.mp3"
-> set gg_snd_Other8="Sound\\Music\\mp3Music\\NightElfDefeat.mp3"
-> set gg_snd_Other9="Sound\\Music\\mp3Music\\NightElfVictory.mp3"
-> set gg_snd_SecretFound01=CreateSound("Sound\\Interface\\SecretFound.wav",false,false,false,10,10,"")
-> call SetSoundParamsFromLabel(gg_snd_SecretFound01,"SecretFound")
-> call SetSoundDuration(gg_snd_SecretFound01,2525)
-> set gg_snd_Hint=CreateSound("Sound\\Interface\\Hint.wav",false,false,false,10,10,"")
-> call SetSoundParamsFromLabel(gg_snd_Hint,"Hint")
-> call SetSoundDuration(gg_snd_Hint,2006)
-5020c5130
-< set gg_rct_Bad_17=Rect(5952.0,-8192.0,7200.0,-7776.0)
----
-> set gg_rct_Bad_17=Rect(5952.0,-8192.0,7200.0,-7712.0)
-5025c5135
-< set gg_rct_Bad_22=Rect(5984.0,-7904.0,6432.0,-7616.0)
----
-> set gg_rct_Bad_22=Rect(6784.0,-7776.0,7264.0,-7456.0)
 5218a5329
 > set mbitem=null
 5224a5336
@@ -214,122 +179,6 @@
 > set mbitem=null
 5242a5357
 > set mbitem=null
-7499a7650,7849
-> function InitTrig_Globals takes nothing returns nothing
-> endfunction
-> function IntializeRegions takes nothing returns nothing
-> set region_senthealing=CreateRegion()
-> call RegionAddRect(region_senthealing,gg_rct_Recreate1)
-> set region_scourgehealing=CreateRegion()
-> call RegionAddRect(region_scourgehealing,gg_rct_Recreate2)
-> set region_sentbase=CreateRegion()
-> call RegionAddRect(region_sentbase,gg_rct_Base_1)
-> call RegionAddRect(region_sentbase,gg_rct_Base_1b)
-> call RegionAddRect(region_sentbase,gg_rct_Base_1c)
-> set region_scourgebase=CreateRegion()
-> call RegionAddRect(region_scourgebase,gg_rct_Base_2)
-> call RegionAddRect(region_scourgebase,gg_rct_Base_2b)
-> call RegionAddRect(region_scourgebase,gg_rct_Base_2c)
-> set region_badplaces=CreateRegion()
-> call RegionAddRect(region_badplaces,gg_rct_Bad_01)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_02)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_03)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_04)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_05)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_06)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_07)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_08)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_09)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_10)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_11)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_12)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_13)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_14)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_15)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_16)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_17)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_18)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_19)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_20)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_21)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_22)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_23)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_24)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_25)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_26)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_27)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_28)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_29)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_30)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_31)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_32)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_33)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_34)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_35)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_36)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_37)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_38)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_39)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_40)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_41)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_42)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_43)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_44)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_45)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_46)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_47)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_48)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_49)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_50)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_51)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_52)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_53)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_54)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_55)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_56)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_57)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_58)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_59)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_60)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_61)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_62)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_63)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_64)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_65)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_66)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_67)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_68)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_69)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_70)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_71)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_72)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_73)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_74)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_75)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_76)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_77)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_78)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_79)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_80)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_81)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_82)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_83)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_84)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_85)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_86)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_87)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_88)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_89)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_90)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_91)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_92)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_93)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_94)
-> call RegionAddRect(region_badplaces,gg_rct_Bad_95)
-> endfunction
-> function InitTrig_Regions takes nothing returns nothing
-> call IntializeRegions()
-> endfunction
 > function LockAllItems takes player p returns nothing
 > local unit Hero=udg_Hero[GetPlayerId(p)]
 > local integer i=0
@@ -356,126 +205,6 @@
 > set Hero=null
 > set Item=null
 > endfunction
-7648,7762d8003
-< function InitTrig_Globals takes nothing returns nothing
-< endfunction
-< function IntializeRegions takes nothing returns nothing
-< set region_senthealing=CreateRegion()
-< call RegionAddRect(region_senthealing,gg_rct_Recreate1)
-< set region_scourgehealing=CreateRegion()
-< call RegionAddRect(region_scourgehealing,gg_rct_Recreate2)
-< set region_sentbase=CreateRegion()
-< call RegionAddRect(region_sentbase,gg_rct_Base_1)
-< call RegionAddRect(region_sentbase,gg_rct_Base_1b)
-< call RegionAddRect(region_sentbase,gg_rct_Base_1c)
-< set region_scourgebase=CreateRegion()
-< call RegionAddRect(region_scourgebase,gg_rct_Base_2)
-< call RegionAddRect(region_scourgebase,gg_rct_Base_2b)
-< call RegionAddRect(region_scourgebase,gg_rct_Base_2c)
-< set region_badplaces=CreateRegion()
-< call RegionAddRect(region_badplaces,gg_rct_Bad_01)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_02)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_03)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_04)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_05)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_06)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_07)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_08)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_09)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_10)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_11)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_12)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_13)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_14)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_15)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_16)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_17)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_18)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_19)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_20)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_21)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_22)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_23)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_24)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_25)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_26)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_27)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_28)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_29)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_30)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_31)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_32)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_33)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_34)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_35)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_36)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_37)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_38)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_39)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_40)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_41)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_42)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_43)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_44)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_45)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_46)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_47)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_48)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_49)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_50)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_51)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_52)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_53)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_54)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_55)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_56)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_57)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_58)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_59)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_60)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_61)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_62)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_63)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_64)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_65)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_66)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_67)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_68)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_69)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_70)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_71)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_72)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_73)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_74)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_75)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_76)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_77)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_78)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_79)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_80)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_81)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_82)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_83)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_84)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_85)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_86)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_87)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_88)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_89)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_90)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_91)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_92)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_93)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_94)
-< call RegionAddRect(region_badplaces,gg_rct_Bad_95)
-< endfunction
-< function InitTrig_Regions takes nothing returns nothing
-< call IntializeRegions()
-< endfunction
-< function LockAllItems takes player p returns nothing
-< local unit Hero=udg_Hero[GetPlayerId(p)]
-< local integer i=0
-< local item Item
 ---
 > function StickyNapalm_SetSlow takes unit Source,integer Level,integer Stack returns nothing
 > local integer i
@@ -1098,10 +827,6 @@
 > endloop
 > call EnableTrigger(t_manipulateitem)
 > set Item=null
-18629c19060
-< if(indexId==indexid_gemoftruesight or indexId==indexid_aegis)and IsFlyingCourier(u)then
----
-> if(indexId==indexid_aegis)and IsFlyingCourier(u)then
 18636,18637d19066
 < else
 < set tt_item1=CreateItem(Item_Dummy[indexId],x,y)
@@ -1185,10 +910,6 @@
 < endif
 ---
 > call RestrictedItems_UpdateMeleeRange(Hero,Item)
-18750c19103
-< return indexId==indexid_helmofthedominatorcourier or indexId==indexid_armletofmordiggianoncourier or indexId==indexid_armletofmordiggianoffcourier or indexId==indexid_shivasguardcourier or indexId==indexid_helmofthedominator or indexId==indexid_armletofmordiggianon or indexId==indexid_armletofmordiggianoff or indexId==indexid_shivasguard
----
-> return indexId==indexid_helmofthedominatorcourier or indexId==indexid_armletofmordiggianoncourier or indexId==indexid_armletofmordiggianoffcourier or indexId==indexid_shivasguardcourier or indexId==indexid_helmofthedominator or indexId==indexid_armletofmordiggianon or indexId==indexid_armletofmordiggianoff or indexId==indexid_shivasguard or indexId==indexid_gemoftruesight or indexId==indexid_gemoftruesightcourier
 18767a19121,19123
 > if indexId==indexid_gemoftruesightcourier then
 > set newIndex=indexid_gemoftruesight
