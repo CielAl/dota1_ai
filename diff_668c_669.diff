@@ -65,11 +65,6 @@
 2583a2607,2608
 > unit mjollnir_target
 > unit mjollnir_source
-2595c2620,2621
-< constant integer abilityid_fortify=1093743665
----
-> constant integer abilityid_fortify1=1093743665
-> constant integer abilityid_fortify2=1093752649
 2614a2641,2642
 > boolean damageevent_valid=false
 > boolean array safedamage_urn
@@ -324,26 +319,6 @@
 8383a8583,8584
 > elseif unitId==1164799855 then
 > return abilityid_aghanimsscepter_enchantress
-9757a9959
-> call UnitAddAbility(COP1,abilityid_fortify1)
-9765a9968
-> call UnitAddAbility(COP2,abilityid_fortify1)
-9773a9977
-> call UnitAddAbility(COP3,abilityid_fortify1)
-9781a9986
-> call UnitAddAbility(COP4,abilityid_fortify1)
-9789a9995
-> call UnitAddAbility(COP5,abilityid_fortify1)
-9797a10004
-> call UnitAddAbility(COP6,abilityid_fortify2)
-9805a10013
-> call UnitAddAbility(COP7,abilityid_fortify2)
-9813a10022
-> call UnitAddAbility(COP8,abilityid_fortify2)
-9821a10031
-> call UnitAddAbility(COP9,abilityid_fortify2)
-9829a10040
-> call UnitAddAbility(COP10,abilityid_fortify2)
 12610a12826
 > call ExecuteFunc("Register_Bloodrage")
 12817a13034
@@ -1119,10 +1094,6 @@
 < call GroupEnumUnitsInRange(g,x,y,1600,Condition(function GenericCondition_EnemyHeroes))
 ---
 > call GroupEnumUnitsInRange(g,x,y,1225,Condition(function GenericCondition_EnemyHeroes))
-21948c22381
-< if GetSpellAbilityId()==abilityid_fortify then
----
-> if GetSpellAbilityId()==abilityid_fortify1 or GetSpellAbilityId()==abilityid_fortify2 then
 22160,22161c22593,22597
 < local trigger t=CreateTrigger()
 < local integer Cache=GetHandleId(t)
