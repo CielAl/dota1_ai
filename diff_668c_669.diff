@@ -150,10 +150,6 @@
 > real recall_distance
 > real recall_x
 > real recall_y
-3313c3403
-< constant integer abilityid_godstrength=1093687120
----
-> constant integer abilityid_godstrength=1093752648
 3367a3458,3459
 > integer remotemine_unitid
 > player remotemine_player
@@ -2223,42 +2219,6 @@
 > set Target=null
 48522a49652
 > call TimedLifeEffect("war3mapImported\\CotS.mdx",GetLocationX(l),GetLocationY(l),5)
-48897a50028
-> call UnitMakeAbilityPermanent(GetEnumUnit(),true,warcry_abilityid)
-48936c50067,50072
-< if GetTriggerEventId()!=EVENT_PLAYER_UNIT_SPELL_EFFECT or(GetTriggerEventId()==EVENT_PLAYER_UNIT_SPELL_EFFECT and IsPurge(GetSpellAbilityId())and GetSpellTargetUnit()==Hero)then
----
-> local integer Count=(LoadInteger(hash_main,(Cache),(34)))
-> if GetTriggerEventId()!=EVENT_PLAYER_UNIT_SPELL_EFFECT then
-> set Count=Count+1
-> call SaveInteger(hash_main,(Cache),(34),(Count))
-> endif
-> if(GetTriggerEventId()!=EVENT_PLAYER_UNIT_SPELL_EFFECT and Count>1)or(GetTriggerEventId()==EVENT_PLAYER_UNIT_SPELL_EFFECT and IsPurge(GetSpellAbilityId())and GetSpellTargetUnit()==Hero)then
-48938a50075,50076
-> call UnitRemoveAbility(Hero,1110454329)
-> call UnitRemoveAbility(Hero,1110459472)
-48941a50080,50085
-> elseif GetTriggerEventId()!=EVENT_PLAYER_UNIT_SPELL_EFFECT then
-> call DestroyEffect(AddSpecialEffectTarget("war3mapImported\\BattleCryCaster.mdx",Hero,"overhead"))
-> call UnitAddAbility(Hero,abilityid_godstrengthbonus)
-> call SetUnitAbilityLevel(Hero,abilityid_godstrengthbonus,GetUnitAbilityLevel(Hero,abilityid_godstrength))
-> call UnitMakeAbilityPermanent(Hero,true,abilityid_godstrengthbonus)
-> call SetPlayerAbilityAvailable(GetOwningPlayer(Hero),abilityid_godstrengthbonus,false)
-48951a50096
-> call TriggerRegisterTimerEvent(t,0.31,false)
-48955,48958c50100,50102
-< call DestroyEffect(AddSpecialEffectTarget("war3mapImported\\BattleCryCaster.mdx",Hero,"overhead"))
-< call UnitAddAbility(Hero,abilityid_godstrengthbonus)
-< call SetUnitAbilityLevel(Hero,abilityid_godstrengthbonus,GetUnitAbilityLevel(Hero,abilityid_godstrength))
-< call SetPlayerAbilityAvailable(GetOwningPlayer(Hero),abilityid_godstrengthbonus,false)
----
-> call SaveInteger(hash_main,(Cache),(34),(0))
-> set t=null
-> set Hero=null
-48961c50105
-< if GetSpellAbilityId()==abilityid_godstrength then
----
-> if GetSpellAbilityId()==abilityid_godstrength and GetUnitTypeId(GetTriggerUnit())==1211117617 then
 49158a50303,50305
 > if IsDead(GetFilterUnit())then
 > return false
