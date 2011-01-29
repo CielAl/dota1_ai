@@ -321,8 +321,6 @@
 > return abilityid_aghanimsscepter_enchantress
 12610a12826
 > call ExecuteFunc("Register_Bloodrage")
-12817a13034
-> call ExecuteFunc("Register_Reincarnation")
 14189a14407,14471
 > function GiveBonusXPGold_Count takes nothing returns nothing
 > if(GetUnitTypeId((GetEnumUnit()))==1211117642)==false then
@@ -2203,73 +2201,6 @@
 > if GetLearnedSkill()==abilityid_exort then
 > call SetHeroInt(GetTriggerUnit(),GetHeroInt(GetTriggerUnit(),false)+2,true)
 > endif
-57093c58392,58404
-< call DamageTarget(Source,Target,DAMAGE_MAGICAL,15+15*Level)
----
-> local real Damage
-> if Level==1 then
-> set Damage=15
-> elseif Level==2 then
-> set Damage=30
-> elseif Level==3 then
-> set Damage=40
-> elseif Level==4 then
-> set Damage=50
-> endif
-> if GetTriggerEvalCount(t)==3 or GetTriggerEvalCount(t)==4 then
-> call DamageTarget(Source,Target,DAMAGE_MAGICAL,Damage)
-> endif
-57169a58481,58530
-> function Reincarnation_Control takes nothing returns boolean
-> local trigger t=GetTriggeringTrigger()
-> local integer Cache=GetHandleId(t)
-> local unit Source=(LoadUnitHandle(hash_main,(Cache),(2)))
-> call SelectUnitForPlayerSingle(Source,GetOwningPlayer(Source))
-> call FlushChildHashtable(hash_main,(Cache))
-> call CleanTrigger(t)
-> set t=null
-> set Source=null
-> return false
-> endfunction
-> function Reincarnation_Dead takes nothing returns boolean
-> local trigger t=GetTriggeringTrigger()
-> local integer Cache=GetHandleId(t)
-> local unit Source=(LoadUnitHandle(hash_main,(Cache),(2)))
-> local integer Level=GetUnitAbilityLevel(Source,abilityid_reincarnation)
-> if TimerGetRemaining(CTimer[GetPlayerId(GetOwningPlayer(Source))])==0 and GetUnitState(Source,UNIT_STATE_MANA)>=140 then
-> call TimerStart(CTimer[GetPlayerId(GetOwningPlayer(Source))],380-80*Level,false,null)
-> set t=CreateTrigger()
-> set Cache=GetHandleId(t)
-> call TriggerRegisterTimerEvent(t,5.5-Level*0.5+0.01,false)
-> call TriggerAddCondition(t,Condition(function Reincarnation_Control))
-> call SaveUnitHandle(hash_main,(Cache),(2),(Source))
-> endif
-> set t=null
-> set Source=null
-> return false
-> endfunction
-> function Reincarnation_Learned takes nothing returns nothing
-> local trigger t=CreateTrigger()
-> local integer Cache=GetHandleId(t)
-> local unit Source=GetTriggerUnit()
-> call TriggerRegisterDeathEvent(t,Source)
-> call TriggerAddCondition(t,Condition(function Reincarnation_Dead))
-> call SaveUnitHandle(hash_main,(Cache),(2),(Source))
-> set t=null
-> set Source=null
-> endfunction
-> function Reincarnation_Main takes nothing returns boolean
-> if GetLearnedSkill()==abilityid_reincarnation and GetUnitAbilityLevel(GetTriggerUnit(),abilityid_reincarnation)==1 and IsUnitIllusion(GetTriggerUnit())==false then
-> call Reincarnation_Learned()
-> endif
-> return false
-> endfunction
-> function Register_Reincarnation takes nothing returns nothing
-> local trigger t=CreateTrigger()
-> call TriggerRegisterAnyUnitEvent(t,EVENT_PLAYER_HERO_SKILL)
-> call TriggerAddCondition(t,Condition(function Reincarnation_Main))
-> set t=null
-> endfunction
 57218c58579
 < elseif Target==null then
 ---
