@@ -117,28 +117,9 @@
 > boolean phoenix_phase2=false
 3046a3120
 > constant integer callofthewild_invis=1093752647
-3144a3222,3230
-> constant integer abilityid_wrathofnature=1093752632
-> constant integer abilityid_wrathofnatureupgrade=1093752633
-> constant integer abilityid_wrathofnature_real=1093678936
-> constant integer abilityid_wrathofnatureupgrade_real=1093681484
-> unit wrathofnature_target
-> real wrathofnature_distance
-> real wrathofnature_x
-> real wrathofnature_y
-> unit wrathofnature_source
-3175a3262,3265
-> unit recall_target
-> real recall_distance
-> real recall_x
-> real recall_y
 3367a3458,3459
 > integer remotemine_unitid
 > player remotemine_player
-3433c3525
-< constant real shackleshot_maxangle=30
----
-> constant real shackleshot_maxangle=26
 3435a3528,3529
 > real shackleshot_x
 > real shackleshot_y
@@ -319,8 +300,6 @@
 8383a8583,8584
 > elseif unitId==1164799855 then
 > return abilityid_aghanimsscepter_enchantress
-12610a12826
-> call ExecuteFunc("Register_Bloodrage")
 14189a14407,14471
 > function GiveBonusXPGold_Count takes nothing returns nothing
 > if(GetUnitTypeId((GetEnumUnit()))==1211117642)==false then
@@ -2167,20 +2146,6 @@
 < if Distance<udg_TempInt*1500 and GetUnitLifePercent(GetEnumUnit())<=40 then
 ---
 > if Distance<(udg_TempInt*1500+25)and GetUnitLifePercent(GetEnumUnit())<=40 then
-53994a55269,55281
-> function Bloodrage_Main takes nothing returns boolean
-> if GetSpellAbilityId()==abilityid_bloodrage and GetSpellTargetUnit()!=GetTriggerUnit()and IsUnitAlly(GetSpellTargetUnit(),GetOwningPlayer(GetTriggerUnit()))and(LoadBoolean(hash_main,(GetHandleId(GetOwningPlayer(GetSpellTargetUnit()))),(139)))then
-> call InterruptUnit(GetTriggerUnit())
-> call Error(GetOwningPlayer(GetTriggerUnit()),GetObjectName(MSG_DISABLE_HELP_ON))
-> endif
-> return false
-> endfunction
-> function Register_Bloodrage takes nothing returns nothing
-> local trigger t=CreateTrigger()
-> call TriggerRegisterAnyUnitEvent(t,EVENT_PLAYER_UNIT_SPELL_CAST)
-> call TriggerAddCondition(t,Condition(function Bloodrage_Main))
-> set t=null
-> endfunction
 54076a55364
 > call UnitRemoveAbility(Hero,1110454597)
 54313c55601
