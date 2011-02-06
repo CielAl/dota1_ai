@@ -1255,28 +1255,6 @@
 < if IsUnitAlly(GetTriggerUnit(),GetOwningPlayer(GetAttacker()))then
 ---
 > if IsUnitAlly(GetTriggerUnit(),GetOwningPlayer(GetAttacker()))and GetUnitTypeId(GetTriggerUnit())!=1966092621 and GetUnitTypeId(GetTriggerUnit())!=1966092622 then
-31811a32386,32393
-> elseif s=="-music other6"then
-> call Music_Set(gg_snd_Other6)
-> elseif s=="-music other7"then
-> call Music_Set(gg_snd_Other7)
-> elseif s=="-music other8"then
-> call Music_Set(gg_snd_Other8)
-> elseif s=="-music other9"then
-> call Music_Set(gg_snd_Other9)
-31816c32398
-< call DisplayTimedTextToPlayer(GetTriggerPlayer(),0,udg_TextY,10,"off, random, nightelf1, nightelf2, nightelf3, human1, human2, human3, orc1, orc2, orc3, undead1, undead2, undead3, other1, other2, other3, other4, other5, special")
----
-> call DisplayTimedTextToPlayer(GetTriggerPlayer(),0,udg_TextY,10,"off, random, nightelf1, nightelf2, nightelf3, human1, human2, human3, orc1, orc2, orc3, undead1, undead2, undead3, other1, other2, other3, other4, other5, other6, other7, other8, other9, special")
-31855a32438,32445
-> set Music_Options[Music_Max]=gg_snd_Other6
-> set Music_Max=Music_Max+1
-> set Music_Options[Music_Max]=gg_snd_Other7
-> set Music_Max=Music_Max+1
-> set Music_Options[Music_Max]=gg_snd_Other8
-> set Music_Max=Music_Max+1
-> set Music_Options[Music_Max]=gg_snd_Other9
-> set Music_Max=Music_Max+1
 39755,39756c40345,40633
 < call StartingReplayData()
 < call CleanTrigger(GetTriggeringTrigger())
@@ -1886,8 +1864,6 @@
 48222a49350,49351
 > set Source=null
 > set Target=null
-48522a49652
-> call TimedLifeEffect("war3mapImported\\CotS.mdx",GetLocationX(l),GetLocationY(l),5)
 49158a50303,50305
 > if IsDead(GetFilterUnit())then
 > return false
