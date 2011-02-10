@@ -55,9 +55,6 @@
 
 > integer RoshanUpgrade=0
 
-2122a2137
-> integer indexid_gemoftruesightcourier
-
 2220a2236
 > integer indexid_mantastyleranged
 
@@ -86,14 +83,6 @@
 
 2513a2531
 > constant integer unitid_goodcourier6=1848659013
-
-2524c2542,2543
-< constant integer abilityid_morphfelboartochicken=1395667014
-
----
-> constant integer abilityid_morphfelboartorabit=1395667014
-
-> constant integer abilityid_morphrabittochicken=1395667253
 
 2535a2555,2558
 > real array TP_Location_X
@@ -1639,20 +1628,6 @@
 ---
 > call RestrictedItems_UpdateMeleeRange(Hero,Item)
 
-18767a19121,19123
-> if indexId==indexid_gemoftruesightcourier then
-
-> set newIndex=indexid_gemoftruesight
-
-> endif
-
-18791a19148,19150
-> if indexId==indexid_gemoftruesight then
-
-> set newIndex=indexid_gemoftruesightcourier
-
-> endif
-
 19096a19456,19467
 > function HeroMorphRestrictions takes nothing returns boolean
 
@@ -1773,64 +1748,6 @@
 
 ---
 > call DamageTarget(GetDyingUnit(),LastWill_FindUnit(GetKillingUnit()),DAMAGE_PURE,600)
-
-20105c20457
-< call UnitRemoveAbility(Hero,1093685331)
-
----
-> call UnitRemoveAbility(Hero,1093682520)
-
-20111c20463
-< call UnitRemoveAbility(Hero,1093685331)
-
----
-> call UnitRemoveAbility(Hero,1093682520)
-
-20118c20470
-< call UnitAddAbility(Hero,1093685331)
-
----
-> call UnitAddAbility(Hero,1093682520)
-
-20125c20477
-< call UnitAddAbility(Hero,1093685331)
-
----
-> call UnitAddAbility(Hero,1093682520)
-
-20495c20847
-< local integer r=GetRandomInt(1,5)
-
----
-> local integer r=GetRandomInt(1,6)
-
-20505c20857
-< else
-
----
-> elseif r==5 then
-
-20506a20859,20860
-> else
-
-> return unitid_goodcourier6
-
-20753c21107
-< set newability=abilityid_morphfelboartochicken
-
----
-> set newability=abilityid_morphfelboartorabit
-
-20761a21116,21117
-> elseif OldId==unitid_goodcourier6 then
-
-> set newability=abilityid_morphrabittochicken
-
-20769c21125
-< set newability=abilityid_morphfelboartochicken
-
----
-> set newability=abilityid_morphfelboartorabit
 
 20925,20926c21281
 < function MorphCrow takes nothing returns nothing
@@ -3102,78 +3019,6 @@
 > local ubersplat Splat=CreateUbersplat(x,y,"THNN",255,255,255,255,false,false)
 
 > call SetUbersplatRenderAlways(Splat,true)
-
-40406c41316,41317
-< function UnstableConcoction_Hit takes unit u returns nothing
-
----
-> function UnstableConcoction_Hit takes unit u,real x,real y returns nothing
-
-> if u!=null then
-
-40408a41320
-> endif
-
-40412a41325,41326
-> local real x
-
-> local real y
-
-40415c41329
-< set unstableconcoction_stun=(2+0.5*Level)*Elapsed/unstableconcoction_maxcharge
-
----
-> set unstableconcoction_stun=(1+0.75*Level)*Elapsed/unstableconcoction_maxcharge
-
-40421c41335
-< call UnstableConcoction_Hit(Target)
-
----
-> call UnstableConcoction_Hit(Target,GetUnitX(Target),GetUnitY(Target))
-
-40423c41337
-< call UnstableConcoction_Hit(Target)
-
----
-> call UnstableConcoction_Hit(Target,GetUnitX(Target),GetUnitY(Target))
-
-40424a41339,41340
-> set x=GetUnitX(Target)
-
-> set y=GetUnitY(Target)
-
-40429c41345
-< call UnstableConcoction_Hit(Target)
-
----
-> call UnstableConcoction_Hit(Target,x,y)
-
-40431a41348
-> if Target!=null then
-
-40432a41350
-> endif
-
-40532a41451
-> call DestroyEffect((LoadEffectHandle(hash_main,(Cache),(32))))
-
-40542a41462
-> call DestroyEffect((LoadEffectHandle(hash_main,(Cache),(32))))
-
-40562a41483
-> call DestroyEffect((LoadEffectHandle(hash_main,(Cache),(32))))
-
-40574a41496,41499
-> local string s="war3mapImported\\UnstableConcoctionRangeDisplay3.mdx"
-
-> if GetLocalPlayer()!=GetOwningPlayer(Source)then
-
-> set s=""
-
-> endif
-
-40576a41502
-> call SaveEffectHandle(hash_main,(Cache),(32),(AddSpecialEffectTarget(s,Source,"origin")))
 
 40709c41635
 < call GroupEnumUnitsInRange(GroupVar,x,y,625,CondVar)
