@@ -250,12 +250,6 @@
 3634a3727
 > constant integer abilityid_reincarnation=1093677401
 
-3795a3889
-> constant integer greaterbash_stun=1093752657
-
-3803a3898
-> unit netherstrike_source
-
 5218a5329
 > set mbitem=null
 
@@ -3993,52 +3987,6 @@
 ---
 > local real Duration=18
 
-58845c60210
-< call DamageTarget(Source,Target,DAMAGE_MAGICAL,50*Level)
-
----
-> call DamageTarget(Source,Target,DAMAGE_MAGICAL,70*Level)
-
-58860,58861c60225,60226
-< local real NewX=CurrentX+19*Cos(Angle)
-
-< local real NewY=CurrentY+19*Sin(Angle)
-
----
-> local real NewX=SafeX2(CurrentX+19*Cos(Angle))
-
-> local real NewY=SafeY2(CurrentY+19*Sin(Angle))
-
-58917,58918c60282,60283
-< call SetUnitX(U01,GetLocationX(l))
-
-< call SetUnitY(U01,GetLocationY(l))
-
----
-> call SetUnitX(U01,SafeX2(GetLocationX(l)))
-
-> call SetUnitY(U01,SafeY2(GetLocationY(l)))
-
-58928,58929c60293,60294
-< call SetUnitX(U02,GetLocationX(l))
-
-< call SetUnitY(U02,GetLocationY(l))
-
----
-> call SetUnitX(U02,SafeX2(GetLocationX(l)))
-
-> call SetUnitY(U02,SafeY2(GetLocationY(l)))
-
-58944,58945c60309,60310
-< call SetUnitX(Source,GetLocationX(l))
-
-< call SetUnitY(Source,GetLocationY(l))
-
----
-> call SetUnitX(Source,SafeX2(GetLocationX(l)))
-
-> call SetUnitY(Source,SafeY2(GetLocationY(l)))
-
 59380a60746
 > call StickyNapalm_SetSlow(Target,0,0)
 
@@ -4101,103 +4049,11 @@
 
 > call SetUnitY(Target,y+Rate*Sin(Angle))
 
-62864,62865c64280,64281
-< local trigger t=CreateTrigger()
-
-< local integer Cache=GetHandleId(t)
-
----
-> local trigger t
-
-> local integer Cache
-
-62869a64286,64291
-> local unit Caster=CreateUnit(GetOwningPlayer(Source),1697656901,GetUnitX(Target),GetUnitY(Target),0)
-
-> call UnitAddAbility(Caster,greaterbash_stun)
-
-> call SetUnitAbilityLevel(Caster,greaterbash_stun,Level)
-
-> if IssueTargetOrder(Caster,"thunderbolt",Target)then
-
-> set t=CreateTrigger()
-
-> set Cache=GetHandleId(t)
-
-62879a64302
-> endif
-
-62883a64307
-> set Caster=null
-
 63037c64461
 < if Source==null or IsDead(Target)==true or GetUnitTypeId(Source)!=1328558154 or IsNotAttackable(Target)then
 
 ---
 > if Source==null or IsDead(Target)==true or GetUnitTypeId(Source)!=1328558154 or IsNotAttackable(Target)or((LoadInteger(hash_main,(GetHandleId((Source))),((4259))))==HERO_STATE_ON)then
-
-63168,63169c64592,64593
-< local trigger t=CreateTrigger()
-
-< local integer Cache=GetHandleId(t)
-
----
-> local trigger t
-
-> local integer Cache
-
-63171a64596,64601
-> local unit Caster=CreateUnit(GetOwningPlayer(Source),1697656901,GetUnitX(Target),GetUnitY(Target),0)
-
-> call UnitAddAbility(Caster,greaterbash_stun)
-
-> call SetUnitAbilityLevel(Caster,greaterbash_stun,Level)
-
-> if IssueTargetOrder(Caster,"thunderbolt",Target)then
-
-> set t=CreateTrigger()
-
-> set Cache=GetHandleId(t)
-
-63180a64611
-> endif
-
-63181a64613,64625
-> set Caster=null
-
-> endfunction
-
-> function NetherStrike_Process takes nothing returns nothing
-
-> call NetherStrike_GreaterBash(netherstrike_source,GetEnumUnit())
-
-> endfunction
-
-> function NetherStrike_AffectArea takes unit Source,unit Targer returns nothing
-
-> local group g=GetAvailableGroup()
-
-> set tt_unit1=Source
-
-> set netherstrike_source=Source
-
-> call GroupEnumUnitsInRange(g,GetUnitX(Source),GetUnitY(Source),275,Condition(function GenericCondition_EnemyUnitsEx))
-
-> call ForGroup(g,function NetherStrike_Process)
-
-> call KillGroup(g)
-
-> set g=null
-
-63213a64658
-> if GetUnitAbilityLevel(Source,abilityid_netherstrike)>0 then
-
-63214a64660,64662
-> else
-
-> call NetherStrike_AffectArea(Source,Target)
-
-> endif
 
 63346c64794
 < if GetSpellAbilityId()==abilityid_sunder then
