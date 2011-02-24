@@ -4096,11 +4096,6 @@
 68797a70384
 > set U05=null
 
-68936c70523
-< call Stun(tether_source,GetEnumUnit(),1+0.25*tether_level)
-
----
-> call Stun(tether_source,GetEnumUnit(),0.75+0.25*tether_level)
 
 69422c71009
 < call InitTrig_Custom_Pick_Up_Item()
