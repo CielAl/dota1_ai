@@ -3886,25 +3886,8 @@
 62189a63604
 > call SaveInteger(hash_main,(GetHandleId((Hero))),((4299)),(HERO_STATE_ON))
 
-62854c64269,64270
-< call SetUnitPosition(Target,x+Rate*Cos(Angle),y+Rate*Sin(Angle))
 
----
-> call SetUnitX(Target,x+Rate*Cos(Angle))
 
-> call SetUnitY(Target,y+Rate*Sin(Angle))
-
-63037c64461
-< if Source==null or IsDead(Target)==true or GetUnitTypeId(Source)!=1328558154 or IsNotAttackable(Target)then
-
----
-> if Source==null or IsDead(Target)==true or GetUnitTypeId(Source)!=1328558154 or IsNotAttackable(Target)or((LoadInteger(hash_main,(GetHandleId((Source))),((4259))))==HERO_STATE_ON)then
-
-63346c64794
-< if GetSpellAbilityId()==abilityid_sunder then
-
----
-> if GetSpellAbilityId()==abilityid_sunder and GetOwningPlayer(GetSpellTargetUnit())!=udg_NeutralHostile then
 
 
 
