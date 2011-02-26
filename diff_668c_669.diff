@@ -3906,193 +3906,20 @@
 ---
 > if GetSpellAbilityId()==abilityid_sunder and GetOwningPlayer(GetSpellTargetUnit())!=udg_NeutralHostile then
 
-63363c64811
-< if GetTriggerEventId()==EVENT_UNIT_DEATH or GetTriggerEvalCount(t)>(4*(4+Level))or IsMagicImmune(Target)or DistanceBetweenUnits(Source,Target)>600 or IsUnitVisible(Target,GetOwningPlayer(Source))==false then
 
----
-> if GetTriggerEventId()==EVENT_UNIT_DEATH or GetTriggerEvalCount(t)>(4*(4+Level))or IsMagicImmune(Target)or DistanceBetweenUnits(Source,Target)>600 then
 
-63374a64823,64830
-> elseif IsUnitVisible(Target,GetOwningPlayer(Source))==false then
-
-> if(LoadInteger(hash_main,(Cache),(34)))==1 then
-
-> call FlushChildHashtable(hash_main,(Cache))
-
-> call CleanTrigger(t)
-
-> call KillUnit(Caster)
-
-> else
-
-> call SaveInteger(hash_main,(Cache),(34),(1))
-
-> endif
-
-63375a64832
-> call SaveInteger(hash_main,(Cache),(34),(0))
 
 
 63505a64964
 > call StickyNapalm_SetSlow(Source,0,0)
 
-63936a65396,65452
-> function ShallowGrave_TextTag takes string text,unit Target,unit Hero returns nothing
 
-> local texttag tt=CreateTextTag()
 
-> call SetTextTagText(tt,text,0.033)
-
-> call SetTextTagPosUnit(tt,Target,64)
-
-> call SetTextTagColor(tt,160,0,255,255)
-
-> call SetTextTagVelocity(tt,0,0.0355)
-
-> call SetTextTagFadepoint(tt,0.15)
-
-> call SetTextTagPermanent(tt,false)
-
-> call SetTextTagLifespan(tt,0.65)
-
-> if IsUnitAlly(Hero,GetLocalPlayer())then
-
-> call SetTextTagVisibility(tt,true)
-
-> else
-
-> call SetTextTagVisibility(tt,false)
-
-> endif
-
-> set tt=null
-
-> endfunction
-
-> function ShallowGrave_GetString takes real Duration returns string
-
-> if Duration>4.5 then
-
-> return"5.0"
-
-> elseif Duration>4.0 then
-
-> return"4.5"
-
-> elseif Duration>3.5 then
-
-> return"4.0"
-
-> elseif Duration>3.0 then
-
-> return"3.5"
-
-> elseif Duration>2.5 then
-
-> return"3.0"
-
-> elseif Duration>2.0 then
-
-> return"2.5"
-
-> elseif Duration>1.5 then
-
-> return"2.0"
-
-> elseif Duration>1.0 then
-
-> return"1.5"
-
-> elseif Duration>0.5 then
-
-> return"1.0"
-
-> elseif Duration>0.0 then
-
-> return"0.5"
-
-> else
-
-> return"0.0"
-
-> endif
-
-> return" "
-
-> endfunction
-
-> function ShallowGrave_Visual takes nothing returns boolean
-
-> local trigger t=GetTriggeringTrigger()
-
-> local integer Cache=GetHandleId(t)
-
-> local unit Target=(LoadUnitHandle(hash_main,(Cache),(17)))
-
-> local integer Count=GetTriggerEvalCount(t)
-
-> if Count>11 then
-
-> call FlushChildHashtable(hash_main,(Cache))
-
-> call CleanTrigger(t)
-
-> else
-
-> call ShallowGrave_TextTag(ShallowGrave_GetString(5.5-0.5*Count),Target,Target)
-
-> endif
-
-> set t=null
-
-> set Target=null
-
-> return false
-
-> endfunction
-
-64014a65531,65536
-> set t=CreateTrigger()
-
-> set Cache=GetHandleId(t)
-
-> call TriggerRegisterTimerEvent(t,0.5,true)
-
-> call TriggerRegisterTimerEvent(t,0,false)
-
-> call TriggerAddCondition(t,Condition(function ShallowGrave_Visual))
-
-> call SaveUnitHandle(hash_main,(Cache),(17),(Target))
-
-65838c67414
-< local real Drain=3+3*Level
-
----
-> local real Drain=2+6*Level
 
 66765a68342
 > call StickyNapalm_SetSlow(Source,0,0)
 
-67078c68655
-< if GetUnitAbilityLevel(GetAttacker(),abilityid_essenceshift)>0 and IsUnitType(GetTriggerUnit(),UNIT_TYPE_HERO)==true and IsUnitType(GetTriggerUnit(),UNIT_TYPE_STRUCTURE)==false and GetAttacker()==(LoadUnitHandle(hash_main,(GetHandleId(GetTriggeringTrigger())),(14)))and GetUnitTypeId(GetTriggerUnit())!=1848651852 and IsUnitEnemy(GetTriggerUnit(),GetOwningPlayer(GetAttacker()))then
 
----
-> if GetUnitAbilityLevel(GetAttacker(),abilityid_essenceshift)>0 and IsUnitType(GetTriggerUnit(),UNIT_TYPE_HERO)==true and IsUnitType(GetTriggerUnit(),UNIT_TYPE_STRUCTURE)==false and GetAttacker()==(LoadUnitHandle(hash_main,(GetHandleId(GetTriggeringTrigger())),(14)))and GetUnitTypeId(GetTriggerUnit())!=1848651852 and IsUnitEnemy(GetTriggerUnit(),GetOwningPlayer(GetAttacker()))and GetUnitTypeId(GetTriggerUnit())!=1160786502 then
-
-67205c68782
-< call DamageTarget(Source,Target,DAMAGE_MAGICAL,25+25*Level)
-
----
-> call DamageTarget(Source,Target,DAMAGE_MAGICAL,40*Level)
-
-67602a69180
-> if GetOwningPlayer(Target)!=udg_NeutralHostile then
-
-67604a69183
-> endif
-
-68797a70384
-> set U05=null
 
 
 69422c71009
