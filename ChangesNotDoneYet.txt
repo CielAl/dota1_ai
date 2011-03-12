@@ -1,0 +1,50 @@
+v. 6.69 Changes not done yet
+=============================================
+
+- Heroes -
+
+>>>>> Lone Druid
+- Leash range increased to 1100
+- Fixed common scenarios where Spirit Bear would miss its attack as the target was moving
+- Casting Summon Spirit Bear while the bear is still alive will restore that bear's health instead of not allowing you to cast.
+>>>>> Meepo
+- Fixed some targeting issues with casting poof (300996)
+>>>>> Techies
+- Remote Mine autoselection removed
+- Added a new sub ability Focused Detonate that you can use on the minimap or in an area to detonate all nearby remote mines (AoE of 700) (297625)
+>>>>> Terrorblade
+- Fixed melee/range item to update properly for Metamorphosis transformation
+- Fixed Manta Style interaction with Metamorphosis (so he can use it properly now)
+>>>>> Troll Warlord
+- Battle Trance self duration increased from 8 to 10 seconds
+- Fixed melee/range item to update properly for Berserker Rage transformation 
+
+- Items - 
+>>>>> Hand of Midas
+- Transmute now gives 2.5 XP when used on a unit (2744725)
+>>>>> Healing Salve
+- Double clicking on Healing Salve causes it to be used on your hero
+>>>>> Magic Stick & Magic Wand
+- AoE for gaining charges reduced from 1600 to 1200
+- No longer give you charges if a spell was cast from the fog of war
+>>>>> Manta Style
+- Increased recipe cost by 50 (Yasha recipe cost was reduced by 50)
+- Rebalanced Manta Style for melee and ranged heroes
+>>>>> Urn of Shadows
+- Soul Release now causes HP loss instead of magical damage when used on enemies (same overall dps as before, no longer disables dagger)
+
+- Gameplay & Cosmetics - 
+
+* Rebalanced the assist Gold & XP system
+* XP AoE increased from 1000 to 1200
+* Added a sound effect that notifies allies near the location you are teleporting to
+* Added a new soundset for King Leoric (279632)
+* Lich now has his icy hands effect only when he gets Aghanim's Scepter
+* Added sound effect for Meepo's attack
+* Added sound effect for Troll Warlord's melee attack
+* Added a new visual effect while casting Curse of the Silent
+* Hand of Midas bounty text is now easier to see 
+* Added a ground effect when the water is gushing out from Torrent 
+* Changed the illusion creation visual effect on Terrorblade's Conjure Image
+
+- Bugs - 
