@@ -198,11 +198,6 @@
 3046a3120
 > constant integer callofthewild_invis=1093752647
 
-3367a3458,3459
-> integer remotemine_unitid
-
-> player remotemine_player
-
 3435a3528,3529
 > real shackleshot_x
 
@@ -3101,57 +3096,6 @@
 
 ---
 > if IsRealSummoned(GetEnumUnit())or GetUnitTypeId(GetEnumUnit())==1160786502 then
-
-50260a51413
-> call UnitAddAbility(GetTriggerUnit(),1093752646)
-
-50270c51423
-< if(GetSpellAbilityId()==1093681485 or GetSpellAbilityId()==1093681459 or GetSpellAbilityId()==1093681460 or GetSpellAbilityId()==1093677652 or GetSpellAbilityId()==1093748314)then
-
----
-> if(GetSpellAbilityId()==1093681485 or GetSpellAbilityId()==1093681459 or GetSpellAbilityId()==1093681460 or GetSpellAbilityId()==1093677652 or GetSpellAbilityId()==1093748314 or GetSpellAbilityId()==1093752646)then
-
-50299a51453,51464
-> function RemoteMine_FindSpecificMines takes nothing returns boolean
-
-> return GetOwningPlayer(GetFilterUnit())==remotemine_player and GetUnitTypeId(GetFilterUnit())==remotemine_unitid and IsDead(GetFilterUnit())==false
-
-> endfunction
-
-> function DetonateMinesInArea takes player p,integer uid,real x,real y returns nothing
-
-> local group g=GetAvailableGroup()
-
-> set remotemine_player=p
-
-> set remotemine_unitid=uid
-
-> call GroupEnumUnitsInRange(g,x,y,716,Condition(function RemoteMine_FindSpecificMines))
-
-> call ForGroup(g,function Trig_Remote_Mine_Blast_IssueDetonate)
-
-> call KillGroup(g)
-
-> set g=null
-
-> endfunction
-
-50359a51525,51532
-> if(GetSpellAbilityId()==1093752646)then
-
-> set x=GetSpellTargetX()
-
-> set y=GetSpellTargetY()
-
-> call DetonateMinesInArea(GetOwningPlayer(GetTriggerUnit()),1865429304,x,y)
-
-> call DetonateMinesInArea(GetOwningPlayer(GetTriggerUnit()),1865429042,x,y)
-
-> call DetonateMinesInArea(GetOwningPlayer(GetTriggerUnit()),1865429058,x,y)
-
-> call DetonateMinesInArea(GetOwningPlayer(GetTriggerUnit()),1865429314,x,y)
-
-> endif
 
 50446d51618
 < call SelectUnitAddForPlayer(GetTriggerUnit(),GetOwningPlayer(GetTriggerUnit()))

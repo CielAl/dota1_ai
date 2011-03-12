@@ -11,7 +11,6 @@ v. 6.69 Changes not done yet
 - Fixed some targeting issues with casting poof (300996)
 >>>>> Techies
 - Remote Mine autoselection removed
-- Added a new sub ability Focused Detonate that you can use on the minimap or in an area to detonate all nearby remote mines (AoE of 700) (297625)
 >>>>> Terrorblade
 - Fixed melee/range item to update properly for Metamorphosis transformation
 - Fixed Manta Style interaction with Metamorphosis (so he can use it properly now)
