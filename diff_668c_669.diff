@@ -208,30 +208,6 @@
 
 > real shackleshot_y
 
-3472,3476c3566,3569
-< constant integer stickynapalm_slow_1=1093748047
-
-< constant integer stickynapalm_slow_2=1093748046
-
-< constant integer stickynapalm_slow_3=1093748045
-
-< constant integer stickynapalm_slow_4=1093748048
-
-< constant integer stickynapalm_slow=1093748302
-
----
-> integer array stickynapalm_slow_1
-
-> integer array stickynapalm_slow_2
-
-> integer array stickynapalm_slow_3
-
-> integer array stickynapalm_slow_4
-
-3480,3481d3572
-< unit stickynapalm_caster
-
-< integer stickynapalm_caster_abil
 
 3502a3594
 > constant integer abilityid_bloodrage=1093682499
@@ -306,18 +282,6 @@
 
 > endfunction
 
----
-> function StickyNapalm_SetSlow takes unit Source,integer Level,integer Stack returns nothing
-
-> local integer i
-
-> if stickynapalm_slow_1[1]==0 then
-
-> return
-
-> endif
-
-> set i=1
 
 7958,7960c8198,8199
 < exitwhen i>5
@@ -327,9 +291,6 @@
 < call SetItemDroppable(Item,false)
 
 ---
-> exitwhen i>10
-
-> call UnitRemoveAbility(Source,stickynapalm_slow_1[i])
 
 7963,7969c8202
 < set Hero=null
@@ -347,7 +308,6 @@
 < local item Item
 
 ---
-> set i=1
 
 7971,7973c8204,8205
 < exitwhen i>5
@@ -357,9 +317,6 @@
 < call SetItemDroppable(Item,true)
 
 ---
-> exitwhen i>10
-
-> call UnitRemoveAbility(Source,stickynapalm_slow_2[i])
 
 7976,7986c8208
 < set Hero=null
@@ -385,7 +342,6 @@
 < local integer x=0
 
 ---
-> set i=1
 
 7988,7991c8210,8212
 < exitwhen x>15
@@ -397,11 +353,6 @@
 < set x=x+1
 
 ---
-> exitwhen i>10
-
-> call UnitRemoveAbility(Source,stickynapalm_slow_3[i])
-
-> set i=i+1
 
 7993,8008c8214
 < endfunction
@@ -437,7 +388,6 @@
 < local integer i=0
 
 ---
-> set i=1
 
 8010,8030c8216,8217
 < exitwhen i>40
@@ -483,36 +433,12 @@
 < endif
 
 ---
-> exitwhen i>10
-
-> call UnitRemoveAbility(Source,stickynapalm_slow_4[i])
 
 8033c8220,8229
 < return Location(x,y)
 
 ---
-> call UnitRemoveAbility(Source,buffid_stickynapalm)
 
-> if Level==1 then
-
-> call UnitAddAbility(Source,stickynapalm_slow_1[Stack])
-
-> elseif Level==2 then
-
-> call UnitAddAbility(Source,stickynapalm_slow_2[Stack])
-
-> elseif Level==3 then
-
-> call UnitAddAbility(Source,stickynapalm_slow_3[Stack])
-
-> elseif Level==4 then
-
-> call UnitAddAbility(Source,stickynapalm_slow_4[Stack])
-
-> endif
-
-8145a8342
-> call StickyNapalm_SetSlow(Target,0,0)
 
 8292a8490,8491
 > elseif unitId==1164799855 then
@@ -1653,62 +1579,6 @@
 
 > endfunction
 
-19214,19241d19584
-< function CustomPickUpItems_Main takes nothing returns boolean
-
-< local unit Hero=GetTriggerUnit()
-
-< local item Item=GetManipulatedItem()
-
-< local integer id=GetItemTypeId(Item)
-
-< if id==Item_Real[indexid_scrolloftownportal]then
-
-< set TP_Location_X[GetPlayerId(GetOwningPlayer(Hero))]=GetItemX(Item)
-
-< set TP_Location_Y[GetPlayerId(GetOwningPlayer(Hero))]=GetItemY(Item)
-
-< endif
-
-< call RunesPickup(Hero,Item)
-
-< call CloakFix(Hero,Item)
-
-< if(GetItemTypeId(Item)==Item_Real[indexid_armletofmordiggianon]or GetItemTypeId(Item)==Item_Real[indexid_armletofmordiggianoff])and IsCourier(Hero)then
-
-< call UnitRemoveItem(Hero,Item)
-
-< elseif GetItemTypeId(Item)==Item_Real[indexid_aegis]and GetUnitTypeId(Hero)!=1848651852 and AegisMSG_Disabled==false then
-
-< set aegisholder=Hero
-
-< set AegisMSG_Disabled=true
-
-< call Traffic_RegisterData("AegisOn",GetPlayerId(GetOwningPlayer(Hero)))
-
-< call DisplayTimedTextToForceEx(GetPlayersAll(),10.00,udg_Colors[GetPlayerId(GetOwningPlayer(Hero))]+GetUnitName(Hero)+"|r "+GetObjectName(MSG_CARRYINGAEGIS))
-
-< endif
-
-< set Hero=null
-
-< set Item=null
-
-< return false
-
-< endfunction
-
-< function InitTrig_Custom_Pick_Up_Item takes nothing returns nothing
-
-< local trigger t=CreateTrigger()
-
-< call TriggerRegisterAnyUnitEvent(t,EVENT_PLAYER_UNIT_PICKUP_ITEM)
-
-< call TriggerAddCondition(t,Condition(function CustomPickUpItems_Main))
-
-< set t=null
-
-< endfunction
 
 19814a20158
 > if safedamage_urn[GetPlayerId(GetOwningPlayer(GetTriggerUnit()))]==false then
@@ -1749,142 +1619,12 @@
 ---
 > call DamageTarget(GetDyingUnit(),LastWill_FindUnit(GetKillingUnit()),DAMAGE_PURE,600)
 
-20925,20926c21281
-< function MorphCrow takes nothing returns nothing
 
-< local unit Old=GetTriggerUnit()
 
----
-> function MorphCrow_Start takes unit Old returns nothing
-
-20958d21312
-< local item CrowRecipe=UnitReturnItemOfType(Old,Item_Real[indexid_recipe_flyingcourier])
-
-20961,20964d21314
-< if CrowRecipe==null then
-
-< set CrowRecipe=UnitReturnItemOfType(Old,Item_Mute[indexid_recipe_flyingcourier])
-
-< endif
-
-< if CrowRecipe!=null then
-
-20974d21323
-< call RemoveItem(CrowRecipe)
-
-21053,21055d21401
-< else
-
-< call Error(GetOwningPlayer(Old),GetObjectName(MSG_RECIPE_INCOMPLETE))
-
-< endif
-
-21070a21417,21444
-> function MorphCrow_Process takes nothing returns boolean
-
-> local trigger t=GetTriggeringTrigger()
-
-> local integer Cache=GetHandleId(t)
-
-> local unit Source=(LoadUnitHandle(hash_main,(Cache),(2)))
-
-> local item CrowRecipe=UnitReturnItemOfType(Source,Item_Real[indexid_recipe_flyingcourier])
-
-> if CrowRecipe==null then
-
-> set CrowRecipe=UnitReturnItemOfType(Source,Item_Mute[indexid_recipe_flyingcourier])
-
-> endif
-
-> if CrowRecipe!=null then
-
-> call RemoveItem(CrowRecipe)
-
-> call MorphCrow_Start(Source)
-
-> else
-
-> call Error(GetOwningPlayer(Source),GetObjectName(MSG_RECIPE_INCOMPLETE))
-
-> endif
-
-> call FlushChildHashtable(hash_main,(Cache))
-
-> call CleanTrigger(t)
-
-> set t=null
-
-> set Source=null
-
-> return false
-
-> endfunction
-
-> function MorphCrow takes unit Source returns nothing
-
-> local trigger t=CreateTrigger()
-
-> local integer Cache=GetHandleId(t)
-
-> call TriggerRegisterTimerEvent(t,0.01,false)
-
-> call TriggerAddCondition(t,Condition(function MorphCrow_Process))
-
-> call SaveUnitHandle(hash_main,(Cache),(2),(Source))
-
-> set t=null
-
-> endfunction
-
-21073c21447,21471
-< call MorphCrow()
-
----
-> call MorphCrow(GetTriggerUnit())
-
-> endif
-
-> return false
-
-> endfunction
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-21074a21473,21474
-> set Hero=null
-
-> set Item=null
-
-21076a21477,21482
-> function InitTrig_Custom_Pick_Up_Item takes nothing returns nothing
-
-> local trigger t=CreateTrigger()
-
-> call TriggerRegisterAnyUnitEvent(t,EVENT_PLAYER_UNIT_PICKUP_ITEM)
-
-> call TriggerAddCondition(t,Condition(function CustomPickUpItems_Main))
-
-> set t=null
-
-> endfunction
 
 21365a21772
 > call PlaySoundForNearbyPlayers(Hero,gg_snd_Hint,x,y,2400)
 
-21475a21883
-> call StickyNapalm_SetSlow(Hero,0,0)
 
 21805a22237
 > if IsUnitVisible(GetTriggerUnit(),GetOwningPlayer(GetEnumUnit()))==true then
@@ -3462,287 +3202,6 @@
 52609a53787
 > endif
 
-52807a53986
-> call StickyNapalm_SetSlow(Target,0,0)
-
-52894a54074
-> call StickyNapalm_SetSlow(Hero,0,0)
-
-53348c54543
-< local integer Count
-
----
-> local integer Count=(LoadInteger(hash_main,(GetHandleId(Target)),(281)))
-
-53355c54550
-< call UnitRemoveAbility(Target,buffid_stickynapalm)
-
----
-> call StickyNapalm_SetSlow(Target,0,0)
-
-53357,53358c54552
-< if GetUnitAbilityLevel(GetTriggerUnit(),buffid_stickynapalm)>0 and GetUnitAbilityLevel(GetEventDamageSource(),abilityid_stickynapalm)>0 and(LoadUnitHandle(hash_main,(GetHandleId(GetTriggeringTrigger())),(2)))==GetEventDamageSource()then
-
-< set Count=(LoadInteger(hash_main,(GetHandleId(Target)),(281)))
-
----
-> if Count>0 and GetUnitAbilityLevel(GetEventDamageSource(),abilityid_stickynapalm)>0 and(LoadUnitHandle(hash_main,(GetHandleId(GetTriggeringTrigger())),(2)))==GetEventDamageSource()then
-
-53369c54563
-< elseif GetUnitAbilityLevel(Target,buffid_stickynapalm)==0 then
-
----
-> elseif Count==0 then
-
-53381a54576,54594
-> function StickyNapalm_Decrement takes nothing returns boolean
-
-> local trigger t=GetTriggeringTrigger()
-
-> local integer Cache=GetHandleId(t)
-
-> local unit Source=(LoadUnitHandle(hash_main,(Cache),(2)))
-
-> local unit Target=(LoadUnitHandle(hash_main,(Cache),(17)))
-
-> local real LastTime=(LoadReal(hash_main,(GetHandleId(Target)),(675)))
-
-> local integer StickyCount=(LoadInteger(hash_main,(GetHandleId(Target)),(281)))
-
-> if(TimerGetElapsed(udg_GameTimer))-LastTime>=8 then
-
-> call SetUnitTurnSpeed(Target,GetUnitDefaultTurnSpeed(Target))
-
-> call SaveInteger(hash_main,(GetHandleId(Target)),(281),(0))
-
-> call StickyNapalm_SetSlow(Target,0,0)
-
-> endif
-
-> call FlushChildHashtable(hash_main,(Cache))
-
-> call CleanTrigger(t)
-
-> set t=null
-
-> set Source=null
-
-> set Target=null
-
-> return false
-
-> endfunction
-
-53386a54600
-> local integer Level=GetUnitAbilityLevel(Source,abilityid_stickynapalm)
-
-53388,53390c54602,54607
-< call UnitRemoveAbility(Target,buffid_stickynapalm)
-
-< call SetUnitAbilityLevel(stickynapalm_caster,stickynapalm_caster_abil,Count)
-
-< call IssueTargetOrder(stickynapalm_caster,"slow",Target)
-
----
-> if IsMagicImmune(Target)then
-
-> set Source=null
-
-> set Target=null
-
-> return
-
-> endif
-
-> call StickyNapalm_SetSlow(Target,Level,Count)
-
-53391a54609
-> call SaveReal(hash_main,(GetHandleId(Target)),(675),(((TimerGetElapsed(udg_GameTimer)))*1.0))
-
-53394c54612
-< call TextTagOnUnitEx(I2S(Count)+"!",2,Target,0.026,50,0,255,216)
-
----
-> call TextTagOnUnitExForAllied(GetOwningPlayer(Source),I2S(Count)+"!",2,Target,0.026,50,0,255,216)
-
-53406a54625,54630
-> set t=CreateTrigger()
-
-> set Cache=GetHandleId(t)
-
-> call TriggerRegisterTimerEvent(t,8,false)
-
-> call TriggerAddCondition(t,Condition(function StickyNapalm_Decrement))
-
-> call SaveUnitHandle(hash_main,(Cache),(2),(Source))
-
-> call SaveUnitHandle(hash_main,(Cache),(17),(Target))
-
-53417,53428d54640
-< local integer Level=GetUnitAbilityLevel(Source,abilityid_stickynapalm)
-
-< set stickynapalm_caster=CreateUnit(GetOwningPlayer(Source),1697656901,x,y,0)
-
-< if Level==1 then
-
-< set stickynapalm_caster_abil=stickynapalm_slow_1
-
-< elseif Level==2 then
-
-< set stickynapalm_caster_abil=stickynapalm_slow_2
-
-< elseif Level==3 then
-
-< set stickynapalm_caster_abil=stickynapalm_slow_3
-
-< elseif Level==4 then
-
-< set stickynapalm_caster_abil=stickynapalm_slow_4
-
-< endif
-
-< call UnitAddAbility(stickynapalm_caster,stickynapalm_caster_abil)
-
-53453a54666
-> local integer i
-
-53457,53460c54670,54733
-< call PreloadAbility(stickynapalm_slow_1)
-
-< call PreloadAbility(stickynapalm_slow_2)
-
-< call PreloadAbility(stickynapalm_slow_3)
-
-< call PreloadAbility(stickynapalm_slow_4)
-
----
-> set stickynapalm_slow_1[1]=1093752899
-
-> set stickynapalm_slow_1[2]=1093752898
-
-> set stickynapalm_slow_1[3]=1093752884
-
-> set stickynapalm_slow_1[4]=1093752885
-
-> set stickynapalm_slow_1[5]=1093752886
-
-> set stickynapalm_slow_1[6]=1093752887
-
-> set stickynapalm_slow_1[7]=1093752897
-
-> set stickynapalm_slow_1[8]=1093752888
-
-> set stickynapalm_slow_1[9]=1093752889
-
-> set stickynapalm_slow_1[10]=1093752900
-
-> set stickynapalm_slow_2[1]=1093752909
-
-> set stickynapalm_slow_2[2]=1093752901
-
-> set stickynapalm_slow_2[3]=1093752902
-
-> set stickynapalm_slow_2[4]=1093752903
-
-> set stickynapalm_slow_2[5]=1093752904
-
-> set stickynapalm_slow_2[6]=1093752905
-
-> set stickynapalm_slow_2[7]=1093752906
-
-> set stickynapalm_slow_2[8]=1093752907
-
-> set stickynapalm_slow_2[9]=1093752910
-
-> set stickynapalm_slow_2[10]=1093752908
-
-> set stickynapalm_slow_3[1]=1093752911
-
-> set stickynapalm_slow_3[2]=1093752918
-
-> set stickynapalm_slow_3[3]=1093752919
-
-> set stickynapalm_slow_3[4]=1093752913
-
-> set stickynapalm_slow_3[5]=1093752914
-
-> set stickynapalm_slow_3[6]=1093752915
-
-> set stickynapalm_slow_3[7]=1093752920
-
-> set stickynapalm_slow_3[8]=1093752916
-
-> set stickynapalm_slow_3[9]=1093752917
-
-> set stickynapalm_slow_3[10]=1093752912
-
-> set stickynapalm_slow_4[1]=1093752921
-
-> set stickynapalm_slow_4[2]=1093752922
-
-> set stickynapalm_slow_4[3]=1093753141
-
-> set stickynapalm_slow_4[4]=1093753142
-
-> set stickynapalm_slow_4[5]=1093753143
-
-> set stickynapalm_slow_4[6]=1093753137
-
-> set stickynapalm_slow_4[7]=1093753138
-
-> set stickynapalm_slow_4[8]=1093753139
-
-> set stickynapalm_slow_4[9]=1093753140
-
-> set stickynapalm_slow_4[10]=1093753136
-
-> set i=1
-
-> loop
-
-> exitwhen i>10
-
-> call PreloadAbility(stickynapalm_slow_1[i])
-
-> set i=i+1
-
-> endloop
-
-> set i=1
-
-> loop
-
-> exitwhen i>10
-
-> call PreloadAbility(stickynapalm_slow_2[i])
-
-> set i=i+1
-
-> endloop
-
-> set i=1
-
-> loop
-
-> exitwhen i>10
-
-> call PreloadAbility(stickynapalm_slow_3[i])
-
-> set i=i+1
-
-> endloop
-
-> set i=1
-
-> loop
-
-> exitwhen i>10
-
-> call PreloadAbility(stickynapalm_slow_4[i])
-
-> set i=i+1
-
-> endloop
 
 53866c55139,55140
 < local real dmg=0.2*Level*SquareRoot((LastX-x)*(LastX-x)+(LastY-y)*(LastY-y))
@@ -3832,15 +3291,6 @@
 ---
 > local real Duration=18
 
-59380a60746
-> call StickyNapalm_SetSlow(Target,0,0)
-
-59411a60778
-> call StickyNapalm_SetSlow(Hero,0,0)
-
-59482a60850
-> call StickyNapalm_SetSlow(Hero,0,0)
-
 59505a60874
 > if GetUnitTypeId(Target)!=1160786502 then
 
@@ -3888,25 +3338,7 @@
 
 
 
-
-
-
-
-
-63505a64964
-> call StickyNapalm_SetSlow(Source,0,0)
-
-
-
-
-66765a68342
-> call StickyNapalm_SetSlow(Source,0,0)
-
-
-
-
 69422c71009
-< call InitTrig_Custom_Pick_Up_Item()
 
 ---
 > call InitTrig_Hero_Morphing_Restrictions()
