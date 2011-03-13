@@ -19,15 +19,11 @@ v. 6.69 Changes not done yet
 - Fixed melee/range item to update properly for Berserker Rage transformation 
 
 - Items - 
->>>>> Hand of Midas
-- Transmute now gives 2.5 XP when used on a unit (2744725)
 >>>>> Magic Stick & Magic Wand
 - AoE for gaining charges reduced from 1600 to 1200
 - No longer give you charges if a spell was cast from the fog of war
 >>>>> Manta Style
 - Rebalanced Manta Style for melee and ranged heroes
->>>>> Urn of Shadows
-- Soul Release now causes HP loss instead of magical damage when used on enemies (same overall dps as before, no longer disables dagger)
 
 - Gameplay & Cosmetics - 
 
