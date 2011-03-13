@@ -21,13 +21,10 @@ v. 6.69 Changes not done yet
 - Items - 
 >>>>> Hand of Midas
 - Transmute now gives 2.5 XP when used on a unit (2744725)
->>>>> Healing Salve
-- Double clicking on Healing Salve causes it to be used on your hero
 >>>>> Magic Stick & Magic Wand
 - AoE for gaining charges reduced from 1600 to 1200
 - No longer give you charges if a spell was cast from the fog of war
 >>>>> Manta Style
-- Increased recipe cost by 50 (Yasha recipe cost was reduced by 50)
 - Rebalanced Manta Style for melee and ranged heroes
 >>>>> Urn of Shadows
 - Soul Release now causes HP loss instead of magical damage when used on enemies (same overall dps as before, no longer disables dagger)
@@ -42,7 +39,6 @@ v. 6.69 Changes not done yet
 * Added sound effect for Meepo's attack
 * Added sound effect for Troll Warlord's melee attack
 * Added a new visual effect while casting Curse of the Silent
-* Hand of Midas bounty text is now easier to see 
 * Added a ground effect when the water is gushing out from Torrent 
 * Changed the illusion creation visual effect on Terrorblade's Conjure Image
 
