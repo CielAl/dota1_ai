@@ -22,20 +22,12 @@
 > trigger gg_trg_Custom_Pick_Up_Item=null
 
 
-992a1006
-> sound tt_soundhandle
-
 2220a2236
 > integer indexid_mantastyleranged
 
 2273a2290
 > integer indexid_phoenixblade
 
-2384a2402
-> integer indexid_aghanimsscepterenchantress
-
-2432a2451
-> constant integer abilityid_aghanimsscepter_enchantress=1093752644
 
 2453a2473,2474
 > constant integer morphrestrict_metamorph=1093751369
@@ -61,14 +53,6 @@
 
 > real array Blink_Location_Y
 
-2583a2607,2608
-> unit mjollnir_target
-
-> unit mjollnir_source
-
-
-3046a3120
-> constant integer callofthewild_invis=1093752647
 
 
 3435a3528,3529
@@ -1493,19 +1477,6 @@
 21365a21772
 > call PlaySoundForNearbyPlayers(Hero,gg_snd_Hint,x,y,2400)
 
-
-21805a22237
-> if IsUnitVisible(GetTriggerUnit(),GetOwningPlayer(GetEnumUnit()))==true then
-
-21820a22253
-> endif
-
-21830c22263
-< call GroupEnumUnitsInRange(g,x,y,1600,Condition(function GenericCondition_EnemyHeroes))
-
----
-> call GroupEnumUnitsInRange(g,x,y,1225,Condition(function GenericCondition_EnemyHeroes))
-
 22160,22161c22593,22597
 < local trigger t=CreateTrigger()
 
@@ -1953,21 +1924,6 @@
 ---
 > call AddTimedAbilityAndRemove(GetEnumUnit(),abilityid_rampagebonus,rampage_level,rampage_duration*2,1110454338)
 
-52149c53321
-< set tt_real1=Angle
-
----
-> set tt_real1=Atan2(GetUnitY(Source)-shackleshot_y,GetUnitX(Source)-shackleshot_x)
-
-52191a53364,53365
-> set shackleshot_x=(LoadReal(hash_main,(Cache),(6)))
-
-> set shackleshot_y=(LoadReal(hash_main,(Cache),(7)))
-
-52258a53433,53434
-> call SaveReal(hash_main,(Cache),(6),((GetUnitX(Source))*1.0))
-
-> call SaveReal(hash_main,(Cache),(7),((GetUnitY(Source))*1.0))
 
 52607a53784
 > if GetUnitTypeId(GetEnumUnit())!=1160786502 then
