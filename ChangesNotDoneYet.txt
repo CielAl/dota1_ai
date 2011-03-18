@@ -18,8 +18,6 @@ v. 6.69 Changes not done yet
 - Fixed melee/range item to update properly for Berserker Rage transformation 
 
 - Items - 
->>>>> Manta Style
-- Rebalanced Manta Style for melee and ranged heroes
 
 - Gameplay & Cosmetics - 
 
@@ -36,7 +34,6 @@ v. 6.69 Changes not done yet
 - Bugs - 
 
 * Fixed visible caster units during Light Strike Array and Split Earth
-* Fixed converted creeps from sometimes being slowed by Enchant
 * Fixed Healing Ward to indicate the level to your allies instead of just for you
 * Fixed Roshan's interaction with Familiars
 * Fixed some issues with a small number of spells not properly detecting Meld and Ghostwalk as invisible
