@@ -11,10 +11,7 @@ v. 6.69 Changes not done yet
 - Fixed some targeting issues with casting poof (300996)
 >>>>> Techies
 - Remote Mine autoselection removed
->>>>> Terrorblade
-- Fixed Manta Style interaction with Metamorphosis (so he can use it properly now)
 >>>>> Troll Warlord
-- Battle Trance self duration increased from 8 to 10 seconds
 - Fixed melee/range item to update properly for Berserker Rage transformation 
 
 - Items - 
@@ -22,19 +19,16 @@ v. 6.69 Changes not done yet
 - Gameplay & Cosmetics - 
 
 * Rebalanced the assist Gold & XP system
-* Added a sound effect that notifies allies near the location you are teleporting to
 * Added a new soundset for King Leoric (279632)
 * Lich now has his icy hands effect only when he gets Aghanim's Scepter
 * Added sound effect for Meepo's attack
 * Added sound effect for Troll Warlord's melee attack
 * Added a new visual effect while casting Curse of the Silent
-* Added a ground effect when the water is gushing out from Torrent 
 * Changed the illusion creation visual effect on Terrorblade's Conjure Image
 
 - Bugs - 
 
 * Fixed visible caster units during Light Strike Array and Split Earth
-* Fixed Healing Ward to indicate the level to your allies instead of just for you
 * Fixed Roshan's interaction with Familiars
 * Fixed some issues with a small number of spells not properly detecting Meld and Ghostwalk as invisible
 * Fixed Sonic Wave targeting mechanism when casting towards a location with an allied unit (298969)

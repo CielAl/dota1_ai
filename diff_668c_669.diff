@@ -54,13 +54,6 @@
 > real array Blink_Location_Y
 
 
-
-3435a3528,3529
-> real shackleshot_x
-
-> real shackleshot_y
-
-
 3502a3594
 > constant integer abilityid_bloodrage=1093682499
 
@@ -1472,11 +1465,6 @@
 > call DamageTarget(GetDyingUnit(),LastWill_FindUnit(GetKillingUnit()),DAMAGE_PURE,600)
 
 
-
-
-21365a21772
-> call PlaySoundForNearbyPlayers(Hero,gg_snd_Hint,x,y,2400)
-
 22160,22161c22593,22597
 < local trigger t=CreateTrigger()
 
@@ -1547,11 +1535,6 @@
 > return false
 
 > endfunction
-
-39879a40788,40789
-> local ubersplat Splat=CreateUbersplat(x,y,"THNN",255,255,255,255,false,false)
-
-> call SetUbersplatRenderAlways(Splat,true)
 
 40709c41635
 < call GroupEnumUnitsInRange(GroupVar,x,y,625,CondVar)
@@ -1693,12 +1676,6 @@
 
 45043d46107
 < call BurningSpear_RestoreMana(GetTriggerUnit())
-
-45725c46798
-< return GetUnitTypeId(GetSummonedUnit())==1865429059
-
----
-> return GetUnitTypeId(GetSummonedUnit())==1865429059 or GetUnitTypeId(GetSummonedUnit())==1865429319 or GetUnitTypeId(GetSummonedUnit())==1865429320 or GetUnitTypeId(GetSummonedUnit())==1865429321
 
 45771,45772c46853,46854
 < local trigger t=CreateTrigger()
