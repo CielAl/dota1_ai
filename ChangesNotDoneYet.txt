@@ -18,7 +18,6 @@ v. 6.69 Changes not done yet
 
 - Gameplay & Cosmetics - 
 
-* Rebalanced the assist Gold & XP system
 * Added a new soundset for King Leoric (279632)
 * Lich now has his icy hands effect only when he gets Aghanim's Scepter
 * Added sound effect for Meepo's attack
