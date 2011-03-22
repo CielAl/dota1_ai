@@ -11,8 +11,6 @@ v. 6.69 Changes not done yet
 - Fixed some targeting issues with casting poof (300996)
 >>>>> Techies
 - Remote Mine autoselection removed
->>>>> Troll Warlord
-- Fixed melee/range item to update properly for Berserker Rage transformation 
 
 - Items - 
 
@@ -43,7 +41,6 @@ v. 6.69 Changes not done yet
 * Fixed some AI issues with Firefly
 * Fixed lag on first cast of Adaptive Strike
 * Fixed a couple of abilities with slightly incorrect cooldowns on scoreboard
-* Fixed some courier tooltips
 * Fixed Dragon Slave targeting mechanism when casting towards a location with an allied unit
 * Fixed interaction between Level 3 Rupture and Force Staff
 * Fixed the scourge Glyph not showing the new icon (Ability Code: A1WH)
@@ -58,7 +55,6 @@ v. 6.69 Changes not done yet
 * Fixed a rare bug with Spirit Bear losing track of his items
 * Fixed some minor duration inconsistencies with God's Strength
 * Fixed some triggered spells from bypassing Last Will (on Necronomicon Warrior) damage return
-* Fixed Sticky Napalm compatibility problems with Shiva's Guard
 * Fixed some possible lag scenarios with Soul Catcher
 * Fixed a very rare cause where you could Soul Ring usage could be lethal
 * Courier can no longer use Ghost Scepter (to prevent some abuses)
