@@ -30,37 +30,23 @@ v. 6.69 Changes not done yet
 * Fixed some issues with a small number of spells not properly detecting Meld and Ghostwalk as invisible
 * Fixed Sonic Wave targeting mechanism when casting towards a location with an allied unit (298969)
 * Fixed using Conjure Image while magic immune (298995)
-* Fixed Roshan not dispelling Urn of Shadows
 * Fixed some cast mechanism issues with Techie's Suicide (242147)
-* Fixed Liquid Fire interaction with Siege units (263667)
 * Fixed a rare situation where Relocate would fail to teleport you
 * Fixed a bug with freezing a leaver Spirit Breaker
 * Fixed Tango dispelling Urn of Shadows healing effect
 * Fixed Static Storm scoreboard cooldown being a little off
-* Fixed a bug with Scepter Dismember and Linken's Sphere
 * Fixed some AI issues with Firefly
-* Fixed lag on first cast of Adaptive Strike
 * Fixed a couple of abilities with slightly incorrect cooldowns on scoreboard
 * Fixed Dragon Slave targeting mechanism when casting towards a location with an allied unit
-* Fixed interaction between Level 3 Rupture and Force Staff
 * Fixed the scourge Glyph not showing the new icon (Ability Code: A1WH)
 * Fixed some inconsistencies in the visual AoE of some abilities (no balance changes here, just making the cursors more consistent for: Avalanche, Storm Bolt, Rocket Flare, Pit of Malice, Expulsion, Chronosphere, Earthbind, Spin Web, Dream Coil, Weave, Maledict, Vacuum, Sanity's Eclipse)
-* Fixed damage AoE on Waning Rift being slightly less than the silence AoE
 * Fixed a very minor visual glitch when attempting to buy a recipe for power treads
-* Fixed very minor inconsistency between the armor reduction and the damage AoE on Acid Spray
-* Fixed AoE on Strygwyr's thirst being off by 25
 * Fixed Sticky Napalm triggering Linken Sphere
 * Fixed interaction bugs with Soul Rip and Ethereal state
-* Fixed AoE on Song of the Siren being off by 25
 * Fixed a rare bug with Spirit Bear losing track of his items
 * Fixed some minor duration inconsistencies with God's Strength
-* Fixed some triggered spells from bypassing Last Will (on Necronomicon Warrior) damage return
 * Fixed some possible lag scenarios with Soul Catcher
-* Fixed a very rare cause where you could Soul Ring usage could be lethal
-* Courier can no longer use Ghost Scepter (to prevent some abuses)
-* Fixed some minor incorrect behaviors when using burning spears at very low hp
 * Fixed some rare damage cap issues with Dragon Slave and Sonic Wave
-* Fixed some minor duration inconsistencies with Insatiable Hunger
 * Fixed Sticky Napalm malfunctioning when cast on units in Fog of War
 * Fixed a fatal error possible with Skewer
 * Fixed a minor visual bug when Unstable Concoction explodes in midair
