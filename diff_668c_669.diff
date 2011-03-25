@@ -13,39 +13,6 @@
 5242a5357
 > set mbitem=null
 
-
-
-7979,7986c8208
-< function IsNotAttackable takes unit u returns boolean
-
-< return GetUnitAbilityLevel(u,1097167980)>0 or GetUnitAbilityLevel(u,1113815395)>0 or GetUnitAbilityLevel(u,1113815346)>0
-
-< endfunction
-
-< function IsStunned takes unit u returns boolean
-
-< return(GetUnitAbilityLevel((u),(1112560453))>0)or(GetUnitAbilityLevel((u),(1110456633))>0)or(GetUnitAbilityLevel((u),(1112757326))>0)or(GetUnitAbilityLevel((u),(1110459206))>0)or(GetUnitAbilityLevel((u),(1110458957))>0)or(GetUnitAbilityLevel((u),(1111844210))>0)or(GetUnitAbilityLevel((u),(1110454583))>0)or(GetUnitAbilityLevel((u),(1110455885))>0)or(GetUnitAbilityLevel((u),(1110456142))>0)or(GetUnitAbilityLevel((u),(1110456403))>0)or(GetUnitAbilityLevel((u),(1110454353))>0)or(GetUnitAbilityLevel((u),(1110455382))>0)or(GetUnitAbilityLevel((u),(1110456114))>0)or(GetUnitAbilityLevel((u),(1112891758))>0)or(GetUnitAbilityLevel((u),(1110456629))>0)or(GetUnitAbilityLevel((u),(1110454617))>0)or(GetUnitAbilityLevel((u),(1110455113))>0)or(GetUnitAbilityLevel((u),(1110455859))>0)or(GetUnitAbilityLevel((u),(1113943655))>0)or(GetUnitAbilityLevel((u),(1110458692))>0)or(GetUnitAbilityLevel((u),(1110458693))>0)or(GetUnitAbilityLevel((u),(1110458949))>0)or(GetUnitAbilityLevel((u),(1110458950))>0)or(GetUnitAbilityLevel((u),(1110454328))>0)or(GetUnitAbilityLevel((u),(1110455362))>0)or(GetUnitAbilityLevel((u),(1110454854))>0)or(GetUnitAbilityLevel((u),(1112896368))>0)or(GetUnitAbilityLevel((u),(1112896372))>0)or(GetUnitAbilityLevel((u),(1110459460))>0)or((LoadInteger(hash_main,(GetHandleId((u))),((4293))))==HERO_STATE_ON)==true
-
-< endfunction
-
-< function SetTime takes integer Minutes,integer Seconds,boolean extraColor returns nothing
-
-< local integer x=0
-
----
-
-7988,7991c8210,8212
-< exitwhen x>15
-
-< call SetPlayerState(Player(x),PLAYER_STATE_RESOURCE_LUMBER,Minutes)
-
-< call SetPlayerState(Player(x),PLAYER_STATE_RESOURCE_FOOD_USED,Seconds)
-
-< set x=x+1
-
----
-
-
 47959a49084
 > set g=null
 
@@ -58,98 +25,6 @@
 > set Source=null
 
 > set Target=null
-
-49158a50303,50305
-> if IsDead(GetFilterUnit())then
-
-> return false
-
-> endif
-
-49244a50392,50394
-> if IsDead(GetFilterUnit())then
-
-> return false
-
-> endif
-
-49267a50418
-> local unit Bear
-
-49289a50441,50445
-> elseif NoBear==false then
-
-> set Bear=FirstOfGroup(GroupVar)
-
-> call AddSpecialEffectTargetUnitBJ("chest",Bear,"Abilities\\Spells\\Orc\\FeralSpirit\\feralspiritdone.mdl")
-
-> call SetUnitState(Bear,UNIT_STATE_LIFE,GetUnitState(Bear,UNIT_STATE_MAX_LIFE))
-
-> set Bear=null
-
-49322,49325d50477
-< set t=CreateTrigger()
-
-< call TriggerRegisterAnyUnitEvent(t,EVENT_PLAYER_UNIT_SPELL_CAST)
-
-< call TriggerAddCondition(t,Condition(function Trig_Summon_Spirit_Bear_Conditions))
-
-< call TriggerAddAction(t,function Trig_Summon_Spirit_Bear_PreActions)
-
-49361c50513
-< if((GetUnitX(BearOwner)-GetUnitX(Bear))*(GetUnitX(BearOwner)-GetUnitX(Bear))+(GetUnitY(BearOwner)-GetUnitY(Bear))*(GetUnitY(BearOwner)-GetUnitY(Bear))>=855625)then
-
----
-> if((GetUnitX(BearOwner)-GetUnitX(Bear))*(GetUnitX(BearOwner)-GetUnitX(Bear))+(GetUnitY(BearOwner)-GetUnitY(Bear))*(GetUnitY(BearOwner)-GetUnitY(Bear))>=(1100*1100))then
-
-
-50446d51618
-< call SelectUnitAddForPlayer(GetTriggerUnit(),GetOwningPlayer(GetTriggerUnit()))
-
-50849c52021
-< if GetTriggerEventId()==EVENT_PLAYER_UNIT_ATTACKED and Count<3 then
-
----
-> if GetTriggerEventId()==EVENT_PLAYER_UNIT_ATTACKED and Count<6 then
-
-50858c52030
-< if Count>2 then
-
----
-> if Count>5 then
-
-50868c52040
-< if Count>2 then
-
----
-> if Count>5 then
-
-
-54846a56136
-> endif
-
-57218c58579
-< elseif Target==null then
-
----
-> else
-
-57221a58583,58585
-> if Target!=null then
-
-> set TargetLoc=GetUnitLoc(Target)
-
-> else
-
-57222a58587
-> endif
-
-
-62046c63456
-< set MaxIteration=MaxIteration+1
-
----
-> set MaxIteration=MaxIteration+2
 
 62111a63523
 > if((LoadInteger(hash_main,(GetHandleId((Hero))),((4299))))==HERO_STATE_ON)==false then

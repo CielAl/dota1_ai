@@ -3,12 +3,6 @@ v. 6.69 Changes not done yet
 
 - Heroes -
 
->>>>> Lone Druid
-- Leash range increased to 1100
-- Fixed common scenarios where Spirit Bear would miss its attack as the target was moving
-- Casting Summon Spirit Bear while the bear is still alive will restore that bear's health instead of not allowing you to cast.
->>>>> Meepo
-- Fixed some targeting issues with casting poof (300996)
 >>>>> Techies
 - Remote Mine autoselection removed
 

@@ -15,22 +15,6 @@
 > endloop
 > return-1
 > endfunction
-13122c13095
-< return GetOwningPlayer(GetTriggerUnit())!=udg_NeutralHostile and IsUnitType(GetTriggerUnit(),UNIT_TYPE_HERO)==true and IsUnitIllusion(GetTriggerUnit())==false and HaveSavedBoolean(hash_main,GetHandleId(GetTriggerUnit()),85)==false and IsRealHero2(GetTriggerUnit())
----
-> return IsUnitType(GetTriggerUnit(),UNIT_TYPE_HERO)==true and IsUnitIllusion(GetTriggerUnit())==false and HaveSavedBoolean(hash_main,GetHandleId(GetTriggerUnit()),85)==false and IsRealHero2(GetTriggerUnit())
-14396c14369
-< if IsUnitType(GetTriggerUnit(),UNIT_TYPE_HERO)==true and GetOwningPlayer(GetTriggerUnit())!=udg_NeutralHostile then
----
-> if IsUnitType(GetTriggerUnit(),UNIT_TYPE_HERO)==true then
-14604,14605d14576
-< elseif GetUnitTypeId(KillHero)==1160786502 then
-< call DisplayTimedTextToForceEx(udg_AllMsgPlayers,10.00,(udg_Colors[GetPlayerId(DeadPlayer)]+(PlayerNames[GetPlayerId((DeadPlayer))])+"|r has been killed by Phoenix"))
-14678,14680d14648
-< if GetUnitTypeId(KillHero)==1160786502 then
-< set KillPlayerString=udg_Colors[0]+GetObjectName(1160786502)+"|r"
-< endif
-
 19104a19065,19067
 > function CourierFakedItems_IsFlaggedSecondary takes integer indexId returns boolean
 > return indexId==indexid_gemoftruesight or indexId==indexid_gemoftruesightcourier
@@ -74,79 +58,3 @@
 > if IsDead(GetTriggerUnit())==false then
 19459a19442
 > endif
-28903c28886
-< if IsUnitAlly(GetTriggerUnit(),GetOwningPlayer(GetAttacker()))and GetUnitTypeId(GetTriggerUnit())!=1966092621 and GetUnitTypeId(GetTriggerUnit())!=1966092622 then
----
-> if IsUnitAlly(GetTriggerUnit(),GetOwningPlayer(GetAttacker()))then
-35055a35039,35040
-> call SetPlayerState(udg_SentPlayers[1],PLAYER_STATE_RESOURCE_GOLD,0)
-> call SetPlayerState(udg_ScourgePlayers[1],PLAYER_STATE_RESOURCE_GOLD,0)
-
-
-45946c45613
-< if(GetSpellAbilityId()==abilityid_souleater or GetSpellAbilityId()==abilityid_souleaterupgrade)and(GetUnitAbilityLevel((GetSpellTargetUnit()),buffid_linkensphere)>0)==false and GetOwningPlayer(GetSpellTargetUnit())!=udg_NeutralHostile then
----
-> if(GetSpellAbilityId()==abilityid_souleater or GetSpellAbilityId()==abilityid_souleaterupgrade)and(GetUnitAbilityLevel((GetSpellTargetUnit()),buffid_linkensphere)>0)==false then
-46149c45816
-< call AddAttackSpeedBonus(Hero,Level*Level_Percent*2)
----
-> call AddAttackSpeedBonus(Hero,Level*Level_Percent*3)
-48197c47864
-< if GetOwningPlayer(GetSpellTargetUnit())==GetOwningPlayer(GetTriggerUnit())or GetOwningPlayer(GetSpellTargetUnit())==udg_NeutralHostile then
----
-> if GetOwningPlayer(GetSpellTargetUnit())==GetOwningPlayer(GetTriggerUnit())then
-50799c50466
-< if IsRealSummoned(GetEnumUnit())or GetUnitTypeId(GetEnumUnit())==1160786502 then
----
-> if IsRealSummoned(GetEnumUnit())then
-53784d53450
-< if GetUnitTypeId(GetEnumUnit())!=1160786502 then
-53787d53452
-< endif
-54550a54216,54220
-> elseif Count==0 then
-> call SetUnitTurnSpeed(Target,GetUnitDefaultTurnSpeed(Target))
-> call SaveInteger(hash_main,(GetHandleId(Target)),(281),(0))
-> call FlushChildHashtable(hash_main,(Cache))
-> call CleanTrigger(t)
-54563,54567d54232
-< elseif Count==0 then
-< call SetUnitTurnSpeed(Target,GetUnitDefaultTurnSpeed(Target))
-< call SaveInteger(hash_main,(GetHandleId(Target)),(281),(0))
-< call FlushChildHashtable(hash_main,(Cache))
-< call CleanTrigger(t)
-56134d55798
-< if GetOwningPlayer(Target)!=udg_NeutralHostile then
-56136d55799
-< endif
-60874d60536
-< if GetUnitTypeId(Target)!=1160786502 then
-60878d60539
-< endif
-61096c60757
-< return(GetSpellAbilityId()==1093678647 or GetSpellAbilityId()==1093679184)and(GetUnitAbilityLevel((GetSpellTargetUnit()),buffid_linkensphere)>0)==false and GetOwningPlayer(GetSpellTargetUnit())!=udg_NeutralHostile
----
-> return(GetSpellAbilityId()==1093678647 or GetSpellAbilityId()==1093679184)and(GetUnitAbilityLevel((GetSpellTargetUnit()),buffid_linkensphere)>0)==false
-64269,64270c63930,63935
-< call SetUnitX(Target,x+Rate*Cos(Angle))
-< call SetUnitY(Target,y+Rate*Sin(Angle))
----
-> set x=SafeX(x+Rate*Cos(Angle))
-> set y=SafeY(y+Rate*Sin(Angle))
-> if(IsPointInRegion(region_badplaces,((x)*1.0),((y)*1.0)))==false then
-> call SetUnitX(Target,x)
-> call SetUnitY(Target,y)
-> endif
-64794c64459
-< if GetSpellAbilityId()==abilityid_sunder and GetOwningPlayer(GetSpellTargetUnit())!=udg_NeutralHostile then
----
-> if GetSpellAbilityId()==abilityid_sunder then
-68655c68320
-< if GetUnitAbilityLevel(GetAttacker(),abilityid_essenceshift)>0 and IsUnitType(GetTriggerUnit(),UNIT_TYPE_HERO)==true and IsUnitType(GetTriggerUnit(),UNIT_TYPE_STRUCTURE)==false and GetAttacker()==(LoadUnitHandle(hash_main,(GetHandleId(GetTriggeringTrigger())),(14)))and GetUnitTypeId(GetTriggerUnit())!=1848651852 and IsUnitEnemy(GetTriggerUnit(),GetOwningPlayer(GetAttacker()))and GetUnitTypeId(GetTriggerUnit())!=1160786502 then
----
-> if GetUnitAbilityLevel(GetAttacker(),abilityid_essenceshift)>0 and IsUnitType(GetTriggerUnit(),UNIT_TYPE_HERO)==true and IsUnitType(GetTriggerUnit(),UNIT_TYPE_STRUCTURE)==false and GetAttacker()==(LoadUnitHandle(hash_main,(GetHandleId(GetTriggeringTrigger())),(14)))and GetUnitTypeId(GetTriggerUnit())!=1848651852 and IsUnitEnemy(GetTriggerUnit(),GetOwningPlayer(GetAttacker()))then
-69180d68844
-< if GetOwningPlayer(Target)!=udg_NeutralHostile then
-69183d68846
-< endif
-
