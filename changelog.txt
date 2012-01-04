@@ -1,0 +1,243 @@
+6.73
+=============================================================================
+
+New Intelligence Hero: Dragonus, Skywrath Mage
+New Agility Hero: Xin, Ember Spirit
+New Strength Hero: Rizzrak, Goblin Shredder 
+New Strength Hero: Tresdin, Legion Commander
+
+ Dirge
+- Flesh Golem cooldown decreased from 90 to 75
+- Decay cooldown decreased from 11/9/7/5 to 10/8/6/4
+
+ Doom Bringer
+- Scorched Earth duration increased from 8/10/12/14 to 10/12/14/16
+
+ Dragon Knight
+- While in Dragon form Dragon Tail's cast range increased from 150 to 400
+
+ Drow Ranger 
+- Base Agility increased by 4
+
+ Enchantress
+- Enchantress movement speed from 305 to 310
+
+ Eredar
+- Model changed to the Archimonde model 
+
+ Furion
+- Wrath of Nature cooldown rescaled from 90/60/60 to 90/75/60
+
+ Gyrocopter
+- Armor increased by 2
+
+ Jakiro
+- Ice Path cooldown decreased from 16/15/14/13 to 12/11/10/9
+- Macropyre duration increased from 5 to 7 seconds
+
+ Juggernaut
+- Omnislash random damage improved from 150-250 to 175-250
+- Omnislash hit count increased from 3/5/8 (5/7/10 aghanim) to 3/6/9 (6/9/12 aghanim)
+
+ Keeper of the Light
+- Blinding Light cooldown decreased from 20 to 20/16/12
+- Recall cooldown decreased from 40 to 15 seconds
+
+ Kunkka
+- Strength growth increased from 2.7 to 3.0
+- Ghost Ship's CoCo's Rum duration increased from 5/6/7 to 8 
+- Tidebringer cleave AoE improved from 380/420/460/500 to 500
+- Torrent slow increased from 30 to 35%
+- X Marks The Spot cooldown decreased from 30 to 20 seconds
+
+ Krobelus
+- Witchcraft movement speed increased from 3/6/9/12% to 4/8/12/16%
+
+ Lanaya
+- Refraction instances increased from 2/3/4/5 to 3/4/5/6
+
+ Leoric
+- Reincarnation slow duration increased from 3 to 4 seconds
+- Reincarnation cooldown decreased from 300/220/140 to 260/160/60
+
+ Leshrac
+- Movement speed increased from 310 to 315
+- Pulse Nova AoE increased from 400 to 450
+
+ Lina Inverse
+- Base intelligence increased by 3
+- Dragon Slave travel distance increased by 100
+- Dragon Slave final AoE increased from 125 to 150
+
+ Lion
+- Mana Drain level 4 increased from 100 to 120 per second
+- Mana Drain now drains at 0.25 second intervals instead of 1 second (596884)
+
+ Lord of Avernus
+- Aphotic Shield will explode at the end of its duration if it has not taken sufficient damage
+- Aphotic Shield cooldown decreased from 18/15/12/9 to 14/12/10/8
+- Aphotic Shield cast range increased from 450 to 500
+
+ Luna
+- Base damage increased by 5
+
+ Magnataur
+- Skewer cooldown decreased from 35 to 30
+- Empower duration increased from 30 to 40 seconds
+
+ Medusa
+- Toggle cooldown on mana shield removed
+- Stone Gaze rebalanced
+
+ Meepo
+- Poof damage rescaled from 50/80/110/140 to 80/100/120/140
+
+ Mirana
+- Fixed Elune's Arrow damaging but not stunning invisible units
+
+ Morphling
+- Base agility increased by 5
+- Adaptive strike cooldown decreased from 20 to 10
+
+ Naga Siren
+- Ensnare cast range increased from 620/630/640/650 to 650
+- Song of the Siren AoE increased from 750 to 1250
+- Song of the Siren's End ability is now available 0.5 seconds after casting (484587)
+
+ Necrolyte
+- Death Pulse AoE increased from 375/425/450/475 to 475
+- Heartstopper damage increased from 0.4/0.6/0.8/1.0% to 0.5/0.7/0.9/1.1%
+- Sadist level 4 now restores 600 mana if you kill a hero
+
+ Nerubian Assassin
+- Vendetta cooldown decreased from 90/75/60 to 70/60/50
+- Mana Burn cooldown decreased from 35/25/15/5 to 28/20/12/4
+
+ Obsidian Destroyer
+- Sanity's Eclipse now hits units imprisoned by Astral Imprisonment
+
+ Pandaren Brewmaster
+- Drunken Haze cooldown decreased from 12 to 8
+- Tinted Panda Brewmaster's Primal Split model colors
+
+ Phantom Assassin
+- Stifling Dagger damage increased from 40/80/120/160 to 50/100/150/200
+
+ Phantom Lancer
+- Doppelwalk movement bonus increased from 10 to 15%
+- Juxtapose illusions cap increased from 2/3/4/5 to 2/4/6/8
+
+ Phoenix
+- Fire Spirits heal amount decreased to 50% of damage
+- Fire Spirits now targets a location rather than a unit
+- Fire Spirits cooldown decreased from 35 to 30
+- Fire Spirits projectile speed increased
+- Icarus Dive cooldown decreased from 30 to 25
+- Sun Ray hp activation cost decreased from 25% to 20%
+- Sun Ray manacost rescaled from 35 to 10/20/30/40
+
+ Pit Lord
+- Expulsion corpse explosion rate decreased from every 1.25 seconds to 1.5 seconds
+- Expulsion manacost increased from 125 to 125/135/145/155
+
+ Pudge
+- Flesh Heap now has a overhead notification when strength is gained
+
+ Pugna
+- Life Drain damage increased from 95/140/185 to 100/150/200 (and Scepter from 150/200/250 to 175/225/275)
+- Life Drain duration increased from 9 to 10 seconds
+
+ Queen of Pain
+- Base damage increased by 4
+- Scream of Pain AoE increased from 400/425/450/475 to 475
+
+ Razor
+- Static Link duration, after it finishes draining, increased from 13 to 18
+- Static Link cooldown rescaled from 35/30/25/20 to 25
+
+ Rooftrellen
+- Overgrowth damage per second decreased from 70/100/130 to 50/75/100
+- Leech Seed manacost increased from 110/120/130/140 to 140
+
+ Rubick
+- Fade Bolt manacost increased from 90/95/100/105 to 150
+- Fade Bolt cd rescaled from 10 to 16/14/12/10
+- Telekinesis manacost decreased from 160 to 120
+
+ Sand King
+- Epicenter's slow is no longer blocked by magic immunity
+- Caustic Finale buff duration increased from 2 to 8 seconds
+
+ Shadow Fiend
+- Movement speed increased from 300 to 305
+- Agility growth increased from 2.4 to 2.9
+- Necromancy soul cap increased from 8/15/23/30 to 8/16/24/32
+
+ Silencer 
+- Glaives of Wisdom damage increased from 30/40/50/60% to 30/45/60/75%
+- Last Word now functions while Silencer is stunned/silenced
+- Last Word no longer triggers when enemies use items
+
+ Slark
+- Pounce damage increased from 40/80/120/160 to 70/140/210/280
+- Pounce cooldown rescaled from 12 to 20/16/12/8 
+- Pounce cast range increased from 400/500/600/700 to 700
+- Shadow Dance regen increased from 2/3/4% to 3/4/5%
+- Shadow Dance passive bonuses activation delay decreased from 0.7 to 0.5
+
+ Sniper
+- Shrapnel AoE increased from 325 to 350
+
+ Spectre
+- Dispersion damage no longer disables items like Blink Dagger
+
+ Spirit Breaker
+- Charge of Darkness cooldown decreased from 40 to 35
+- Charge of Darkness AoE knockback increased from 250 to 300
+- Netherstrike damage increased from 100/200/300 to 150/250/350
+
+ Stealth Assassin
+- Backstab damage bonus increased from 0.25/0.5/0.75/1.0 to 0.5/0.75/1.0/1.25 of agility
+
+ Storm Spirit
+- Overload bonus damage increased from 30/45/60/75 to 30/50/70/90
+
+ Sven
+- Great Cleave increased from 20/30/40/50% to 30/40/50/60%
+- God's Strength is no longer purgeable
+- God's Strength damage buff increased from 100/125/150% to 100/140/180%
+- Warcry duration increased from 6 to 8 seconds
+- Warcry cast time removed
+
+ Tinker
+- Laser's miss duration increased from 2 to 3 seconds
+
+ Tiny 
+- Tiny now automatically and permanently equips a tree when he has Aghanim's Scepter
+
+Troll Warlord
+- Fervor increments now increase while attacking towers
+
+ Tuskarr
+- Snowball cooldown decreased from 40 to 28
+
+ Ursa Warrior 
+- Armor increased by 1
+- Enrage damage increased from 4/5/6% to 5/6/7% of current HP
+- Earthshock AoE increased from 365 to 385
+- Earthshock cooldown decreased from 7 to 6
+- Fury Swipes damage increased from 10/15/20/25 to 15/20/25/30
+
+ Visage
+- Added Aghanim Scepter for Visage (creates 1 extra familiar)
+- Soul Assumption manacost rescaled from 200/180/160/140 to 170/160/150/140
+
+ Warlock
+- Infernal's Flaming Fists trigger chance increased from 40% to 60%
+- Infernal's Flaming Fists damage increased from 75/115/150 to 100/150/200
+
+ Zeus
+- Arc Lightning level 4 damage increased from 130 to 145 damage
+- Lightning Bolt cooldown decreased from 6.5 to 6
+- Static Field now affects creeps
+- Static Field no longer requires unit visibility to take effect
