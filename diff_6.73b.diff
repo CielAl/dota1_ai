@@ -1690,54 +1690,6 @@
  return indexid_aghanimsscepterlich
  elseif unitId==1164666213 then
  return indexid_aghanimsscepterleshrac
-@@ -8985,44 +9314,46 @@
- return indexid_aghanimsscepterrazor
- elseif unitId==1162032951 then
- return indexid_aghanimsscepterviper
- elseif unitId==1429221456 then
- return indexid_aghanimsscepterdestroyer
- elseif unitId==1164799855 then
- return indexid_aghanimsscepterenchantress
- elseif unitId==1211117646 then
- return indexid_aghanimsscepterdarkseer
- elseif unitId==1160786510 or unitId==1160786511 then
- return indexid_aghanimssceptergyrocopter
- elseif unitId==1211117641 then
- return indexid_aghanimssceptermeepo
- elseif unitId==1211117636 then
- return indexid_aghanimsscepterbeastmaster
-+elseif unitId==1430468144 then
-+return indexid_aghanimssceptervisage
- endif
- return indexid_aghanimsscepter
- endfunction
- function GetScepterAbilityId takes unit whichUnit returns integer
- local integer unitId
- if whichUnit==null then
- return-2
- endif
- set unitId=GetUnitTypeId(whichUnit)
- if unitId==1211117620 then
- return abilityid_aghanimsscepter_lina
- elseif unitId==1430466872 then
- return abilityid_aghanimsscepter_lion
--elseif unitId==1432580716 then
-+elseif unitId==1432580716 or unitId==1429221720 then
- return abilityid_aghanimsscepter_tiny
- elseif unitId==1211117640 then
- return abilityid_aghanimsscepter_pugna
- elseif unitId==1430466609 then
- return abilityid_aghanimsscepter_qop
- elseif unitId==1332898670 then
- return abilityid_aghanimsscepter_rhasta
- elseif unitId==1215128178 then
- return abilityid_aghanimsscepter_zeus
- elseif unitId==1214931305 then
- return abilityid_aghanimsscepter_rylai
- elseif unitId==1433168227 then
- return abilityid_aghanimsscepter_lich
- elseif unitId==1164666213 then
- return abilityid_aghanimsscepter_leshrac
 @@ -9086,58 +9417,60 @@
  return abilityid_aghanimsscepter_razor
  elseif unitId==1162032951 then
@@ -8001,47 +7953,6 @@
  call TriggerAddCondition(t,Condition(function Trig_Gush_Conditions))
  call TriggerAddAction(t,function Trig_Gush_Actions)
  endfunction
-@@ -70787,37 +72671,37 @@
- call TriggerAddCondition(t,Condition(function GravekeepersCloak_Main))
- loop
- exitwhen i>5
- set p=udg_SentPlayers[i]
- call GravekeepersCloak_SetUnavailable(p)
- set p=udg_ScourgePlayers[i]
- call GravekeepersCloak_SetUnavailable(p)
- set i=i+1
- endloop
- set t=null
- endfunction
- function Gargoyle_Land takes nothing returns nothing
- local integer Level
- local unit Source=GetTriggerUnit()
- local unit Caster
--if GetUnitTypeId(Source)==unitid_gargoyle_a_1_stone or GetUnitTypeId(Source)==unitid_gargoyle_a_2_stone or GetUnitTypeId(Source)==unitid_gargoyle_a_3_stone or GetUnitTypeId(Source)==unitid_gargoyle_b_1_stone or GetUnitTypeId(Source)==unitid_gargoyle_b_2_stone or GetUnitTypeId(Source)==unitid_gargoyle_b_3_stone then
-+if GetUnitTypeId(Source)==unitid_gargoyle_a_1_stone or GetUnitTypeId(Source)==unitid_gargoyle_a_2_stone or GetUnitTypeId(Source)==unitid_gargoyle_a_3_stone or GetUnitTypeId(Source)==unitid_gargoyle_b_1_stone or GetUnitTypeId(Source)==unitid_gargoyle_b_2_stone or GetUnitTypeId(Source)==unitid_gargoyle_b_3_stone or GetUnitTypeId(Source)==unitid_gargoyle_c_1_stone or GetUnitTypeId(Source)==unitid_gargoyle_c_2_stone or GetUnitTypeId(Source)==unitid_gargoyle_c_3_stone then
- return
- endif
- set Caster=CreateUnit(GetOwningPlayer(Source),1697656901,GetUnitX(Source),GetUnitY(Source),0)
--if GetUnitTypeId(Source)==unitid_gargoyle_a_1 or GetUnitTypeId(Source)==unitid_gargoyle_b_1 then
-+if GetUnitTypeId(Source)==unitid_gargoyle_a_1 or GetUnitTypeId(Source)==unitid_gargoyle_b_1 or GetUnitTypeId(Source)==unitid_gargoyle_c_1 then
- set Level=1
--elseif GetUnitTypeId(Source)==unitid_gargoyle_a_2 or GetUnitTypeId(Source)==unitid_gargoyle_b_2 then
-+elseif GetUnitTypeId(Source)==unitid_gargoyle_a_2 or GetUnitTypeId(Source)==unitid_gargoyle_b_2 or GetUnitTypeId(Source)==unitid_gargoyle_c_2 then
- set Level=2
- else
- set Level=3
- endif
- call UnitAddAbility2(Caster,stoneform_stun)
- call SetUnitAbilityLevel(Caster,stoneform_stun,Level)
- call IssueImmediateOrder(Caster,"stomp")
- set Source=null
- set Caster=null
- endfunction
- function Gargoyle_SetDamage takes unit Garg,integer Remaining,integer Level returns nothing
- local integer PerCharge
- if Level==1 then
- set PerCharge=8
- elseif Level==2 then
 @@ -78839,33 +84851,35 @@
  call InitTrig_Misc()
  call InitTrig_Map_Info()
