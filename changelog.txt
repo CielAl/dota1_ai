@@ -227,7 +227,7 @@ Troll Warlord
 - Fury Swipes damage increased from 10/15/20/25 to 15/20/25/30
 
  Visage
-- Added Aghanim Scepter for Visage (creates 1 extra familiar)
+- Added Aghanim Scepter for Visage 
 - Soul Assumption manacost rescaled from 200/180/160/140 to 170/160/150/140
 
  Warlock
