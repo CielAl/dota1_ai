@@ -336,38 +336,6 @@
  integer indexid_aghanimsscepterleshrac
  integer indexid_aghanimsscepterlich
  integer indexid_aghanimsscepterlina
-@@ -2399,30 +2420,31 @@
- integer indexid_aghanimsscepternevermore
- integer indexid_aghanimsscepteraxe
- integer indexid_aghanimsscepterbatrider
- integer indexid_aghanimsscepterearthshaker
- integer indexid_aghanimsscepterpuck
- integer indexid_aghanimsscepterwarlock
- integer indexid_aghanimsscepterrazor
- integer indexid_aghanimsscepterviper
- integer indexid_aghanimssceptertiny
- integer indexid_aghanimsscepterdestroyer
- integer indexid_aghanimsscepterenchantress
- integer indexid_aghanimsscepterdarkseer
- integer indexid_aghanimssceptergyrocopter
- integer indexid_aghanimssceptermeepo
- integer indexid_aghanimsscepterbeastmaster
-+integer indexid_aghanimssceptervisage
- constant integer abilityid_aghanimsscepter_furion=1093686585
- constant integer abilityid_aghanimsscepter_kotl=1093686350
- constant integer abilityid_aghanimsscepter_leshrac=1093686583
- constant integer abilityid_aghanimsscepter_lich=1093686581
- constant integer abilityid_aghanimsscepter_lina=1093686352
- constant integer abilityid_aghanimsscepter_lion=1093686354
- constant integer abilityid_aghanimsscepter_lucifer=1093686602
- constant integer abilityid_aghanimsscepter_luna=1093686598
- constant integer abilityid_aghanimsscepter_necro=1093686596
- constant integer abilityid_aghanimsscepter_ogre=0
- constant integer abilityid_aghanimsscepter_dirge=0
- constant integer abilityid_aghanimsscepter_pugna=1093686358
- constant integer abilityid_aghanimsscepter_qop=1093686360
- constant integer abilityid_aghanimsscepter_rhasta=1093686362
- constant integer abilityid_aghanimsscepter_rylai=1093686579
 @@ -2452,57 +2474,61 @@
  constant integer abilityid_aghanimsscepter_nevermore=1093750101
  constant integer abilityid_aghanimsscepter_axe=1093750100
@@ -1690,69 +1658,6 @@
  return indexid_aghanimsscepterlich
  elseif unitId==1164666213 then
  return indexid_aghanimsscepterleshrac
-@@ -9086,58 +9417,60 @@
- return abilityid_aghanimsscepter_razor
- elseif unitId==1162032951 then
- return abilityid_aghanimsscepter_viper
- elseif unitId==1429221456 then
- return abilityid_aghanimsscepter_destroyer
- elseif unitId==1164799855 then
- return abilityid_aghanimsscepter_enchantress
- elseif unitId==1211117646 then
- return abilityid_aghanimsscepter_darkseer
- elseif unitId==1160786510 or unitId==1160786511 then
- return abilityid_aghanimsscepter_gyrocopter
- elseif unitId==1211117641 then
- return abilityid_aghanimsscepter_meepo
- elseif unitId==1211117636 then
- return abilityid_aghanimsscepter_beastmaster
-+elseif unitId==1430468144 then
-+return abilityid_aghanimsscepter_visage
- endif
- return 0
- endfunction
- function IsItemInCooldown takes item Item returns boolean
- local integer i=1
- loop
- exitwhen i>ItemCooldown_TrackedMax
- if Item==ItemCooldown_TrackedItem[i]then
- return true
- endif
- set i=i+1
- endloop
- return false
- endfunction
- function IsItemScepter takes item whichItem returns boolean
- local integer indexId=GetIndex(whichItem)
- if indexId==indexid_aghanimsscepter or indexId==indexid_aghanimsscepterfurion or indexId==indexid_aghanimsscepterkotl or indexId==indexid_aghanimsscepterleshrac or indexId==indexid_aghanimsscepterlich or indexId==indexid_aghanimsscepterlina or indexId==indexid_aghanimsscepterlion or indexId==indexid_aghanimsscepterlucifer or indexId==indexid_aghanimsscepterluna or indexId==indexid_aghanimsscepternecro or indexId==indexid_aghanimsscepterogre or indexId==indexid_aghanimsscepterpugna or indexId==indexid_aghanimsscepterqop or indexId==indexid_aghanimsscepterrhasta or indexId==indexid_aghanimsscepterrylai or indexId==indexid_aghanimsscepterveno or indexId==indexid_aghanimsscepterwitchdoctor or indexId==indexid_aghanimsscepterzeus or indexId==indexid_aghanimsscepterclockwerk or indexId==indexid_aghanimssceptervengeful or indexId==indexid_aghanimsscepterjugg or indexId==indexid_aghanimsscepterchen or indexId==indexid_aghanimsscepterns or indexId==indexid_aghanimsscepterjakiro or indexId==indexid_aghanimssceptersandking or indexId==indexid_aghanimsscepterhuskar or indexId==indexid_aghanimsscepterinvoker or indexId==indexid_aghanimsscepterpudge or indexId==indexid_aghanimsscepterwindrunner or indexId==indexid_aghanimssceptervoid or indexId==indexid_aghanimssceptersb or indexId==indexid_aghanimsscepterbane or indexId==indexid_aghanimsscepterabaddon or indexId==indexid_aghanimsscepterdazzle or indexId==indexid_aghanimssceptertechies or indexId==indexid_aghanimsscepterpanda or indexId==indexid_aghanimsscepteraxe or indexId==indexid_aghanimsscepterearthshaker then
- return true
--elseif indexId==indexid_aghanimsscepterpuck or indexId==indexid_aghanimsscepterwarlock or indexId==indexid_aghanimsscepterrazor or indexId==indexid_aghanimsscepterviper or indexId==indexid_aghanimssceptertiny or indexId==indexid_aghanimsscepterdestroyer or indexId==indexid_aghanimsscepterenchantress or indexId==indexid_aghanimsscepterdarkseer or indexId==indexid_aghanimssceptergyrocopter or indexId==indexid_aghanimssceptermeepo or indexId==indexid_aghanimsscepterbeastmaster then
-+elseif indexId==indexid_aghanimsscepterpuck or indexId==indexid_aghanimsscepterwarlock or indexId==indexid_aghanimsscepterrazor or indexId==indexid_aghanimsscepterviper or indexId==indexid_aghanimssceptertiny or indexId==indexid_aghanimsscepterdestroyer or indexId==indexid_aghanimsscepterenchantress or indexId==indexid_aghanimsscepterdarkseer or indexId==indexid_aghanimssceptergyrocopter or indexId==indexid_aghanimssceptermeepo or indexId==indexid_aghanimsscepterbeastmaster or indexId==indexid_aghanimssceptervisage then
- return true
- endif
- return false
- endfunction
- function IsIndexIdConsumable takes integer indexId returns boolean
- return indexId==indexid_flyingcourier or indexId==indexid_cheese or indexId==indexid_claritypotion or indexId==indexid_flaskofsapphirewater or indexId==indexid_ancienttangoofessifation or indexId==indexid_observerwards or indexId==indexid_sentrywards or indexId==indexid_scrolloftownportal or indexId==indexid_ghostpotion or indexId==indexid_wandofillusions or indexId==indexid_smokeofdeceit
- endfunction
- function IsIndexIdCharged takes integer indexId returns boolean
--return indexId==indexid_staffofhealing or indexId==indexid_ancientjangoo or indexId==indexid_diffusalblade or indexId==indexid_diffusalbladelevel2 or indexId==indexid_bloodstone or indexId==indexid_aegis or indexId==indexid_dustofappearance or indexId==indexid_magicstick or indexId==indexid_magicwand
-+return indexId==indexid_staffofhealing or indexId==indexid_ancientjangoo or indexId==indexid_diffusalblade or indexId==indexid_diffusalbladelevel2 or indexId==indexid_bloodstone or indexId==indexid_aegis or indexId==indexid_dustofappearance or indexId==indexid_magicstick or indexId==indexid_magicwand or indexId==indexid_bladeofthereaper
- endfunction
- function DelayedItemCreation_Helper takes nothing returns boolean
- local trigger t=GetTriggeringTrigger()
- local integer Cache=GetHandleId(t)
- local integer itemId=(LoadInteger(hash_main,(Cache),(74)))
- local real x=(LoadReal(hash_main,(Cache),(6)))
- local real y=(LoadReal(hash_main,(Cache),(7)))
- local player p=(LoadPlayerHandle(hash_main,(Cache),(54)))
- local boolean consumable=(LoadBoolean(hash_main,(Cache),(75)))
- local integer charges=(LoadInteger(hash_main,(Cache),(76)))
- local item newItem=CreateItem(itemId,x,y)
- call SetItemPlayer(newItem,p,true)
- call SetItemUserData(newItem,0)
- if consumable then
- call SetItemCharges(newItem,charges)
 @@ -9877,31 +10210,31 @@
  function Buyback_StartCooldown takes player p returns nothing
  local integer id=GetPlayerId(p)
