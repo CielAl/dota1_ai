@@ -104,11 +104,6 @@ New Strength Hero: Tresdin, Legion Commander
 - Song of the Siren AoE increased from 750 to 1250
 - Song of the Siren's End ability is now available 0.5 seconds after casting (484587)
 
- Necrolyte
-- Death Pulse AoE increased from 375/425/450/475 to 475
-- Heartstopper damage increased from 0.4/0.6/0.8/1.0% to 0.5/0.7/0.9/1.1%
-- Sadist level 4 now restores 600 mana if you kill a hero
-
  Nerubian Assassin
 - Vendetta cooldown decreased from 90/75/60 to 70/60/50
 - Mana Burn cooldown decreased from 35/25/15/5 to 28/20/12/4
