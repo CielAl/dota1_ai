@@ -2069,7 +2069,7 @@
  function ElunesArrow_Action takes nothing returns nothing
  local unit Hero=GetTriggerUnit()
  local real SourceX=SafeX(GetUnitX(Hero))
-@@ -50667,72 +52143,74 @@
+@@ -50667,72 +52143,74 @@ Overflow
  if IsUnitInGroup(GetEnumUnit(),songofthesiren_group)==false then
  call GroupAddUnit(songofthesiren_group,GetEnumUnit())
  call SetUnitOwner(songofthesiren_caster,GetOwningPlayer(GetEnumUnit()),false)
@@ -3776,71 +3776,6 @@
  endif
  return false
  endfunction
-@@ -66931,30 +68667,31 @@
- set Dying=null
- endif
- return false
- endfunction
- function FleahHeap_GiveBonus takes nothing returns boolean
- local trigger t=GetTriggeringTrigger()
- local unit Source=(LoadUnitHandle(hash_main,(GetHandleId(t)),(2)))
- local integer Cache=GetHandleId(Source)
- local integer FleshHeapTally=(LoadInteger(hash_main,(Cache),(672)))
- local integer FleshHeapLast=(LoadInteger(hash_main,(Cache),(673)))
- local integer Level=GetUnitAbilityLevel(Source,abilityid_fleshheap)
- local integer FleshHeapProposed=R2I(I2R(FleshHeapTally)*(0.6+0.3*Level))
- if FleshHeapProposed>FleshHeapLast then
- call ModifyHeroStat(bj_HEROSTAT_STR,Source,bj_MODIFYMETHOD_ADD,FleshHeapProposed-FleshHeapLast)
- call SaveInteger(hash_main,(Cache),(673),(FleshHeapProposed))
-+call TextTagOnUnitEx("+"+I2S(FleshHeapProposed-FleshHeapLast)+" "+GetObjectName(1848659274),3,Source,0.023,0,255,0,230)
- endif
- set t=null
- set Source=null
- return false
- endfunction
- function FleahHeap takes nothing returns nothing
- local unit Source=GetTriggerUnit()
- local trigger t=CreateTrigger()
- local integer Cache=GetHandleId(t)
- call TriggerRegisterTimerEvent(t,0.5,true)
- call TriggerAddCondition(t,Condition(function FleahHeap_GiveBonus))
- call SaveUnitHandle(hash_main,(Cache),(2),(Source))
- set Source=null
- set t=null
- endfunction
-@@ -67520,31 +69257,31 @@
- call TriggerRegisterUnitEvent(t,Source,EVENT_UNIT_DEATH)
- call TriggerRegisterUnitEvent(t,Target,EVENT_UNIT_DEATH)
- call SaveUnitHandle(hash_main,(Cache),(2),(Source))
- call SaveUnitHandle(hash_main,(Cache),(17),(Target))
- elseif DeadUnit==Target then
- call StaticLink_RemoveDamage(Target,0)
- call TriggerRegisterUnitEvent(t,Source,EVENT_UNIT_DEATH)
- call SaveUnitHandle(hash_main,(Cache),(2),(Source))
- call SaveUnitHandle(hash_main,(Cache),(17),(null))
- else
- call StaticLink_AddDamage(Source,0)
- call TriggerRegisterUnitEvent(t,Target,EVENT_UNIT_DEATH)
- call SaveUnitHandle(hash_main,(Cache),(2),(null))
- call SaveUnitHandle(hash_main,(Cache),(17),(Target))
- endif
--call TriggerRegisterTimerEvent(t,13,false)
-+call TriggerRegisterTimerEvent(t,18,false)
- call TriggerAddCondition(t,Condition(function StaticLink_DelayedRemove_Finished))
- endfunction
- function StaticLink_Follow takes nothing returns boolean
- local trigger t=GetTriggeringTrigger()
- local integer Cache=GetHandleId(t)
- local unit Source=(LoadUnitHandle(hash_main,(Cache),(2)))
- local unit Target=(LoadUnitHandle(hash_main,(Cache),(17)))
- local lightning Light=(LoadLightningHandle(hash_main,(Cache),(196)))
- local integer Level=(LoadInteger(hash_main,(Cache),(5)))
- local integer Count=GetTriggerEvalCount(t)
- local unit Caster=(LoadUnitHandle(hash_main,(Cache),(19)))
- call MoveLightning(Light,true,GetUnitX(Source),GetUnitY(Source),GetUnitX(Target),GetUnitY(Target))
- call SetUnitX(Caster,GetUnitX(Target))
- call SetUnitY(Caster,GetUnitY(Target))
- if DistanceBetweenXY(GetUnitX(Source),GetUnitY(Source),GetUnitX(Target),GetUnitY(Target))>700 or GetTriggerEventId()==EVENT_UNIT_DEATH or IsUnitVisible(Target,GetOwningPlayer(Source))==false then
 @@ -78839,33 +84851,35 @@
  call InitTrig_Misc()
  call InitTrig_Map_Info()
