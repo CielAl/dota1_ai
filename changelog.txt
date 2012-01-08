@@ -191,7 +191,6 @@ New Strength Hero: Tresdin, Legion Commander
 
  Spirit Breaker
 - Charge of Darkness cooldown decreased from 40 to 35
-- Charge of Darkness AoE knockback increased from 250 to 300
 
  Stealth Assassin
 - Backstab damage bonus increased from 0.25/0.5/0.75/1.0 to 0.5/0.75/1.0/1.25 of agility
