@@ -817,45 +817,6 @@
  call SetTextTagVelocity(tt,0,0.03)
  if GetLocalPlayer()==p then
  call SetTextTagVisibility(tt,true)
-@@ -44098,35 +45479,35 @@
- call TriggerRegisterAnyUnitEvent(t,EVENT_PLAYER_UNIT_SPELL_EFFECT)
- call TriggerAddCondition(t,Condition(function Trig_Call_of_the_Wild_Conditions))
- call TriggerAddAction(t,function Trig_Call_of_the_Wild_Actions)
- endfunction
- function Track_GiveBounty takes nothing returns nothing
- local unit Source=GetTriggerUnit()
- local integer Cache=GetHandleId(Source)
- local player p=(LoadPlayerHandle(hash_main,(Cache),(54)))
- local integer Level=(LoadInteger(hash_main,(Cache),(5)))
- local texttag tt=CreateTextTag()
- local integer Gold
- local integer i=1
- local unit u
- local player p2
- if Level==1 then
--set Gold=75
--elseif Level==2 then
- set Gold=150
-+elseif Level==2 then
-+set Gold=200
- else
--set Gold=225
-+set Gold=250
- endif
- call SetPlayerState(p,PLAYER_STATE_RESOURCE_GOLD,GetPlayerState(p,PLAYER_STATE_RESOURCE_GOLD)+Gold)
- call SetTextTagText(tt,"+"+I2S(Gold),0.025)
- call SetTextTagPosUnit(tt,udg_Hero[GetPlayerId(p)],100)
- call SetTextTagColor(tt,255,220,0,255)
- call SetTextTagVelocity(tt,0,0.03)
- call SetTextTagVisibility(tt,false)
- if GetLocalPlayer()==p then
- call SetTextTagVisibility(tt,true)
- endif
- call SetTextTagFadepoint(tt,2)
- call SetTextTagLifespan(tt,3)
- call SetTextTagPermanent(tt,false)
- set ReliableGold[GetPlayerId(p)]=ReliableGold[GetPlayerId(p)]+Gold
- set bounty_totalgold=bounty_totalgold+Gold
 @@ -46068,44 +47449,62 @@
  set Caster=null
  set l=null
@@ -969,85 +930,6 @@
  local unit Source=(LoadUnitHandle(hash_main,(Cache),(2)))
  local integer TargetIndex=(LoadInteger(hash_main,(Cache),(30)))
  local unit Target=TI_GetUnit(TargetIndex)
-@@ -48659,31 +50135,31 @@
- return false
- endfunction
- function Register_DualBreath takes nothing returns nothing
- local trigger t=CreateTrigger()
- call TriggerRegisterAnyUnitEvent(t,EVENT_PLAYER_UNIT_SPELL_EFFECT)
- call TriggerAddCondition(t,Condition(function DualBreath_Main))
- call PreloadAbility(abilityid_dualbreathfrost)
- call PreloadAbility(abilityid_dualbreathfire)
- call PreloadAbility(abilityid_dualbreathfrosteffect)
- set t=null
- endfunction
- function Omnislash_Effect takes unit Hero,unit Target returns nothing
- local real a=GetRandomReal(0,360)
- local real x=GetUnitX(Target)+50*Cos(a*bj_DEGTORAD)
- local real y=GetUnitY(Target)+50*Sin(a*bj_DEGTORAD)
--local real dmg=GetRandomReal(150,250)
-+local real dmg=GetRandomReal(175,250)
- call SetUnitPosition(Hero,x,y)
- call SetUnitFacing(Hero,bj_RADTODEG*Atan2(GetUnitY(Target)-GetUnitY(Hero),GetUnitX(Target)-GetUnitX(Hero)))
- call SetUnitAnimation(Hero,"Attack")
- call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\NightElf\\Blink\\BlinkCaster.mdl",Hero,"chest"))
- call DamageTarget(Hero,Target,DAMAGE_PHYSICAL,dmg)
- call IssueTargetOrder(Hero,"attack",Target)
- endfunction
- function Omnislash_FirstTime takes nothing returns boolean
- local trigger t=GetTriggeringTrigger()
- local integer Cache=GetHandleId(t)
- local unit Hero=(LoadUnitHandle(hash_main,(Cache),(14)))
- local unit Target=(LoadUnitHandle(hash_main,(Cache),(17)))
- call Omnislash_Effect(Hero,Target)
- call FlushChildHashtable(hash_main,(Cache))
- call CleanTrigger(t)
-@@ -48739,40 +50215,40 @@
- set NextTarget=null
- return false
- endfunction
- function Omnislash takes nothing returns nothing
- local unit Hero=GetTriggerUnit()
- local unit Target=GetSpellTargetUnit()
- local integer Level=GetUnitAbilityLevel(Hero,abilityid_omnislash)
- local trigger t=CreateTrigger()
- local integer Cache=GetHandleId(t)
- local integer BFLevel=GetUnitAbilityLevel(Hero,abilityid_bladefury)
- local player p=GetOwningPlayer(Hero)
- local integer Limit=3
- if Level==0 then
- set Level=GetUnitAbilityLevel(Hero,abilityid_omnislashupgrade)
- if Level==1 then
--set Limit=5
-+set Limit=6
- elseif Level==2 then
--set Limit=7
-+set Limit=9
- elseif Level==3 then
--set Limit=10
-+set Limit=12
- endif
- elseif Level==2 then
--set Limit=5
-+set Limit=6
- elseif Level==3 then
--set Limit=8
-+set Limit=9
- endif
- call SetPlayerAbilityAvailable(p,abilityid_bladefury,false)
- call SetUnitVertexColor(Hero,255,255,255,125)
- call SetUnitPathing(Hero,false)
- call SetUnitInvulnerable(Hero,true)
- call SaveInteger(hash_main,(GetHandleId((Hero))),((4253)),(HERO_STATE_ON))
- call SaveUnitHandle(hash_main,(Cache),(14),(Hero))
- call SaveUnitHandle(hash_main,(Cache),(17),(Target))
- call TriggerRegisterTimerEvent(t,0,false)
- call TriggerAddCondition(t,Condition(function Omnislash_FirstTime))
- set t=CreateTrigger()
- set Cache=GetHandleId(t)
- call SaveUnitHandle(hash_main,(Cache),(14),(Hero))
- call SaveInteger(hash_main,(Cache),(216),(Limit))
- call SaveInteger(hash_main,(Cache),(325),(BFLevel))
 @@ -50058,31 +51534,31 @@
  local real OriginalX
  local real OriginalY

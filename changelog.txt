@@ -35,10 +35,6 @@ New Strength Hero: Tresdin, Legion Commander
 - Ice Path cooldown decreased from 16/15/14/13 to 12/11/10/9
 - Macropyre duration increased from 5 to 7 seconds
 
- Juggernaut
-- Omnislash random damage improved from 150-250 to 175-250
-- Omnislash hit count increased from 3/5/8 (5/7/10 aghanim) to 3/6/9 (6/9/12 aghanim)
-
  Keeper of the Light
 - Blinding Light cooldown decreased from 20 to 20/16/12
 - Recall cooldown decreased from 40 to 15 seconds
