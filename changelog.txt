@@ -99,11 +99,6 @@ New Strength Hero: Tresdin, Legion Commander
 - Base agility increased by 5
 - Adaptive strike cooldown decreased from 20 to 10
 
- Naga Siren
-- Ensnare cast range increased from 620/630/640/650 to 650
-- Song of the Siren AoE increased from 750 to 1250
-- Song of the Siren's End ability is now available 0.5 seconds after casting (484587)
-
  Nerubian Assassin
 - Vendetta cooldown decreased from 90/75/60 to 70/60/50
 - Mana Burn cooldown decreased from 35/25/15/5 to 28/20/12/4
