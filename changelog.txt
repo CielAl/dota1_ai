@@ -55,7 +55,6 @@ New Strength Hero: Tresdin, Legion Commander
 
  Leshrac
 - Movement speed increased from 310 to 315
-- Pulse Nova AoE increased from 400 to 450
 
  Lina Inverse
 - Base intelligence increased by 3

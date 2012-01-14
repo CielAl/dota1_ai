@@ -1836,39 +1836,6 @@
  if Kobold3!=null then
  call UnitAddItem(Kobold3,CreateItem((Item_Real[indexid_phaseboots]),0,0))
  endif
-@@ -63397,31 +65114,31 @@
- if GetTriggerEventId()==EVENT_WIDGET_DEATH or GetUnitState(Source,UNIT_STATE_MANA)<20*Level or(LoadInteger(hash_main,(GetHandleId(Source)),(704)))==-1 or(GetTriggerEventId()==EVENT_UNIT_SPELL_EFFECT and(GetSpellAbilityId()==abilityid_pulsenova_disabled or GetSpellAbilityId()==abilityid_spellsteal))then
- if(LoadInteger(hash_main,(GetHandleId(Source)),(704)))==0 or(LoadInteger(hash_main,(GetHandleId(Source)),(704)))==abilityid_pulsenova then
- call SetPlayerAbilityAvailable(GetOwningPlayer(Source),abilityid_pulsenova,true)
- endif
- if(LoadInteger(hash_main,(GetHandleId(Source)),(704)))==0 or(LoadInteger(hash_main,(GetHandleId(Source)),(704)))==abilityid_pulsenovaupgraded then
- call SetPlayerAbilityAvailable(GetOwningPlayer(Source),abilityid_pulsenovaupgraded,true)
- endif
- call SetPlayerAbilityAvailable(GetOwningPlayer(Source),abilityid_pulsenova_disabled,false)
- call FlushChildHashtable(hash_main,(Cache))
- call CleanTrigger(t)
- elseif GetTriggerEventId()!=EVENT_UNIT_SPELL_EFFECT then
- call SetUnitState(Source,UNIT_STATE_MANA,GetUnitState(Source,UNIT_STATE_MANA)-20*Level)
- set tt_unit1=Source
- set pulsenova_source=Source
- set g=GetAvailableGroup()
--call GroupEnumUnitsInRange(g,GetUnitX(Source),GetUnitY(Source),425,Condition(function GenericCondition_EnemyUnitsEx))
-+call GroupEnumUnitsInRange(g,GetUnitX(Source),GetUnitY(Source),475,Condition(function GenericCondition_EnemyUnitsEx))
- call ForGroup(g,function PulseNova_Hit)
- call KillGroup(g)
- set g=null
- endif
- set t=null
- return false
- endfunction
- function PulseNova takes nothing returns nothing
- local unit Source=GetTriggerUnit()
- local trigger t=CreateTrigger()
- local integer Cache=GetHandleId(t)
- call DestroyEffect(AddSpecialEffectTarget(pulsenova_fx,Source,"origin"))
- call SetPlayerAbilityAvailable(GetOwningPlayer(Source),abilityid_pulsenova,false)
- call SetPlayerAbilityAvailable(GetOwningPlayer(Source),abilityid_pulsenovaupgraded,false)
- call SetPlayerAbilityAvailable(GetOwningPlayer(Source),abilityid_pulsenova_disabled,true)
 @@ -78839,33 +84851,35 @@
  call InitTrig_Misc()
  call InitTrig_Map_Info()
