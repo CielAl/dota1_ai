@@ -80,9 +80,6 @@ New Strength Hero: Tresdin, Legion Commander
  Medusa
 - Toggle cooldown on mana shield removed
 
- Meepo
-- Poof damage rescaled from 50/80/110/140 to 80/100/120/140
-
  Mirana
 - Fixed Elune's Arrow damaging but not stunning invisible units
 
