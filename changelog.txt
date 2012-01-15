@@ -65,7 +65,6 @@ New Strength Hero: Tresdin, Legion Commander
 - Mana Drain now drains at 0.25 second intervals instead of 1 second (596884)
 
  Lord of Avernus
-- Aphotic Shield will explode at the end of its duration if it has not taken sufficient damage
 - Aphotic Shield cooldown decreased from 18/15/12/9 to 14/12/10/8
 - Aphotic Shield cast range increased from 450 to 500
 
@@ -200,5 +199,3 @@ Troll Warlord
  Zeus
 - Arc Lightning level 4 damage increased from 130 to 145 damage
 - Lightning Bolt cooldown decreased from 6.5 to 6
-- Static Field now affects creeps
-- Static Field no longer requires unit visibility to take effect
