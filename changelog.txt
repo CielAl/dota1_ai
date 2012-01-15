@@ -51,7 +51,6 @@ New Strength Hero: Tresdin, Legion Commander
 
  Leoric
 - Reincarnation slow duration increased from 3 to 4 seconds
-- Reincarnation cooldown decreased from 300/220/140 to 260/160/60
 
  Leshrac
 - Movement speed increased from 310 to 315
@@ -90,9 +89,6 @@ New Strength Hero: Tresdin, Legion Commander
  Nerubian Assassin
 - Vendetta cooldown decreased from 90/75/60 to 70/60/50
 - Mana Burn cooldown decreased from 35/25/15/5 to 28/20/12/4
-
- Obsidian Destroyer
-- Sanity's Eclipse now hits units imprisoned by Astral Imprisonment
 
  Pandaren Brewmaster
 - Drunken Haze cooldown decreased from 12 to 8
