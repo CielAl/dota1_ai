@@ -957,39 +957,6 @@
  if GetTriggerEventId()==EVENT_UNIT_SPELL_EFFECT then
  set Target=GetSpellTargetUnit()
  set Source=GetTriggerUnit()
-@@ -52396,31 +53876,31 @@
- endfunction
- function Shrapnel_Iterate takes nothing returns boolean
- local trigger t=GetTriggeringTrigger()
- local integer Cache=GetHandleId(t)
- local unit Source=(LoadUnitHandle(hash_main,(Cache),(2)))
- local unit Caster=(LoadUnitHandle(hash_main,(Cache),(19)))
- local integer Level=(LoadInteger(hash_main,(Cache),(5)))
- local real x=(LoadReal(hash_main,(Cache),(6)))
- local real y=(LoadReal(hash_main,(Cache),(7)))
- local group g=GetAvailableGroup()
- local real d
- local real a
- local real x2
- local real y2
- set tt_unit1=Source
--call GroupEnumUnitsInRange(g,x,y,350,Condition(function GenericCondition_EnemyUnitsAndStructureEx))
-+call GroupEnumUnitsInRange(g,x,y,375,Condition(function GenericCondition_EnemyUnitsAndStructureEx))
- set shrapnel_source=Source
- set shrapnel_damage=Level*12
- set shrapnel_caster=Caster
- call ForGroup(g,function Shrapnel_Hit)
- call KillGroup(g)
- call DestroyEffect((LoadEffectHandle(hash_main,(Cache),(309))))
- call DestroyEffect((LoadEffectHandle(hash_main,(Cache),(175))))
- call DestroyEffect((LoadEffectHandle(hash_main,(Cache),(176))))
- call DestroyEffect((LoadEffectHandle(hash_main,(Cache),(177))))
- call DestroyEffect((LoadEffectHandle(hash_main,(Cache),(178))))
- call DestroyEffect((LoadEffectHandle(hash_main,(Cache),(179))))
- call DestroyEffect((LoadEffectHandle(hash_main,(Cache),(180))))
- call DestroyEffect((LoadEffectHandle(hash_main,(Cache),(330))))
- call DestroyEffect((LoadEffectHandle(hash_main,(Cache),(331))))
- if GetTriggerEvalCount(t)==8 then
 @@ -78839,33 +84851,35 @@
  call InitTrig_Misc()
  call InitTrig_Map_Info()

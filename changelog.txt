@@ -144,9 +144,6 @@ New Strength Hero: Tresdin, Legion Commander
 - Shadow Dance regen increased from 2/3/4% to 3/4/5%
 - Shadow Dance passive bonuses activation delay decreased from 0.7 to 0.5
 
- Sniper
-- Shrapnel AoE increased from 325 to 350
-
  Spectre
 - Dispersion damage no longer disables items like Blink Dagger
 
