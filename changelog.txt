@@ -169,9 +169,6 @@ New Strength Hero: Tresdin, Legion Commander
  Tinker
 - Laser's miss duration increased from 2 to 3 seconds
 
- Tiny 
-- Tiny now automatically and permanently equips a tree when he has Aghanim's Scepter
-
 Troll Warlord
 - Fervor increments now increase while attacking towers
 
@@ -180,7 +177,6 @@ Troll Warlord
 
  Ursa Warrior 
 - Armor increased by 1
-- Enrage damage increased from 4/5/6% to 5/6/7% of current HP
 - Earthshock AoE increased from 365 to 385
 - Earthshock cooldown decreased from 7 to 6
 - Fury Swipes damage increased from 10/15/20/25 to 15/20/25/30
