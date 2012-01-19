@@ -92,7 +92,6 @@ New Strength Hero: Tresdin, Legion Commander
 
  Phantom Lancer
 - Doppelwalk movement bonus increased from 10 to 15%
-- Juxtapose illusions cap increased from 2/3/4/5 to 2/4/6/8
 
  Phoenix
 - Fire Spirits heal amount decreased to 50% of damage
@@ -133,11 +132,6 @@ New Strength Hero: Tresdin, Legion Commander
  Shadow Fiend
 - Movement speed increased from 300 to 305
 - Agility growth increased from 2.4 to 2.9
-
- Silencer 
-- Glaives of Wisdom damage increased from 30/40/50/60% to 30/45/60/75%
-- Last Word now functions while Silencer is stunned/silenced
-- Last Word no longer triggers when enemies use items
 
  Slark
 - Pounce cooldown rescaled from 12 to 20/16/12/8 
