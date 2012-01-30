@@ -149,6 +149,8 @@ G0[272	  = bypassing channeling effect on function J3
 G0[288    = Rubick's ability function call
 G0[304    = Rubick's ability function call, skip other non-ability function
 
+G0[320    = returning to base for item purpose
+
 ---boolean GZ
 GZ[16+O5]=true - AI Issued Order
 GZ[64+O5]=true - -aid command used
@@ -197,6 +199,61 @@ hq[528+O5] = defense
 hq[320+O5] = tower defense
 hq[480+O5] = udv asking help
 hq[576+O5] = changing lane
+
+new item system:
+=================================================================
+--item array g_aiItemsBuff
+g_aiItemsBuff[O5*24+slotID] = temporary
+g_aiItemsBuff[288+O5] = last delayed created item
+
+
+--integer array g_aiItemIDBuff
+g_aiItemIDBuff[O5*24 + slotID]
+
+
+--integer array g_aiItemInt
+g_aiItemInt[O5] = first misc item (defensive)
+g_aiItemInt[16+O5] = sec misc item (tactical consumable)
+
+g_aiItemInt[32+O5] = core build step
+g_aiItemInt[48+O5] = core build step (sim mode)
+
+g_aiItemInt[64+O5] = callstack
+g_aiItemInt[80+O5] = empty inventory
+
+g_aiItemInt[96+O5] = terget single item
+g_aiItemInt[112+O5] = target recipe item
+
+g_aiItemInt[128+O5] = current ID of empty item buffer
+
+g_aiItemInt[144+O5] = item phase
+
+g_aiItemInt[160+O5] = substituting aiFinishedBuying by Bz (new item func only)
+g_aiItemInt[176+O5] = substituting isUnitAtFountain by Bz (new item func only)
+
+g_aiItemInt[192+O5] = total gold spent in sim mode
+
+g_aiItemInt[208+O5] = child identifier for simulation mode's Sv/LdBool
+
+--boolean array g_aiItemBool
+g_aiItemBool[O5] = enable new item system
+g_aiItemBool[16+ = has orb effect
+g_aiItemBool[32+ = has buff placer
+g_aiItemBool[48+ = sim mode
+g_aiItemBool[64+ = allow the hero not to bring tp
+g_aiItemBool[80+ = has entered LUX Mode
+
+g_aiItemBool[96+ = item number initialized
+
+g_aiItemBool[112+ = item requirement initialized (false = super-sim mode)
+
+g_aiItemBool[128+ = signal to return to base on full stash
+
+g_aiItemBool[144+ = if 'true', disable t_manipulateitem on UnitBuyItem (currently deprecated)
+
+g_aiItemBool[160+ = sim-mode has already entered Lux phase (buffer)
+g_aiItemBool[176+ = sim-mode has already entered Lux phase (fix)
+
 
 ---=============================================================================
 "Usage of aiAbilities system"
