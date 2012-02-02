@@ -62,9 +62,9 @@
     integer indexid_ancientjangoo
     integer indexid_ancientjangooempty
     integer indexid_bladeofthereaper
-    integer indexid_ironboots
+    integer indexid_ironboots	//Tranquil Boots
     integer indexid_ironboots_disabled
-    integer indexid_cripplingstaff
+    integer indexid_cripplingstaff //Rod of Atos
     integer indexid_moonshard
     integer indexid_ringofaquila
     integer indexid_ringofaquilaheroes
@@ -84,8 +84,8 @@
     integer indexid_smokeofdeceit
     integer indexid_medallionofcourage
     integer indexid_veilofdiscord
-    integer indexid_prudence
-    integer indexid_annihilator
+    integer indexid_prudence	//Heaven's Halberd
+    integer indexid_annihilator  //Abyssal Blade
     integer gg_Item_Perseverance
     integer gg_Item_HeaddressofRejuvenation
     integer gg_Item_NathrezimBuckler
