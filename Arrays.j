@@ -234,6 +234,7 @@ g_aiItemInt[176+O5] = substituting isUnitAtFountain by Bz (new item func only)
 g_aiItemInt[192+O5] = total gold spent in sim mode
 
 g_aiItemInt[208+O5] = child identifier for simulation mode's Sv/LdBool
+g_aiItemInt[224+O5] = child identifier for sell mode's Sv/LdInt (prevent selling of fresh items, prevent double item combines)
 
 --boolean array g_aiItemBool
 g_aiItemBool[O5] = enable new item system
