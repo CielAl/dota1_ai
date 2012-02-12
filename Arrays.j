@@ -193,6 +193,7 @@ g_taAITriggers[16+O5] =
 g_taAITriggers[64+O5] = backing off
 g_taAITriggers[80+O5] =first item buy
 g_taAITriggers[96+O5] =chasing through fog
+g_taAITriggers[112+O5] = for use per step of new item system
 
 ---laning priority:
 hq[528+O5] = defense
@@ -235,6 +236,10 @@ g_aiItemInt[192+O5] = total gold spent in sim mode
 
 g_aiItemInt[208+O5] = child identifier for simulation mode's Sv/LdBool
 g_aiItemInt[224+O5] = child identifier for sell mode's Sv/LdInt (prevent selling of fresh items, prevent double item combines)
+g_aiItemInt[240+O5] = total core item step
+g_aiItemInt[256+O5] = child identifier for bear items Sv/LdBool
+
+g_aiItemInt[272+O5] = Bz based variable for per item step
 
 --boolean array g_aiItemBool
 g_aiItemBool[O5] = enable new item system
@@ -250,11 +255,14 @@ g_aiItemBool[112+ = item requirement initialized (false = super-sim mode)
 
 g_aiItemBool[128+ = signal to return to base on full stash
 
-g_aiItemBool[144+ = if 'true', disable t_manipulateitem on UnitBuyItem (currently deprecated)
+g_aiItemBool[144+ = a sub-recipe item is completed
 
 g_aiItemBool[160+ = sim-mode has already entered Lux phase (buffer)
 g_aiItemBool[176+ = sim-mode has already entered Lux phase (fix)
 
+g_aiItemBool[192+ = g_ai_HasSecondBuild (mark of AI have second unit to build, i.e. Bear)
+
+g_aiItemBool[208+ = return of last AIBuy_Core
 
 ---=============================================================================
 "Usage of aiAbilities system"
