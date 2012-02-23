@@ -206,6 +206,7 @@ new item system:
 --item array g_aiItemsBuff
 g_aiItemsBuff[O5*24+slotID] = temporary
 g_aiItemsBuff[288+O5] = last delayed created item
+g_aiItemsBuff[304+O5] = target item for aiRespondDroppedItem_uyv
 
 
 --integer array g_aiItemIDBuff
@@ -240,6 +241,8 @@ g_aiItemInt[240+O5] = total core item step
 g_aiItemInt[256+O5] = child identifier for bear items Sv/LdBool
 
 g_aiItemInt[272+O5] = Bz based variable for per item step
+
+g_aiItemInt[288+O5] = item with this index id will be ignored from AIDropMutedAct. Used for item picking.
 
 --boolean array g_aiItemBool
 g_aiItemBool[O5] = enable new item system
