@@ -1,0 +1,1570 @@
+--- 73c.j	2012-03-14 05:23:53.000000000 +0100
++++ 74.j	2012-03-14 05:24:54.000000000 +0100
+@@ -2109,10 +2109,11 @@
+ boolean AegisMSG_Disabled=true
+ integer roshan_upgradelevel=1
+ trigger t_UpgradeRoshan
+ integer RoshanUpgrade=0
+ leaderboard array courierdeath_lb
++boolean array courierdeath_active
+ integer array Item_Dummy
+ integer array Item_Real
+ integer array Item_Unit
+ integer array Item_Mute
+ string array Item_Icon
+@@ -2439,11 +2440,11 @@
+ constant integer abilityid_aghanimsscepter_lina=1093686352
+ constant integer abilityid_aghanimsscepter_lion=1093686354
+ constant integer abilityid_aghanimsscepter_lucifer=1093686602
+ constant integer abilityid_aghanimsscepter_luna=1093686598
+ constant integer abilityid_aghanimsscepter_necro=1093686596
+-constant integer abilityid_aghanimsscepter_ogre=0
++constant integer abilityid_aghanimsscepter_ogre=1093815124
+ constant integer abilityid_aghanimsscepter_dirge=0
+ constant integer abilityid_aghanimsscepter_pugna=1093686358
+ constant integer abilityid_aghanimsscepter_qop=1093686360
+ constant integer abilityid_aghanimsscepter_rhasta=1093686362
+ constant integer abilityid_aghanimsscepter_rylai=1093686579
+@@ -2703,10 +2704,11 @@
+ real etherblast_damage
+ constant integer abilityid_soulring=1093751096
+ constant string soulring_fx="Abilities\\Spells\\Orc\\SpiritLink\\SpiritLinkZapTarget.mdl"
+ constant integer abilityid_treechop=1093748292
+ constant integer abilityid_returnhome=1093747027
++constant integer abilityid_findsecretshop=1093815123
+ constant integer abilityid_mantastyle=1093681720
+ boolean damageevent_valid=false
+ boolean array safedamage_urn
+ constant integer abilityid_staffofhealing=1093750095
+ constant integer staffofhealing_heal=1093750093
+@@ -2725,11 +2727,11 @@
+ unit smokeofdeceit_caster
+ player smokeofdeceit_player
+ constant integer abilityid_veilofdiscord=1093810244
+ constant integer veilofdiscord=1093810246
+ constant integer veilofdiscord_buffid=1110459729
+-constant real veilofdiscord_duration=15
++constant real veilofdiscord_duration=20
+ constant string veilofdiscord_fx="war3mapImported\\DarkLightningNova.mdx"
+ constant integer abilityid_cripplingstaff=1093813569
+ constant integer cripplingstaff_miss=1093814861
+ constant integer cripplingstaff_miss_buffid=1110459989
+ constant integer cripplingstaff_slow=1093813571
+@@ -3266,10 +3268,11 @@
+ constant integer abilityid_demonicconversion=1093744688
+ constant integer abilityid_demonicconversion_spawn=1093744474
+ constant integer abilityid_blackhole=1093747288
+ constant integer abilityid_blackholesent=1093687347
+ constant integer abilityid_blackholescourge=1093687348
++constant integer buffid_blackhole=1110456406
+ constant integer abilityid_wanningrift=1093686083
+ constant integer abilityid_wanningrifthelper=1093686084
+ constant integer abilityid_prismaticprison=1093686072
+ constant integer abilityid_prismaticprison_upgrade=1093751120
+ constant integer abilityid_prismaticprisonstun=1093686086
+@@ -3421,25 +3424,28 @@
+ unit songofthesiren_source
+ unit songofthesiren_caster
+ group songofthesiren_group
+ group songofthesiren_g
+ group songofthesiren_g2
+-constant integer abilityid_waterspray=1093808985
+-constant integer unitid_waterspray=1747993653
++constant integer abilityid_waterspray=1093815125
+ constant integer waterspray_armor_1=1093809204
+ constant integer waterspray_armor_2=1093809205
+ constant integer waterspray_armor_3=1093809206
+ constant integer waterspray_armor_4=1093809207
++unit waterspray_source
++group waterspray_affected
+ constant integer abilityid_ensnare=1093809220
+ constant integer ensnare_spell=1093681729
+ integer ensnare_count=0
+ unit ensnare_target
+ integer array multicast_count_2
+ integer array multicast_count_3
+ integer array multicast_count_4
+ integer array multicast_count_5
+ integer array multicast_count_total
++constant integer fireblast_aghanim=1093815121
++constant integer fireblast_aghanim_real=1093815122
+ constant integer abilityid_spiritlance=1093742660
+ constant integer unitid_spiritlance=1747990092
+ constant integer spiritlance_slow=1093742659
+ constant string spiritlance_fx="Abilities\\Weapons\\IllidanMissile\\IllidanMissile.mdl"
+ constant string spiritlance_fx_attach="origin"
+@@ -3743,11 +3749,11 @@
+ integer array stickynapalm_slow_4
+ constant integer buffid_stickynapalm=1110458963
+ constant string stickynapalm_fx_explode="Abilities\\Weapons\\LordofFlameMissile\\LordofFlameMissile.mdl"
+ constant string stickynapalm_fx_apply="Objects\\Spawnmodels\\Undead\\UndeadBlood\\UndeadBloodGargoyle.mdl"
+ constant integer abilityid_flamebreak=1093744982
+-constant integer unitid_flamebreak=1747990617
++constant integer unitid_flamebreak=1747993924
+ unit flamebreak_source
+ unit flamebreak_target
+ integer flamebreak_level
+ real flamebreak_x
+ real flamebreak_y
+@@ -4050,10 +4056,11 @@
+ constant integer abilityid_nerubimpale=1093687351
+ constant integer abilityid_manaburn=1093748789
+ constant integer abilityid_watchersuicide=1093748808
+ constant integer scarab_silence=1093748551
+ unit scarab_caster
++constant integer abilityid_spikedcarapace=1093815119
+ constant integer abilityid_necromastry=1093681746
+ constant integer abilityid_necromastryhelper=1093682001
+ constant string shadowraze_fx="Abilities\\Spells\\Undead\\AnimateDead\\AnimateDeadTarget.mdl"
+ constant integer abilityid_requiemofsouls=1093810506
+ constant integer abilityid_requiemofsouls_upgrade=1093750096
+@@ -8740,10 +8747,13 @@
+ return IsUnitType(GetFilterUnit(),UNIT_TYPE_HERO)==true
+ endfunction
+ function GenericCondition_EnemyUnitsExVisible takes nothing returns boolean
+ return(IsUnitEnemy(tt_unit1,GetOwningPlayer(GetFilterUnit()))and(GetUnitAbilityLevel(GetFilterUnit(),1093678162)==0 and IsUnitType(GetFilterUnit(),UNIT_TYPE_STRUCTURE)==false and IsDead(GetFilterUnit())==false)and(IsUnitType(GetFilterUnit(),UNIT_TYPE_ANCIENT)==false or GenericCondition_IsBear(GetFilterUnit())))and IsUnitVisible(GetFilterUnit(),GetOwningPlayer(tt_unit1))
+ endfunction
++function GenericCondition_EnemyUnitsExNoWW takes nothing returns boolean
++return(IsUnitEnemy(tt_unit1,GetOwningPlayer(GetFilterUnit()))and(GetUnitAbilityLevel(GetFilterUnit(),1093678162)==0 and IsUnitType(GetFilterUnit(),UNIT_TYPE_STRUCTURE)==false and IsDead(GetFilterUnit())==false)and(IsUnitType(GetFilterUnit(),UNIT_TYPE_ANCIENT)==false or GenericCondition_IsBear(GetFilterUnit())))and(IsUnitVisible(GetFilterUnit(),GetOwningPlayer(tt_unit1))or(IsUnitVisible(GetFilterUnit(),GetOwningPlayer(tt_unit1))==false and GenericCondition_IsDotAInvis(GetFilterUnit()))==false)
++endfunction
+ function GenericCondition_EnemyUnitsExVisibleAttackable takes nothing returns boolean
+ return((IsUnitEnemy(tt_unit1,GetOwningPlayer(GetFilterUnit()))and(GetUnitAbilityLevel(GetFilterUnit(),1093678162)==0 and IsUnitType(GetFilterUnit(),UNIT_TYPE_STRUCTURE)==false and IsDead(GetFilterUnit())==false)and(IsUnitType(GetFilterUnit(),UNIT_TYPE_ANCIENT)==false or GenericCondition_IsBear(GetFilterUnit())))and IsUnitVisible(GetFilterUnit(),GetOwningPlayer(tt_unit1)))and IsNotAttackable(GetFilterUnit())==false
+ endfunction
+ function GenericCondition_RegularUnits takes nothing returns boolean
+ return(GetUnitAbilityLevel(GetFilterUnit(),1093678162)==0 and IsUnitType(GetFilterUnit(),UNIT_TYPE_STRUCTURE)==false and IsDead(GetFilterUnit())==false)and(IsUnitType(GetFilterUnit(),UNIT_TYPE_ANCIENT)==false or GenericCondition_IsBear(GetFilterUnit()))
+@@ -9229,10 +9239,12 @@
+ set unitId=GetUnitTypeId(whichUnit)
+ if unitId==1211117620 then
+ return indexid_aghanimsscepterlina
+ elseif unitId==1430466872 then
+ return indexid_aghanimsscepterlion
++elseif unitId==1215130471 then
++return indexid_aghanimsscepterogre
+ elseif unitId==1432580716 or unitId==1429221720 then
+ return indexid_aghanimssceptertiny
+ elseif unitId==1211117640 then
+ return indexid_aghanimsscepterpugna
+ elseif unitId==1430466609 then
+@@ -9336,10 +9348,12 @@
+ set unitId=GetUnitTypeId(whichUnit)
+ if unitId==1211117620 then
+ return abilityid_aghanimsscepter_lina
+ elseif unitId==1430466872 then
+ return abilityid_aghanimsscepter_lion
++elseif unitId==1215130471 then
++return abilityid_aghanimsscepter_ogre
+ elseif unitId==1432580716 or unitId==1429221720 then
+ return abilityid_aghanimsscepter_tiny
+ elseif unitId==1211117640 then
+ return abilityid_aghanimsscepter_pugna
+ elseif unitId==1430466609 then
+@@ -13278,11 +13292,11 @@
+ set ItemAbilities[ItemAbilities_Max]=1093815095
+ set ItemAbilities_Max=ItemAbilities_Max+1
+ set ItemAbilities[ItemAbilities_Max]=1093815089
+ endfunction
+ function IsGlobalSpellIgnore takes integer id returns boolean
+-return id==abilityid_pulsenova or id==abilityid_pulsenovaupgraded or id==abilityid_pulsenova_disabled or id==abilityid_shadowpoison_explode or id==abilityid_oscillation_in or id==abilityid_oscillation_out or id==abilityid_shadowpoison_explode or id==1093678667 or id==1093752391 or id==abilityid_overcharge or id==1093752646 or id==1093686328 or id==1093686327 or id==abilityid_dash_helper or id==abilityid_firespirits_helper or id==abilityid_sunray_off or id==abilityid_sunray_movement or id==1093743681 or id==1093809721 or id==1093815111 or id==1093808458 or id==1093810008 or id==1093810265 or id==1093809221 or id==1093753416 or id==1093752655 or id==1093748305 or id==1093686341 or id==1093814863 or id==1093813848 or id==1093684560 or id==1093815109 or id==1093815112 or id==1093815097
++return id==abilityid_pulsenova or id==abilityid_pulsenovaupgraded or id==abilityid_pulsenova_disabled or id==abilityid_shadowpoison_explode or id==abilityid_oscillation_in or id==abilityid_oscillation_out or id==abilityid_shadowpoison_explode or id==1093678667 or id==1093752391 or id==abilityid_overcharge or id==1093752646 or id==1093686328 or id==1093686327 or id==abilityid_dash_helper or id==abilityid_firespirits_helper or id==abilityid_sunray_off or id==abilityid_sunray_movement or id==1093743681 or id==1093809721 or id==1093815111 or id==1093808458 or id==1093810008 or id==1093810265 or id==1093809221 or id==1093753416 or id==1093752655 or id==1093748305 or id==1093686341 or id==1093814863 or id==1093813848 or id==1093684560 or id==1093815109 or id==1093815112 or id==1093815097 or id==1093814860
+ endfunction
+ function MiscInit2 takes nothing returns nothing
+ set AbusableSpells_Max=AbusableSpells_Max+1
+ set AbusableSpells[AbusableSpells_Max]=1093683254
+ set AbusableSpells_Max=AbusableSpells_Max+1
+@@ -14296,10 +14310,11 @@
+ call ExecuteFunc("Register_FingerOfDeath")
+ elseif PointValue==65 then
+ call ExecuteFunc("Register_NerubImpale")
+ call ExecuteFunc("Register_ManaBurn")
+ call ExecuteFunc("Register_WatcherSuicide")
++call ExecuteFunc("Register_SpikedCarapace")
+ elseif PointValue==58 then
+ call ExecuteFunc("Register_Shapeshift")
+ call ExecuteFunc("Register_FeralHeart")
+ call ExecuteFunc("Register_Howl")
+ elseif PointValue==63 then
+@@ -14872,13 +14887,13 @@
+ call SaveInteger(hash_abilities,(1093683000),(2),(80))
+ call SaveInteger(hash_abilities,(1093683000),(3),(80))
+ call SaveInteger(hash_abilities,(1093678933),(1),(180))
+ call SaveInteger(hash_abilities,(1093678933),(2),(120))
+ call SaveInteger(hash_abilities,(1093678933),(3),(60))
+-call SaveInteger(hash_abilities,(1093684053),(1),(180))
+-call SaveInteger(hash_abilities,(1093684053),(2),(160))
+-call SaveInteger(hash_abilities,(1093684053),(3),(140))
++call SaveInteger(hash_abilities,(1093684053),(1),(160))
++call SaveInteger(hash_abilities,(1093684053),(2),(140))
++call SaveInteger(hash_abilities,(1093684053),(3),(120))
+ call SaveInteger(hash_abilities,(1093748042),(1),(20))
+ call SaveInteger(hash_abilities,(1093748042),(2),(20))
+ call SaveInteger(hash_abilities,(1093748042),(3),(20))
+ call SaveInteger(hash_abilities,(1093681716),(1),(10))
+ call SaveInteger(hash_abilities,(1093681716),(2),(7))
+@@ -16638,10 +16653,16 @@
+ set id=GetPlayerId(udg_ScourgePlayers[i])
+ endif
+ set i=i+1
+ if Remaining==0 then
+ call LeaderboardDisplay(courierdeath_lb[id],false)
++if IsPlayerAlly(udg_SentPlayers[0],Player(id))then
++set courierdeath_active[GetPlayerId(udg_SentPlayers[0])]=false
++endif
++if IsPlayerAlly(udg_ScourgePlayers[0],Player(id))then
++set courierdeath_active[GetPlayerId(udg_ScourgePlayers[0])]=false
++endif
+ else
+ if IsDead(udg_Hero[id])==false then
+ call PlayerSetLeaderboard(Player(id),courierdeath_lb[id])
+ call LeaderboardDisplay(courierdeath_lb[id],true)
+ call LeaderboardSetLabel(courierdeath_lb[id],"    "+GetObjectName(1848659034)+" "+I2S(Remaining))
+@@ -16681,28 +16702,30 @@
+ function CourierDeath_Main takes nothing returns boolean
+ local real x
+ local real y
+ local unit Courier=GetTriggerUnit()
+ local integer i=1
+-local integer Bounty=150
++local integer Bounty=175
+ local trigger t=CreateTrigger()
+ local integer Cache=GetHandleId(t)
+ call Traffic_RegisterData("Courier"+I2S(GetPlayerId(GetOwningPlayer(GetTriggerUnit()))),GetPlayerId(GetOwningPlayer(GetKillingUnit())))
+ call DisplayTimedTextToForceEx(udg_AllMsgPlayers,10.00,GetString_ChickenKilled(GetOwningPlayer(GetTriggerUnit()),GetOwningPlayer(GetKillingUnit())))
+ call PingMinimapEx(GetUnitX(GetTriggerUnit()),GetUnitY(GetTriggerUnit()),6,255,0,0,false)
+ call TriggerRegisterTimerEvent(t,1,true)
+ call TriggerAddCondition(t,Condition(function CourierDeath_Scoreboard))
+ call SaveUnitHandle(hash_main,(Cache),(2),(Courier))
+-if IsPlayerAlly(GetOwningPlayer(Courier),udg_SentPlayers[0])then
++if IsPlayerAlly(GetOwningPlayer(Courier),udg_SentPlayers[0])and courierdeath_active[GetPlayerId(udg_SentPlayers[0])]==false then
++set courierdeath_active[GetPlayerId(udg_SentPlayers[0])]=true
+ loop
+ exitwhen i>5
+ call CourierDeath_GiveGold(udg_ScourgePlayers[i],Bounty)
+ set i=i+1
+ endloop
+ endif
+ set i=1
+-if IsPlayerAlly(GetOwningPlayer(Courier),udg_ScourgePlayers[0])then
++if IsPlayerAlly(GetOwningPlayer(Courier),udg_ScourgePlayers[0])and courierdeath_active[GetPlayerId(udg_ScourgePlayers[0])]==false then
++set courierdeath_active[GetPlayerId(udg_ScourgePlayers[0])]=true
+ loop
+ exitwhen i>5
+ call CourierDeath_GiveGold(udg_SentPlayers[i],Bounty)
+ set i=i+1
+ endloop
+@@ -16764,10 +16787,12 @@
+ call PingMinimapEx(GetUnitX(GetTriggerUnit()),GetUnitY(GetTriggerUnit()),6,255,0,0,false)
+ endif
+ endfunction
+ function ChickenDeath_Init takes nothing returns boolean
+ call CleanTrigger(GetTriggeringTrigger())
++set courierdeath_active[GetPlayerId(udg_SentPlayers[0])]=false
++set courierdeath_active[GetPlayerId(udg_ScourgePlayers[0])]=false
+ set courierdeath_lb[GetPlayerId(udg_SentPlayers[1])]=CreateLeaderboard()
+ set courierdeath_lb[GetPlayerId(udg_SentPlayers[2])]=CreateLeaderboard()
+ set courierdeath_lb[GetPlayerId(udg_SentPlayers[3])]=CreateLeaderboard()
+ set courierdeath_lb[GetPlayerId(udg_SentPlayers[4])]=CreateLeaderboard()
+ set courierdeath_lb[GetPlayerId(udg_SentPlayers[5])]=CreateLeaderboard()
+@@ -21418,10 +21443,13 @@
+ call UnitMakeAbilityPermanent(Unit,true,scepter_abilityid)
+ call SetPlayerAbilityAvailable(p,scepter_abilityid,false)
+ if GetUnitTypeId(Unit)==1211117653 then
+ set tt_unit1=Unit
+ call ExecuteFunc("InvokerCore_ScepterUpdate")
++elseif GetUnitTypeId(Unit)==1215130471 then
++set tt_unit1=Unit
++call ExecuteFunc("Aghanim_Fireblast_Add")
+ endif
+ endif
+ if indexId!=scepter_indexid then
+ call DestroyItem(Item)
+ set newItem=UnitAddItemById(Unit,Item_Real[scepter_indexid])
+@@ -21474,10 +21502,14 @@
+ if GetWidgetLife(Item)>0 then
+ set scepter_indexid=GetScepterIndexId(Unit)
+ set scepter_abilityid=GetScepterAbilityId(Unit)
+ if FindItemOfType(Unit,Item_Real[scepter_indexid])==null and GetUnitAbilityLevel(Unit,scepter_abilityid)>0 then
+ call UnitRemoveAbility(Unit,scepter_abilityid)
++if GetUnitTypeId(Unit)==1215130471 then
++set tt_unit1=Unit
++call ExecuteFunc("Aghanim_Fireblast_Remove")
++endif
+ endif
+ if IsItemOwned(Item)==false then
+ if GetItemType(Item)==ITEM_TYPE_ARTIFACT or IsIndexIdCharged(indexId)then
+ set consumable=true
+ endif
+@@ -22086,10 +22118,31 @@
+ call SetItemPlayer(newItem,tt_player1,false)
+ call SetItemUserData(newItem,1)
+ set newItem=CreateItem(Item_Dummy[indexid_ghostscepter],x,y)
+ call SetItemPlayer(newItem,tt_player1,false)
+ call SetItemUserData(newItem,1)
++elseif indexId==indexid_ironboots then
++set tt_player1=GetItemPlayer(Item)
++call RemoveItem(Item)
++set newItem=CreateItem(Item_Dummy[indexid_bootsofspeed],x,y)
++call SetItemPlayer(newItem,tt_player1,false)
++call SetItemUserData(newItem,1)
++set newItem=CreateItem(Item_Dummy[indexid_ringofprotection],x,y)
++call SetItemPlayer(newItem,tt_player1,false)
++call SetItemUserData(newItem,1)
++set newItem=CreateItem(Item_Dummy[indexid_ringofregeneration],x,y)
++call SetItemPlayer(newItem,tt_player1,false)
++call SetItemUserData(newItem,1)
++elseif indexId==indexid_sangeandyasha then
++set tt_player1=GetItemPlayer(Item)
++call RemoveItem(Item)
++set newItem=CreateItem(Item_Dummy[indexid_sange],x,y)
++call SetItemPlayer(newItem,tt_player1,false)
++call SetItemUserData(newItem,1)
++set newItem=CreateItem(Item_Dummy[indexid_yasha],x,y)
++call SetItemPlayer(newItem,tt_player1,false)
++call SetItemUserData(newItem,1)
+ elseif indexId==indexid_ringofaquila or indexId==indexid_ringofaquilaheroes then
+ set tt_player1=GetItemPlayer(Item)
+ call RemoveItem(Item)
+ set newItem=CreateItem(Item_Dummy[indexid_wraithband],x,y)
+ call SetItemPlayer(newItem,tt_player1,false)
+@@ -22392,11 +22445,11 @@
+ local integer Cache=GetHandleId(Source)
+ local integer i=0
+ local real Time=(TimerGetElapsed(udg_GameTimer))
+ local real Buffer=10
+ loop
+-exitwhen i>2
++exitwhen i>3
+ if(LoadReal(hash_main,(Cache),(730+i)))<Time-Buffer then
+ return false
+ endif
+ set i=i+1
+ endloop
+@@ -22405,11 +22458,11 @@
+ function IronBoots_DamageTracker takes unit Source returns nothing
+ local integer Cache=GetHandleId(Source)
+ local integer LastUsedIndex=(LoadInteger(hash_main,(Cache),(729)))
+ call SaveReal(hash_main,(Cache),(730+LastUsedIndex),(((TimerGetElapsed(udg_GameTimer)))*1.0))
+ set LastUsedIndex=LastUsedIndex+1
+-if LastUsedIndex==3 then
++if LastUsedIndex==4 then
+ set LastUsedIndex=0
+ endif
+ call SaveInteger(hash_main,(Cache),(729),(LastUsedIndex))
+ endfunction
+ function IronBoots_Update takes unit Hero returns nothing
+@@ -24285,10 +24338,12 @@
+ call SetUnitX(Hero,x)
+ call SetUnitY(Hero,y)
+ call PauseUnit(Hero,true)
+ call PauseUnit(Hero,false)
+ call KillTrees(x,y,240)
++set tt_unit1=Hero
++call ExecuteFunc("Glipse_ResetRecord")
+ endif
+ endif
+ set t=null
+ set Hero=null
+ set UnitFX_From=null
+@@ -24352,10 +24407,12 @@
+ call SetUnitX(Hero,GetUnitX(Target)-1)
+ call SetUnitY(Hero,GetUnitY(Target)-1)
+ call PauseUnit(Hero,true)
+ call PauseUnit(Hero,false)
+ call KillTrees(x,y,240)
++set tt_unit1=Hero
++call ExecuteFunc("Glipse_ResetRecord")
+ call DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\MassTeleport\\MassTeleportTarget.mdl",GetUnitX(Hero),GetUnitY(Hero)))
+ endif
+ set t=null
+ set Hero=null
+ set UnitFX_From=null
+@@ -25212,11 +25269,11 @@
+ if GetTriggerEvalCount(t)==11 or GetTriggerEventId()==EVENT_UNIT_DEATH then
+ call FlushChildHashtable(hash_main,(Cache))
+ call CleanTrigger(t)
+ else
+ call DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\FlakCannons\\FlakTarget.mdl",x,y))
+-if((LoadInteger(hash_main,(GetHandleId((Target))),((4306))))==HERO_STATE_ON)==false then
++if((LoadInteger(hash_main,(GetHandleId((Target))),((4306))))==HERO_STATE_ON)==false and GetUnitAbilityLevel(Target,buffid_blackhole)==0 then
+ call KillTrees(x,y,150)
+ call SetUnitX(Target,x)
+ call SetUnitY(Target,y)
+ endif
+ endif
+@@ -25478,13 +25535,29 @@
+ set y=GetRectCenterY(gg_rct_Hero_Creation_UD)
+ endif
+ call IssuePointOrder(Source,"move",x,y)
+ set Source=null
+ endfunction
++function FindSecretShop takes nothing returns nothing
++local unit Source=GetTriggerUnit()
++local real x
++local real y
++if IsSent(GetOwningPlayer(Source))then
++set x=-4533
++set y=1158
++else
++set x=3190
++set y=-35
++endif
++call IssuePointOrder(Source,"move",x,y)
++set Source=null
++endfunction
+ function ReturnHome_Main takes nothing returns nothing
+ if GetSpellAbilityId()==abilityid_returnhome then
+ call ReturnHome()
++elseif GetSpellAbilityId()==abilityid_findsecretshop then
++call FindSecretShop()
+ endif
+ endfunction
+ function MantaStyle_Fix takes nothing returns nothing
+ local unit Hero=GetTriggerUnit()
+ call SaveBoolean(hash_main,(GetHandleId(Hero)),(129),(true))
+@@ -25704,14 +25777,16 @@
+ if IsRealPlayer(GetOwningPlayer(Source))and SmokeOfDeceit_IsNearby(Source)==false then
+ if IsPlayerAlly(GetLocalPlayer(),GetOwningPlayer(Source))==false and IsObserver(GetLocalPlayer())==false then
+ call UnitSetUsesAltIcon(Source,true)
+ endif
+ call UnitAddAbility2(Source,smokeofdeceit_invis)
+-call UnitAddAbility2(Source,smokeofdeceit_ms)
+ call UnitMakeAbilityPermanent(Source,true,smokeofdeceit_invis)
++if IsRealSummoned(Source)==false then
++call UnitAddAbility2(Source,smokeofdeceit_ms)
+ call UnitMakeAbilityPermanent(Source,true,smokeofdeceit_ms)
+ call SetPlayerAbilityAvailable(GetOwningPlayer(Source),smokeofdeceit_ms,false)
++endif
+ set t=CreateTrigger()
+ set Cache=GetHandleId(t)
+ call SaveInteger(hash_main,(Cache),(34),(0))
+ call SaveUnitHandle(hash_main,(Cache),(2),(Source))
+ call SaveBoolean(hash_main,(Cache),(671),(false))
+@@ -25838,11 +25913,11 @@
+ call FlushChildHashtable(hash_main,(Cache))
+ call CleanTrigger(t)
+ elseif GetTriggerEventId()!=EVENT_UNIT_DAMAGED then
+ set Count=Count+1
+ call SaveInteger(hash_main,(Cache),(34),(Count))
+-call SetUnitState(Source,UNIT_STATE_LIFE,GetUnitState(Source,UNIT_STATE_LIFE)+15)
++call SetUnitState(Source,UNIT_STATE_LIFE,GetUnitState(Source,UNIT_STATE_LIFE)+17)
+ endif
+ set t=null
+ set Source=null
+ return false
+ endfunction
+@@ -31900,10 +31975,12 @@
+ call DestroyFogModifier(CreateFogModifierRadius(udg_ScourgePlayers[0],FOG_OF_WAR_VISIBLE,3200,1,300,true,true))
+ call DestroyFogModifier(CreateFogModifierRadius(udg_SentPlayers[0],FOG_OF_WAR_VISIBLE,-7292,4186,450,true,true))
+ call DestroyFogModifier(CreateFogModifierRadius(udg_ScourgePlayers[0],FOG_OF_WAR_VISIBLE,-7292,4186,450,true,true))
+ call DestroyFogModifier(CreateFogModifierRadius(udg_SentPlayers[0],FOG_OF_WAR_VISIBLE,7348,-4334,450,true,true))
+ call DestroyFogModifier(CreateFogModifierRadius(udg_ScourgePlayers[0],FOG_OF_WAR_VISIBLE,7348,-4334,450,true,true))
++call DestroyFogModifier(CreateFogModifierRect(udg_SentPlayers[0],FOG_OF_WAR_VISIBLE,VisibleRect,true,true))
++call DestroyFogModifier(CreateFogModifierRect(udg_ScourgePlayers[0],FOG_OF_WAR_VISIBLE,VisibleRect,true,true))
+ endfunction
+ function TeleportationEffect_WhichTarget takes nothing returns boolean
+ local real d
+ if GetUnitAbilityLevel(GetFilterUnit(),1093678162)==0 and IsDead(GetFilterUnit())==false and IsUnitType(GetFilterUnit(),UNIT_TYPE_HERO)==false and IsUnitAlly(GetFilterUnit(),GetOwningPlayer(tt_unit2))==true then
+ set d=DistanceBetweenXY(tt_real2,tt_real3,GetUnitX(GetFilterUnit()),GetUnitY(GetFilterUnit()))
+@@ -31978,13 +32055,10 @@
+ function InitTrig_Teleportation_Effect takes nothing returns nothing
+ endfunction
+ function RestrictHeroes takes nothing returns nothing
+ call TechHeroForAll(1160786502)
+ call TechHeroForAll(1311780946)
+-call TechHeroForAll(1160786520)
+-call TechHeroForAll(1328558406)
+-call TechHeroForAll(1160786506)
+ call TechHeroForAll(1311788336)
+ call TechHeroForAll(1160786738)
+ call TechHeroForAll(1160786507)
+ call TechHeroForAll(1211122767)
+ endfunction
+@@ -43952,11 +44026,11 @@
+ call CleanTrigger(t)
+ call DestroyEffect(AddSpecialEffect("Objects\\Spawnmodels\\Naga\\NagaDeath\\NagaDeath.mdl",x,y))
+ call DestroyEffect(AddSpecialEffect("effects\\TidalErruption.mdx",x,y))
+ set tt_unit1=Hero
+ set tt_int1=Level
+-call GroupEnumUnitsInRange(g,x,y,225,Condition(function GenericCondition_EnemyUnitsNoImmune))
++call GroupEnumUnitsInRange(g,x,y,215+25,Condition(function GenericCondition_EnemyUnitsNoImmune))
+ call ForGroup(g,function Torrent_Toss)
+ call KillGroup(g)
+ set t=null
+ set Hero=null
+ return false
+@@ -44499,11 +44573,11 @@
+ local group g
+ local integer Level=GetUnitAbilityLevel(Source,abilityid_unstableconcoction)
+ local real x
+ local real y
+ set unstableconcoction_source=Source
+-set unstableconcoction_damage=(60+60*Level)*Elapsed/unstableconcoction_maxcharge
++set unstableconcoction_damage=(60+70*Level)*Elapsed/unstableconcoction_maxcharge
+ set unstableconcoction_stun=(1+0.75*Level)*Elapsed/unstableconcoction_maxcharge
+ set unstableconcoction_caster=CreateUnit(GetOwningPlayer(Source),1697656901,GetUnitX(Target),GetUnitY(Target),0)
+ call UnitAddAbility2(unstableconcoction_caster,abilityid_genericstun)
+ call SetUnitAbilityLevel(unstableconcoction_caster,abilityid_genericstun,Stun_GetLevel(unstableconcoction_stun))
+ set tt_unit1=Source
+@@ -46090,11 +46164,11 @@
+ return IsUnitType(GetFilterUnit(),UNIT_TYPE_STRUCTURE)==false and IsUnitEnemy(GetFilterUnit(),GetOwningPlayer(GetTriggerUnit()))and GetUnitAbilityLevel(GetFilterUnit(),1093678162)!=1
+ endfunction
+ function QuillSpray_Damage takes nothing returns nothing
+ local integer TargetCache=GetHandleId(GetEnumUnit())
+ local integer NumberOfQuills=(LoadInteger(hash_main,(quillcache),(TargetCache)))
+-local real Damage=RMin(udg_TempReal+NumberOfQuills*30,180)
++local real Damage=RMin(udg_TempReal+NumberOfQuills*30,220)
+ call UnitDamageTarget(udg_TempUnit,GetEnumUnit(),Damage,false,true,ATTACK_TYPE_HERO,DAMAGE_TYPE_NORMAL,WEAPON_TYPE_WHOKNOWS)
+ call SaveInteger(hash_main,(quillcache),(TargetCache),(NumberOfQuills+1))
+ endfunction
+ function QuillSpray_RemoveCounter takes nothing returns nothing
+ local integer TargetCache=GetHandleId(GetEnumUnit())
+@@ -46275,11 +46349,11 @@
+ function Return_Actions takes nothing returns nothing
+ local unit Source=GetTriggerUnit()
+ local unit Target=GetAttacker()
+ local integer Level=GetUnitAbilityLevel(Source,1093677142)
+ local integer STR=GetHeroStr(Source,true)
+-local real Damage=16+(0.18+0.08*Level)*STR
++local real Damage=(14+2*Level)+(0.18+0.08*Level)*STR
+ call DamageTarget(Source,Target,DAMAGE_PHYSICAL,Damage)
+ set Source=null
+ set Target=null
+ endfunction
+ function Return takes nothing returns nothing
+@@ -46806,11 +46880,11 @@
+ local real x=GetUnitX(Target)
+ local real y=GetUnitY(Target)
+ local real Rate=12
+ local unit Source=(LoadUnitHandle(hash_main,(Cache),(2)))
+ local integer Level=(LoadInteger(hash_main,(Cache),(5)))
+-local integer ShockDamage=40+15*Level
++local integer ShockDamage=30+30*Level
+ if GetTriggerEvalCount(t)>21 then
+ call FlushChildHashtable(hash_main,(Cache))
+ call CleanTrigger(t)
+ call SaveInteger(hash_main,(GetHandleId((Target))),((4260)),(HERO_STATE_OFF))
+ call DamageTarget(Source,Target,DAMAGE_MAGICAL,I2R(ShockDamage))
+@@ -47340,11 +47414,11 @@
+ elseif Level==4 then
+ set freezingfield_damage=310
+ endif
+ set freezingfield_source=Source
+ set tt_unit1=Source
+-call GroupEnumUnitsInRange(g,x,y,190+24,Condition(function GenericCondition_EnemyUnitsEx))
++call GroupEnumUnitsInRange(g,x,y,240,Condition(function GenericCondition_EnemyUnitsEx))
+ call ForGroup(g,function FreezingField_Damage_Helper)
+ call KillGroup(g)
+ set g=null
+ endfunction
+ function FreezingField_Slow takes nothing returns nothing
+@@ -47363,11 +47437,11 @@
+ local real d
+ local real x
+ local real y
+ local group g=GetAvailableGroup()
+ set tt_unit1=Hero
+-call GroupEnumUnitsInRange(g,GetUnitX(Hero),GetUnitY(Hero),635+20,Condition(function GenericCondition_EnemyUnitsEx))
++call GroupEnumUnitsInRange(g,GetUnitX(Hero),GetUnitY(Hero),710,Condition(function GenericCondition_EnemyUnitsEx))
+ call ForGroup(g,function FreezingField_Slow)
+ call KillGroup(g)
+ if Segment==1 then
+ set a=GetRandomReal(0,90)
+ elseif Segment==2 then
+@@ -47375,11 +47449,11 @@
+ elseif Segment==3 then
+ set a=GetRandomReal(180,270)
+ else
+ set a=GetRandomReal(270,360)
+ endif
+-set d=GetRandomReal(125,635)
++set d=GetRandomReal(140,710)
+ if GetTriggerEventId()==EVENT_UNIT_SPELL_ENDCAST and(GetSpellAbilityId()==abilityid_freezingfield or GetSpellAbilityId()==abilityid_freezingfieldupgrade)then
+ call FlushChildHashtable(hash_main,(Cache))
+ call CleanTrigger(t)
+ call StopSound(gg_snd_BlizzardLoop1,false,true)
+ else
+@@ -47897,10 +47971,13 @@
+ call SaveReal(hash_main,(Cache),(199),((0)*1.0))
+ call SaveInteger(hash_main,(Cache),(194),(IMax(R2I(SquareRoot((x-SourceX)*(x-SourceX)+(y-SourceY)*(y-SourceY))/(25+25*Level)),1)))
+ call SaveEffectHandle(hash_main,(Cache),(32),(AddSpecialEffectTarget("effects\\Lightning_Ball_Tail_FX.mdx",Fake,"origin")))
+ call TriggerRegisterTimerEvent(t,0.04,true)
+ call TriggerAddCondition(t,Condition(function LightningBall_Move))
++call ShowUnit(Source,false)
++call ShowUnit(Source,true)
++call SelectUnitAddForPlayer(Source,GetOwningPlayer(Source))
+ endif
+ set Source=null
+ set Caster=null
+ set Fake=null
+ set l=null
+@@ -49023,13 +49100,36 @@
+ call TriggerAddCondition(t,Condition(function PhaseShift_End))
+ call AddHeroState(Hero,4266,5.9)
+ set t=null
+ set Hero=null
+ endfunction
++function PhaseShift_TurnOff takes nothing returns boolean
++local trigger t=GetTriggeringTrigger()
++local integer Cache=GetHandleId(t)
++local unit Hero=(LoadUnitHandle(hash_main,(Cache),(14)))
++call IssueImmediateOrder(Hero,"phaseshiftoff")
++call FlushChildHashtable(hash_main,(Cache))
++call CleanTrigger(t)
++set t=null
++set Hero=null
++return false
++endfunction
++function PhaseShift_TurnOffStart takes nothing returns nothing
++local unit Hero=GetTriggerUnit()
++local trigger t=CreateTrigger()
++local integer Cache=GetHandleId(t)
++call SaveUnitHandle(hash_main,(Cache),(14),(Hero))
++call TriggerRegisterTimerEvent(t,0,false)
++call TriggerAddCondition(t,Condition(function PhaseShift_TurnOff))
++set t=null
++set Hero=null
++endfunction
+ function PhaseShift_Main takes nothing returns boolean
+ if GetIssuedOrderId()==String2OrderIdBJ("phaseshift")and IsUnitIllusion(GetTriggerUnit())==false and((LoadInteger(hash_main,(GetHandleId((GetTriggerUnit()))),((4266))))==HERO_STATE_ON)==false then
+ call PhaseShift()
++elseif GetIssuedOrderId()==String2OrderIdBJ("phaseshifton")then
++call PhaseShift_TurnOffStart()
+ endif
+ return false
+ endfunction
+ function Register_PhaseShift takes nothing returns nothing
+ local trigger t=CreateTrigger()
+@@ -49056,10 +49156,13 @@
+ if GetTriggerEventId()==EVENT_UNIT_DEATH then
+ set tt_unit1=CreateUnit(GetOwningPlayer(Caster),unitid_illusoryorb,GetUnitX((LoadUnitHandle(hash_main,(Cache),(14)))),GetUnitY((LoadUnitHandle(hash_main,(Cache),(14)))),0)
+ call SetUnitScale(tt_unit1,2.5,2.5,2.5)
+ call KillUnit(tt_unit1)
+ call SetUnitPosition((LoadUnitHandle(hash_main,(Cache),(14))),GetUnitX(Caster),GetUnitY(Caster))
++call ShowUnit((LoadUnitHandle(hash_main,(Cache),(14))),false)
++call ShowUnit((LoadUnitHandle(hash_main,(Cache),(14))),true)
++call SelectUnitAddForPlayer((LoadUnitHandle(hash_main,(Cache),(14))),GetOwningPlayer((LoadUnitHandle(hash_main,(Cache),(14)))))
+ set IllusoryOrb_Caster[GetPlayerId(GetOwningPlayer(Caster))]=null
+ call KillGroup(g)
+ call FlushChildHashtable(hash_main,(Cache))
+ call CleanTrigger(t)
+ elseif GetTriggerEvalCount(t)>120 then
+@@ -50173,15 +50276,18 @@
+ endfunction
+ function Omnislash_Iterate takes nothing returns boolean
+ local trigger t=GetTriggeringTrigger()
+ local integer Cache=GetHandleId(t)
+ local unit Hero=(LoadUnitHandle(hash_main,(Cache),(14)))
++local unit Caster=(LoadUnitHandle(hash_main,(Cache),(19)))
+ local integer Limit=(LoadInteger(hash_main,(Cache),(216)))
+ local integer BFLevel=(LoadInteger(hash_main,(Cache),(325)))
+ local integer Counter=(LoadInteger(hash_main,(Cache),(28)))
+ local unit NextTarget
++call SetUnitPosition(Caster,GetUnitX(Hero),GetUnitY(Hero))
+ if Counter>Limit then
++call KillUnit(Caster)
+ call DestroyEffect((LoadEffectHandle(hash_main,(Cache),(32))))
+ call FlushChildHashtable(hash_main,(Cache))
+ call CleanTrigger(t)
+ call SetPlayerAbilityAvailable(GetOwningPlayer(Hero),abilityid_bladefury,true)
+ call SetUnitPathing(Hero,true)
+@@ -50190,10 +50296,11 @@
+ call SetUnitVertexColor(Hero,255,255,255,255)
+ else
+ call SaveInteger(hash_main,(Cache),(28),(Counter+1))
+ call Omnislash_FindTarget(Hero)
+ if tt_unit1==null then
++call KillUnit(Caster)
+ call DestroyEffect((LoadEffectHandle(hash_main,(Cache),(32))))
+ call FlushChildHashtable(hash_main,(Cache))
+ call CleanTrigger(t)
+ call SetPlayerAbilityAvailable(GetOwningPlayer(Hero),abilityid_bladefury,true)
+ call SetUnitPathing(Hero,true)
+@@ -50203,10 +50310,11 @@
+ endif
+ endif
+ set t=null
+ set Hero=null
+ set NextTarget=null
++set Caster=null
+ return false
+ endfunction
+ function Omnislash takes nothing returns nothing
+ local unit Hero=GetTriggerUnit()
+ local unit Target=GetSpellTargetUnit()
+@@ -50214,10 +50322,11 @@
+ local trigger t=CreateTrigger()
+ local integer Cache=GetHandleId(t)
+ local integer BFLevel=GetUnitAbilityLevel(Hero,abilityid_bladefury)
+ local player p=GetOwningPlayer(Hero)
+ local integer Limit=3
++local unit Caster=CreateUnit(GetOwningPlayer(Hero),1865429060,GetUnitX(Hero),GetUnitY(Hero),0)
+ if Level==0 then
+ set Level=GetUnitAbilityLevel(Hero,abilityid_omnislashupgrade)
+ if Level==1 then
+ set Limit=6
+ elseif Level==2 then
+@@ -50240,10 +50349,11 @@
+ call TriggerRegisterTimerEvent(t,0,false)
+ call TriggerAddCondition(t,Condition(function Omnislash_FirstTime))
+ set t=CreateTrigger()
+ set Cache=GetHandleId(t)
+ call SaveUnitHandle(hash_main,(Cache),(14),(Hero))
++call SaveUnitHandle(hash_main,(Cache),(19),(Caster))
+ call SaveInteger(hash_main,(Cache),(216),(Limit))
+ call SaveInteger(hash_main,(Cache),(325),(BFLevel))
+ call SaveInteger(hash_main,(Cache),(28),(2))
+ call SaveEffectHandle(hash_main,(Cache),(32),(AddSpecialEffectTarget("Abilities\\Weapons\\PhoenixMissile\\Phoenix_Missile_mini.mdl",Hero,"weapon")))
+ call TriggerRegisterTimerEvent(t,0.4,true)
+@@ -50524,11 +50634,11 @@
+ call UnitRemoveAbility(Target,ManaLeak_GetBuffId(Level))
+ call DestroyEffect((LoadEffectHandle(hash_main,(Cache),(32))))
+ call FlushChildHashtable(hash_main,(Cache))
+ call CleanTrigger(t)
+ elseif GetUnitState(Target,UNIT_STATE_MANA)<1 then
+-call Stun((LoadUnitHandle(hash_main,(Cache),(2))),Target,1+0.25*Level)
++call Stun((LoadUnitHandle(hash_main,(Cache),(2))),Target,1+0.3*Level)
+ set Caster=null
+ call UnitRemoveAbility(Target,ManaLeak_GetBuffAbility(Level))
+ call UnitRemoveAbility(Target,ManaLeak_GetBuffId(Level))
+ call DestroyEffect((LoadEffectHandle(hash_main,(Cache),(32))))
+ call FlushChildHashtable(hash_main,(Cache))
+@@ -51708,10 +51818,13 @@
+ call SaveGroupHandle(hash_main,(Cache),(133),(AlreadyDamaged))
+ call SaveReal(hash_main,(Cache),(13),((Atan2(TargetY-SourceY,TargetX-SourceX))*1.0))
+ call SaveInteger(hash_main,(Cache),(194),(IMax(R2I(SquareRoot((TargetX-SourceX)*(TargetX-SourceX)+(TargetY-SourceY)*(TargetY-SourceY))/50),1)))
+ call TriggerRegisterTimerEvent(t,0.04,true)
+ call TriggerAddCondition(t,Condition(function Waveform_Move))
++call ShowUnit(UnitVar,false)
++call ShowUnit(UnitVar,true)
++call SelectUnitAddForPlayer(UnitVar,GetOwningPlayer(UnitVar))
+ set t=null
+ endfunction
+ function RegisterWaveform takes nothing returns nothing
+ local trigger t=CreateTrigger()
+ call TriggerRegisterAnyUnitEvent(t,EVENT_PLAYER_UNIT_SPELL_EFFECT)
+@@ -51975,14 +52088,23 @@
+ set Iterate=null
+ return false
+ endfunction
+ function Morph takes nothing returns nothing
+ local unit Hero=GetTriggerUnit()
+-local trigger t=CreateTrigger()
+-local integer Cache=GetHandleId(t)
++local trigger t
++local integer Cache
+ local integer Level=GetUnitAbilityLevel(GetTriggerUnit(),abilityid_morph)
+ if Level==1 then
++call SetHeroAgi(Hero,GetHeroAgi(Hero,false)+3,true)
++call SetHeroStr(Hero,GetHeroStr(Hero,false)+3,true)
++else
++call SetHeroAgi(Hero,GetHeroAgi(Hero,false)+1,true)
++call SetHeroStr(Hero,GetHeroStr(Hero,false)+1,true)
++endif
++if Level==1 then
++set t=CreateTrigger()
++set Cache=GetHandleId(t)
+ call UnitAddAbility2(Hero,abilityid_morphsecondary)
+ call TriggerRegisterUnitEvent(t,Hero,EVENT_UNIT_ISSUED_ORDER)
+ call TriggerAddCondition(t,Condition(function Morph_Order))
+ call SaveTriggerHandle(hash_main,(Cache),(226),(null))
+ else
+@@ -52213,14 +52335,11 @@
+ local trigger t=CreateTrigger()
+ call TriggerRegisterAnyUnitEvent(t,EVENT_PLAYER_UNIT_SPELL_EFFECT)
+ call TriggerAddCondition(t,Condition(function SongOfTheSiren_Main))
+ set t=null
+ endfunction
+-function WaterSpray_Hit takes nothing returns nothing
+-local integer Cache=GetHandleId(GetTriggeringTrigger())
+-local unit Source=tt_unit1
+-local unit Target=tt_unit2
++function WaterSpray_Hit takes unit Source,unit Target returns nothing
+ local integer Level=GetUnitAbilityLevel(Source,abilityid_waterspray)
+ local integer id=waterspray_armor_1
+ call DamageTarget(Source,Target,DAMAGE_MAGICAL,100+30*Level)
+ if Level==2 then
+ set id=waterspray_armor_2
+@@ -52231,53 +52350,53 @@
+ endif
+ if IsRealSummoned(Target)==false then
+ call AddTimedAbility(Target,id,1,8)
+ endif
+ call SetPlayerAbilityAvailable(GetOwningPlayer(Target),id,false)
++call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Other\\CrushingWave\\CrushingWaveDamage.mdl",Target,"chest"))
+ set Source=null
+ set Target=null
+ endfunction
+-function WaterSpray_Process takes nothing returns nothing
+-local unit Source=GetTriggerUnit()
+-local unit Target=GetEnumUnit()
+-local trigger t=CreateProjectileToUnit(Source,Target,unitid_waterspray,"WaterSpray_Hit",1400)
++function WaterSpray_Check takes nothing returns nothing
++if IsUnitInGroup(GetEnumUnit(),waterspray_affected)==false then
++call GroupAddUnit(waterspray_affected,GetEnumUnit())
++call WaterSpray_Hit(waterspray_source,GetEnumUnit())
++endif
++endfunction
++function WaterSpray_Start takes nothing returns nothing
++local unit Source=GetEnumUnit()
++local trigger t=CreateTrigger()
+ local integer Cache=GetHandleId(t)
+-set Source=null
+-set Target=null
++local real x=GetUnitX(Source)
++local real y=GetUnitY(Source)
++local group g=GetAvailableGroup()
++call DestroyEffect(AddSpecialEffect("war3mapImported\\RipTide09.mdx",x,y))
++set tt_unit1=Source
++call GroupEnumUnitsInRange(g,x,y,450+25,Condition(function GenericCondition_EnemyUnitsEx))
++call ForGroup(g,function WaterSpray_Check)
++call KillGroup(g)
+ set t=null
++set g=null
++endfunction
++function WaterSpray_FindIllusions takes nothing returns boolean
++return IsUnitIllusion(GetFilterUnit())and IsDead(GetFilterUnit())==false
+ endfunction
+ function WaterSpray takes nothing returns nothing
+-local trigger t=CreateTrigger()
+-local integer Cache=GetHandleId(t)
+ local unit Source=GetTriggerUnit()
+-local real SourceX=GetUnitX(Source)
+-local real SourceY=GetUnitY(Source)
+-local real TargetX=GetSpellTargetX()
+-local real TargetY=GetSpellTargetY()
+-local real a=AngleBetweenXY(SourceX,SourceY,TargetX,TargetY)*bj_DEGTORAD
+-local real x
+-local real y
+-local real d
+-local group g1=GetAvailableGroup()
+-local group g2=GetAvailableGroup()
++local real x=GetUnitX(Source)
++local real y=GetUnitY(Source)
++local group g=GetAvailableGroup()
+ local integer i=0
+-loop
+-exitwhen i>7
+-set x=SourceX+(300+i*50)*Cos(a)
+-set y=SourceY+(300+i*50)*Sin(a)
+-set tt_unit1=Source
+-call GroupEnumUnitsInRange(g2,x,y,375,Condition(function GenericCondition_EnemyUnitsEx))
+-call GroupAddGroup(g2,g1)
+-set i=i+1
+-endloop
+-call ForGroup(g1,function WaterSpray_Process)
+-call KillGroup(g1)
+-call KillGroup(g2)
+-set t=null
++set waterspray_affected=GetAvailableGroup()
++set waterspray_source=Source
++call GroupEnumUnitsOfPlayer(g,GetOwningPlayer(Source),Condition(function WaterSpray_FindIllusions))
++call GroupAddUnit(g,Source)
++call ForGroup(g,function WaterSpray_Start)
++call KillGroup(g)
++call KillGroup(waterspray_affected)
+ set Source=null
+-set g1=null
+-set g2=null
++set g=null
+ endfunction
+ function WaterSpray_Main takes nothing returns boolean
+ if GetSpellAbilityId()==abilityid_waterspray then
+ call WaterSpray()
+ endif
+@@ -52353,10 +52472,11 @@
+ local real r=GetRandomReal(0,100)
+ local integer Level=GetUnitAbilityLevel(whichUnit,1093679160)
+ local boolean Scepter=FindItemOfType(whichUnit,Item_Real[indexid_aghanimsscepterogre])!=null
+ local integer Multicast=0
+ local integer id=GetPlayerId(GetOwningPlayer(whichUnit))
++set Scepter=false
+ if Level==1 then
+ set multicast_count_total[id]=multicast_count_total[id]+1
+ if Scepter then
+ if r<30 then
+ set multicast_count_3[id]=multicast_count_3[id]+1
+@@ -52422,10 +52542,31 @@
+ endif
+ endif
+ endif
+ return Multicast
+ endfunction
++function Aghanim_Fireblast_Cast takes nothing returns nothing
++local unit Source=GetTriggerUnit()
++local unit Target=GetSpellTargetUnit()
++local unit Caster=CreateUnit(GetOwningPlayer(Source),1697656901,GetUnitX(Target),GetUnitY(Target),0)
++call UnitAddAbility2(Caster,fireblast_aghanim_real)
++call IssueTargetOrder(Caster,"thunderbolt",Target)
++set Source=null
++set Target=null
++set Caster=null
++endfunction
++function Aghanim_Fireblast_Add takes nothing returns nothing
++local unit Source=tt_unit1
++call UnitAddAbility2(Source,fireblast_aghanim)
++call SetPlayerAbilityAvailable(GetOwningPlayer(Source),fireblast_aghanim,true)
++set Source=null
++endfunction
++function Aghanim_Fireblast_Remove takes nothing returns nothing
++local unit Source=tt_unit1
++call SetPlayerAbilityAvailable(GetOwningPlayer(Source),fireblast_aghanim,false)
++set Source=null
++endfunction
+ function Fireblast_Loop takes nothing returns boolean
+ local trigger t=GetTriggeringTrigger()
+ local integer Cache=GetHandleId(t)
+ local unit Target=(LoadUnitHandle(hash_main,(Cache),(17)))
+ local unit Source=(LoadUnitHandle(hash_main,(Cache),(2)))
+@@ -52436,10 +52577,13 @@
+ if GetTriggerEvalCount(t)>Iterations then
+ call FlushChildHashtable(hash_main,(Cache))
+ call CleanTrigger(t)
+ else
+ set Caster=CreateUnit(GetOwningPlayer(Source),1697656901,GetUnitX(Target),GetUnitY(Target),0)
++if MCSpell==fireblast_aghanim then
++set MCSpell=fireblast_aghanim_real
++endif
+ call UnitAddAbility2(Caster,MCSpell)
+ call SetUnitAbilityLevel(Caster,MCSpell,Level)
+ call IssueTargetOrder(Caster,"thunderbolt",Target)
+ endif
+ set t=null
+@@ -52476,16 +52620,19 @@
+ set Target=null
+ set Source=null
+ endfunction
+ function Fireblast_Main takes nothing returns boolean
+ local integer r
+-if GetUnitAbilityLevel(GetTriggerUnit(),1093679160)>0 and IsBlocked(GetSpellTargetUnit())==false and(GetSpellAbilityId()==1093678167 or GetSpellAbilityId()==1093679172 or GetSpellAbilityId()==1093679169 or GetSpellAbilityId()==1093679161)then
++if GetUnitAbilityLevel(GetTriggerUnit(),1093679160)>0 and IsBlocked(GetSpellTargetUnit())==false and(GetSpellAbilityId()==1093678167 or GetSpellAbilityId()==1093679172 or GetSpellAbilityId()==1093679169 or GetSpellAbilityId()==1093679161 or GetSpellAbilityId()==fireblast_aghanim)then
+ set r=MC_RunChance(GetTriggerUnit())
+-if r>1 then
++if r>1 and((LoadInteger(hash_main,(GetHandleId((GetSpellTargetUnit()))),((4322))))==HERO_STATE_ON)==false then
+ call Fireblast(r)
+ endif
+ endif
++if IsBlocked(GetSpellTargetUnit())==false and GetSpellAbilityId()==fireblast_aghanim then
++call Aghanim_Fireblast_Cast()
++endif
+ return false
+ endfunction
+ function Multicast_Command takes nothing returns boolean
+ local integer id=GetPlayerId(GetTriggerPlayer())
+ local string s1
+@@ -57555,12 +57702,12 @@
+ local boolean inWidth
+ local boolean inHeight
+ set dx=GetUnitX(Target)-GetUnitX(Source)
+ set dy=GetUnitY(Target)-GetUnitY(Source)
+ set length=Pow(Pow(dx,2)+Pow(dy,2),0.5)
+-set x=GetUnitX(Target)+(areaHeight/2)*(dx/length)
+-set y=GetUnitY(Target)+(areaHeight/2)*(dy/length)
++set x=GetUnitX(Target)+(areaHeight/2-25)*(dx/length)
++set y=GetUnitY(Target)+(areaHeight/2-25)*(dy/length)
+ set tt_unit1=Source
+ set tt_real1=Damage
+ call GroupEnumUnitsInRange(g,x,y,Pow(Pow(areaHeight/2,2)+Pow(areaWidth/2,2),0.5),Condition(function GenericCondition_EnemyUnitsEx))
+ call GroupRemoveUnit(g,Target)
+ set uPicked=FirstOfGroup(g)
+@@ -59639,19 +59786,24 @@
+ local real a=(LoadReal(hash_main,(Cache),(137)))
+ local group g=GetAvailableGroup()
+ local unit Target
+ local real x=GetUnitX(Caster)
+ local real y=GetUnitY(Caster)
+-set x=SafeX(x+30*Cos(a))
+-set y=SafeY(y+30*Sin(a))
++local real FinalX=(LoadReal(hash_main,(Cache),(6)))
++local real FinalY=(LoadReal(hash_main,(Cache),(7)))
++set x=SafeX(x+36*Cos(a))
++set y=SafeY(y+36*Sin(a))
+ call SetUnitX(Caster,x)
+ call SetUnitY(Caster,y)
+ set tt_unit1=Caster
+ call GroupEnumUnitsInRange(g,x,y,125,Condition(function GenericCondition_EnemyUnitsEx))
+ set Target=FirstOfGroup(g)
+ call KillGroup(g)
+-if GetTriggerEvalCount(t)>55 or Target!=null then
++if DistanceBetweenXY(x,y,FinalX,FinalY)<40 or GetTriggerEvalCount(t)>100 then
++set Target=null
++set x=FinalX
++set y=FinalY
+ set flamebreak_source=Source
+ set flamebreak_level=(LoadInteger(hash_main,(Cache),(5)))
+ set flamebreak_target=Target
+ if Target==null then
+ set flamebreak_x=x
+@@ -59666,11 +59818,10 @@
+ call GroupRemoveUnit(g,Target)
+ call Stun(Source,Target,0.3)
+ call DamageTarget(flamebreak_source,Target,DAMAGE_MAGICAL,flamebreak_level*75)
+ endif
+ call ForGroup(g,function Flamebreak_Hit)
+-call SetUnitScale(Caster,7,7,7)
+ call KillUnit(Caster)
+ call KillGroup(g)
+ call FlushChildHashtable(hash_main,(Cache))
+ call CleanTrigger(t)
+ endif
+@@ -59688,16 +59839,19 @@
+ local real y=GetLocationY(l)
+ local real a=Atan2(y-GetUnitY(Source),x-GetUnitX(Source))
+ local trigger t=CreateTrigger()
+ local integer Cache=GetHandleId(t)
+ local integer Level=GetUnitAbilityLevel(Source,abilityid_flamebreak)
+-local unit Caster=CreateUnit(GetOwningPlayer(Source),unitid_flamebreak,GetUnitX(Source),GetUnitY(Source),a*bj_RADTODEG)
++local unit Caster
+ call RemoveLocation(l)
++set Caster=CreateUnit(GetOwningPlayer(Source),unitid_flamebreak,GetUnitX(Source),GetUnitY(Source),a*bj_RADTODEG)
+ call SaveReal(hash_main,(Cache),(137),((a)*1.0))
+ call SaveInteger(hash_main,(Cache),(5),(Level))
+ call SaveUnitHandle(hash_main,(Cache),(2),(Source))
+ call SaveUnitHandle(hash_main,(Cache),(19),(Caster))
++call SaveReal(hash_main,(Cache),(6),((x)*1.0))
++call SaveReal(hash_main,(Cache),(7),((y)*1.0))
+ call TriggerRegisterTimerEvent(t,0.04,true)
+ call TriggerAddCondition(t,Condition(function Flamebreak_Move))
+ set Source=null
+ set Caster=null
+ set l=null
+@@ -60664,12 +60818,12 @@
+ local trigger t=CreateTrigger()
+ local integer Cache=GetHandleId(t)
+ local integer Level=GetUnitAbilityLevel(Source,abilityid_deathpact)
+ local real TargetLife=GetUnitState(Target,UNIT_STATE_LIFE)
+ local real SourceLife=GetUnitState(Source,UNIT_STATE_LIFE)
+-local integer BonusDamage=R2I((0.02+0.02*Level)*TargetLife)
+-local integer BonusHP=R2I((0.4+0.1*Level)*TargetLife)
++local integer BonusDamage=R2I((0.035+0.015*Level)*TargetLife)
++local integer BonusHP=R2I((0.35+0.15*Level)*TargetLife)
+ call AddDamageBonus(Source,BonusDamage)
+ call AddHPBonus(Source,BonusHP)
+ call UnitAddAbility2(Source,deathpact_icon)
+ call SetUnitState(Target,UNIT_STATE_LIFE,1)
+ call DamageTarget(Source,Target,DAMAGE_PHYSICAL,20)
+@@ -60696,11 +60850,11 @@
+ call TriggerRegisterAnyUnitEvent(t,EVENT_PLAYER_UNIT_SPELL_EFFECT)
+ call TriggerAddCondition(t,Condition(function DeathPact_Main))
+ set t=null
+ endfunction
+ function Essence_Aura_Disallowed takes integer x returns boolean
+-return x==1093678680 or x==1093681489 or x==abilityid_balllightning or x==1093684805 or x==abilityid_balllightning or x==1093747504
++return x==1093678680 or x==1093681489 or x==abilityid_balllightning or x==1093684805 or x==abilityid_balllightning or x==1093747504 or x==1093686082
+ endfunction
+ function Trig_Essence_Aura_Conditions takes nothing returns boolean
+ return(GetLearnedSkill()==abilityid_essenceaura)and(IsUnitIllusion(GetTriggerUnit())==false)
+ endfunction
+ function Essence_Aura_Cast_Condition takes nothing returns boolean
+@@ -61215,13 +61369,14 @@
+ endif
+ call SetUnitAbilityLevel(Wall,1093685580,Level)
+ set wallofreplica_estimatorx=GetUnitX(Target)
+ set wallofreplica_estimatory=GetUnitY(Target)
+ set wallofreplica_estimatetarget=Target
+-if Scepter and IsUnitAlly(Target,GetOwningPlayer(Wall))==true then
+-call SetUnitAbilityLevel(Wall,1093685580,4)
++if Scepter then
++call SetUnitAbilityLevel(Wall,1093685580,3+Level)
+ call IssueTargetOrderById(Wall,852274,Target)
++call DamageTarget(Wall,Target,DAMAGE_MAGICAL,150)
+ else
+ call IssueTargetOrderById(Wall,852274,Target)
+ call DamageTarget(Wall,Target,DAMAGE_MAGICAL,150)
+ endif
+ call UnitApplyTimedLife(InvisViewer,1112820806,0.5)
+@@ -61242,11 +61397,11 @@
+ set g=null
+ return false
+ endfunction
+ function WallOfReplica_Detected_Scepter takes nothing returns boolean
+ local group g
+-if IsUnitType(GetFilterUnit(),UNIT_TYPE_HERO)==true and(GetUnitTypeId((GetFilterUnit()))==1211117642)==false then
++if IsUnitType(GetFilterUnit(),UNIT_TYPE_HERO)==true and IsUnitEnemy(GetFilterUnit(),GetOwningPlayer((LoadUnitHandle(hash_main,(GetHandleId(GetTriggeringTrigger())),(259)))))and(GetUnitTypeId((GetFilterUnit()))==1211117642)==false then
+ set g=(LoadGroupHandle(hash_main,(GetHandleId(GetTriggeringTrigger())),(257)))
+ if IsUnitInGroup(GetFilterUnit(),g)==false then
+ call GroupAddUnit(g,GetFilterUnit())
+ call WallOfReplica_Detected_Main(true)
+ endif
+@@ -62456,11 +62611,11 @@
+ set t=null
+ endfunction
+ function Invoke1_Damage_Helper takes nothing returns nothing
+ local real ManaLoss=RMax(RMin(GetUnitState(GetEnumUnit(),UNIT_STATE_MANA),invoke1_burn),0)
+ local real LifeLoss=ManaLoss*0.5
+-if IsMagicImmune(GetEnumUnit())==false and ManaLoss>0 then
++if IsMagicImmune(GetEnumUnit())==false and ManaLoss>0 and IsCycloned(GetEnumUnit())==false then
+ if GetUnitState(GetEnumUnit(),UNIT_STATE_LIFE)>LifeLoss then
+ call SetUnitState(GetEnumUnit(),UNIT_STATE_LIFE,GetUnitState(GetEnumUnit(),UNIT_STATE_LIFE)-LifeLoss)
+ else
+ call SetUnitState(GetEnumUnit(),UNIT_STATE_LIFE,1)
+ call DamageTarget(invoke1_source,GetEnumUnit(),DAMAGE_MAGICAL,LifeLoss)
+@@ -62541,11 +62696,11 @@
+ set Offset=2.5
+ endif
+ call UnitAddAbility2(Caster,abilityid_invoke2_cyclone)
+ call SetUnitAbilityLevel(Caster,abilityid_invoke2_cyclone,QuasLevel)
+ call IssueTargetOrder(Caster,"cyclone",Target)
+-call DamageTargetDelayed(DamageSource,Target,DAMAGE_MAGICAL,77.5+(WexLevel+QuasLevel)*23.0,Offset)
++call DamageTargetDelayed(DamageSource,Target,DAMAGE_MAGICAL,70+(WexLevel+QuasLevel)*20.0,Offset)
+ set Caster=null
+ set DamageSource=null
+ endfunction
+ function Invoke2_Execute takes nothing returns nothing
+ if IsUnitInGroup(GetEnumUnit(),tt_group1)==false then
+@@ -62910,11 +63065,11 @@
+ call DelayedPreloadAbility(abilityid_invoke5_effect,GetRandomReal(1,25))
+ set t=null
+ endfunction
+ function Invoke6_GetDamage takes unit Hero returns real
+ local integer ExortLevel=(LoadInteger(hash_main,(GetHandleId(Hero)),(3002)))
+-return(80+ExortLevel*30.0)/2
++return(80+ExortLevel*35.0)/2
+ endfunction
+ function Invoke6_GetDistance takes unit Hero returns real
+ local integer WexLevel=(LoadInteger(hash_main,(GetHandleId(Hero)),(3000)))
+ local integer QuasLevel=(LoadInteger(hash_main,(GetHandleId(Hero)),(3001)))
+ local integer ExortLevel=(LoadInteger(hash_main,(GetHandleId(Hero)),(3002)))
+@@ -62961,11 +63116,11 @@
+ local trigger t=GetTriggeringTrigger()
+ local integer Cache=GetHandleId(t)
+ local real x=(LoadReal(hash_main,(Cache),(6)))
+ local real y=(LoadReal(hash_main,(Cache),(7)))
+ local real a=(LoadReal(hash_main,(Cache),(137)))
+-local integer Count=GetTriggerEvalCount(t)-30
++local integer Count=GetTriggerEvalCount(t)-26
+ local unit Source=(LoadUnitHandle(hash_main,(Cache),(2)))
+ local real NewX
+ local real NewY
+ local unit Caster
+ local group g
+@@ -63008,11 +63163,11 @@
+ local unit Source=GetTriggerUnit()
+ local real x=GetLocationX(l)
+ local real y=GetLocationY(l)
+ local real a=Atan2(y-GetUnitY(Source),x-GetUnitX(Source))
+ local unit Falling=CreateUnit(GetOwningPlayer(Source),unitid_invoke6_falling,x,y,a*bj_RADTODEG)
+-call SetUnitTimeScale(Falling,0.5)
++call SetUnitTimeScale(Falling,0.58)
+ call UnitApplyTimedLife(Falling,1112820806,1.75)
+ call TriggerRegisterTimerEvent(t,0.05,true)
+ call TriggerAddCondition(t,Condition(function Invoke6_Move))
+ call SaveUnitHandle(hash_main,(Cache),(2),(Source))
+ call SaveReal(hash_main,(Cache),(6),((x)*1.0))
+@@ -63341,11 +63496,11 @@
+ call DelayedPreloadAbility(abilityid_invoke8_damage,GetRandomReal(1,25))
+ set t=null
+ endfunction
+ function Invoke9_Damage takes nothing returns nothing
+ if IsCourier(GetEnumUnit())==false then
+-call DamageTarget(tt_unit1,GetEnumUnit(),DAMAGE_MAGICAL,tt_real1)
++call DamageTarget(tt_unit1,GetEnumUnit(),DAMAGE_PURE,tt_real1)
+ endif
+ endfunction
+ function Invoke9_Expire takes nothing returns boolean
+ local trigger t=GetTriggeringTrigger()
+ local integer Cache=GetHandleId(t)
+@@ -63354,11 +63509,10 @@
+ local real x=(LoadReal(hash_main,(Cache),(6)))
+ local real y=(LoadReal(hash_main,(Cache),(7)))
+ local group g=GetAvailableGroup()
+ local integer Count
+ set tt_unit1=Hero
+-call TimedReveal(GetOwningPlayer(Hero),4,x,y,400)
+ call GroupEnumUnitsInRange(g,x,y,200,Condition(function GenericCondition_EnemyUnitsEx))
+ set Count=CountUnitsInGroup(g)
+ if Count<1 then
+ set Count=1
+ endif
+@@ -63384,10 +63538,11 @@
+ local real Damage=(LoadInteger(hash_main,(GetHandleId(Hero)),(3002)))*62.5+12.5+25
+ local string s=""
+ if IsPlayerAlly(GetLocalPlayer(),GetOwningPlayer(Hero))==true or(udg_ObserverMode and(GetLocalPlayer()==udg_Observer1 or GetLocalPlayer()==udg_Observer2))then
+ set s=invoke9_fx
+ endif
++call TimedReveal(GetOwningPlayer(Hero),5.7,x,y,400)
+ call TriggerRegisterTimerEvent(t,1.7,false)
+ call TriggerAddCondition(t,Condition(function Invoke9_Expire))
+ call SaveUnitHandle(hash_main,(Cache),(14),(Hero))
+ call SaveReal(hash_main,(Cache),(6),((x)*1.0))
+ call SaveReal(hash_main,(Cache),(7),((y)*1.0))
+@@ -65530,11 +65685,11 @@
+ local unit Source=GetTriggerUnit()
+ local unit Target=GetSpellTargetUnit()
+ local integer Level=GetUnitAbilityLevel(Source,abilityid_leveldeath)
+ local integer TargetLevel=GetHeroLevel(Target)
+ if ModuloInteger(TargetLevel,7-Level)==0 or TargetLevel==25 then
+-call DamageTarget(Source,Target,DAMAGE_MAGICAL,250)
++call DamageTarget(Source,Target,DAMAGE_MAGICAL,275)
+ call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Demon\\DemonBoltImpact\\DemonBoltImpact.mdl",Target,"chest"))
+ endif
+ set Source=null
+ set Target=null
+ endfunction
+@@ -66813,11 +66968,11 @@
+ function Heartstopper_Damage takes nothing returns nothing
+ local unit Target=GetEnumUnit()
+ local unit Source=heartstopper_source
+ local real CurrentHP=GetUnitState(Target,UNIT_STATE_LIFE)
+ local real MaxHP=GetUnitState(Target,UNIT_STATE_MAX_LIFE)
+-local real HPLoss=((0.003+0.002*heartstopper_level)*MaxHP)/2
++local real HPLoss=((0.004+0.002*heartstopper_level)*MaxHP)/2
+ if CurrentHP<HPLoss then
+ call SetUnitState(Target,UNIT_STATE_LIFE,1)
+ call DamageTarget(Source,Target,DAMAGE_PURE,100)
+ call DamageTarget(Source,Target,DAMAGE_MAGICAL,100)
+ call DamageTarget(Source,Target,DAMAGE_PHYSICAL,100)
+@@ -66871,15 +67026,22 @@
+ return false
+ endif
+ return true
+ endfunction
+ function Trig_Sadist_Actions takes nothing returns nothing
++local real mana
++local integer Level
+ call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\ReplenishMana\\SpiritTouchTarget.mdl",GetKillingUnit(),"origin"))
+ if IsUnitType(GetTriggerUnit(),UNIT_TYPE_HERO)==true and GetUnitAbilityLevel(GetKillingUnit(),1093678640)==4 then
+ call SetUnitState(GetKillingUnit(),UNIT_STATE_MANA,GetUnitState(GetKillingUnit(),UNIT_STATE_MANA)+600)
+ else
+-call SetUnitManaBJ(GetKillingUnitBJ(),(GetUnitStateSwap(UNIT_STATE_MANA,GetKillingUnitBJ())+(12.00*I2R(GetUnitAbilityLevelSwapped(1093678640,GetKillingUnitBJ())))))
++set Level=GetUnitAbilityLevelSwapped(1093678640,GetKillingUnitBJ())
++set mana=12*Level
++if Level==4 then
++set mana=60
++endif
++call SetUnitManaBJ(GetKillingUnitBJ(),(GetUnitStateSwap(UNIT_STATE_MANA,GetKillingUnitBJ())+mana))
+ endif
+ endfunction
+ function Sadist takes nothing returns nothing
+ local trigger t=CreateTrigger()
+ call TriggerRegisterAnyUnitEvent(t,EVENT_PLAYER_UNIT_DEATH)
+@@ -67125,27 +67287,85 @@
+ call TriggerRegisterAnyUnitEvent(t,EVENT_PLAYER_UNIT_SPELL_EFFECT)
+ call TriggerAddCondition(t,Condition(function WatcherSuicide_Main))
+ call PreloadAbility(scarab_silence)
+ set t=null
+ endfunction
++function SpikedCarapace_Think takes nothing returns boolean
++local trigger t=GetTriggeringTrigger()
++local integer Cache=GetHandleId(t)
++local unit Source=(LoadUnitHandle(hash_main,(Cache),(2)))
++local unit Target
++local integer Level=GetUnitAbilityLevel(Source,abilityid_spikedcarapace)
++if GetTriggerEventId()==EVENT_UNIT_DAMAGED then
++if GetEventDamage()>0 and IsPlayerEnemy(GetOwningPlayer(GetEventDamageSource()),GetOwningPlayer(Source))==true then
++if IsRealPlayer(GetOwningPlayer(GetEventDamageSource()))and IsLegitDamage(GetEventDamage())then
++call PreventDamage(Source,GetEventDamage())
++set Target=udg_Hero[GetPlayerId(GetOwningPlayer(GetEventDamageSource()))]
++call UnitRemoveAbility(Source,1093815120)
++call FlushChildHashtable(hash_main,(Cache))
++call CleanTrigger(t)
++if IsDead(Target)==false then
++call Stun(Source,Target,0.6*Level)
++call DamageTarget(Source,Target,DAMAGE_PURE,GetEventDamage())
++endif
++endif
++endif
++else
++call UnitRemoveAbility(Source,1093815120)
++call FlushChildHashtable(hash_main,(Cache))
++call CleanTrigger(t)
++endif
++set t=null
++set Source=null
++return false
++endfunction
++function SpikedCarapace takes nothing returns nothing
++local unit Source=GetTriggerUnit()
++local trigger t=CreateTrigger()
++local integer Cache=GetHandleId(t)
++call TriggerRegisterTimerEvent(t,4.5,false)
++call TriggerRegisterUnitEvent(t,Source,EVENT_UNIT_DAMAGED)
++call TriggerAddCondition(t,Condition(function SpikedCarapace_Think))
++call SaveUnitHandle(hash_main,(Cache),(2),(Source))
++call UnitAddAbility2(Source,1093815120)
++set Source=null
++set t=null
++endfunction
++function SpikedCarapace_Main takes nothing returns boolean
++if GetSpellAbilityId()==abilityid_spikedcarapace then
++call SpikedCarapace()
++endif
++return false
++endfunction
++function Register_SpikedCarapace takes nothing returns nothing
++local trigger t=CreateTrigger()
++call TriggerRegisterAnyUnitEvent(t,EVENT_PLAYER_UNIT_SPELL_EFFECT)
++call TriggerAddCondition(t,Condition(function SpikedCarapace_Main))
++set t=null
++endfunction
+ function Necromastry_Process takes nothing returns nothing
+ local integer Cache=GetHandleId(GetTriggeringTrigger())
+ local unit Source=tt_unit2
++local unit Target=tt_unit1
+ local integer souls=GetUnitAbilityLevel(Source,abilityid_necromastryhelper)
+ local integer maxsouls
+ local integer Level=GetUnitAbilityLevel(Source,abilityid_necromastry)
+-set souls=souls+1
+ if Level==1 then
+-set maxsouls=8
++set maxsouls=12
+ elseif Level==2 then
+-set maxsouls=16
++set maxsouls=20
+ elseif Level==3 then
+-set maxsouls=24
++set maxsouls=28
+ else
+-set maxsouls=32
++set maxsouls=36
+ endif
+ set maxsouls=maxsouls+1
++if IsUnitType(Target,UNIT_TYPE_HERO)==false then
++set souls=souls+1
++else
++set souls=souls+6
++endif
+ set souls=IMinBJ(maxsouls,souls)
+ call SetUnitAbilityLevel(Source,abilityid_necromastryhelper,souls)
+ call SaveInteger(hash_main,(GetHandleId(Source)),(710),(souls))
+ set Source=null
+ endfunction
+@@ -67160,17 +67380,17 @@
+ set Source=udg_Hero[GetPlayerId(GetOwningPlayer(GetKillingUnit()))]
+ endif
+ set souls=GetUnitAbilityLevel(Source,abilityid_necromastryhelper)
+ set Level=GetUnitAbilityLevel(Source,abilityid_necromastry)
+ if Level==1 then
+-set maxsouls=8
++set maxsouls=12
+ elseif Level==2 then
+-set maxsouls=16
++set maxsouls=20
+ elseif Level==3 then
+-set maxsouls=24
++set maxsouls=28
+ else
+-set maxsouls=32
++set maxsouls=36
+ endif
+ if souls<=maxsouls then
+ set t=CreateProjectileToUnit(GetTriggerUnit(),Source,1747993426,"Necromastry_Process",500)
+ set Cache=GetHandleId(t)
+ set t=null
+@@ -67196,17 +67416,17 @@
+ local unit Hero=udg_Hero[GetPlayerId(GetTriggerPlayer())]
+ local integer Souls=GetUnitAbilityLevel(Hero,abilityid_necromastryhelper)-1
+ local integer MaxSouls=0
+ local integer Level=GetUnitAbilityLevel(Hero,abilityid_necromastry)
+ if Level==1 then
+-set MaxSouls=8
++set MaxSouls=12
+ elseif Level==2 then
+-set MaxSouls=16
++set MaxSouls=20
+ elseif Level==3 then
+-set MaxSouls=24
++set MaxSouls=28
+ elseif Level==4 then
+-set MaxSouls=32
++set MaxSouls=36
+ endif
+ set Souls=IMaxBJ(IMinBJ(Souls,MaxSouls),0)
+ if GetUnitTypeId(Hero)==1315334514 then
+ call DisplayTimedTextToPlayer(GetTriggerPlayer(),0,udg_TextY,10.00,GetObjectName(1848658757)+" "+I2S(Souls)+"/"+I2S(MaxSouls))
+ endif
+@@ -72594,11 +72814,11 @@
+ set ShellCounter=IMax(ShellCounter-1,0)
+ call SaveInteger(hash_main,(Cache),(425),(ShellCounter))
+ call GravekeepersCloak_Set(Source,Level,ShellCounter)
+ set t=CreateTrigger()
+ set Cache=GetHandleId(t)
+-call TriggerRegisterTimerEvent(t,16-2*Level,false)
++call TriggerRegisterTimerEvent(t,14-2*Level,false)
+ call TriggerAddCondition(t,Condition(function GravekeepersCloak_Decay))
+ call SaveInteger(hash_main,(Cache),(426),(GetHandleId(GetTriggeringTrigger())))
+ endif
+ set t=null
+ set Source=null
+@@ -73427,11 +73647,11 @@
+ local trigger t=GetTriggeringTrigger()
+ local integer Cache=GetHandleId(t)
+ local unit Source=(LoadUnitHandle(hash_main,(Cache),(2)))
+ local unit Target=(LoadUnitHandle(hash_main,(Cache),(17)))
+ local integer Level=GetUnitAbilityLevel(Source,abilityid_shadowword)
+-if GetTriggerEvalCount(t)>8 or GetTriggerEventId()==EVENT_UNIT_DEATH then
++if GetTriggerEvalCount(t)>9 or GetTriggerEventId()==EVENT_UNIT_DEATH then
+ call DestroyEffect((LoadEffectHandle(hash_main,(Cache),(32))))
+ call UnitRemoveAbility(Target,abilityid_shadowword_damagebuff)
+ call UnitRemoveAbility(Target,buffid_shadowword_damage)
+ call FlushChildHashtable(hash_main,(Cache))
+ call CleanTrigger(t)
+@@ -73447,11 +73667,11 @@
+ local trigger t=GetTriggeringTrigger()
+ local integer Cache=GetHandleId(t)
+ local unit Source=(LoadUnitHandle(hash_main,(Cache),(2)))
+ local unit Target=(LoadUnitHandle(hash_main,(Cache),(17)))
+ local integer Level=GetUnitAbilityLevel(Source,abilityid_shadowword)
+-if GetTriggerEvalCount(t)>8 or GetTriggerEventId()==EVENT_UNIT_DEATH then
++if GetTriggerEvalCount(t)>9 or GetTriggerEventId()==EVENT_UNIT_DEATH then
+ call DestroyEffect((LoadEffectHandle(hash_main,(Cache),(32))))
+ call UnitRemoveAbility(Target,abilityid_shadowword_healbuff)
+ call UnitRemoveAbility(Target,buffid_shadowword_heal)
+ call FlushChildHashtable(hash_main,(Cache))
+ call CleanTrigger(t)
+@@ -73498,11 +73718,11 @@
+ call PreloadAbility(abilityid_shadowword_healbuff)
+ call PreloadAbility(abilityid_shadowword_damagebuff)
+ set t=null
+ endfunction
+ function RainOfChaos_Immolation_Damage takes nothing returns nothing
+-call DamageTarget(rainofchaos_source,GetEnumUnit(),DAMAGE_MAGICAL,10+10*rainofchaos_level)
++call DamageTarget(rainofchaos_source,GetEnumUnit(),DAMAGE_MAGICAL,20+10*rainofchaos_level)
+ call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\NightElf\\Immolation\\ImmolationDamage.mdl",GetEnumUnit(),"head"))
+ endfunction
+ function RainOfChaos_Immolation takes nothing returns boolean
+ local trigger t=GetTriggeringTrigger()
+ local integer Cache=GetHandleId(t)
+@@ -77510,11 +77730,11 @@
+ call SetUnitPosition(Projectile,x,y)
+ call SaveReal(hash_main,(Cache),(23),((x)*1.0))
+ call SaveReal(hash_main,(Cache),(24),((y)*1.0))
+ if DistanceBetweenXY(x,y,GetUnitX(Target),GetUnitY(Target))<20 then
+ set d=RMinBJ(DistanceBetweenXY(x,y,(LoadReal(hash_main,(Cache),(6))),(LoadReal(hash_main,(Cache),(7)))),2000)
+-set damage=d/2000*(100*GetUnitAbilityLevel(Source,abilityid_seekingmissle))
++set damage=d/2000*(110*GetUnitAbilityLevel(Source,abilityid_seekingmissle))
+ set damage=RMaxBJ(damage,50)
+ call KillUnit(Projectile)
+ call DestroyEffect((LoadEffectHandle(hash_main,(Cache),(32))))
+ call FlushChildHashtable(hash_main,(Cache))
+ call CleanTrigger(t)
+@@ -78076,10 +78296,20 @@
+ call Glipse()
+ endif
+ endif
+ return false
+ endfunction
++function Glipse_ResetRecord takes nothing returns nothing
++local unit Target=tt_unit1
++local integer Cache=GetHandleId(Target)
++local integer i=0
++loop
++exitwhen i>15
++set i=i+1
++endloop
++set Target=null
++endfunction
+ function Glipse_Register takes nothing returns nothing
+ local unit Target=GetEnumUnit()
+ local integer Cache=GetHandleId(Target)
+ local integer i=1
+ loop
+@@ -78827,12 +79057,12 @@
+ local location l
+ if d<300 or d>2150 then
+ set l=FindClearLocation(x,y)
+ set x=GetLocationX(l)
+ set y=GetLocationY(l)
+-call SetUnitX(Source,x)
+-call SetUnitY(Source,y)
++call SetUnitX(Source,SafeX(x))
++call SetUnitY(Source,SafeY(y))
+ call KillTrees(x,y,350)
+ call RemoveLocation(l)
+ set l=null
+ call DestroyEffect((LoadEffectHandle(hash_main,(Cache),(32))))
+ call FlushChildHashtable(hash_main,(Cache))
+@@ -81156,11 +81386,11 @@
+ local unit u
+ local trigger t
+ set tt_unit1=Source
+ call GroupEnumUnitsInRange(g,x,y,425,Condition(function GenericCondition_EnemyUnitsExNoImmuneNoInvis))
+ loop
+-exitwhen FirstOfGroup(g)==null or count==3
++exitwhen FirstOfGroup(g)==null or count==2
+ set u=GroupPickRandomUnit(g)
+ if u!=null then
+ if count==0 then
+ set u1=u
+ elseif count==1 then
+@@ -81178,11 +81408,10 @@
+ endif
+ if u2!=null then
+ call CreateProjectileToUnit(Source,u2,unitid_fireshackles,"FireShackles_Process",9000)
+ endif
+ if u3!=null then
+-call CreateProjectileToUnit(Source,u3,unitid_fireshackles,"FireShackles_Process",9000)
+ endif
+ set g=null
+ set Source=null
+ set u=null
+ set u1=null
+@@ -81283,11 +81512,11 @@
+ call SaveUnitHandle(hash_main,(Cache),(2),(Source))
+ set Source=null
+ set t=null
+ endfunction
+ function FireRemnant_Hit takes nothing returns nothing
+-call DamageTarget(fireremnant_source,GetEnumUnit(),DAMAGE_MAGICAL,100+fireremnant_level*40)
++call DamageTarget(fireremnant_source,GetEnumUnit(),DAMAGE_MAGICAL,80+fireremnant_level*40)
+ call DestroyEffect(AddSpecialEffectTarget(fireremnant_fx_impact,GetEnumUnit(),"origin"))
+ endfunction
+ function FireRemnant_Explode takes unit Source,unit Remnant,real x,real y returns nothing
+ local group g
+ call KillUnit(Remnant)
+@@ -81444,15 +81673,15 @@
+ set fireremnant_d=Distance
+ endif
+ endfunction
+ function FireRemnant_CalculateSpeed takes unit u1,unit u2 returns real
+ local real distance=DistanceBetweenUnits(u1,u2)
+-local real time=distance/1300
++local real time=distance/1300.0
+ if time>0.4 then
+-set time=0.4
++return distance/0.4
+ endif
+-return distance/time
++return 1300.0
+ endfunction
+ function FireRemnant_MoveReal takes nothing returns boolean
+ local trigger t=GetTriggeringTrigger()
+ local integer Cache=GetHandleId(t)
+ local unit Source=(LoadUnitHandle(hash_main,(Cache),(2)))
+@@ -82421,11 +82650,11 @@
+ local unit Source=(LoadUnitHandle(hash_main,(Cache),(2)))
+ local unit Attacker=GetAttacker()
+ local integer Level=GetUnitAbilityLevel(Source,abilityid_momentofcourage)
+ local integer id
+ if Source==GetTriggerUnit()and GetRandomInt(1,100)<=(14+2*Level)and((LoadInteger(hash_main,(GetHandleId((Source))),((4316))))==HERO_STATE_ON)==false and IsUnitAlly(Source,GetOwningPlayer(Attacker))==false then
+-call AddHeroState(Source,4316,0.9)
++call AddHeroState(Source,4316,1.2)
+ if Level==1 then
+ set id=momentofcourage_bonus_1
+ elseif Level==2 then
+ set id=momentofcourage_bonus_2
+ elseif Level==3 then
+@@ -83015,11 +83244,11 @@
+ function ArcaneBolt_Hit takes nothing returns nothing
+ local integer Cache=GetHandleId(GetTriggeringTrigger())
+ local unit Source=tt_unit1
+ local unit Target=tt_unit2
+ local integer Level=GetUnitAbilityLevel(Source,abilityid_arcanebolt)
+-local real Damage=40+20*Level+1.5*GetHeroInt(Source,true)
++local real Damage=40+20*Level+1.6*GetHeroInt(Source,true)
+ set amp_allow=true
+ call DamageTarget(Source,Target,DAMAGE_MAGICAL,Damage)
+ set amp_allow=false
+ set Source=null
+ set Target=null
+@@ -83652,11 +83881,11 @@
+ call TriggerAddCondition(t,Condition(function WhirlingDeath_Main))
+ set t=null
+ endfunction
+ function TimberChain_Hit takes unit Source,unit Target returns nothing
+ local integer Level=GetUnitAbilityLevel(Source,abilityid_timberchain)
+-call DamageTarget(Source,Target,DAMAGE_PURE,40+40*Level)
++call DamageTarget(Source,Target,DAMAGE_PURE,60+40*Level)
+ call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Other\\Stampede\\StampedeMissileDeath.mdl",Target,"origin"))
+ endfunction
+ function TimberChain_Process takes nothing returns nothing
+ if IsUnitInGroup(GetEnumUnit(),tt_group1)==false then
+ call GroupAddUnit(tt_group1,GetEnumUnit())
