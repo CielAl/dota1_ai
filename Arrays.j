@@ -10,6 +10,7 @@ eY[id]=11 - Roshan attack
 eY[32+O5]=8 - Visible Hero
 eY[32+O5]=-1 - Invisible Hero
 eY[64+O5] - lanes
+eY[80+O5] - lanes (buffer to auto-laning)
 
     set eY[128+O5]= ability 1
     set eY[144+O5]= ability 2
@@ -51,6 +52,7 @@ h4[O5] = hero main target
 h4[16+O5]
 h4[48 	= defense target
 h4[96+O5]=next target creep deny
+h4[144+  = target of chlane/gank
 h4[272+ = Elune Arrow before dodge
 
 h4[304   = nearby enemy tower
@@ -79,6 +81,7 @@ h9[id] - Previous point to retreat
 h9[16+id] - End point to retreat (base???)
 h9[32     - ??
 h9[48+id  - Techies' bomb spot
+h9[64+    - tower to defend
 
 ---real hq
 hq[416+O5] - issued help signal for nearby allies
@@ -136,6 +139,7 @@ HC[O5] - last hero order location (updated every point or target order)
 ---boolean G0
 G0[64+id]=true - Moving to h9[id] (retreating)
 G0[32+O5]=true - Used Healing Salve, Tango
+G0[48+O5]      - activated g_taAITriggers[64+O5] (temporary back-off)
 G0[176	= changelane reached invisible point
 G0[192	= gank set waiting time (hq[652])
 G0[208+O5] = allow use of closer forest gankpoint on ganking riverside
@@ -207,6 +211,7 @@ new item system:
 g_aiItemsBuff[O5*24+slotID] = temporary
 g_aiItemsBuff[288+O5] = last delayed created item
 g_aiItemsBuff[304+O5] = target item for aiRespondDroppedItem_uyv
+g_aiItemsBuff[320+O5] = item just dropped by AIDropMutedAct
 
 
 --integer array g_aiItemIDBuff
@@ -243,6 +248,9 @@ g_aiItemInt[256+O5] = child identifier for bear items Sv/LdBool
 g_aiItemInt[272+O5] = Bz based variable for per item step
 
 g_aiItemInt[288+O5] = item with this index id will be ignored from AIDropMutedAct. Used for item picking.
+g_aiItemInt[304+O5] = Bz based variable To reconsider sideshopping
+
+g_aiItemInt[320+O5] = number of Ironwood Branches used To fill empty slots. These branches can be sold in sideshopping
 
 --boolean array g_aiItemBool
 g_aiItemBool[O5] = enable new item system
@@ -266,6 +274,11 @@ g_aiItemBool[176+ = sim-mode has already entered Lux phase (fix)
 g_aiItemBool[192+ = g_ai_HasSecondBuild (mark of AI have second unit to build, i.e. Bear)
 
 g_aiItemBool[208+ = return of last AIBuy_Core
+g_aiItemBool[224+ = side-shop mode
+g_aiItemBool[240+ = queue for side-shop mode
+g_aiItemBool[256+ = side-shopping
+
+g_aiItemBool[272+ = AI has all recipe items (if this is false, sideshopping cannot advance step)
 
 ---=============================================================================
 "Usage of aiAbilities system"
