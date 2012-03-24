@@ -1,0 +1,275 @@
+
+
+diff.txt
+
+--- 74.j	2012-03-24 16:32:42.000000000 +0100
++++ 74c.j	2012-03-24 16:33:16.000000000 +0100
+@@ -15973,21 +15973,22 @@
+ local real RespawnTimeModifier3=1
+
+ local real RespawnTimeModifier4=1
+
+ local real RespawnTimeModifier_Constant=0
+
+ local trigger t
+
+ local integer TotalRespawnTime
+
+-local integer AssistCount=Assist_GetCount(DeadHero,KillHero)
+
++local integer AssistCount
+
+ local integer id
+
+ local integer CurrentGold=GetPlayerState(DeadPlayer,PLAYER_STATE_RESOURCE_GOLD)
+
+ local integer UnreliableGold=CurrentGold-ReliableGold[GetPlayerId(DeadPlayer)]
+
+ local unit RealKillHero
+
+ local unit RealDeadHero
+
+ call GiveBonusXPGold()
+
+ if KillHero==null and GetUnitTypeId(DeadHero)==1315988077 then
+
+ set KillHero=primalsplit_killer
+
+ set KillPlayer=GetOwningPlayer(KillHero)
+
+ endif
+
++set AssistCount=Assist_GetCount(DeadHero,KillHero)
+
+ if KillHero!=null then
+
+ set id=GetUnitTypeId(KillHero)
+
+ call Techies_FixXP(udg_Hero[GetPlayerId(GetOwningPlayer(KillHero))],DeadHero)
+
+ endif
+
+ if Deathtrigger_IsSuicide(DeadPlayer,KillPlayer)==false and AssistCount==1 and IsRealPlayer(KillPlayer)==false and KillPlayer!=udg_NeutralHostile then
+
+@@ -21621,10 +21622,14 @@
+ call SetItemUserData(Item,-2)
+
+ set scepter_indexid=GetScepterIndexId(Unit)
+
+ set scepter_abilityid=GetScepterAbilityId(Unit)
+
+ if FindItemOfTypeEx(Unit,Item_Real[scepter_indexid],Item)==null and GetUnitAbilityLevel(Unit,scepter_abilityid)>0 then
+
+ call UnitRemoveAbility(Unit,scepter_abilityid)
+
++if GetUnitTypeId(Unit)==1215130471 then
+
++set tt_unit1=Unit
+
++call ExecuteFunc("Aghanim_Fireblast_Remove")
+
++endif
+
+ endif
+
+ elseif GetItemTypeId(GetManipulatedItem())!=1227894853 and GetItemTypeId(GetManipulatedItem())!=1227895373 then
+
+ set Item=GetManipulatedItem()
+
+ if IsUnitIllusion(Unit)or GetItemUserData(Item)==-2 then
+
+ set Item=null
+
+@@ -42974,20 +42979,10 @@
+ call SetPlayerStateBJ(udg_ScourgePlayers[loopcurrent],PLAYER_STATE_RESOURCE_GOLD,(4265/UDNum))
+
+ call SetPlayerStateBJ(udg_ScourgePlayers[loopcurrent],PLAYER_STATE_RESOURCE_LUMBER,0)
+
+ endif
+
+ set loopcurrent=loopcurrent+1
+
+ endloop
+
+-call DestroyFogModifier(CreateFogModifierRectBJ(true,udg_SentPlayers[1],FOG_OF_WAR_MASKED,GetPlayableMapRect()))
+
+-call DestroyFogModifier(CreateFogModifierRectBJ(true,udg_SentPlayers[2],FOG_OF_WAR_MASKED,GetPlayableMapRect()))
+
+-call DestroyFogModifier(CreateFogModifierRectBJ(true,udg_SentPlayers[3],FOG_OF_WAR_MASKED,GetPlayableMapRect()))
+
+-call DestroyFogModifier(CreateFogModifierRectBJ(true,udg_SentPlayers[4],FOG_OF_WAR_MASKED,GetPlayableMapRect()))
+
+-call DestroyFogModifier(CreateFogModifierRectBJ(true,udg_SentPlayers[5],FOG_OF_WAR_MASKED,GetPlayableMapRect()))
+
+-call DestroyFogModifier(CreateFogModifierRectBJ(true,udg_ScourgePlayers[1],FOG_OF_WAR_MASKED,GetPlayableMapRect()))
+
+-call DestroyFogModifier(CreateFogModifierRectBJ(true,udg_ScourgePlayers[2],FOG_OF_WAR_MASKED,GetPlayableMapRect()))
+
+-call DestroyFogModifier(CreateFogModifierRectBJ(true,udg_ScourgePlayers[3],FOG_OF_WAR_MASKED,GetPlayableMapRect()))
+
+-call DestroyFogModifier(CreateFogModifierRectBJ(true,udg_ScourgePlayers[4],FOG_OF_WAR_MASKED,GetPlayableMapRect()))
+
+-call DestroyFogModifier(CreateFogModifierRectBJ(true,udg_ScourgePlayers[5],FOG_OF_WAR_MASKED,GetPlayableMapRect()))
+
+ if udg_ObserverMode then
+
+ set x=0
+
+ loop
+
+ exitwhen x>5
+
+ call SetPlayerAlliance(Player(0),udg_SentPlayers[x],ConvertAllianceType(0),true)
+
+@@ -59735,10 +59730,12 @@
+ local real d=(LoadReal(hash_main,(Cache),(138)))
+
+ local real x1=(LoadReal(hash_main,(Cache),(6)))
+
+ local real y1=(LoadReal(hash_main,(Cache),(7)))
+
+ local real x2
+
+ local real y2
+
++local real x
+
++local real y
+
+ if GetTriggerEventId()==EVENT_UNIT_DEATH or GetTriggerEvalCount(t)>10 then
+
+ call KillTrees(GetUnitX(Target),GetUnitY(Target),200)
+
+ call DestroyEffect((LoadEffectHandle(hash_main,(Cache),(32))))
+
+ call FlushChildHashtable(hash_main,(Cache))
+
+ call CleanTrigger(t)
+
+@@ -59746,15 +59743,21 @@
+ set x2=x1+d*Cos(a)
+
+ set y2=y1+d*Sin(a)
+
+ if(IsPointInRegion(region_badplaces,((x2)*1.0),((y2)*1.0)))==false then
+
+ call SaveReal(hash_main,(Cache),(6),((x2)*1.0))
+
+ call SaveReal(hash_main,(Cache),(7),((y2)*1.0))
+
+-call SetUnitX(Target,x2)
+
+-call SetUnitY(Target,y2)
+
++set x=x2
+
++set y=y2
+
+ else
+
+-call SetUnitX(Target,x1)
+
+-call SetUnitY(Target,y1)
+
++set x=x1
+
++set y=y1
+
++endif
+
++if IsUnitType(Target,UNIT_TYPE_HERO)==true then
+
++call SetUnitPosition(Target,x,y)
+
++else
+
++call SetUnitX(Target,x)
+
++call SetUnitY(Target,y)
+
+ endif
+
+ endif
+
+ set t=null
+
+ set Target=null
+
+ return false
+
+@@ -59793,11 +59796,11 @@
+ set x=SafeX(x+36*Cos(a))
+
+ set y=SafeY(y+36*Sin(a))
+
+ call SetUnitX(Caster,x)
+
+ call SetUnitY(Caster,y)
+
+ set tt_unit1=Caster
+
+-call GroupEnumUnitsInRange(g,x,y,125,Condition(function GenericCondition_EnemyUnitsEx))
+
++call GroupEnumUnitsInRange(g,x,y,125,Condition(function GenericCondition_EnemyUnitsNoImmune))
+
+ set Target=FirstOfGroup(g)
+
+ call KillGroup(g)
+
+ if DistanceBetweenXY(x,y,FinalX,FinalY)<40 or GetTriggerEvalCount(t)>100 then
+
+ set Target=null
+
+ set x=FinalX
+
+@@ -59811,11 +59814,11 @@
+ else
+
+ set flamebreak_x=GetUnitX(Target)
+
+ set flamebreak_y=GetUnitY(Target)
+
+ endif
+
+ set g=GetAvailableGroup()
+
+-call GroupEnumUnitsInRange(g,x,y,400,Condition(function GenericCondition_EnemyUnitsEx))
+
++call GroupEnumUnitsInRange(g,x,y,400,Condition(function GenericCondition_EnemyUnitsNoImmune))
+
+ if Target!=null then
+
+ call GroupRemoveUnit(g,Target)
+
+ call Stun(Source,Target,0.3)
+
+ call DamageTarget(flamebreak_source,Target,DAMAGE_MAGICAL,flamebreak_level*75)
+
+ endif
+
+@@ -62612,11 +62615,11 @@
+ endfunction
+
+ function Invoke1_Damage_Helper takes nothing returns nothing
+
+ local real ManaLoss=RMax(RMin(GetUnitState(GetEnumUnit(),UNIT_STATE_MANA),invoke1_burn),0)
+
+ local real LifeLoss=ManaLoss*0.5
+
+ if IsMagicImmune(GetEnumUnit())==false and ManaLoss>0 and IsCycloned(GetEnumUnit())==false then
+
+-if GetUnitState(GetEnumUnit(),UNIT_STATE_LIFE)>LifeLoss then
+
++if GetUnitState(GetEnumUnit(),UNIT_STATE_LIFE)>(LifeLoss+0.5)then
+
+ call SetUnitState(GetEnumUnit(),UNIT_STATE_LIFE,GetUnitState(GetEnumUnit(),UNIT_STATE_LIFE)-LifeLoss)
+
+ else
+
+ call SetUnitState(GetEnumUnit(),UNIT_STATE_LIFE,1)
+
+ call DamageTarget(invoke1_source,GetEnumUnit(),DAMAGE_MAGICAL,LifeLoss)
+
+ endif
+
+
