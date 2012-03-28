@@ -28,6 +28,8 @@ eY[288+   = ganking lane
 eY[304+	  = current lane
 eY[320+	  = allies around (aiWarBalance)
 
+eY[336+   = last lane before missed from lane
+
     set eY[336+O5]= ability 1 for cd
     set eY[352+O5]= ability 2 for cd
     set eY[368+O5]= ability 3 for cd
@@ -210,7 +212,7 @@ new item system:
 --item array g_aiItemsBuff
 g_aiItemsBuff[O5*24+slotID] = temporary
 g_aiItemsBuff[288+O5] = last delayed created item
-g_aiItemsBuff[304+O5] = target item for aiRespondDroppedItem_uyv
+g_aiItemsBuff[304+O5] = target item for aiRespondDroppedItem_uyv (substituting HW[32+ )
 g_aiItemsBuff[320+O5] = item just dropped by AIDropMutedAct
 
 
@@ -279,6 +281,8 @@ g_aiItemBool[240+ = queue for side-shop mode
 g_aiItemBool[256+ = side-shopping
 
 g_aiItemBool[272+ = AI has all recipe items (if this is false, sideshopping cannot advance step)
+
+g_aiItemBool[288+ = FORCEFIX - Disable sideshopping once bear is reached
 
 ---=============================================================================
 "Usage of aiAbilities system"
