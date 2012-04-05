@@ -212,8 +212,9 @@ new item system:
 --item array g_aiItemsBuff
 g_aiItemsBuff[O5*24+slotID] = temporary
 g_aiItemsBuff[288+O5] = last delayed created item
-g_aiItemsBuff[304+O5] = target item for aiRespondDroppedItem_uyv (substituting HW[32+ )
+g_aiItemsBuff[304+O5] = AI's boots
 g_aiItemsBuff[320+O5] = item just dropped by AIDropMutedAct
+g_aiItemsBuff[336+O5] = target item for aiRespondDroppedItem_uyv (substituting HW[32+ )
 
 
 --integer array g_aiItemIDBuff
