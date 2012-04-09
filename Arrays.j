@@ -254,6 +254,7 @@ g_aiItemInt[288+O5] = item with this index id will be ignored from AIDropMutedAc
 g_aiItemInt[304+O5] = Bz based variable To reconsider sideshopping
 
 g_aiItemInt[320+O5] = number of Ironwood Branches used To fill empty slots. These branches can be sold in sideshopping
+g_aiItemInt[336+O5] = item to be sold if at least one part of upgrades is obtained
 
 --boolean array g_aiItemBool
 g_aiItemBool[O5] = enable new item system
@@ -284,6 +285,7 @@ g_aiItemBool[256+ = side-shopping
 g_aiItemBool[272+ = AI has all recipe items (if this is false, sideshopping cannot advance step)
 
 g_aiItemBool[288+ = FORCEFIX - Disable sideshopping once bear is reached
+
 
 ---=============================================================================
 "Usage of aiAbilities system"
