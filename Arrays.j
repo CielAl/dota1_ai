@@ -255,6 +255,8 @@ g_aiItemInt[304+O5] = Bz based variable To reconsider sideshopping
 
 g_aiItemInt[320+O5] = number of Ironwood Branches used To fill empty slots. These branches can be sold in sideshopping
 g_aiItemInt[336+O5] = item to be sold if at least one part of upgrades is obtained
+g_aiItemInt[352+O5] = child identifier for item counter's Sv/LdInt
+g_aiItemInt[368+O5] = child identifier for item counter's Sv/LdInt (copy from 352+O5)
 
 --boolean array g_aiItemBool
 g_aiItemBool[O5] = enable new item system
