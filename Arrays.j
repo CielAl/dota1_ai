@@ -9,8 +9,8 @@ eY[id]=10 - Jingling
 eY[id]=11 - Roshan attack
 eY[32+O5]=8 - Visible Hero
 eY[32+O5]=-1 - Invisible Hero
-eY[64+O5] - lanes
-eY[80+O5] - lanes (buffer to auto-laning)
+eY[64+O5] - lanes (real intended lane)
+eY[80+O5] - lanes (buffer to auto-laning; what is visible to others)
 
     set eY[128+O5]= ability 1
     set eY[144+O5]= ability 2
@@ -47,7 +47,12 @@ eY[480	  = last order X
 eY[496    = last order Y
 
 eY[512    = last item operation result (0 = waiting, 1 = success, 2 = failed, DelayedItemCreation is called)
-eY[528    = --------- count for item pick (not used)
+eY[528    = attempt of item pick
+eY[544    = extension of eY[O5]==1 in lane-oriented actions
+			0 = free mode
+			1 = tower defense
+			2 = helping ally
+
 
 ---unit h4
 h4[O5] = hero main target
@@ -192,6 +197,10 @@ aiDefInt[80	= template of order of defense priority (+1-5 = Sent, +7-11 = scrg)
 aiDefInt[96	= 1 -> AI is participating in defense
 
 aiDefInt[112	= laning data (set by aiUpdateLaneData, using eY[80)
+
+aiDefInt[128	= laning data with regard of visibility (set by aiUpdateLaneData, using eY[80)
+
+aiDefInt[144    = ch-lane CD (lane aspect)
 
 --trigger g_taAITriggers
 g_taAITriggers[O5]    =
