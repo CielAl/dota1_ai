@@ -121,6 +121,9 @@ hq[816     - remaining time of Rubicks' spellsteal'
 
 hq[832     - FREE MODE (e.g. picking/destroying items), ignores all AI orders
 
+hq[848     - CD of gank system (in lane-lock func)
+hq[864     - waypoint side offset
+
 ---integer hG (item related)
 hG[O5] = current item ID
 hG[32+ = next item price
@@ -147,9 +150,11 @@ HC[O5] - last hero order location (updated every point or target order)
 G0[64+id]=true - Moving to h9[id] (retreating)
 G0[32+O5]=true - Used Healing Salve, Tango
 G0[48+O5]      - activated g_taAITriggers[64+O5] (temporary back-off)
+G0[128+			= have chance to win based on T8v
 G0[176	= changelane reached invisible point
 G0[192	= gank set waiting time (hq[652])
 G0[208+O5] = allow use of closer forest gankpoint on ganking riverside
+
 
 G0[224    = hit once against an attacking unit (mobbing)
 G0[240    = is relocating
@@ -215,6 +220,7 @@ hq[528+O5] = defense
 hq[320+O5] = tower defense
 hq[480+O5] = udv asking help
 hq[576+O5] = changing lane
+hq[848+O5] = gank cd (for lane-lock system)
 
 new item system:
 =================================================================
