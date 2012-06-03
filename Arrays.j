@@ -273,6 +273,11 @@ g_aiItemInt[336+O5] = item to be sold if at least one part of upgrades is obtain
 g_aiItemInt[352+O5] = child identifier for item counter's Sv/LdInt
 g_aiItemInt[368+O5] = child identifier for item counter's Sv/LdInt (copy from 352+O5)
 
+g_aiItemInt[384+O5] = default PT. 0 = no PT
+g_aiItemInt[400+O5] = current PT
+g_aiItemInt[416+O5] = mana percent to reach before switching back from Int PT.
+
+
 --boolean array g_aiItemBool
 g_aiItemBool[O5] = enable new item system
 g_aiItemBool[16+ = has orb effect
@@ -302,6 +307,7 @@ g_aiItemBool[256+ = side-shopping
 g_aiItemBool[272+ = AI has all recipe items (if this is false, sideshopping cannot advance step)
 
 g_aiItemBool[288+ = FORCEFIX - Disable sideshopping once bear is reached
+
 
 
 ---=============================================================================
