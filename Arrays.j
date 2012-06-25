@@ -124,6 +124,7 @@ hq[832     - FREE MODE (e.g. picking/destroying items), ignores all AI orders
 hq[848     - CD of gank system (in lane-lock func)
 hq[864     - waypoint side offset
 
+
 ---integer hG (item related)
 hG[O5] = current item ID
 hG[32+ = next item price
@@ -166,6 +167,7 @@ G0[288    = Rubick's ability function call
 G0[304    = Rubick's ability function call, skip other non-ability function
 
 G0[320    = returning to base for item purpose
+G0[336	  = gank issue kill signal
 
 ---boolean GZ
 GZ[16+O5]=true - AI Issued Order
@@ -178,7 +180,9 @@ GZ[192+O5         - item reset order
 GZ[208            - war mode
 
 GZ[224		  - Io's temporary tether
-GZ[304+     -"OrbOn" doubled for AI
+GZ[304+     - "OrbOn" doubled for AI
+
+GZ[320+		- false = 1-hero deny
 --boolean udg_bAIMsg
 udg_bAIMsg[O5 - AI main messaging
 udg_bAIMsg[16+ - AI missing report
