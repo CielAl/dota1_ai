@@ -124,6 +124,9 @@ hq[832     - FREE MODE (e.g. picking/destroying items), ignores all AI orders
 hq[848     - CD of gank system (in lane-lock func)
 hq[864     - waypoint side offset
 
+hq[880      - courier burst script CD
+hq[896      - courier usage CD
+
 
 ---integer hG (item related)
 hG[O5] = current item ID
@@ -228,6 +231,11 @@ hq[848+O5] = gank cd (for lane-lock system)
 
 new item system:
 =================================================================
+ga_uCirclesOfPower[O5] = usual COP
+ga_uCirclesOfPower[16+O5] = courier
+ga_uCirclesOfPower[32+O5] = used item buffer (depends on shopping mode)
+
+
 --item array g_aiItemsBuff
 g_aiItemsBuff[O5*24+slotID] = temporary
 g_aiItemsBuff[288+O5] = last delayed created item
@@ -280,7 +288,7 @@ g_aiItemInt[368+O5] = child identifier for item counter's Sv/LdInt (copy from 35
 g_aiItemInt[384+O5] = default PT. 0 = no PT
 g_aiItemInt[400+O5] = current PT
 g_aiItemInt[416+O5] = mana percent to reach before switching back from Int PT.
-
+g_aiItemInt[432+O5] = shopping mode: 0 = NORMAL, 1 = Sideshopping, 2 = courier
 
 --boolean array g_aiItemBool
 g_aiItemBool[O5] = enable new item system
@@ -304,7 +312,7 @@ g_aiItemBool[176+ = sim-mode has already entered Lux phase (fix)
 g_aiItemBool[192+ = g_ai_HasSecondBuild (mark of AI have second unit to build, i.e. Bear)
 
 g_aiItemBool[208+ = return of last AIBuy_Core
-g_aiItemBool[224+ = side-shop mode
+g_aiItemBool[224+ = courier initiated
 g_aiItemBool[240+ = queue for side-shop mode
 g_aiItemBool[256+ = side-shopping
 
