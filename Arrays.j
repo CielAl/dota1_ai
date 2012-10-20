@@ -320,8 +320,6 @@ g_aiItemBool[272+ = AI has all recipe items (if this is false, sideshopping cann
 
 g_aiItemBool[288+ = FORCEFIX - Disable sideshopping once bear is reached
 
-
-
 ---=============================================================================
 "Usage of aiAbilities system"
 - all data are saved in integer, rounded up if decimals.
