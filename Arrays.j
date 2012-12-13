@@ -290,6 +290,10 @@ g_aiItemInt[400+O5] = current PT
 g_aiItemInt[416+O5] = mana percent to reach before switching back from Int PT.
 g_aiItemInt[432+O5] = shopping mode: 0 = NORMAL, 1 = Sideshopping, 2 = courier
 
+g_aiItemInt[448+O5] = child identifier for luxuries list
+g_aiItemInt[464+O5] = current number of luxuries obtained
+g_aiItemInt[480+O5] = max number of luxuries obtained
+
 --boolean array g_aiItemBool
 g_aiItemBool[O5] = enable new item system
 g_aiItemBool[16+ = has orb effect
