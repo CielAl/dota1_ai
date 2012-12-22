@@ -94,16 +94,19 @@ elseif PointValue==97 then	 //Kaldr, Ancient Apparition //AA
 elseif PointValue==98 then	 //Slark, Murloc Nightcrawler 
 elseif PointValue==67 then	 //Akasha, Queen of Pain //QoP
 elseif PointValue==28 then	 //Rhasta, Shadow Shaman 
-elseif PointValue==101 then //Eredar, Shadow Demon 
-elseif PointValue==48 then  //Aurel Vlaicu, Gyrocopter 
-elseif PointValue==49 then  //Thrall, Far Seer 
-elseif PointValue==29 then  //Io, Guardian Wisp //old 50
-elseif PointValue==50 then  //Ymir, Tuskarr 
-elseif PointValue==51 then  //Icarus, Phoenix 
-elseif PointValue==54 then //Xin, Ember Spirit
-elseif PointValue==55 then //Tresdin, Legion Commander
-elseif PointValue==56 then //Dragonus, Skywrath Mage
-elseif PointValue==57 then //Rizzrak, Goblin Shredder
+elseif PointValue==101 then  //Eredar, Shadow Demon 
+elseif PointValue==48 then   //Aurel Vlaicu, Gyrocopter 
+elseif PointValue==49 then   //Thrall, Far Seer 
+elseif PointValue==29 then   //Io, Guardian Wisp //old 50
+elseif PointValue==50 then   //Ymir, Tuskarr 
+elseif PointValue==51 then   //Icarus, Phoenix 
+elseif PointValue==54 then   //Xin, Ember Spirit
+elseif PointValue==55 then   //Tresdin, Legion Commander
+elseif PointValue==56 then   //Dragonus, Skywrath Mage
+elseif PointValue==57 then   //Rizzrak, Goblin Shredder
+elseif PointValue==109 then  //Auroth, Winter Wyvern
+elseif PointValue==110 then  //Zet, Arc Warden
+elseif PointValue==35 then   //Traxex, Drow Ranger
 
 
 // hero ids (id = name)
@@ -215,6 +218,8 @@ $heroes["N0M0"] = "Xin, Ember Spirit";
 $heroes["E02K"] = "Tresdin, Legion Commander";
 $heroes["H0DO"] = "Dragonus, Skywrath Mage";
 $heroes["E032"] = "Rizzrak, Goblin Shredder";
+$heroes["N0M7"] = "Auroth, Winter Wyvern";
+$heroes["N0MK"] = "Zet, Arc Warden";
 
 public constant integer absorb = 852529
 public constant integer acolyteharvest = 852185
