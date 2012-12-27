@@ -1,0 +1,17 @@
+    elseif(i1=='')then
+        call sZv(O5,'','','A00T','',0,21,17)
+        
+        if((not J4)and(GetUnitLifePercent(IB)>83.))then
+            set NAScarabs=CountUnitsInGroup(GetUnitsOfPlayerMatching(GetOwningPlayer(IB),Condition(function ScarabsFilter)))
+            if(((GetUnitAbilityLevel(IB,'A00T')==1)and(NAScarabs<2))or((GetUnitAbilityLevel(IB,'A00T')==2)and(NAScarabs<4))or((GetUnitAbilityLevel(IB,'A00T')==3)and(NAScarabs<6))or((GetUnitAbilityLevel(IB,'A00T')==4)and(NAScarabs<8)))then
+                set J4=IssueImmediateOrderById(IB,852554)
+            endif
+        endif
+        
+       WQv> 
+       if((not J4)and(GetUnitLifePercent(it)>55.))then
+            set NAScarabs=CountUnitsInGroup(GetUnitsOfPlayerMatching(GetOwningPlayer(it),Condition(function ScarabsFilter)))
+            if(((GetUnitAbilityLevel(it,'A00T')==1)and(NAScarabs<2))or((GetUnitAbilityLevel(it,'A00T')==2)and(NAScarabs<4))or((GetUnitAbilityLevel(it,'A00T')==3)and(NAScarabs<6))or((GetUnitAbilityLevel(it,'A00T')==4)and(NAScarabs<8)))then
+                set J4=IssueImmediateOrderById(it,852554)
+            endif
+        endif

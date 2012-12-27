@@ -1,0 +1,471 @@
+if(PointValue==34)then	 //Magina, Anti-Mage
+elseif(PointValue==37)then	 //Rexxar, Beastmaster 
+elseif(PointValue==38)then	 //Jakiro, Twin Head Dragon 
+elseif(PointValue==32)then	 //Gondar, Bounty Hunter 
+elseif(PointValue==52)then	 //Rigwarl, Bristleback //old 29
+elseif(PointValue==31)then	 //Bradwarden, Centaur Warchief 
+elseif(PointValue==24)then	 //Chen, Holy Knight 
+elseif(PointValue==5)then	 //Rylai Crestfall, Crystal Maiden //CM
+elseif(PointValue==8)then	 //Raigor Stonehoof, Earthshaker 
+elseif(PointValue==3)then	 //Aiushtha, Enchantress 
+elseif(PointValue==95)then	 //Darchrow, Enigma 
+elseif(PointValue==20)then	 //Furion, Prophet 
+elseif(PointValue==12)then	 //Yurnero, Juggernaut 
+elseif(PointValue==16)then	 //Ezalor, Keeper of the Light //KotL
+elseif(PointValue==25)then	 //Luna Moonfang, Moon Rider 
+elseif(PointValue==4)then	 //Morphling, Morphling 
+elseif(PointValue==7)then	 //Slithice, Naga Siren 
+elseif(PointValue==18)then	 //Aggron Stonebreaker, Ogre Magi 
+elseif(PointValue==36)then	 //Purist Thunderwrath, Omniknight 
+elseif(PointValue==21)then	 //Azwraith, Phantom Lancer //PL
+elseif(PointValue==14)then	 //Rooftrellen, Treant Protector 
+elseif(PointValue==13)then	 //Nortrom, Silencer 
+elseif(PointValue==26)then	 //Kardel Sharpeye, Dwarven Sniper 
+elseif(PointValue==9)then	 //Rikimaru, Stealth Assassin //SA
+elseif(PointValue==10)then	 //Syllabear, Lone Druid 
+elseif(PointValue==23)then	 //Squee Spleen and Spoon, Goblin Techies 
+elseif(PointValue==19)then	 //Boush, Tinker 
+elseif(PointValue==22)then	 //Tiny, Stone Giant 
+elseif(PointValue==17)then	 //Ulfsaar, Ursa Warrior 
+elseif(PointValue==1)then	 //Shendelzare Silkwood, Vengeful Spirit
+elseif(PointValue==2)then	 //Zeus, Lord of Olympia 
+elseif(PointValue==27)then	 //Jah'rakal, Troll Warlord 
+elseif(PointValue==82)then	 //Mogul Kahn, Axe 
+elseif(PointValue==75)then	 //Atropos, Bane Elemental 
+elseif(PointValue==83)then	 //Strygwyr, Bloodseeker 
+elseif(PointValue==59)then	 //Black Arachnia, Broodmother 
+elseif(PointValue==108)then	 //Nessaj, Chaos Knight //old 57
+elseif(PointValue==69)then	 //Darkterror, Faceless Void 
+elseif(PointValue==100)then      //Leshrac the Malicious, Tormented Soul // old 50
+elseif(PointValue==102)then      //Kel'Thuzad, Lich //old 51
+elseif(PointValue==64)then	 //Lucifer, Doom Bringer 
+elseif(PointValue==106)then	 //Magnus, Magnataur //old 55
+elseif(PointValue==61)then	 //Medusa, Gorgon 
+elseif(PointValue==76)then	 //Rotund'jere, Necrolyte 
+elseif(PointValue==80)then	 //Nevermore, Shadow Fiend 
+elseif(PointValue==62)then	 //Balanar, Night Stalker 
+elseif(PointValue==60)then	 //Mortred, Phantom Assassin //PA
+elseif(PointValue==77)then	 //Pudge, Butcher 
+elseif(PointValue==73)then	 //Pugna, Oblivion 
+elseif(PointValue==81)then	 //Crixalis, Sand King //SK
+elseif(PointValue==66)then	 //Slardar, Slithereen Guard 
+elseif(PointValue==78)then	 //Barathrum, Spiritbreaker 
+elseif(PointValue==99)then	 //Terrorblade, Soul Keeper //old 49
+elseif(PointValue==74)then	 //Leviathan, Tidehunter 
+elseif(PointValue==105)then	 //Lesale Deathbringer, Venomancer //old 54
+elseif(PointValue==70)then	 //Viper, Netherdrake 
+elseif(PointValue==107)then	 //Visage, Necro'lic //old 56
+elseif(PointValue==79)then	 //Anub'seran, Nerubian Weaver 
+elseif(PointValue==68)then	 //Clinkz, Bone Fletcher 
+elseif(PointValue==84)then	 //Abaddon, Lord of Avernus 
+elseif(PointValue==85)then	 //Mercurial, Spectre 
+elseif(PointValue==86)then	 //Vol'Jin, Witch Doctor 
+elseif(PointValue==87)then	 //Harbinger, Obsidian Destroyer 
+elseif(PointValue==33)then	 //Knight Davion, Dragon Knight  //DK
+elseif(PointValue==39)then	 //Razzil Darkbrew, Alchemist 
+elseif(PointValue==88)then	 //Demnok Lannik, Warlock 
+elseif(PointValue==40)then	 //Mirana Nightshade, Priestess of the Moon //PotM
+elseif PointValue==89 then	 //Meepo, Geomancer 
+elseif PointValue==90 then	 //Dazzle, Shadow Priest 
+elseif PointValue==71 then	 //Razor, Lightning Revenant 
+elseif PointValue==93 then	 //Ish'kafel, Dark Seer 
+elseif PointValue==42 then	 //Huskar, Sacred Warrior 
+elseif PointValue==91 then	 //Azgalor, Pit Lord 
+elseif PointValue==92 then	 //Dirge, Undying 
+elseif PointValue==41 then	 //Raijin Thunderkeg, Storm Spirit 
+elseif PointValue==43 then	 //Lanaya, Templar Assassin 
+elseif PointValue==44 then	 //Puck, Faerie Dragon 
+elseif PointValue==30 then	 //Mangix, Pandaren Brewmaster 
+elseif PointValue==72 then	 //N'aix, Lifestealer 
+elseif PointValue==94 then	 //Kael, Invoker 
+elseif PointValue==6 then	 //Sven, Rogue Knight 
+elseif PointValue==104 then	 //Lion, Demon Witch 
+elseif PointValue==53 then	 //Grand Magus, Rubick 
+elseif PointValue==65 then   //Anub'arak, Nerubian Assassin //NA
+elseif PointValue==45 then	 //Rattletrap, Clockwerk Goblin 
+elseif PointValue==58 then	 //Banehallow, Lycanthrope 
+elseif PointValue==63 then	 //King Leoric, Skeleton King //SK
+elseif PointValue==46 then	 //Kunkka, Admiral Proudmoore 
+elseif PointValue==47 then	 //Alleria, Windrunner 
+elseif PointValue==11 then	 //Lina Inverse, Slayer 
+elseif PointValue==96 then	 //Jin'zakk, Batrider 
+elseif PointValue==15 then	 //Tauren Chieftain, Cairne Bloodhoof 
+elseif PointValue==97 then	 //Kaldr, Ancient Apparition //AA
+elseif PointValue==98 then	 //Slark, Murloc Nightcrawler 
+elseif PointValue==67 then	 //Akasha, Queen of Pain //QoP
+elseif PointValue==28 then	 //Rhasta, Shadow Shaman 
+elseif PointValue==101 then  //Eredar, Shadow Demon 
+elseif PointValue==48 then   //Aurel Vlaicu, Gyrocopter 
+elseif PointValue==49 then   //Thrall, Far Seer 
+elseif PointValue==29 then   //Io, Guardian Wisp //old 50
+elseif PointValue==50 then   //Ymir, Tuskarr 
+elseif PointValue==51 then   //Icarus, Phoenix 
+elseif PointValue==54 then   //Xin, Ember Spirit
+elseif PointValue==55 then   //Tresdin, Legion Commander
+elseif PointValue==56 then   //Dragonus, Skywrath Mage
+elseif PointValue==57 then   //Rizzrak, Goblin Shredder
+elseif PointValue==109 then  //Auroth, Winter Wyvern
+elseif PointValue==110 then  //Zet, Arc Warden
+elseif PointValue==35 then   //Traxex, Drow Ranger
+
+
+// hero ids (id = name)
+$heroes["Hvwd"] = "Shendelzare Silkwood, Vengeful Spirit";
+$heroes["Hmbr"] = "Zeus, Lord of Olympia";
+$heroes["Emoo"] = "Aiushtha, Enchantress";
+$heroes["O00P"] = "Morphling, Morphling";
+$heroes["Hjai"] = "Rylai Crestfall, Crystal Maiden";
+$heroes["H001"] = "Sven, Rogue Knight";
+$heroes["HC49"] = "Slithice, Naga Siren";
+$heroes["Otch"] = "Raigor Stonehoof, Earthshaker";
+$heroes["HC92"] = "Rikimaru, Stealth Assassin";
+$heroes["N01O"] = "Syllabear, Lone Druid";
+$heroes["H004"] = "Lina Inverse, Slayer";
+$heroes["Nbbc"] = "Yurnero, Juggernaut";
+$heroes["N01A"] = "Nortrom, Silencer";
+$heroes["Hamg"] = "Rooftrellen, Treant Protector";
+$heroes["Uktl"] = "Darchrow, Enigma";
+$heroes["Hblm"] = "Ezalor, Keeper of the Light";
+$heroes["Huth"] = "Ulfsaar, Ursa Warrior";
+$heroes["Hmkg"] = "Aggron Stonebreaker, Ogre Magi";
+$heroes["Ntin"] = "Boush, Tinker";
+$heroes["Emns"] = "Furion, Prophet";
+$heroes["Ogrh"] = "Azwraith, Phantom Lancer";
+$heroes["Ucrl"] = "Tiny, Stone Giant";
+$heroes["H00K"] = "Squee and Spleen, Goblin Techies";
+$heroes["H00A"] = "Chen, Holy Knight";
+$heroes["E005"] = "Luna Moonfang, Moon Rider";
+$heroes["Usyl"] = "Kardel Sharpeye, Dwarven Sniper";
+$heroes["N016"] = "Jah'rakal, Troll Warlord";
+$heroes["Orkn"] = "Rhasta, Shadow Shaman";
+$heroes["H008"] = "Rigwarl, Bristleback";
+$heroes["Npbm"] = "Mangix, Pandaren Brewmaster";
+$heroes["H000"] = "Bradwarden, Centaur Warchief";
+$heroes["Naka"] = "Gondar, Bounty Hunter";
+$heroes["Hlgr"] = "Knight Davion, Dragon Knight";
+$heroes["Edem"] = "Magina, Anti-Mage";
+$heroes["Nbrn"] = "Traxex, Drow Ranger";
+$heroes["Harf"] = "Purist Thunderwrath, Omniknight";
+$heroes["H00D"] = "Rexxar, Beastmaster";
+$heroes["E00P"] = "Jakiro, Twin Head Dragon";
+$heroes["N01I"] = "Razzil Darkbrew, Alchemist";
+$heroes["N01V"] = "Mirana Nightshade, Priestess of the Moon";
+$heroes["H00S"] = "Raijin Thunderkeg, Storm Spirit";
+$heroes["H00Q"] = "Huskar, Sacred Warrior";
+$heroes["E01Y"] = "Lanaya, Templar Assassin";
+$heroes["N00B"] = "Puck, Faerie Dragon";
+$heroes["H00T"] = "Rattletrap, Clockwerk Goblin";
+$heroes["H06S"] = "Kunkka, Admiral Proudmoore";
+$heroes["N0EG"] = "Alleria, Windrunner";
+$heroes["Eevi"] = "Terrorblade, Soul Keeper";
+$heroes["Ekee"] = "Leshrac the Malicious, Tormented Soul";
+$heroes["Ulic"] = "Kel'Thuzad, Lich";
+$heroes["UC76"] = "Krobelus, Death Prophet";
+$heroes["UC18"] = "Lion, Demon Witch";
+$heroes["EC57"] = "Lesale Deathbringer, Venomancer";
+$heroes["UC11"] = "Magnus, Magnataur";
+$heroes["UC60"] = "Visage, Necro'lic";
+$heroes["U00A"] = "Nessaj, Chaos Knight";
+$heroes["U008"] = "Banehallow, Lycanthrope";
+$heroes["U006"] = "Black Arachnia, Broodmother";
+$heroes["Ewar"] = "Mortred, Phantom Assassin";
+$heroes["H00V"] = "Medusa, Gorgon";
+$heroes["Udre"] = "Balanar, Night Stalker";
+$heroes["NC00"] = "King Leoric, Skeleton King";
+$heroes["UC42"] = "Lucifer, Doom Bringer";
+$heroes["U000"] = "Anub'arak, Nerubian Assassin";
+$heroes["UC91"] = "Slardar, Slithereen Guard";
+$heroes["UC01"] = "Akasha, Queen of Pain";
+$heroes["E004"] = "Clinkz, Bone Fletcher";
+$heroes["EC45"] = "Darkterror, Faceless Void";
+$heroes["EC77"] = "Viper, Netherdrake";
+$heroes["E002"] = "Razor, Lightning Revenant";
+$heroes["U00C"] = "N'aix, Lifestealer";
+$heroes["H00H"] = "Pugna, Oblivion";
+$heroes["Ofar"] = "Leviathan, Tidehunter";
+$heroes["Oshd"] = "Atropos, Bane Elemental";
+$heroes["U00E"] = "Rotund'jere, Necrolyte";
+$heroes["U00F"] = "Pudge, Butcher";
+$heroes["O00J"] = "Barathrum, Spiritbreaker";
+$heroes["Ubal"] = "Anub'seran, Nerubian Weaver";
+$heroes["Nfir"] = "Nevermore, Shadow Fiend";
+$heroes["U00K"] = "Crixalis, Sand King";
+$heroes["Opgh"] = "Mogul Kahn, Axe";
+$heroes["Hvsh"] = "Strygwyr, Bloodseeker";
+$heroes["Udea"] = "Abaddon, Lord of Avernus";
+$heroes["E01B"] = "Mercurial, Spectre";
+$heroes["E01A"] = "Vol'Jin, Witch Doctor";
+$heroes["U00P"] = "Harbinger, Obsidian Destroyer";
+$heroes["E01C"] = "Demnok Lannik, Warlock";
+$heroes["H00I"] = "Meepo, Geomancer";
+$heroes["N01W"] = "Dazzle, Shadow Priest";
+$heroes["N00R"] = "Azgalor, Pit Lord";
+$heroes["H00R"] = "Dirge, Undying";
+$heroes["H00N"] = "Ish'kafel, Dark Seer";
+$heroes["H00U"] = "Kael, Invoker";
+$heroes["N0HP"] = "Kaldr, Ancient Apparition";
+$heroes["O015"] = "Tauren Chieftain, Cairne Bloodhoof"
+$heroes["H071"] = "Slark, Murloc Nightcrawler"
+$heroes["O016"] = "Jin'zakk, Batrider"
+$heroes["E02I"] = "Ymir, Tuskarr"
+$heroes["E02N"] = "Gyrocopter, Aurel Vlaicu"
+$heroes["E02J"] = "Thrall, Far Seer"
+$heroes["O01F"] = "Io, Guardian Wisp"
+$heroes["E02H"] = "Eredar, Shadow Demon"
+$heroes["E02F"] = "Icarus, Phoenix"
+$heroes["E02X"] = "Grand Magus, Rubick"
+$heroes["N0M0"] = "Xin, Ember Spirit";
+$heroes["E02K"] = "Tresdin, Legion Commander";
+$heroes["H0DO"] = "Dragonus, Skywrath Mage";
+$heroes["E032"] = "Rizzrak, Goblin Shredder";
+$heroes["N0M7"] = "Auroth, Winter Wyvern";
+$heroes["N0MK"] = "Zet, Arc Warden";
+
+public constant integer absorb = 852529
+public constant integer acolyteharvest = 852185
+public constant integer AImove = 851988
+public constant integer ambush = 852131
+public constant integer ancestralspirit = 852490
+public constant integer ancestralspirittarget = 852491
+public constant integer animatedead = 852217
+public constant integer antimagicshell = 852186
+public constant integer attack = 851983
+public constant integer attackground = 851984
+public constant integer attackonce = 851985
+public constant integer attributemodskill = 852576
+public constant integer auraunholy = 852215
+public constant integer auravampiric = 852216
+public constant integer autodispel = 852132
+public constant integer autodispeloff = 852134
+public constant integer autodispelon = 852133
+public constant integer autoentangle = 852505
+public constant integer autoentangleinstant = 852506
+public constant integer autoharvestgold = 852021
+public constant integer autoharvestlumber = 852022
+public constant integer avatar = 852086
+public constant integer avengerform = 852531
+public constant integer awaken = 852466
+public constant integer banish = 852486
+public constant integer barkskin = 852135
+public constant integer barkskinoff = 852137
+public constant integer barkskinon = 852136
+public constant integer battleroar = 852599
+public constant integer battlestations = 852099
+public constant integer bearform = 852138
+public constant integer berserk = 852100
+public constant integer blackarrow = 852577
+public constant integer blackarrowoff = 852579
+public constant integer blackarrowon = 852578
+public constant integer blight = 852187
+public constant integer blink = 852525
+public constant integer blizzard = 852089
+public constant integer bloodlust = 852101
+public constant integer bloodlustoff = 852103
+public constant integer bloodluston = 852102
+public constant integer board = 852043
+public constant integer breathoffire = 852580
+public constant integer breathoffrost = 852560
+public constant integer build = 851994
+public constant integer burrow = 852533
+public constant integer cannibalize = 852188
+public constant integer carrionscarabs = 852551
+public constant integer carrionscarabsinstant = 852554
+public constant integer carrionscarabsoff = 852553
+public constant integer carrionscarabson = 852552
+public constant integer carrionswarm = 852218
+public constant integer chainlightning = 852119
+public constant integer channel = 852600
+public constant integer charm = 852581
+public constant integer cloudoffog = 852473
+public constant integer clusterrockets = 852652
+public constant integer coldarrows = 852244
+public constant integer coldarrowstarg = 852243
+public constant integer controlmagic = 852474
+public constant integer corporealform = 852493
+public constant integer corrosivebreath = 852140
+public constant integer coupleinstant = 852508
+public constant integer coupletarget = 852507
+public constant integer creepanimatedead = 852246
+public constant integer creepdevour = 852247
+public constant integer creepheal = 852248
+public constant integer creephealoff = 852250
+public constant integer creephealon = 852249
+public constant integer creepthunderbolt = 852252
+public constant integer creepthunderclap = 852253
+public constant integer cripple = 852189
+public constant integer curse = 852190
+public constant integer curseoff = 852192
+public constant integer curseon = 852191
+public constant integer cyclone = 852144
+public constant integer darkconversion = 852228
+public constant integer darkportal = 852229
+public constant integer darkritual = 852219
+public constant integer darksummoning = 852220
+public constant integer deathanddecay = 852221
+public constant integer deathcoil = 852222
+public constant integer deathpact = 852223
+public constant integer decouple = 852509
+public constant integer defend = 852055
+public constant integer detectaoe = 852015
+public constant integer detonate = 852145
+public constant integer devour = 852104
+public constant integer devourmagic = 852536
+public constant integer disassociate = 852240
+public constant integer disenchant = 852495
+public constant integer dismount = 852470
+public constant integer dispel = 852057
+public constant integer divineshield = 852090
+public constant integer doom = 852583
+public constant integer drain = 852487
+public constant integer dreadlordinferno = 852224
+public constant integer dropitem = 852001
+public constant integer drunkenhaze = 852585
+public constant integer earthquake = 852121
+public constant integer eattree = 852146
+public constant integer elementalfury = 852586
+public constant integer ensnare = 852106
+public constant integer ensnareoff = 852108
+public constant integer ensnareon = 852107
+public constant integer entangle = 852147
+public constant integer entangleinstant = 852148
+public constant integer entanglingroots = 852171
+public constant integer etherealform = 852496
+public constant integer evileye = 852105
+public constant integer faeriefire = 852149
+public constant integer faeriefireoff = 852151
+public constant integer faeriefireon = 852150
+public constant integer fanofknives = 852526
+public constant integer farsight = 852122
+public constant integer fingerofdeath = 852230
+public constant integer firebolt = 852231
+public constant integer flamestrike = 852488
+public constant integer flamingarrows = 852174
+public constant integer flamingarrowstarg = 852173
+public constant integer flamingattack = 852540
+public constant integer flamingattacktarg = 852539
+public constant integer flare = 852060
+public constant integer forceboard = 852044
+public constant integer forceofnature = 852176
+public constant integer forkedlightning = 852587
+public constant integer freezingbreath = 852195
+public constant integer frenzy = 852561
+public constant integer frenzyoff = 852563
+public constant integer frenzyon = 852562
+public constant integer frostarmor = 852225
+public constant integer frostarmoroff = 852459
+public constant integer frostarmoron = 852458
+public constant integer frostnova = 852226
+public constant integer getitem = 851981
+public constant integer gold2lumber = 852233
+public constant integer grabtree = 852511
+public constant integer harvest = 852018
+public constant integer heal = 852063
+public constant integer healingward = 852109
+public constant integer healingwave = 852501
+public constant integer healoff = 852065
+public constant integer healon = 852064
+public constant integer hex = 852502
+public constant integer holdposition = 851993
+public constant integer holybolt = 852092
+public constant integer howlofterror = 852588
+public constant integer humanbuild = 851995
+public constant integer immolation = 852177
+public constant integer impale = 852555
+public constant integer inferno = 852232
+public constant integer innerfire = 852066
+public constant integer innerfireoff = 852068
+public constant integer innerfireon = 852067
+public constant integer instant = 852200
+public constant integer invisibility = 852069
+public constant integer lightningshield = 852110
+public constant integer load = 852046
+public constant integer loadarcher = 852142
+public constant integer loadcorpse = 852050
+public constant integer loadcorpseinstant = 852053
+public constant integer locustswarm = 852556
+public constant integer lumber2gold = 852234
+public constant integer magicdefense = 852478
+public constant integer magicleash = 852480
+public constant integer magicundefense = 852479
+public constant integer manaburn = 852179
+public constant integer manaflareoff = 852513
+public constant integer manaflareon = 852512
+public constant integer manashieldoff = 852590
+public constant integer manashieldon = 852589
+public constant integer massteleport = 852093
+public constant integer mechanicalcritter = 852564
+public constant integer metamorphosis = 852180
+public constant integer militia = 852072
+public constant integer militiaconvert = 852071
+public constant integer militiaoff = 852073
+public constant integer militiaunconvert = 852651
+public constant integer mindrot = 852565
+public constant integer mirrorimage = 852123
+public constant integer monsoon = 852591
+public constant integer mount = 852469
+public constant integer mounthippogryph = 852143
+public constant integer move = 851986
+public constant integer nagabuild = 852467
+public constant integer neutraldetectaoe = 852023
+public constant integer neutralinteract = 852566
+public constant integer neutralspell = 852630
+public constant integer nightelfbuild = 851997
+public constant integer orcbuild = 851996
+public constant integer parasite = 852601
+public constant integer parasiteoff = 852603
+public constant integer parasiteon = 852602
+public constant integer patrol = 851990
+public constant integer phaseshift = 852514
+public constant integer phaseshiftinstant = 852517
+public constant integer phaseshiftoff = 852516
+public constant integer phaseshifton = 852515
+public constant integer phoenixfire = 852481
+public constant integer phoenixmorph = 852482
+public constant integer poisonarrows = 852255
+public constant integer poisonarrowstarg = 852254
+public constant integer polymorph = 852074
+public constant integer possession = 852196
+public constant integer preservation = 852568
+public constant integer purge = 852111
+public constant integer rainofchaos = 852237
+public constant integer rainoffire = 852238
+public constant integer raisedead = 852197
+public constant integer raisedeadoff = 852199
+public constant integer raisedeadon = 852198
+public constant integer ravenform = 852155
+public constant integer recharge = 852157
+public constant integer rechargeoff = 852159
+public constant integer rechargeon = 852158
+public constant integer rejuvenation = 852160
+public constant integer renew = 852161
+public constant integer renewoff = 852163
+public constant integer renewon = 852162
+public constant integer repair = 852024
+public constant integer repairoff = 852026
+public constant integer repairon = 852025
+public constant integer replenish = 852542
+public constant integer replenishlife = 852545
+public constant integer replenishlifeoff = 852547
+public constant integer replenishlifeon = 852546
+public constant integer replenishmana = 852548
+public constant integer replenishmanaoff = 852550
+public constant integer replenishmanaon = 852549
+public constant integer replenishoff = 852544
+public constant integer replenishon = 852543
+public constant integer request_hero = 852239
+public constant integer requestsacrifice = 852201
+public constant integer restoration = 852202
+public constant integer restorationoff = 852204
+public constant integer restorationon = 852203
+public constant integer resumebuild = 851999
+public constant integer resumeharvesting = 852017
+public constant integer resurrection = 852283 // was 852094
+public constant integer returnresources = 852020
+public constant integer revenge = 852241
+public constant integer revive = 852039
+public constant integer roar = 852164
+public constant integer robogoblin = 852656
+public constant integer root = 852165
+public constant integer sacrifice = 852205
+public constant integer sanctuary = 852569
+public constant integer scout = 852181
