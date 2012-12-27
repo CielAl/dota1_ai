@@ -172,6 +172,8 @@ G0[304    = Rubick's ability function call, skip other non-ability function
 G0[320    = returning to base for item purpose
 G0[336	  = gank issue kill signal
 
+G0[352	  = temporarily disable tp
+
 ---boolean GZ
 GZ[16+O5]=true - AI Issued Order
 GZ[64+O5]=true - -aid command used
@@ -221,6 +223,7 @@ g_taAITriggers[64+O5] = backing off
 g_taAITriggers[80+O5] =first item buy
 g_taAITriggers[96+O5] =chasing through fog
 g_taAITriggers[112+O5] = for use per step of new item system
+g_taAITriggers[128+O5] = antistuck in fountain
 
 ---laning priority:
 hq[528+O5] = defense
@@ -323,6 +326,9 @@ g_aiItemBool[256+ = side-shopping
 g_aiItemBool[272+ = AI has all recipe items (if this is false, sideshopping cannot advance step)
 
 g_aiItemBool[288+ = FORCEFIX - Disable sideshopping once bear is reached
+
+g_aiItemBool[304+ = AI is dropping item
+g_aiItemBool[320+ = AI is able to buy scroll from sideshop
 
 ---=============================================================================
 "Usage of aiAbilities system"
