@@ -73,20 +73,20 @@ Nbbc = Juggernaut =========================================
 N01A = Silencer =========================================
     A14L - Curse of the Silent [blizzard - 852089]
     A0LZ - Glaives of Wisdom [poisonarrowstarg - 852254]
-    A0MC - Last Word []
+    A2NT - Last Word [thunderbolt - 852095]
     A0L3 - Global Silence [channel - 852600]
 
 Hamg = Treant Protector =========================================
     A01Z - Nature's Guise [invisibility - 852069]
     A26N - Leech Seed [thunderbolt - 852095]
-    A24O - Living Armor []
+    A2ML - Living Armor [channel - 852600]
     A07Z - Overgrowth [channel - 852600]
 
-Uktl = Enigma =========================================
-    A0I7 - Malefice [acidbomb - 852662]
-    A180 - Demonic Conversion [thunderbolt - 852095]
-    A0B1 - Midnight Pulse [channel - 852600]
-    A1BX - Black Hole [cannibalize - 852188]
+O015 = Tauren Chieftain =========================================
+    A1AA - Echo Stomp []
+    A1A8 - Ancestral Spirit [volcano - 852669]
+    A1CD - Natural Order []
+    A1A1 - Earth Splitter [channel - 852600]
 
 Hblm = Keeper of the Light =========================================
     A085 - Illuminate [channel - 852600]
@@ -96,7 +96,7 @@ Hblm = Keeper of the Light =========================================
 
 Huth = Ursa Warrior =========================================
     A03Y - Earthshock [thunderclap - 852096]
-    A1N4 - Overpower [fanofknives - 852526]
+    A1P9 - Overpower [channel - 852600]
     ANic - Fury Swipes [incinerate - incinerate]
     A0LC - Enrage [berserk - 852100]
 
@@ -166,11 +166,11 @@ Orkn = Shadow Shaman =========================================
     A00P - Shackles [magicleash - 852480]
     A00H - Mass Serpent Ward [ward - 852504]
 
-H008 = Bristleback =========================================
-    A0FW - Viscous Nasal Goo [channel - 852600]
-    A0GP - Quill Spray [fanofknives - 852526]
-    A0M3 - Bristleback []
-    A0FV - Warpath []
+O01F = Guardian Wisp =========================================
+    A1TA - Tether [chainlightning - 852119]
+    A1T8 - Spirits [fanofknives - 852526]
+    A28Q - Overcharge []
+    A1TB - Relocate [acidbomb - 852662]
 
 Npbm = Pandaren Brewmaster =========================================
     A06M - Thunder Clap [thunderclap - 852096]
@@ -180,9 +180,9 @@ Npbm = Pandaren Brewmaster =========================================
 
 H000 = Centaur Warchief =========================================
     A00S - Hoof Stomp [stomp - 852127]
-    A00L - Double Edge []
+    A2ON - Double Edge [channel - 852600]
     A00V - Return []
-    A01L - Great Fortitude [attributemodskill - 852576]
+    A2O6 - Stampede [fanofknives - 852526]
 
 Naka = Bounty Hunter =========================================
     A004 - Shuriken Toss [thunderbolt - 852095]
@@ -280,59 +280,65 @@ N0EG = Windrunner =========================================
     A14I - Windrunner [fanofknives - 852526]
     A12P - Focus Fire [charm - 852581]
 
-Eevi = Soul Keeper =========================================
-    A27A - Reflection [blizzard - 852089]
-    A275 - Zeal []
-    A1RI - Metamorphosis [chemicalrage - 852663]
-    A07Q - Sunder [cripple - 852189]
+E02N = Gyrocopter =========================================
+    A1SO - Rocket Barrage [channel - 852600]
+    A1SQ - Homing Missile [chainlightning - 852119]
+    A229 - Flak Cannon [fanofknives - 852526]
+    A1T5 - Call Down [blizzard - 852089]
 
-Ekee = Tormented Soul =========================================
-    A06W - Split Earth [inferno - 852232]
-    A20T - Diabolic Edict [fanofknives - 852526]
-    A06V - Lightning Storm []
-    A21F - Pulse Nova [berserk - 852100]
+E02J = Disruptor =========================================
+    A1TV - Thunder Strike [thunderbolt - 852095]
+    A1SW - Glimpse []
+    A1SU - Kinetic Field [blizzard - 852089]
+    A1U6 - Static Storm [channel - 852600]
 
-Ulic = Lich =========================================
-    A07F - Frost Nova [frostnova - 852226]
-    A08R - Frost Armor [frostarmor - 852225]
-    A053 - Dark Ritual [innerfire - 852066]
-    A05T - Chain Frost [sleep - 852227]
+E02I = Tuskarr =========================================
+    A1YO - Ice Shards [channel - 852600]
+    A1S7 - Snowball [acolyteharvest - 852185]
+    A1YR - Frozen Sigil [summongrizzly - 852594]
+    A1YQ - Walrus Punch [fanofknives - 852526]
 
-UC76 = Death Prophet =========================================
-    A02M - Carrion Swarm [carrionswarm - 852218]
-    A0P6 - Silence [silence - 852592]
-    A02C - Witchcraft [engineeringupgrade - engineeringupgrade]
-    A073 - Exorcism [tornado - 852597]
+E02F = Phoenix =========================================
+    A1RJ - Icarus Dive [channel - 852600]
+    A1YX - Fire Spirits [ancestralspirit - 852490]
+    A1YY - Sun Ray [charm - 852581]
+    A1RK - Supernova [acidbomb - 852662]
 
-UC18 = Demon Witch =========================================
-    A0X5 - Impale [impale - 852555]
-    A0MN - Voodoo [hex - 852502]
-    A02N - Mana Drain []
-    A095 - Finger of Death [chainlightning - 852119]
+H008 = Bristleback =========================================
+    A0FW - Viscous Nasal Goo [channel - 852600]
+    A0GP - Quill Spray [fanofknives - 852526]
+    A0M3 - Bristleback []
+    A0FV - Warpath []
 
-EC57 = Venomancer =========================================
-    A173 - Venomous Gale [volcano - 852669]
-    A0MY - Poison Sting []
-    A0MS - Plague Ward [Serpentward - Serpentward]
-    A013 - Poison Nova [summongrizzly - 852594]
+E02X = Grand Magus =========================================
+    A27F - Telekinesis [wispharvest - 852214]
+    A27G - Fade Bolt [tranquility - 852184]
+    A27V - Null Field []
+    A27H - Spell Steal [transmute - 852665]
 
-UC11 = Magnataur =========================================
-    A02S - Shockwave [shockwave - 852125]
-    A037 - Empower [innerfire - 852066]
-    A1RD - Skewer [carrionswarm - 852218]
-    A29L - Reverse Polarity [roar - 852164]
+N0M0 = Ember Spirit =========================================
+    A2H3 - Searing Chains [fanofknives - 852526]
+    A2H0 - Sleight of Fist [blizzard - 852089]
+    A2HS - Flame Guard [channel - 852600]
+    A2JK - Fire Remnant [channel - 852600]
 
-UC60 = Necro'lic =========================================
-    A08X - Grave Chill [cripple - 852189]
-    A1NA - Soul Assumption [channel - 852600]
-    A0VX - Gravekeeper's Cloak []
-    A1NE - Familiars [fanofknives - 852526]
+E02K = Legion Commander =========================================
+    A2JB - Overwhelming Odds [blizzard - 852089]
+    A2J2 - Press The Attack [channel - 852600]
+    A2EY - Moment of Courage []
+    A2CI - Duel [thunderbolt - 852095]
 
-U00A = Chaos Knight =========================================
-    A055 - Chaos Bolt []
-    A0RW - Reality Rift [channel - 852600]
-    A03N - Critical Strike []
-    A03O - Phantasm [mirrorimage - 852123]
+H0DO = Skywrath Mage =========================================
+    A2BE - Arcane Bolt [chainlightning - 852119]
+    A2IT - Concussive Shot [fanofknives - 852526]
+    A2HN - Ancient Seal [soulburn - 852668]
+    A2BG - Mystic Flare [channel - 852600]
+
+E032 = Goblin Shredder =========================================
+    A2FK - Whirling Death [fanofknives - 852526]
+    A2E3 - Timber Chain [channel - 852600]
+    A2E4 - Reactive Armor []
+    A2E5 - Chakram [auravampiric - 852216]
 
 U008 = Lycanthrope =========================================
     A03D - Summon Wolves [spiritwolf - 852126]
@@ -437,7 +443,7 @@ Ofar = Tidehunter =========================================
     A29I - Ravage [howlofterror - 852588]
 
 Oshd = Bane Elemental =========================================
-    A04V - Enfeeble [innerfire - 852066]
+    A2OI - Enfeeble [thunderbolt - 852095]
     A0GK - Brain Sap []
     A04Y - Nightmare [sleep - 852227]
     A02Q - Fiend's Grip [magicleash - 852480]
@@ -533,9 +539,9 @@ N01W = Shadow Priest =========================================
     A10Q - Weave [blizzard - 852089]
 
 N00R = Pit Lord =========================================
-    A26O - Firestorm [rainoffire - 852238]
+    A01I - Firestorm [rainoffire - 852238]
     A0RA - Pit of Malice [flamestrike - 852488]
-    A288 - Expulsion [fanofknives - 852526]
+    AIcd - Atrophy Aura []
     A0R0 - Dark Rift [channel - 852600]
 
 H00R = Undying =========================================
@@ -556,23 +562,11 @@ H00U = Invoker =========================================
     A21V - Exort [battleroar - 852599]
     A21Y - Invoke [howlofterror - 852588]
 
-N0HP = Ancient Apparition =========================================
-    A1MG - Cold Feet [channel - 852600]
-    A1HS - Ice Vortex [blizzard - 852089]
-    A1HQ - Chilling Touch [berserk - 852100]
-    A1MI - Ice Blast [acidbomb - 852662]
-
-O015 = Tauren Chieftain =========================================
-    A1AA - Echo Stomp []
-    A1A8 - Ancestral Spirit [volcano - 852669]
-    A1CD - Natural Order []
-    A1A1 - Earth Splitter [channel - 852600]
-
-H071 = Murloc Nightcrawler =========================================
-    A1IM - Dark Pact [fanofknives - 852526]
-    A1J7 - Pounce [channel - 852600]
-    A1HR - Essence Shift []
-    A1IN - Shadow Dance [windwalk - 852129]
+Uktl = Enigma =========================================
+    A0I7 - Malefice [acidbomb - 852662]
+    A180 - Demonic Conversion [thunderbolt - 852095]
+    A0B1 - Midnight Pulse [channel - 852600]
+    A1BX - Black Hole [cannibalize - 852188]
 
 O016 = Batrider =========================================
     A1EL - Sticky Napalm [blizzard - 852089]
@@ -580,29 +574,29 @@ O016 = Batrider =========================================
     A19Z - Firefly [metamorphosis - 852180]
     A19O - Flaming Lasso []
 
-E02I = Tuskarr =========================================
-    A1YO - Ice Shards [channel - 852600]
-    A1S7 - Snowball [acolyteharvest - 852185]
-    A1YR - Frozen Sigil [summongrizzly - 852594]
-    A1YQ - Walrus Punch [fanofknives - 852526]
+N0HP = Ancient Apparition =========================================
+    A1MG - Cold Feet [channel - 852600]
+    A1HS - Ice Vortex [blizzard - 852089]
+    A1HQ - Chilling Touch [berserk - 852100]
+    A1MI - Ice Blast [acidbomb - 852662]
 
-E02N = Gyrocopter =========================================
-    A1SO - Rocket Barrage [channel - 852600]
-    A1SQ - Homing Missile [chainlightning - 852119]
-    A229 - Flak Cannon [fanofknives - 852526]
-    A1T5 - Call Down [blizzard - 852089]
+H071 = Murloc Nightcrawler =========================================
+    A1IM - Dark Pact [fanofknives - 852526]
+    A1J7 - Pounce [channel - 852600]
+    A1HR - Essence Shift []
+    A1IN - Shadow Dance [windwalk - 852129]
 
-E02J = Disruptor =========================================
-    A1TV - Thunder Strike [thunderbolt - 852095]
-    A1SW - Glimpse []
-    A1SU - Kinetic Field [blizzard - 852089]
-    A1U6 - Static Storm [channel - 852600]
+Eevi = Soul Keeper =========================================
+    A2KZ - Reflection [chainlightning - 852119]
+    A0H4 - Conjure Image [channel - 852600]
+    A1RI - Metamorphosis [chemicalrage - 852663]
+    A07Q - Sunder [cripple - 852189]
 
-O01F = Guardian Wisp =========================================
-    A1TA - Tether [chainlightning - 852119]
-    A1T8 - Spirits [fanofknives - 852526]
-    A28Q - Overcharge []
-    A1TB - Relocate [acidbomb - 852662]
+Ekee = Tormented Soul =========================================
+    A06W - Split Earth [inferno - 852232]
+    A035 - Diabolic Edict [summongrizzly - 852594]
+    A06V - Lightning Storm []
+    A21F - Pulse Nova [berserk - 852100]
 
 E02H = Shadow Demon =========================================
     A1S8 - Disruption [chainlightning - 852119]
@@ -610,39 +604,57 @@ E02H = Shadow Demon =========================================
     A1S4 - Shadow Poison [channel - 852600]
     A1SA - Demonic Purge [purge - 852111]
 
-E02F = Phoenix =========================================
-    A1RJ - Icarus Dive [channel - 852600]
-    A1YX - Fire Spirits [ancestralspirit - 852490]
-    A1YY - Sun Ray [charm - 852581]
-    A1RK - Supernova [acidbomb - 852662]
+Ulic = Lich =========================================
+    A07F - Frost Nova [frostnova - 852226]
+    A08R - Frost Armor [frostarmor - 852225]
+    A053 - Dark Ritual [innerfire - 852066]
+    A05T - Chain Frost [sleep - 852227]
 
-E02X = Grand Magus =========================================
-    A27F - Telekinesis [wispharvest - 852214]
-    A27G - Fade Bolt [tranquility - 852184]
-    A27V - Null Field []
-    A27H - Spell Steal [transmute - 852665]
+UC76 = Death Prophet =========================================
+    A02M - Carrion Swarm [carrionswarm - 852218]
+    A0P6 - Silence [silence - 852592]
+    A02C - Witchcraft [engineeringupgrade - engineeringupgrade]
+    A073 - Exorcism [tornado - 852597]
 
-N0M0 = Ember Spirit =========================================
-    A2H3 - Searing Chains [fanofknives - 852526]
-    A2H0 - Sleight of Fist [blizzard - 852089]
-    A2HS - Flame Guard [channel - 852600]
-    A2JK - Fire Remnant [channel - 852600]
+UC18 = Demon Witch =========================================
+    A0X5 - Impale [impale - 852555]
+    A0MN - Voodoo [hex - 852502]
+    A02N - Mana Drain []
+    A095 - Finger of Death [chainlightning - 852119]
 
-E02K = Legion Commander =========================================
-    A2JB - Overwhelming Odds [blizzard - 852089]
-    A2J2 - Press The Attack [channel - 852600]
-    A2EY - Moment of Courage []
-    A2CI - Duel [thunderbolt - 852095]
+EC57 = Venomancer =========================================
+    A173 - Venomous Gale [volcano - 852669]
+    A0MY - Poison Sting []
+    A0MS - Plague Ward [Serpentward - Serpentward]
+    A013 - Poison Nova [summongrizzly - 852594]
 
-H0DO = Skywrath Mage =========================================
-    A2BE - Arcane Bolt [chainlightning - 852119]
-    A2IT - Concussive Shot [fanofknives - 852526]
-    A2HN - Ancient Seal [soulburn - 852668]
-    A2BG - Mystic Flare [channel - 852600]
+UC11 = Magnataur =========================================
+    A02S - Shockwave [shockwave - 852125]
+    A037 - Empower [innerfire - 852066]
+    A1RD - Skewer [carrionswarm - 852218]
+    A29L - Reverse Polarity [roar - 852164]
 
-E032 = Goblin Shredder =========================================
-    A2FK - Whirling Death [fanofknives - 852526]
-    A2E3 - Timber Chain [channel - 852600]
-    A2E4 - Reactive Armor []
-    A2E5 - Chakram [auravampiric - 852216]
+UC60 = Necro'lic =========================================
+    A08X - Grave Chill [cripple - 852189]
+    A1NA - Soul Assumption [channel - 852600]
+    A0VX - Gravekeeper's Cloak []
+    A1NE - Familiars [fanofknives - 852526]
+
+U00A = Chaos Knight =========================================
+    A055 - Chaos Bolt []
+    A0RW - Reality Rift [channel - 852600]
+    A03N - Critical Strike []
+    A03O - Phantasm [mirrorimage - 852123]
+
+N0M7 = Winter Wyvern =========================================
+    A2NE - Arctic Siege [metamorphosis - 852180]
+    A2LA - Splinter Blast [chainlightning - 852119]
+    A2LB - Cold Embrace [channel - 852600]
+    A0Z0 - Winter's Curse [charm - 852581]
+
+N0MK = Arc Warden =========================================
+    A2M1 - Flux [thunderbolt - 852095]
+    A2LM - Magnetic Field [acidbomb - 852662]
+    A2LL - Spark Wraith [channel - 852600]
+    A2M0 - Tempest Double [summongrizzly - 852594]
 
