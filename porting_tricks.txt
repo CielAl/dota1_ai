@@ -10,4 +10,8 @@ AI:
         call AddHeroState(Source,"4309",5.2)
         
 AddHeroState adds a certain state for 5.2 seconds named "state4309".
-If a simple state is added with SaveInteger/LoadInteger, you may not change it.. it`s fine. Allthough SetHeroStateOn/SetHeroStateOff might be used.
+
+If a simple state is added with SaveInteger/LoadInteger, you may not change it.. it`s fine. Allthough SetHeroStateOn/SetHeroStateOff might be used for example:
+
+call SaveInteger(hash_main,(GetHandleId((GetEnumUnit()))),((4306)),(1))   ->>>> call SetHeroStateOn(GetEnumUnit(),"4306")
+call SaveInteger(hash_main,(GetHandleId((GetEnumUnit()))),((4306)),(2))   ->>>> call SetHeroStateOff(GetEnumUnit(),"4306")

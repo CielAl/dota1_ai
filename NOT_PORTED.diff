@@ -1,0 +1,1291 @@
+@@ -801,30 +801,31 @@
+ trigger gg_trg_OM=null
+
+ trigger gg_trg_NB=null
+
+ trigger gg_trg_UB=null
+
+ trigger gg_trg_NM=null
+
+ trigger gg_trg_NT=null
+
+ trigger gg_trg_NS=null
+
+ trigger gg_trg_NR=null
+
+ trigger gg_trg_SO=null
+
+ trigger gg_trg_PM=null
+
+ trigger gg_trg_OI=null
+
+ trigger gg_trg_MI=null
+
+ trigger gg_trg_FR=null
+
+ trigger gg_trg_ER=null
+
+ trigger gg_trg_ZM=null
+
+ trigger gg_trg_CP=null
+
++trigger gg_trg_TT=null
+
+@@ -2947,31 +2963,31 @@
+ constant real RD_HeroSpace=75
+
+ constant real RD_HeroDistance=125
+
+ player RD_CurrentPlayer1=null
+
+ player RD_CurrentPlayer2=null
+
+ integer RD_StartingTeam
+
+ boolean udg_ModeRD=false
+
+ boolean udg_RDSpawn=false
+
+ boolean array RD_HasHero
+
+ real RD_TextX_Sent
+
+ real RD_TextY_Sent
+
+ real RD_TextX_Scourge
+
+ real RD_TextY_Scourge
+
+ constant integer RD_Shadow=1747990089
+
+ unit array RD_ShadowUnits
+
+ integer ShadowUnitsMax=0
+
+-constant integer RD_COUNT=20
+
++constant integer RD_COUNT=22
+
+
+
++boolean udg_ModeTT=false
+
++real array TT_LastTag
+
++unit array TT_HeroA
+
++unit array TT_HeroB
+
++integer array TT_PreviousGold
+
++integer array TT_GoldBank
+
++trigger tt_t_tracker=CreateTrigger()
+
++boolean array TT_DisableTracker
+
++constant integer tt_tagcooldown=180
+
++player tt_itemplayer
+
+
+
+@@ -39823,57 +40513,53 @@
+ call ShowUnit(IntTavern4,false)
+
+ call ShowUnit(StrTavern1,false)
+
+ call ShowUnit(StrTavern2,false)
+
+ call ShowUnit(StrTavern3,false)
+
+ call ShowUnit(StrTavern4,false)
+
+ call ShowUnit(AgiTavern1,false)
+
+ call ShowUnit(AgiTavern2,false)
+
+ call ShowUnit(AgiTavern3,false)
+
+ call ShowUnit(AgiTavern4,false)
+
+ set i=1
+
+ loop
+
+ exitwhen i>RD_COUNT
+
+ set Rand=GiveRandomHeroNumber(true,true)
+
+ if Rigged1 then
+
+ set Rigged1=false
+
+-set Rand=50
+
++set Rand=91
+
+ elseif Rigged2 then
+
+ set Rigged2=false
+
+ set Rand=51
+
+ elseif Rigged3 then
+
+ set Rigged3=false
+
+-set Rand=104
+
++set Rand=99
+
+ elseif Rigged4 then
+
+ set Rigged4=false
+
++if GetRandomInt(1,2)==1 then
+
++set Rand=104
+
++else
+
+ set Rand=65
+
++endif
+
+ elseif Rigged5 then
+
+ set Rigged5=false
+
+-set Rand=49
+
++set Rand=109
+
+ elseif Rigged6 then
+
+ set Rigged6=false
+
+-if GetRandomInt(1,2)==1 then
+
+-set Rand=16
+
+-else
+
+-set Rand=86
+
+-endif
+
++set Rand=15
+
+ elseif Rigged7 then
+
+ set Rigged7=false
+
+-if GetRandomInt(1,2)==1 then
+
+-set Rand=73
+
+-else
+
+-set Rand=83
+
+-endif
+
++set Rand=110
+
+ elseif Rigged8 then
+
+ set Rigged8=false
+
+ elseif Rigged9 then
+
+ set Rigged9=false
+
+ endif
+
+ if Given[Rand]==false and((Rand)!=23)then
+
+ set Given[Rand]=true
+
+ set RD_HeroPool[i]=Rand
+
+ set i=i+1
+
+ endif
+
+ endloop
+
+ set RD_VisionUnits[1]=CreateUnit(udg_SentPlayers[0],1848656963,RD_CenterX_Sent,RD_CenterY_Sent,0)
+
+ set RD_VisionUnits[2]=CreateUnit(udg_SentPlayers[1],1848656963,RD_CenterX_Sent,RD_CenterY_Sent,0)
+
+ set RD_VisionUnits[3]=CreateUnit(udg_SentPlayers[2],1848656963,RD_CenterX_Sent,RD_CenterY_Sent,0)
+
+ set RD_VisionUnits[4]=CreateUnit(udg_SentPlayers[3],1848656963,RD_CenterX_Sent,RD_CenterY_Sent,0)
+ 
+ @@ -43760,84 +44446,492 @@
+ set t=null
+
+ return false
+
+ endfunction
+
+ function ModeCP_Preload takes nothing returns nothing
+
+ local trigger t
+
+ if udg_ModeCP then
+
+ set t=CreateTrigger()
+
+ call TriggerRegisterTimerEvent(t,modecp_delay,false)
+
+ call TriggerAddCondition(t,Condition(function ModeCP_Start))
+
+ set t=null
+
+ endif
+
+ endfunction
+
+ function ModeCP takes nothing returns nothing
+
+ set udg_ModeCP=true
+
+ endfunction
+
+-function Trig_timer1_Actions takes nothing returns nothing
+
+-set udg_KillInt[1]=0
+
++function ModeTT_ProcessItems takes nothing returns nothing
+
++local integer indexId=GetIndex(GetEnumItem())
+
++if GetWidgetLife(GetEnumItem())>0 and GetItemPlayer(GetEnumItem())==tt_itemplayer and indexId!=indexid_aegis and indexId!=indexid_divinerapier and indexId!=indexid_divinerapierfree and indexId!=indexid_gemoftruesight and indexId!=indexid_gemoftruesightcourier then
+
++if IsItemVisible(GetEnumItem())then
+
++call SetItemVisible(GetEnumItem(),false)
+
++else
+
++call SetItemVisible(GetEnumItem(),true)
+
++endif
+
++endif
+
+ endfunction
+
+-function InitTrig_timer1 takes nothing returns nothing
+
+-set gg_trg_timer1=CreateTrigger()
+
+-call TriggerRegisterTimerExpireEventBJ(gg_trg_timer1,udg_KillTimer[1])
+
+-call TriggerAddAction(gg_trg_timer1,function Trig_timer1_Actions)
+
++function ModeTT_DropItems takes nothing returns nothing
+
++local player p=tt_itemplayer
+
++local region r=CreateRegion()
+
++local unit u=GetEnumUnit()
+
++local integer indexId
+
++local integer i=0
+
++local item Item
+
++local integer id
+
++local real x
+
++local real y
+
++if IsSent(p)then
+
++call RegionAddRect(r,gg_rct_Recreate1)
+
++set x=GetRectCenterX(gg_rct_Recreate1)
+
++set y=GetRectCenterY(gg_rct_Recreate1)
+
++else
+
++call RegionAddRect(r,gg_rct_Recreate2)
+
++set x=GetRectCenterX(gg_rct_Recreate2)
+
++set y=GetRectCenterY(gg_rct_Recreate2)
+
++endif
+
++loop
+
++exitwhen i>5
+
++set Item=UnitItemInSlot(u,i)
+
++set indexId=GetIndex(Item)
+
++if GetItemPlayer(Item)==tt_itemplayer and indexId!=indexid_aegis and indexId!=indexid_divinerapier and indexId!=indexid_divinerapierfree and indexId!=indexid_gemoftruesight and indexId!=indexid_gemoftruesightcourier then
+
++call UnitRemoveItemFromSlot(u,i)
+
++set id=GetPlayerId(GetItemPlayer(Item))
+
++call SetItemPosition(Item,x,y)
+
++endif
+
++set i=i+1
+
++endloop
+
++call RemoveRegion(r)
+
++set u=null
+
++set r=null
+
+ endfunction
+
+-function Trig_timer2_Actions takes nothing returns nothing
+
+-set udg_KillInt[2]=0
+
++function ModeTT_SearchItems takes nothing returns boolean
+
++return(GetUnitTypeId(GetFilterUnit())==1852010352 or IsCourier(GetFilterUnit())or(IsUnitType(GetFilterUnit(),UNIT_TYPE_HERO)==true and GetOwningPlayer(GetFilterUnit())!=tt_itemplayer and GetOwningPlayer(GetFilterUnit())!=udg_SentPlayers[0]and GetOwningPlayer(GetFilterUnit())!=udg_ScourgePlayers[0]))and IsUnitAlly(GetFilterUnit(),tt_itemplayer)==true
+
+ endfunction
+
+-function InitTrig_timer2 takes nothing returns nothing
+
+-set gg_trg_timer2=CreateTrigger()
+
+-call TriggerRegisterTimerExpireEventBJ(gg_trg_timer2,udg_KillTimer[2])
+
+-call TriggerAddAction(gg_trg_timer2,function Trig_timer2_Actions)
+
++function ModeTT_DropAllItems takes player p returns nothing
+
++local integer i=0
+
++local item Item
+
++local integer id=GetPlayerId(p)
+
++local group g=GetAvailableGroup()
+
++set tt_itemplayer=p
+
++call GroupEnumUnitsInRange(g,0,0,99999,Condition(function ModeTT_SearchItems))
+
++call ForGroup(g,function ModeTT_DropItems)
+
++call KillGroup(g)
+
+ endfunction
+
+-function Trig_timer3_Actions takes nothing returns nothing
+
+-set udg_KillInt[3]=0
+
++function ModeTT_ToggleItemStates takes player p returns nothing
+
++set tt_itemplayer=p
+
++call EnumItemsInRectBJ(bj_mapInitialPlayableArea,function ModeTT_ProcessItems)
+
++endfunction
+
++function ModeTT_RespawnHero takes unit u returns nothing
+
++local unit DeadHero=u
+
++local player DeadPlayer=GetOwningPlayer(u)
+
++local location RespawnLoc
+
++if IsScourge(DeadPlayer)then
+
++set RespawnLoc=GetRectCenter(gg_rct_Hero_Creation_UD)
+
++else
+
++set RespawnLoc=GetRectCenter(gg_rct_Hero_Creation_NE)
+
++endif
+
++if udg_GameOver==false and IsDead(DeadHero)then
+
++call ReviveCamera(DeadHero,DeadPlayer,GetLocationX(RespawnLoc),GetLocationY(RespawnLoc),true)
+
++if Deathtrigger_IsKobold(DeadHero)==false or GetUnitAbilityLevel(DeadHero,1093684567)==0 then
+
++call ReviveHeroLoc(DeadHero,RespawnLoc,true)
+
++else
+
++call Deathtrigger_ReviveKobold(DeadHero,RespawnLoc)
+
++endif
+
++endif
+
++call RemoveLocation(RespawnLoc)
+
++set DeadHero=null
+
++set DeadPlayer=null
+
++set RespawnLoc=null
+
+ endfunction
+
+-function InitTrig_timer3 takes nothing returns nothing
+
+-set gg_trg_timer3=CreateTrigger()
+
+-call TriggerRegisterTimerExpireEventBJ(gg_trg_timer3,udg_KillTimer[3])
+
+-call TriggerAddAction(gg_trg_timer3,function Trig_timer3_Actions)
+
++function ModeTT_SyncHeroes takes unit HeroA,unit HeroB returns nothing
+
++local player p=GetOwningPlayer(HeroB)
+
++local integer id=GetPlayerId(p)
+
++call SetHeroXP(HeroB,GetHeroXP(HeroA),true)
+
++call SetPlayerState(p,PLAYER_STATE_RESOURCE_GOLD,(LoadInteger(hash_main,(GetHandleId(HeroB)),(787)))+TT_GoldBank[id])
+
++set TT_PreviousGold[id]=GetPlayerState(p,PLAYER_STATE_RESOURCE_GOLD)
+
++set TT_GoldBank[id]=0
+
+ endfunction
+
+-function Trig_timer4_Actions takes nothing returns nothing
+
+-set udg_KillInt[4]=0
+
++function ModeTT_CompareTypes takes integer id,unit Original returns boolean
+
++return GetHeroTypeById(HeroID[id])!=GetHeroType(Original)
+
+ endfunction
+
+-function InitTrig_timer4 takes nothing returns nothing
+
+-set gg_trg_timer4=CreateTrigger()
+
+-call TriggerRegisterTimerExpireEventBJ(gg_trg_timer4,udg_KillTimer[4])
+
+-call TriggerAddAction(gg_trg_timer4,function Trig_timer4_Actions)
+
++function GetHeroDefaultColors_R takes unit u returns integer
+
++return 255
+
+ endfunction
+
+-function Trig_timer5_Actions takes nothing returns nothing
+
+-set udg_KillInt[5]=0
+
++function GetHeroDefaultColors_G takes unit u returns integer
+
++return 255
+
+ endfunction
+
+-function InitTrig_timer5 takes nothing returns nothing
+
+-set gg_trg_timer5=CreateTrigger()
+
+-call TriggerRegisterTimerExpireEventBJ(gg_trg_timer5,udg_KillTimer[5])
+
+-call TriggerAddAction(gg_trg_timer5,function Trig_timer5_Actions)
+
++function GetHeroDefaultColors_B takes unit u returns integer
+
++return 255
+
+ endfunction
+
+-function Trig_timer7_Actions takes nothing returns nothing
+
+-set udg_KillInt[7]=0
+
++function ModeTT_DisableHero takes unit u,integer id,player p returns nothing
+
++local player p1=GetOwningPlayer(u)
+
++local player p2
+
++local integer i
+
++local item TempItem
+
++if IsSent(GetOwningPlayer(u))then
+
++set p2=udg_SentPlayers[0]
+
++else
+
++set p2=udg_ScourgePlayers[0]
+
++endif
+
++call SaveInteger(hash_main,(GetHandleId(u)),(787),(GetPlayerState(GetOwningPlayer(u),PLAYER_STATE_RESOURCE_GOLD)))
+
++call SaveBoolean(hash_main,(GetHandleId(u)),(140),(false))
+
++call SaveInteger(hash_main,(GetHandleId((u))),((4259)),(HERO_STATE_ON))
+
++call UnitAddAbility(u,1093678162)
+
++call SetUnitInvulnerable2(u,true)
+
++call PauseUnit(u,true)
+
++call SetUnitVertexColor(u,GetHeroDefaultColors_R(u),GetHeroDefaultColors_G(u),GetHeroDefaultColors_B(u),150)
+
++call SelectUnitRemoveForPlayer(u,GetOwningPlayer(u))
+
++call SetUnitOwner(u,p2,false)
+
++call SetUnitPathing(u,false)
+
++call SetUnitX(u,GetUnitX(COP[id]))
+
++call SetUnitY(u,GetUnitY(COP[id]))
+
++set i=0
+
++loop
+
++exitwhen i>5
+
++if UnitItemInSlot(u,i)==null then
+
++set TempItem=CreateItem(1227895373,GetUnitX(u),GetUnitY(u))
+
++call UnitAddItem(u,TempItem)
+
++endif
+
++set i=i+1
+
++endloop
+
++set p1=null
+
++set p2=null
+
+ endfunction
+
+-function InitTrig_timer7 takes nothing returns nothing
+
+-set gg_trg_timer7=CreateTrigger()
+
+-call TriggerRegisterTimerExpireEventBJ(gg_trg_timer7,udg_KillTimer[7])
+
+-call TriggerAddAction(gg_trg_timer7,function Trig_timer7_Actions)
+
++function ModeTT_EnableHero takes unit u,integer id,player p returns nothing
+
++local integer i
+
++set udg_Hero[id]=u
+
++call SaveBoolean(hash_main,(GetHandleId(u)),(140),(false))
+
++call SaveInteger(hash_main,(GetHandleId((u))),((4259)),(HERO_STATE_OFF))
+
++call UnitRemoveAbility(u,1093678162)
+
++call SetUnitInvulnerable2(u,false)
+
++call PauseUnit(u,false)
+
++call SetUnitVertexColor(u,GetHeroDefaultColors_R(u),GetHeroDefaultColors_G(u),GetHeroDefaultColors_B(u),255)
+
++call SelectUnitAddForPlayer(u,GetOwningPlayer(u))
+
++call SetUnitOwner(u,p,false)
+
++call SetUnitPathing(u,true)
+
++if IsSent(Player(id))==true then
+
++call SetUnitPosition(u,GetRectCenterX(gg_rct_Hero_Creation_NE),GetRectCenterY(gg_rct_Hero_Creation_NE))
+
++else
+
++call SetUnitPosition(u,GetRectCenterX(gg_rct_Hero_Creation_UD),GetRectCenterY(gg_rct_Hero_Creation_UD))
+
++endif
+
++set i=0
+
++loop
+
++exitwhen i>5
+
++if GetItemTypeId(UnitItemInSlot(u,i))==1227895373 then
+
++call DestroyItem(UnitItemInSlot(u,i))
+
++endif
+
++set i=i+1
+
++endloop
+
+ endfunction
+
+-function Trig_timer8_Actions takes nothing returns nothing
+
+-set udg_KillInt[8]=0
+
++function ModeTT_AreHeroesInFountain takes integer id returns boolean
+
++local region r=CreateRegion()
+
++local boolean result=false
+
++if IsSent(Player(id))==true then
+
++call RegionAddRect(r,gg_rct_SpawnSent)
+
++else
+
++call RegionAddRect(r,gg_rct_SpawnUD)
+
++endif
+
++if IsUnitInRegion(r,TT_HeroA[id])and IsUnitInRegion(r,TT_HeroB[id])then
+
++set result=true
+
++endif
+
++call RemoveRegion(r)
+
++return result or IsDead(TT_HeroA[id])or IsDead(TT_HeroB[id])
+
+ endfunction
+
+-function InitTrig_timer8 takes nothing returns nothing
+
+-set gg_trg_timer8=CreateTrigger()
+
+-call TriggerRegisterTimerExpireEventBJ(gg_trg_timer8,udg_KillTimer[8])
+
++function ModeTT_RequestSwap_Logic takes nothing returns boolean
+
++local trigger t=GetTriggeringTrigger()
+
++local integer Cache=GetHandleId(t)
+
++local integer id=(LoadInteger(hash_main,(Cache),(34)))
+
++local integer Stage=GetTriggerEvalCount(t)
+
++local player p=Player(id)
+
++if Stage==1 then
+
++call ModeTT_DropAllItems(p)
+
++elseif Stage==2 then
+
++call ModeTT_ToggleItemStates(p)
+
++elseif Stage==3 then
+
++if udg_Hero[id]==TT_HeroA[id]then
+
++call ModeTT_RespawnHero(TT_HeroA[id])
+
++call ModeTT_DisableHero(TT_HeroA[id],id,p)
+
++call ModeTT_EnableHero(TT_HeroB[id],id,p)
+
++call ModeTT_SyncHeroes(TT_HeroA[id],TT_HeroB[id])
+
++else
+
++call ModeTT_RespawnHero(TT_HeroB[id])
+
++call ModeTT_DisableHero(TT_HeroB[id],id,p)
+
++call ModeTT_EnableHero(TT_HeroA[id],id,p)
+
++call ModeTT_SyncHeroes(TT_HeroB[id],TT_HeroA[id])
+
++endif
+
++else
+
++call FlushChildHashtable(hash_main,(Cache))
+
++call CleanTrigger(t)
+
++endif
+
++return false
+
++endfunction
+
++function ModeTT_RequestSwap takes nothing returns boolean
+
++local integer id=GetPlayerId(GetTriggerPlayer())
+
++local real CurrentTime=(TimerGetElapsed(udg_GameTimer))
+
++local trigger t
+
++local integer Cache
+
++if(CurrentTime-TT_LastTag[id])<tt_tagcooldown then
+
++call DisplayTimedTextToPlayer(GetTriggerPlayer(),0,udg_TextY,10,GetObjectName(1848659282)+": "+I2S(R2I(tt_tagcooldown-(CurrentTime-TT_LastTag[id]))))
+
++elseif ModeTT_AreHeroesInFountain(id)==false then
+
++call DisplayTimedTextToPlayer(GetTriggerPlayer(),0,udg_TextY,10,GetObjectName(1848659283))
+
++else
+
++set TT_LastTag[id]=CurrentTime
+
++set t=CreateTrigger()
+
++set Cache=GetHandleId(t)
+
++call TriggerRegisterTimerEvent(t,0.2,true)
+
++call TriggerAddCondition(t,Condition(function ModeTT_RequestSwap_Logic))
+
++call SaveInteger(hash_main,(Cache),(34),(id))
+
++set t=null
+
++endif
+
++return false
+
++endfunction
+
++function ModeTT_MonitorGold takes nothing returns boolean
+
++local integer i=1
+
++local integer id
+
++local integer Delta
+
++local integer CurrentGold
+
++local player p
+
++loop
+
++exitwhen i>5
+
++set p=udg_SentPlayers[i]
+
++set id=GetPlayerId(p)
+
++set CurrentGold=GetPlayerState(p,PLAYER_STATE_RESOURCE_GOLD)
+
++if TT_PreviousGold[id]<CurrentGold and TT_DisableTracker[id]==false then
+
++set TT_GoldBank[id]=TT_GoldBank[id]+CurrentGold-TT_PreviousGold[id]
+
++endif
+
++set TT_PreviousGold[id]=CurrentGold
+
++if TT_DisableTracker[id]==true then
+
++set TT_DisableTracker[id]=false
+
++endif
+
++set p=udg_ScourgePlayers[i]
+
++set id=GetPlayerId(p)
+
++set CurrentGold=GetPlayerState(p,PLAYER_STATE_RESOURCE_GOLD)
+
++if TT_PreviousGold[id]<CurrentGold and TT_DisableTracker[id]==false then
+
++set TT_GoldBank[id]=TT_GoldBank[id]+CurrentGold-TT_PreviousGold[id]
+
++endif
+
++set TT_PreviousGold[id]=CurrentGold
+
++if TT_DisableTracker[id]==true then
+
++set TT_DisableTracker[id]=false
+
++endif
+
++set i=i+1
+
++endloop
+
++return false
+
++endfunction
+
++function ModeTT_AssignHeroes takes nothing returns boolean
+
++local trigger t=GetTriggeringTrigger()
+
++local integer Cache=GetHandleId(t)
+
++local integer Index=(LoadInteger(hash_main,(Cache),(55)))
+
++local player p
+
++local integer Rand
+
++local location SpawnSent=GetRectCenter(gg_rct_Hero_Creation_NE)
+
++local location SpawnScourge=GetRectCenter(gg_rct_Hero_Creation_UD)
+
++local integer id
+
++if Index<6 then
+
++set p=udg_SentPlayers[Index]
+
++set id=GetPlayerId(p)
+
++elseif Index<11 then
+
++set p=udg_ScourgePlayers[Index-5]
+
++set id=GetPlayerId(p)
+
++endif
+
++if Index>10 then
+
++call FlushChildHashtable(hash_main,(Cache))
+
++call CleanTrigger(t)
+
++call TriggerRegisterTimerEvent(tt_t_tracker,0.1,true)
+
++call TriggerAddCondition(tt_t_tracker,Condition(function ModeTT_MonitorGold))
+
++elseif Index<6 then
+
++call SaveInteger(hash_main,(Cache),(55),(Index+1))
+
++set udg_Hero[GetPlayerId(p)]=null
+
++if IsPlayer(p)then
+
++loop
+
++exitwhen udg_Hero[GetPlayerId(p)]!=null
+
++set Rand=GetSetElement()
+
++if udg_HeroFlags[Rand]==false then
+
++if not udg_ModeDU then
+
++set udg_HeroFlags[Rand]=true
+
++endif
+
++set udg_Hero[id]=CreateUnitAtLoc(p,HeroID[Rand],SpawnSent,bj_UNIT_FACING)
+
++set TT_HeroA[id]=udg_Hero[id]
+
++call ModeTT_DisableHero(udg_Hero[id],id,p)
+
++endif
+
++endloop
+
++endif
+
++elseif Index<11 then
+
++call SaveInteger(hash_main,(Cache),(55),(Index+1))
+
++set udg_Hero[GetPlayerId(p)]=null
+
++if IsPlayer(p)then
+
++loop
+
++exitwhen udg_Hero[id]!=null
+
++set Rand=GetSetElement()
+
++if udg_HeroFlags[Rand]==false then
+
++if not udg_ModeDU then
+
++set udg_HeroFlags[Rand]=true
+
++endif
+
++set udg_Hero[id]=CreateUnitAtLoc(p,HeroID[Rand],SpawnScourge,bj_UNIT_FACING)
+
++set TT_HeroA[id]=udg_Hero[id]
+
++call ModeTT_DisableHero(udg_Hero[id],id,p)
+
++endif
+
++endloop
+
++endif
+
++endif
+
++if Index<6 then
+
++set p=udg_SentPlayers[Index]
+
++elseif Index<11 then
+
++set p=udg_ScourgePlayers[Index-5]
+
++endif
+
++if Index<6 then
+
++call SaveInteger(hash_main,(Cache),(55),(Index+1))
+
++set udg_Hero[GetPlayerId(p)]=null
+
++if IsPlayer(p)then
+
++loop
+
++exitwhen udg_Hero[id]!=null
+
++set Rand=GetSetElement()
+
++if udg_HeroFlags[Rand]==false and ModeTT_CompareTypes(Rand,TT_HeroA[id])then
+
++if not udg_ModeDU then
+
++set udg_HeroFlags[Rand]=true
+
++endif
+
++set udg_Hero[id]=CreateUnitAtLoc(p,HeroID[Rand],SpawnSent,bj_UNIT_FACING)
+
++set TT_HeroB[id]=udg_Hero[id]
+
++set TT_PreviousGold[id]=GetPlayerState(p,PLAYER_STATE_RESOURCE_GOLD)
+
++call ModeTT_EnableHero(udg_Hero[id],id,p)
+
++call SaveUnitHandle(hash_main,(GetHandleId(TT_HeroB[id])),(788),(TT_HeroA[id]))
+
++call SaveUnitHandle(hash_main,(GetHandleId(TT_HeroA[id])),(788),(TT_HeroB[id]))
+
++endif
+
++endloop
+
++endif
+
++elseif Index<11 then
+
++call SaveInteger(hash_main,(Cache),(55),(Index+1))
+
++set udg_Hero[id]=null
+
++if IsPlayer(p)then
+
++loop
+
++exitwhen udg_Hero[id]!=null
+
++set Rand=GetSetElement()
+
++if udg_HeroFlags[Rand]==false and ModeTT_CompareTypes(Rand,TT_HeroA[id])then
+
++if not udg_ModeDU then
+
++set udg_HeroFlags[Rand]=true
+
++endif
+
++set udg_Hero[id]=CreateUnitAtLoc(p,HeroID[Rand],SpawnScourge,bj_UNIT_FACING)
+
++set TT_HeroB[id]=udg_Hero[id]
+
++set TT_PreviousGold[id]=GetPlayerState(p,PLAYER_STATE_RESOURCE_GOLD)
+
++call ModeTT_EnableHero(udg_Hero[id],id,p)
+
++call SaveUnitHandle(hash_main,(GetHandleId(TT_HeroB[id])),(788),(TT_HeroA[id]))
+
++call SaveUnitHandle(hash_main,(GetHandleId(TT_HeroA[id])),(788),(TT_HeroB[id]))
+
++endif
+
++endloop
+
++endif
+
++endif
+
++call RemoveLocation(SpawnSent)
+
++call RemoveLocation(SpawnScourge)
+
++set SpawnSent=null
+
++set SpawnScourge=null
+
++set p=null
+
++set t=null
+
++return false
+
++endfunction
+
++function ModeTT takes nothing returns nothing
+
++local integer i=1
+
++local integer id
+
++local real CurrentTime=(TimerGetElapsed(udg_GameTimer))
+
++local trigger t
+
++set udg_ModeTT=true
+
++set udg_Allow_Repick=false
+
++set AllowSwap=false
+
++call TechHeroForAll(1211117641)
+
++call TechHeroForAll(1328558160)
+
++call TechHeroForAll(1211117653)
+
++loop
+
++exitwhen i>5
+
++set id=GetPlayerId(udg_SentPlayers[i])
+
++set TT_DisableTracker[id]=false
+
++set TT_LastTag[id]=CurrentTime-tt_tagcooldown
+
++set TT_GoldBank[id]=0
+
++set id=GetPlayerId(udg_ScourgePlayers[i])
+
++set TT_DisableTracker[id]=false
+
++set TT_LastTag[id]=CurrentTime-tt_tagcooldown
+
++set TT_GoldBank[id]=0
+
++set i=i+1
+
++endloop
+
++set t=CreateTrigger()
+
++call TriggerRegisterTimerEvent(t,.5,true)
+
++call TriggerAddCondition(t,Condition(function ModeTT_AssignHeroes))
+
++call SaveInteger(hash_main,(GetHandleId(t)),(55),(1))
+
++set t=CreateTrigger()
+
++call TriggerRegisterPlayerChatEvent(t,udg_SentPlayers[1],"-tt",true)
+
++call TriggerRegisterPlayerChatEvent(t,udg_SentPlayers[2],"-tt",true)
+
++call TriggerRegisterPlayerChatEvent(t,udg_SentPlayers[3],"-tt",true)
+
++call TriggerRegisterPlayerChatEvent(t,udg_SentPlayers[4],"-tt",true)
+
++call TriggerRegisterPlayerChatEvent(t,udg_SentPlayers[5],"-tt",true)
+
++call TriggerRegisterPlayerChatEvent(t,udg_ScourgePlayers[1],"-tt",true)
+
++call TriggerRegisterPlayerChatEvent(t,udg_ScourgePlayers[2],"-tt",true)
+
++call TriggerRegisterPlayerChatEvent(t,udg_ScourgePlayers[3],"-tt",true)
+
++call TriggerRegisterPlayerChatEvent(t,udg_ScourgePlayers[4],"-tt",true)
+
++call TriggerRegisterPlayerChatEvent(t,udg_ScourgePlayers[5],"-tt",true)
+
++call TriggerAddCondition(t,Condition(function ModeTT_RequestSwap))
+
++set t=null
+
++endfunction
+
++function Trig_timer1_Actions takes nothing returns nothing
+
++set udg_KillInt[1]=0
+
++endfunction
+
++function InitTrig_timer1 takes nothing returns nothing
+
++set gg_trg_timer1=CreateTrigger()
+
++call TriggerRegisterTimerExpireEventBJ(gg_trg_timer1,udg_KillTimer[1])
+
++call TriggerAddAction(gg_trg_timer1,function Trig_timer1_Actions)
+
++endfunction
+
++function Trig_timer2_Actions takes nothing returns nothing
+
++set udg_KillInt[2]=0
+
++endfunction
+
++function InitTrig_timer2 takes nothing returns nothing
+
++set gg_trg_timer2=CreateTrigger()
+
++call TriggerRegisterTimerExpireEventBJ(gg_trg_timer2,udg_KillTimer[2])
+
++call TriggerAddAction(gg_trg_timer2,function Trig_timer2_Actions)
+
++endfunction
+
++function Trig_timer3_Actions takes nothing returns nothing
+
++set udg_KillInt[3]=0
+
++endfunction
+
++function InitTrig_timer3 takes nothing returns nothing
+
++set gg_trg_timer3=CreateTrigger()
+
++call TriggerRegisterTimerExpireEventBJ(gg_trg_timer3,udg_KillTimer[3])
+
++call TriggerAddAction(gg_trg_timer3,function Trig_timer3_Actions)
+
++endfunction
+
++function Trig_timer4_Actions takes nothing returns nothing
+
++set udg_KillInt[4]=0
+
++endfunction
+
++function InitTrig_timer4 takes nothing returns nothing
+
++set gg_trg_timer4=CreateTrigger()
+
++call TriggerRegisterTimerExpireEventBJ(gg_trg_timer4,udg_KillTimer[4])
+
++call TriggerAddAction(gg_trg_timer4,function Trig_timer4_Actions)
+
++endfunction
+
++function Trig_timer5_Actions takes nothing returns nothing
+
++set udg_KillInt[5]=0
+
++endfunction
+
++function InitTrig_timer5 takes nothing returns nothing
+
++set gg_trg_timer5=CreateTrigger()
+
++call TriggerRegisterTimerExpireEventBJ(gg_trg_timer5,udg_KillTimer[5])
+
++call TriggerAddAction(gg_trg_timer5,function Trig_timer5_Actions)
+
++endfunction
+
++function Trig_timer7_Actions takes nothing returns nothing
+
++set udg_KillInt[7]=0
+
++endfunction
+
++function InitTrig_timer7 takes nothing returns nothing
+
++set gg_trg_timer7=CreateTrigger()
+
++call TriggerRegisterTimerExpireEventBJ(gg_trg_timer7,udg_KillTimer[7])
+
++call TriggerAddAction(gg_trg_timer7,function Trig_timer7_Actions)
+
++endfunction
+
++function Trig_timer8_Actions takes nothing returns nothing
+
++set udg_KillInt[8]=0
+
++endfunction
+
++function InitTrig_timer8 takes nothing returns nothing
+
++set gg_trg_timer8=CreateTrigger()
+
++call TriggerRegisterTimerExpireEventBJ(gg_trg_timer8,udg_KillTimer[8])
+
+ call TriggerAddAction(gg_trg_timer8,function Trig_timer8_Actions)
+
+ endfunction
+
+ function Trig_timer9_Actions takes nothing returns nothing
+
+ set udg_KillInt[9]=0
+
+ endfunction
+
+ function InitTrig_timer9 takes nothing returns nothing
+
+ set gg_trg_timer9=CreateTrigger()
+
+ call TriggerRegisterTimerExpireEventBJ(gg_trg_timer9,udg_KillTimer[9])
+
+ call TriggerAddAction(gg_trg_timer9,function Trig_timer9_Actions)
+
+ endfunction
+
+ function Trig_timer10_Actions takes nothing returns nothing
+
+ set udg_KillInt[10]=0
+
+ endfunction
+
+ function InitTrig_timer10 takes nothing returns nothing
+
+ set gg_trg_timer10=CreateTrigger()
