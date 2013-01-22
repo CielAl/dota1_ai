@@ -184,7 +184,7 @@ GZ[176+O5 = true  - no permission to continue with item build (waiting TriggerAd
 GZ[192+O5         - item reset order
 GZ[208            - war mode
 
-GZ[224		  - Io's temporary tether
+GZ[224		  - Io's temporary tether      '
 GZ[304+     - "OrbOn" doubled for AI
 
 GZ[320+		- false = 1-hero deny
@@ -242,7 +242,7 @@ ga_uCirclesOfPower[32+O5] = used item buffer (depends on shopping mode)
 --item array g_aiItemsBuff
 g_aiItemsBuff[O5*24+slotID] = temporary
 g_aiItemsBuff[288+O5] = last delayed created item
-g_aiItemsBuff[304+O5] = AI's boots
+g_aiItemsBuff[304+O5] = AI's boots '
 g_aiItemsBuff[320+O5] = item just dropped by AIDropMutedAct
 g_aiItemsBuff[336+O5] = target item for aiRespondDroppedItem_uyv (substituting HW[32+ )
 
