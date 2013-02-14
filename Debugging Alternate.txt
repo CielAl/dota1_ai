@@ -1,0 +1,31 @@
+For Unit-----------------------------
+-!! Unit Type Id :Create A Unit of TYPE to the OwningPlayer of Selected Unit
+-spell AbilCode [Level] : Add Spell with [Level] to the Selected Unit 
+-despell AbilCode : Remove the Spell
+
+-decease 1/2  :1 to kill the Selected Unit; 2 to Remove the Selected Unit(if it is hero, there will always be memory leaks) 
+
+For Item-----------------------------
+-item ItemId :Add Item to the Selected Unit
+-charge SlotNum(0to 5) chargeNum : set the charge in ItemSlot 
+-drop SlotNum on/off :set item Droppability
+-desitem SlotNum: Remove Item in ItemSlot
+
+
+For Player-----------------------------
+-enable AbilCode SetPlayerAbilityAvailable True (for AI)
+-disable AbilCode  SetPlayerAbilityAvailable false (for AI)
+-share PlayerId on/off : get the Controll of any Players
+-get PlayerNum  transfer the OwningPlayer of SelectedUnit to Player(Num)(the Num will be automatically limited in the range of 0 to 15)
+
+Debugging--------------------------------
+-debug on/off : Debug of the Spawned unit
+
+-text [0 to 5] : Debug the UnitTypeId of Selected unit and the ItemId in Certain ItemSlot
+
+
+-spellmsg on/off : Debug off the Casted Spell/Abil Id/Caster
+
+Others------------------------------------
+-ratio TimeScale of Animation
+-scale UnitScale

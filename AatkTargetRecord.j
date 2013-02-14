@@ -22,7 +22,7 @@ endglobals
 //ListHandle_Attacker
 //ListState
 //top unit/real
-//IndexTopAatk ---top value
+// ---top value
 //handleId of stack unit --->bool
 
 function AatkPool_RefreshTargets takes nothing returns boolean
@@ -45,7 +45,10 @@ set List_Loop=0
 			
 			call RemoveSavedHandle(hash_list,Atk_Cache,top) //Remove Tops`
 			call RemoveSavedReal(hash_list,Atk_Cache,top)
-
+			
+			call SaveInteger(hash_list,Atk_Cache,GetHandleId(TopUnit),List_Loop)
+			call SaveInteger(hash_list,Atk_Cache,IndexTopTarget,top)
+			set top=top-1
 		endif
 		set List_Loop=List_Loop+1
 	endloop	
@@ -63,8 +66,8 @@ set List_Loop=IndexOffsetAtk
 		if Atk_dTime-LoadReal(hash_list,Atk_Cache,List_Loop)>4 or IsUnit(LoadUnitHandle(hash_list,Atk_Cache,List_Loop),null) then
 			set TopUnit=LoadUnitHandle(hash_list,Atk_Cache,top) //get tops` data
 			set TopTime=LoadReal(hash_list,Atk_Cache,top)
-			call RemoveSavedBoolean(hash_list,Atk_Cache,GetHandleId(LoadUnitHandle(hash_list,Atk_Cache,List_Loop))) //Remove Boolean and the childkey address
-			call RemoveSavedInteger(hash_list,Atk_Cache,GetHandleId(LoadUnitHandle(hash_list,Atk_Cache,List_Loop)))
+			call RemoveSavedBoolean(hash_list,Atk_Cache,IndexOffsetAtk+GetHandleId(LoadUnitHandle(hash_list,Atk_Cache,List_Loop))) //Remove Boolean and the childkey address
+			call RemoveSavedInteger(hash_list,Atk_Cache,IndexOffsetAtk+GetHandleId(LoadUnitHandle(hash_list,Atk_Cache,List_Loop)))
 			
 			call SaveUnitHandle(hash_list,Atk_Cache,List_Loop,TopUnit) //OverWrite
 			call SaveReal(hash_list,Atk_Cache,List_Loop,TopTime) 
@@ -74,9 +77,9 @@ set List_Loop=IndexOffsetAtk
 			
 	
 			call Rem("Refresh current key ")
-			call SaveInteger(hash_list,Atk_Cache,GetHandleId(TopUnit),List_Loop)
+			call SaveInteger(hash_list,Atk_Cache,IndexOffsetAtk+GetHandleId(TopUnit),List_Loop)
 			call SaveInteger(hash_list,Atk_Cache,IndexTopAatk,top)
-
+			set top=top-1
 		endif
 		set List_Loop=List_Loop+1
 	endloop	
@@ -118,7 +121,7 @@ function Push_AttakerList takes unit target ,unit attacker returns nothing //sto
 local integer Cache=GetHandleId(target)
 local integer top
 local integer index=GetHandleId(attacker)
-if not LoadBoolean(hash_list,Cache,index) then
+if not LoadBoolean(hash_list,Cache,index+IndexOffsetAtk) then
 	set top=LoadInteger(hash_list,Cache,IndexTopAatk)
 	if top==0 then
 		set ListHandle[Atk_ListTop]=(target)
@@ -127,10 +130,10 @@ if not LoadBoolean(hash_list,Cache,index) then
 	endif
 	call SaveUnitHandle(hash_list,Cache,IndexOffsetAtk+top,attacker)
 	call SaveInteger(hash_list,Cache,IndexTopAatk,top+1) //top++ 
-	call SaveBoolean(hash_list,Cache,index,true)  // bool of Existence
-	call SaveInteger(hash_list,Cache,index,top)	  //TopId
+	call SaveBoolean(hash_list,Cache,IndexOffsetAtk+index,true)  // bool of Existence
+	call SaveInteger(hash_list,Cache,IndexOffsetAtk+index,top)	  //TopId
 else
-	set top=LoadInteger(hash_list,Cache,index)
+	set top=LoadInteger(hash_list,Cache,index+IndexOffsetAtk)
 endif
 	call SaveReal(hash_list,Cache,IndexOffsetAtk+top,TimerGetElapsed(udg_GameTimer)) //Attk time
 
@@ -181,7 +184,44 @@ endfunction
 function GetAttackingSourceCount takes unit who returns integer
 	return LoadInteger(hash_list,GetHandleId(who),IndexTopAatk)
 endfunction
-
+function GetSourceIsAttackedByHeroOrTower takes unit who returns boolean
+local integer i
+local integer end
+local integer index
+	if LoadInteger(hash_list,GetHandleId(who),IndexTopAatk)==0 then
+		return false
+	endif
+	set i=IndexOffsetAtk
+	set end=IndexOffsetAtk+LoadInteger(hash_list,GetHandleId(who),IndexTopAatk)
+	set index=GetHandleId(who)
+	loop
+		exitwhen i>=end
+		if IsUnitType(LoadUnitHandle(hash_list,index,i),UNIT_TYPE_HERO)==true or IsUnitType(LoadUnitHandle(hash_list,index,i),UNIT_TYPE_STRUCTURE)==true then
+			return true
+		endif	
+		set i=i+1
+	endloop
+	return false
+endfunction
+function GetSourceIsAttackingHeroOrTower takes unit who returns boolean
+local integer i
+local integer end
+local integer index
+	if LoadInteger(hash_list,GetHandleId(who),IndexTopTarget)==0 then
+		return false
+	endif
+	set i=0
+	set end=LoadInteger(hash_list,GetHandleId(who),IndexTopTarget)
+	set index=GetHandleId(who)
+	loop
+		exitwhen i>=end
+		if IsUnitType(LoadUnitHandle(hash_list,index,i),UNIT_TYPE_HERO)==true or IsUnitType(LoadUnitHandle(hash_list,index,i),UNIT_TYPE_STRUCTURE)==true then
+			return true
+		endif	
+		set i=i+1
+	endloop
+	return false
+endfunction
 function InitAttackTargetList takes nothing returns nothing
 local integer i=0
 	call TriggerRegisterTimerEvent(AttackerMonitor,2,true)
@@ -192,4 +232,29 @@ local integer i=0
 		set ListState[i]=0
 		set i=i+1
 	endloop	
+endfunction
+
+function InitTowerRegister takes nothing returns nothing
+    call Aatk_RegisterTower(SentinelBuilding_Tower1Top)
+    call Aatk_RegisterTower(SentinelBuilding_Tower1Mid)
+    call Aatk_RegisterTower(SentinelBuilding_Tower1Bot)
+    call Aatk_RegisterTower(SentinelBuilding_Tower2Top)
+    call Aatk_RegisterTower(SentinelBuilding_Tower2Mid)
+    call Aatk_RegisterTower(SentinelBuilding_Tower2Bot)
+    call Aatk_RegisterTower(SentinelBuilding_Tower3Top)
+    call Aatk_RegisterTower(SentinelBuilding_Tower3Mid)
+    call Aatk_RegisterTower(SentinelBuilding_Tower3Bot)
+    call Aatk_RegisterTower(SentinelBuilding_Tower4Left)
+    call Aatk_RegisterTower(SentinelBuilding_Tower4Right)
+	call Aatk_RegisterTower(ScourgeBuilding_Tower1Top)
+    call Aatk_RegisterTower(ScourgeBuilding_Tower1Mid)
+    call Aatk_RegisterTower(ScourgeBuilding_Tower1Bot)
+    call Aatk_RegisterTower(ScourgeBuilding_Tower2Top)
+    call Aatk_RegisterTower(ScourgeBuilding_Tower2Mid)
+    call Aatk_RegisterTower(ScourgeBuilding_Tower2Bot)
+    call Aatk_RegisterTower(ScourgeBuilding_Tower3Top)
+    call Aatk_RegisterTower(ScourgeBuilding_Tower3Mid)
+    call Aatk_RegisterTower(ScourgeBuilding_Tower3Bot)
+    call Aatk_RegisterTower(ScourgeBuilding_Tower4Left)
+    call Aatk_RegisterTower(ScourgeBuilding_Tower4Right)
 endfunction
