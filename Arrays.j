@@ -82,6 +82,7 @@ h8[160   - gank last position (target's h8[80]')
 
 h8[144   - tele target
 h8[160   - Io's tele target
+h8[176   - BoT target
 
 ---unit waypoint h9
 h9[id] - Previous point to retreat
@@ -126,7 +127,8 @@ hq[864     - waypoint side offset
 
 hq[880      - courier burst script CD
 hq[896      - courier usage CD
-
+hq[912		- EnumPoint CD - currently deprecated
+hq[928		- aiEngage CD
 
 ---integer hG (item related)
 hG[O5] = current item ID
@@ -188,6 +190,8 @@ GZ[224		  - Io's temporary tether      '
 GZ[304+     - "OrbOn" doubled for AI
 
 GZ[320+		- false = 1-hero deny
+GZ[336+	    - jungling initiated (anti-sleep bug)
+
 --boolean udg_bAIMsg
 udg_bAIMsg[O5 - AI main messaging
 udg_bAIMsg[16+ - AI missing report
@@ -215,6 +219,9 @@ aiDefInt[112	= laning data (set by aiUpdateLaneData, using eY[80)
 aiDefInt[128	= laning data with regard of visibility (set by aiUpdateLaneData, using eY[80)
 
 aiDefInt[144    = ch-lane CD (lane aspect)
+aiDefInt[160	= aiGetHeroPoint add-up count (proportional to starting gold)
+
+aiDefInt[176	= 1 -> AI is checked to tele
 
 --trigger g_taAITriggers
 g_taAITriggers[O5]    =
