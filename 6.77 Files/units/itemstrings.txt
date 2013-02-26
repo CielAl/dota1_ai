@@ -4751,3 +4751,203 @@ Name="Scroll of Town Portal (AI)"
 Tip=""
 Ubertip="Transports AI to a friendly structure. |n|n|cff99ccffCooldown: |r 65 seconds. "
 Description=""
+[Y001]
+Name="Pushing"
+[Y002]
+Name="Return to fountain"
+[Y003]
+Name="Moving back"
+[Y004]
+Name="Heading mid (auto)"
+[Y005]
+Name="Heading left (auto)"
+[Y006]
+Name="Heading right (auto)"
+[Y007]
+Name="Moving to ambush"
+[Y008]
+Name="Cancelling ambush"
+[Y009]
+Name="Ambushing"
+[Y010]
+Name="Ambushing "
+[Y011]
+Name="Ambush"
+[Y012]
+Name="Moving to engage |c00ffcc00Roshan|r"
+[Y013]
+Name="Requesting |c00ffcc00Glyph of Fortification|r"
+[Y014]
+Name="Defending"
+[Y015]
+Name="Defending change area"
+[Y016]
+Name="Neutral creeping is turned "
+[Y017]
+Name="Heading right (substituting)"
+[Y018]
+Name="Heading left (substituting)"
+[Y019]
+Name="Tango will be used instead of Salve"
+[Y020]
+Name="Salve will be used instead of Tangoes"
+[Y021]
+Name="Low Dodge Mode enabled"
+[Y022]
+Name="Low Dodge Mode disabled"
+[Y023]
+Name="Resuming in pushing"
+[Y024]
+Name="Defending base"
+[Y025]
+Name="Stay-defending base"
+[Y026]
+Name="Staying to defend base"
+[Y027]
+Name="Negative (|c00ffcc00Roshan|r has not respawned)"
+[Y028]
+Name="|cffffcc00Negative (dead)|r"
+[Y029]
+Name="|cffffcc00Negative (low Life)|r"
+[Y030]
+Name="|cffffcc00Negative (in battle)|r"
+[Y031]
+Name="|cffffcc00Negative (too far)|r"
+[Y032]
+Name="Heading mid"
+[Y033]
+Name="|cffffcc00Already in lane"
+[Y034]
+Name="Heading left"
+[Y035]
+Name="Heading right"
+[Y036]
+Name="Heading mid (left is too far)"
+[Y037]
+Name="Heading mid (right is too far)"
+[Y038]
+Name="|r: Sighted"
+[Y039]
+Name="|r: Missing"
+[Y040]
+Name="Returning "
+[Y041]
+Name="|r's |c00ffcc00"
+[Y042]
+Name="|r in Circle."
+[Y043]
+Name="AI commands:"
+[Y044]
+Name="Attack"
+[Y045]
+Name="Defend"
+[Y046]
+Name="Retreat"
+[Y047]
+Name="Fountain"
+[Y048]
+Name="Change Lane"
+[Y049]
+Name="Other Commands.."
+[Y050]
+Name="Cancel"
+[Y051]
+Name="What Lane:"
+[Y052]
+Name="Right"
+[Y053]
+Name="Left"
+[Y054]
+Name="Middle"
+[Y055]
+Name="Anywhere"
+[Y056]
+Name="Stay To Defend"
+[Y057]
+Name="Attack Roshan"
+[Y058]
+Name="Turn Neutral Creeping off"
+[Y059]
+Name="Turn Neutral Creeping on"
+[Y060]
+Name="Turn Auto Lane Changing off"
+[Y061]
+Name="Turn Auto Lane Changing on"
+[Y062]
+Name="All Allies"
+[Y063]
+Name="Order to Whom:"
+[Y064]
+Name=" |cffffcc00has been selected as AI leader of |r  "
+[Y065]
+Name="AI missing hero report is automatically turned |c00ff9090off|r "
+[YA65]
+Name=" Use"
+[Y066]
+Name=" -aimsgmiss|r to re-enable  "
+[Y067]
+Name="Automatic lane changing is turned "
+[Y068]
+Name="|cffffcc00ADDED ENEMY AI COMMANDS: -osden, -oden, -oaen|r"
+[Y069]
+Name="|cffffcc00You can order all ally AI using special commands (read Map Info)."
+[Y070]
+Name="  AI will remind human players instead to use |c00ffcc00Glyph of Fortification|r"
+[Y071]
+Name="All ally AI are free to choose where to push"
+[Y072]
+Name="Commands:"
+[YA72]
+Name="       Type '-o','-c' or ' c' before any of these: "
+[YBLA]
+Name="               
+[Y073]
+Name="pn|r - let AI choose where to push"
+[Y074]
+Name="pl|r - all AI allies pushes left"
+[Y075]
+Name="pr|r - all AI allies pushes right"
+[Y076]
+Name="pm|r - all AI allies pushes middle"
+[Y077]
+Name="All ally AI will push left lane"
+[Y078]
+Name="All ally AI will push right lane"
+[Y079]
+Name="All ally AI will push mid lane"
+[Y080]
+Name="|cffffcc00Invalid target"
+[Y081]
+Name="|cffffcc00Target is dead"
+[Y082]
+Name="|cffffcc00Target is not visible"
+[Y083]
+Name="|cffffcc00Target is not enemy"
+[Y084]
+Name="Set Mass Push Lane"
+[Y085]
+Name="|cffffcc00Commands: Target -|r "
+[YA85]
+Name="Type '-o','-c' or ' c' before any of these. "
+[YB85]
+Name=" You can order more than one by using ',': "
+[Y086]
+Name="t <Player no>[,<Player no2>] <target Player no>|r- ambush target hero."
+[Y087]
+Name="t a <target Player no>|r- All allied bots ambush target hero   " 
+[Y088]
+Name="|cffffcc00Commands: Go -|r "
+[YA88]
+Name="  Type '-o','-c' or ' c' before any of these. "
+[YB88]
+Name=" You can order more than one by using ",":  "
+[Y089]
+Name="gl<Player no>|r - order bot to go left  "
+[Y090]
+Name="gr<Player no>|r - order bot to go right "
+[Y091]
+Name="gm<Player no>|r - order bot to go mid     "
+[Y1ON]
+Name="|c009090ffon|r"
+[YOOF]
+Name="|c00ff9090off|r"
