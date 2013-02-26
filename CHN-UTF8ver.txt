@@ -1,0 +1,200 @@
+[Y001]	
+Name=推进
+[Y002]	
+Name=返回生命泉
+[Y003]	
+Name=撤退
+[Y004]	
+Name=前往中路(自动)
+[Y005]	
+Name=前往上路(自动)
+[Y006]	
+Name=前往到下路(自动)
+[Y007]	
+Name=前去Gank
+[Y008]	
+Name=取消伏击
+[Y009]	
+Name=正在Gank
+[Y010]	
+Name=正在Gank
+[Y011]	
+Name=Gank
+[Y012]	
+Name=前往打|c00ffcc00Roshan|r
+[Y013]	
+Name=请求启动|c00ffcc00防御符文|r
+[Y014]	
+Name=回防
+[Y015]	
+Name=改变防守区域
+[Y016]	
+Name=AI自动刷野功能已被
+[Y017]	
+Name=换线到下路
+[Y018]	
+Name=换线到上路
+[Y019]	
+Name=将使用远古祭祀替代大药罐进行恢复
+[Y020]	
+Name=将使用大药罐替代远古祭祀进行恢复
+[Y021]	
+Name=AI技能躲闪能力为弱
+[Y022]	
+Name=AI技能躲闪能力为强
+[Y023]	
+Name=正在恢复推进
+[Y024]	
+Name=正在防守基地
+[Y025]	
+Name=返回驻守基地
+[Y026]	
+Name=正在驻守基地
+[Y027]	
+Name=命令无效(|c00ffcc00肉山|r尚未刷新)
+[Y028]	
+Name=|cffffcc00命令无效(使用英雄已经死亡)|r
+[Y029]	
+Name=|cffffcc00命令无效 (生命过低)|r
+[Y030]	
+Name=|cffffcc00命令无效 (正在战斗)|r
+[Y031]	
+Name=|cffffcc00Negative (距离过远)|r
+[Y032]	
+Name=前往中路
+[Y033]	
+Name=已在该线
+[Y034]	
+Name=前往上路
+[Y035]	
+Name=前往下路
+[Y036]	
+Name=前往中路(上路太远了)
+[Y037]	
+Name=前往中路(下路太远了)
+[Y038]	
+Name=|r: 发现了
+[Y039]	
+Name=|r: 失去踪影(Miss)
+[Y040]	
+Name=返还
+[Y041]	
+Name=|r的 |c00ffcc00
+[Y042]	
+Name=|r 于能量圈中
+[Y043]	
+Name=AI 指令:
+[Y044]	
+Name=推进
+[Y045]	
+Name=回防
+[Y046]	
+Name=撤退
+[Y047]	
+Name=泉疗
+[Y048]	
+Name=换线
+[Y049]	
+Name=其他命令..
+[Y050]	
+Name=取消
+[Y051]	
+Name=请选择线路:
+[Y052]	
+Name=下路
+[Y053]	
+Name=上路
+[Y054]	
+Name=中路
+[Y055]	
+Name=随机选择路线
+[Y056]	
+Name=驻守基地
+[Y057]	
+Name=攻击肉山
+[Y058]
+Name=关闭自动刷野
+[Y059]
+Name=开启自动刷野
+[Y060]	
+Name=关闭自动换线功能
+[Y061]	
+Name=开启自动换线功能
+[Y062]	
+Name=所有友军AI
+[Y063]	
+Name=请选择命令发布对象:
+[Y064]	
+Name= |cffffcc00已被选为队长 阵营为: |r  
+[Y065]	
+Name=AI报告Miss功能已被自动|c00ff9090关闭|r. 
+[YA65]
+Name= 使用 
+[Y066]	
+Name= -aimsgmiss|r 命令以再启动  
+[Y067]	
+Name=自动换线功能已被
+[Y068]	
+Name=|cffffcc00加入了对敌方AI的控制命令: -osden, -oden, -oaen|r
+[Y069]	
+Name=|cffffcc00你可以使用特殊指令来指挥任何友方AI玩家 (详见地图信息F9).
+[Y070]	
+Name= AI 将会提醒玩家开启防御符文并不再自动使用.
+[Y071]	
+Name=所有的AI都会自由选择推进路线
+[Y072]	
+Name=指令: 
+[YA72]
+Name= 在下列参数之前输入(但不要在参数之前加入空格) "-o","-c" 或 " c": 
+[YBLA]
+Name=           
+[Y073]	
+Name=pn|r -让AI自行选择推进路线 
+[Y074]	
+Name=pl|r - 让所有 友军AI  从上路团推 
+[Y075]	
+Name=pr|r - 让所有 友军AI  从下路团推. 
+[Y076]	
+Name=pm|r - 让所有 友军AI  从中路团推.  示例:-cpl,而 -c pl则是非法的. 
+[Y077]	
+Name=友方AI将从上路推进
+[Y078]	
+Name=友方AI将从下路推进
+[Y079]	
+Name=友方AI将从中路推进
+[Y080]	
+Name=|cffffcc00目标无效
+[Y081]	
+Name=|cffffcc00目标已经死亡
+[Y082]	
+Name=|cffffcc00目标不可见
+[Y083]	
+Name=|cffffcc00目标不是敌方单位
+[Y084]
+Name=设置团推路线
+[Y085]	
+Name=|cffffcc00指定目标目标AI指令: -|r 
+[YA85]
+Name= 在以下参数字符前输入 "-o","-c" 或 " c". 
+[YB85]
+Name= 当有多个玩家参数时可用逗号 "",""分隔,""[]""内的是可选参数: 
+[Y086]	
+Name=t 命令玩家A的序号[,命令玩家B的序号] 目标玩家序号|r - 被命令玩家将gank目标玩家 
+[Y087]	
+Name=t a 目标玩家序号|r - 所有友军AI都将Gank目标玩家单位. 示例: "-ct 2,3 6"表示近卫绿色玩家和紫色玩家将Gank天灾的粉色玩家. 
+[Y088]	
+Name=|cffffcc00AI行军指令: -|r 
+[YA88]
+Name= 在以下指令前输入 "-o","-c" or " c". 
+[YB88]
+Name= 可使用逗号分隔多个玩家参数 ",":   
+[Y089]	
+Name=gl所选玩家序号 |r - 命令该玩家前往上路 
+[Y090]	
+Name=gr所选玩家序号 |r - 命令该玩家前往下路 
+[Y091]	
+Name=gm所选玩家序号 |r - 命令该玩家前往中路.  示例: "-cgl7" 表示让友方天灾的灰色玩家(7号)前往上路. 
+[Y1ON]
+Name=|c009090ff启用|r
+[YOOF]
+Name=|c009090ff禁用|r

@@ -1,3 +1,4 @@
+[THIS IS AN ANSI FILE]
 [Y001]	
 Name=ÍÆ½ø
 [Y002]	

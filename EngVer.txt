@@ -191,9 +191,10 @@ Name=Order to Whom:
 Name= |cffffcc00has been selected as AI leader of |r  
 [Y065]
 
-Name=AI missing hero report is automatically turned |c00ff9090off|r. |n Use |n 
+Name=AI missing hero report is automatically turned |c00ff9090off|r. 
+[YA65]
+Name= Use
 [Y066]
-
 Name= -aimsgmiss|r to re-enable.  
 [Y067]
 
@@ -212,16 +213,20 @@ Name=  AI will remind human players instead to use |c00ffcc00Glyph of Fortificat
 Name=All ally AI are free to choose where to push
 [Y072]
 
-Name=Commands:|n        Type "-o","-c" or " c" before any of these: |n        
+Name=Commands:
+[YA72]
+Name=       Type "-o","-c" or " c" before any of these: 
+[YBLA]
+Name=               
 [Y073]
 
-Name=pn|r - let AI choose where to push |n        
+Name=pn|r - let AI choose where to push       
 [Y074]
 
-Name=pl|r - all AI allies pushes left |n        
+Name=pl|r - all AI allies pushes left        
 [Y075]
 
-Name=pr|r - all AI allies pushes right |n        
+Name=pr|r - all AI allies pushes right        
 [Y076]
 
 Name=pm|r - all AI allies pushes middle
@@ -244,33 +249,42 @@ Name=|cffffcc00Target is dead
 
 Name=|cffffcc00Target is not visible
 [Y083]
-
 Name=|cffffcc00Target is not enemy
+[Y084]
+Name=Set Mass Push Lane
 [Y085]
 
-Name=|cffffcc00Commands: Target -|r |n
-Type "
--o","-c" or " c" before any of these. |n You can order more than one by using ",": |n    
-[Y086]
+Name=|cffffcc00Commands: Target -|r 
 
-Name=t <Player no>[,<Player no2>] <target Player no>|r- ambush target hero. |n    
+[YA85]
+Name=Type "-o","-c" or " c" before any of these. 
+[YB85]
+Name= You can order more than one by using ",": 
+ 
+[Y086]
+Name=t <Player no>[,<Player no2>] <target Player no>|r- ambush target hero.     
 
 [Y087]
-
-Name=t a <target Player no>|r- All allied bots ambush target hero |n    
+Name=t a <target Player no>|r- All allied bots ambush target hero    
 [Y088]
+Name=|cffffcc00Commands: Go -|r 
+[YA88]
+Name=  Type "-o","-c" or " c" before any of these. 
 
-Name=|cffffcc00Commands: Go -|r |n  Type "-o","-c" or " c" before any of these. |n You can order more than one by using ",":  |n 
+[YB88]
+Name= You can order more than one by using ",":  
     
 [Y089]
 
-Name=gl<Player no>|r - order bot to go left |n    
+Name=gl<Player no>|r - order bot to go left  
 
 [Y090]
+Name=gr<Player no>|r - order bot to go right 
 
-Name=gr<Player no>|r - order bot to go right |n    
 [Y091]
+Name=gm<Player no>|r - order bot to go mid     
 
-Name=gm<Player no>|r - order bot to go mid |n    
-
-
+[Y1ON]
+Name=|c009090ffon|r
+[YOOF]
+Name=|c00ff9090off|r
