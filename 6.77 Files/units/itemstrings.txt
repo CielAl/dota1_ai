@@ -4880,11 +4880,9 @@ Name="Order to Whom:"
 [Y064]
 Name=" |cffffcc00has been selected as AI leader of |r  "
 [Y065]
-Name="AI missing hero report is automatically turned |c00ff9090off|r "
-[YA65]
-Name=" Use"
+Name="AI missing hero report is automatically turned |c00ff9090off|r|nUse "
 [Y066]
-Name=" -aimsgmiss|r to re-enable  "
+Name="-aimsgmiss|r to re-enable  "
 [Y067]
 Name="Automatic lane changing is turned "
 [Y068]
@@ -4947,6 +4945,8 @@ Name="gl<Player no>|r - order bot to go left  "
 Name="gr<Player no>|r - order bot to go right "
 [Y091]
 Name="gm<Player no>|r - order bot to go mid     "
+[Y092]
+Name="The AI has bought you an |c00ffcc00Animal Courier|r in your Circle"
 [Y1ON]
 Name="|c009090ffon|r"
 [YOOF]
