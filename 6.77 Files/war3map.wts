@@ -1,22 +1,36 @@
+STRING 49998
+{
+You may put one gold bonus modifier and one exp bonus modifier gamemode. Alternatively, put one hybrid modifier.
+
+Exp bonus modifier gamemode:
+|c00dd8dffDefault|r: Depending on AI difficulty, +20%/45%/80% exp rate.
+|c00dd8dff-normexp (-ne)|r: Disables all kind of exp bonus.
+|c00dd8dff-highexp (-he)|r: Depending on AI difficulty, change default bonus exp rate to +40%/70%/110%.
+|c00dd8dff-dynaexp (-de)|r: For each time the AI is killed, +35% exp rate. For each 3 minutes the AI spend without kill, +17.5% exp rate (starting from 5th minute). For each kill, the bonus is decreased by 33%, and for each assist by 25%. Maximum bonus of 200%.
+
+Gold bonus modifier gamemode:
+|c00dd8dffDefault|r: Depending on AI difficulty, +0/4/8 gold per 7 sec. Also includes small starting gold bonus.
+|c00dd8dff-normgold (-ng)|r: Disables all kind of gold bonus.
+|c00dd8dff-highgold (-hg)|r: +8 gold per 7 sec. +10% starting gold.
+|c00dd8dff-dynagold (-dg)|r: For each time the AI is killed, +5 gold per 7 sec. For each 3 minutes the AI spend without kill, +2.5 gold per 7 sec (starting from 5th minute). For each kill, the bonus is decreased by 33%, and for each assist by 25%. Maximum bonus of 72 gold per 7 sec.
+
+Hybrid modifier:
+|c00dd8dff-beginnermode (-bm)|r: Equal to normexp + normgold
+|c00dd8dff-advancedmode (-am)|r: Equal to normexp + normgold + dynaexp + dynagold
+|c00dd8dff-xtrememode   (-xm)|r: Equal to highexp + highgold + dynaexp + dynagold
+}
 STRING 49999
 {
 This AI has been adapted from the scripts created by Cloud_str, RGB and BuffMePlz. Me and the AITeam@PlayDota are working to improve compatibility as DotA changes, but main credits go to them.
 
-This AI script is still under heavy development.  Some abilities will not be used properly (if at all) by bots but this will be addressed in future releases.
-
-Currently the following have been disabled for this AI release:
-Game modes: -lm, -vr, -rv, -rd, -xl, -cd, -so
-Commands: -afk, -kickafk, -ah, -cm, -switch (-ok, -no, -unlock)
-For fun: -fun
-
 AI updates can be found at http://dota-pbmn.blogspot.com/
 
-AI content by PleaseBugMeNot aka PBMN, Cloud_str & AITeam
+AI content by PleaseBugMeNot aka PBMN, Cloud_str, Ciel & AITeam
 }
 
 STRING 50000
 {
-DotA v6.77  |c00dd8dffAI 1.4|r |c00fff864"Doomsday"|r
+DotA v6.77b |c00dd8dffAI 1.4|r |c00fff864"Doomsday"|r
 }
 
 STRING 50001
