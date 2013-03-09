@@ -5036,6 +5036,8 @@ Name=gr<Player no>|r - order bot to go right
 
 [Y091]
 Name=gm<Player no>|r - order bot to go mid     
+[Y092]
+Name="The AI has bought you an |c00ffcc00Animal Courier|r in your Circle"
 
 [Y1ON]
 Name=|c009090ffon|r
