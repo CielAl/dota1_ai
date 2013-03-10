@@ -4741,6 +4741,16 @@ Name=阿托斯之棍卷轴|nRod of Atos Recipe
 Tip=
 Ubertip=|cffff0303这件物品不属于你，它失去了效果|r
 Description=
+[PBMM]
+Name="回城卷轴 (AI)"
+Tip=""
+Ubertip=""
+Description=""
+[PBMN]
+Name="回城卷轴 (AI)"
+Tip=""
+Ubertip="将AI传送到友方建筑物附近. |n|n|cff99ccffCooldown: |r 65 seconds. "
+Description=""
 [Y001]	
 Name=推进
 [Y002]	
