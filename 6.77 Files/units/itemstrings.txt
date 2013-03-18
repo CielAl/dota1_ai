@@ -4563,7 +4563,7 @@ Description=""
 [I0OG]
 Name="Tranquil Boots"
 Tip=""
-Ubertip="Provides +75 Movement Speed, +3 Armor and +3 HP Regeneration. If you take 3 instances of damage over 20 in the previous 10 seconds, this item will be disabled and revert to basic boot form. Can cast rejuvenate to heal 170 HP over 10 seconds, non-combat only. |n|n|cff99ccffCooldown: |r 40 |n|n|c00ff0303Movement Speed does not stack with other boot items.|r |n|n|c00fffc01Can be disassembled|r "
+Ubertip="Provides +75 Movement Speed, +3 Armor and +3 HP Regeneration. If you take 3 instances of damage over 20 in the previous 10 seconds, this item will be disabled and lose 50 MS. Can cast rejuvenate to heal 250 HP over 20 seconds, non-combat only. |n|n|cff99ccffCooldown: |r 60 |n|n|c00ff0303Movement Speed does not stack with other boot items.|r |n|n|c00fffc01Can be disassembled|r "
 Description=""
 [I0OH]
 Name="Tranquil Boots"
@@ -4573,7 +4573,7 @@ Description=""
 [I0OI]
 Name="Tranquil Boots (broken)"
 Tip=""
-Ubertip="+50 Movement Speed."
+Ubertip="+25 Movement Speed."
 Description=""
 [I0OJ]
 Name="Tranquil Boots Disabled"
