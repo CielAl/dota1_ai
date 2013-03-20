@@ -129,6 +129,7 @@ hq[880      - courier burst script CD
 hq[896      - courier usage CD
 hq[912		- EnumPoint CD - currently deprecated
 hq[928		- aiEngage CD
+hq[944		- AIAttackedByTower timer (timer started by hero attacks. if under few seconds the AI is hit by tower, AI will fall back)
 
 ---integer hG (item related)
 hG[O5] = current item ID
@@ -175,6 +176,7 @@ G0[320    = returning to base for item purpose
 G0[336	  = gank issue kill signal
 
 G0[352	  = temporarily disable tp
+
 
 ---boolean GZ
 GZ[16+O5]=true - AI Issued Order
