@@ -157,7 +157,8 @@ HC[O5] - last hero order location (updated every point or target order)
 G0[64+id]=true - Moving to h9[id] (retreating)
 G0[32+O5]=true - Used Healing Salve, Tango
 G0[48+O5]      - activated g_taAITriggers[64+O5] (temporary back-off)
-G0[128+			= have chance to win based on T8v
+G0[128			= have chance to win based on T8v
+G0[144  = ??? (T9v = T8v_Part1)
 G0[176	= changelane reached invisible point
 G0[192	= gank set waiting time (hq[652])
 G0[208+O5] = allow use of closer forest gankpoint on ganking riverside
