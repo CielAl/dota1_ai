@@ -5049,6 +5049,10 @@ Name=AI auto-glyph is turned
 Name=AI missing hero report is turned 
 [Y097]
 Name=AI messaging is turned 
+[Y098]
+Name=You can select the XP and Gold rate for AI.|r 
+[Y099]
+Name=Read Map Info (F9) for details.|r
 [Y1ON]
 Name=|c009090ffon|r
 [YOOF]
