@@ -129,6 +129,7 @@ hq[880      - courier burst script CD
 hq[896      - courier usage CD
 hq[912		- EnumPoint CD - currently deprecated
 hq[928		- aiEngage CD
+hq[944		- AIAttackedByTower timer (timer started by hero attacks. if under few seconds the AI is hit by tower, AI will fall back)
 
 ---integer hG (item related)
 hG[O5] = current item ID
@@ -156,7 +157,8 @@ HC[O5] - last hero order location (updated every point or target order)
 G0[64+id]=true - Moving to h9[id] (retreating)
 G0[32+O5]=true - Used Healing Salve, Tango
 G0[48+O5]      - activated g_taAITriggers[64+O5] (temporary back-off)
-G0[128+			= have chance to win based on T8v
+G0[128			= have chance to win based on T8v
+G0[144  = ??? (T9v = T8v_Part1)
 G0[176	= changelane reached invisible point
 G0[192	= gank set waiting time (hq[652])
 G0[208+O5] = allow use of closer forest gankpoint on ganking riverside
@@ -175,6 +177,7 @@ G0[320    = returning to base for item purpose
 G0[336	  = gank issue kill signal
 
 G0[352	  = temporarily disable tp
+
 
 ---boolean GZ
 GZ[16+O5]=true - AI Issued Order

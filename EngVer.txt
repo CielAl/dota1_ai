@@ -283,7 +283,19 @@ Name=gr<Player no>|r - order bot to go right
 
 [Y091]
 Name=gm<Player no>|r - order bot to go mid     
+[Y092]
+Name="The AI has bought you an |c00ffcc00Animal Courier|r in your Circle"
 
+[Y093]
+Name=AI DE/DG board is turned 
+[Y094]
+Name=AI board is turned 
+[Y095]
+Name=AI auto-glyph is turned 
+[Y096]
+Name=AI missing hero report is turned 
+[Y097]
+Name=AI messaging is turned 
 [Y1ON]
 Name=|c009090ffon|r
 [YOOF]
