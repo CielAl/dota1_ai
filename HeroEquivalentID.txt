@@ -1,0 +1,8 @@
+Syllabear
+(i1=='N01O')or(i1=='N013')or(i1=='N014')or(i1=='N015')
+
+TB
+(i1=='Eevi')or(i1=='Eevm')
+
+Jara
+(i1=='N016')or(i1=='N017')or(i1=='N02B')
