@@ -5053,6 +5053,16 @@ Name=AI messaging is turned
 Name=You can select the XP and Gold rate for AI.|r 
 [Y099]
 Name=Read Map Info (F9) for details.|r
+[Y100]
+Name=You can choose your AI allies'/opponents' heroes using 
+[Y101]
+Name=You can choose your AI opponents' heroes using 
+[Y102]
+Name=You can choose your AI allies' heroes using 
+[Y103]
+Name=About AI
+[Y104]
+Name=Exp/Gold Modes
 [Y1ON]
 Name=|c009090ffon|r
 [YOOF]
