@@ -226,6 +226,15 @@ aiDefInt[160	= aiGetHeroPoint add-up count (proportional to starting gold)
 
 aiDefInt[176	= 1 -> AI is checked to tele
 
+--unit aiDefUnit
+aID = 0 (sent), 24 (scourge)
+aiDefUnit[aID+4 = siege target
+aiDefUnit[aID+8 = target of unidentified units (possible summons)
+aiDefUnit[aID+12 = hero target
+aiDefUnit[aID+16 = basic unit
+
+aiDefUnit[48+O5 = mob target
+
 --trigger g_taAITriggers
 g_taAITriggers[O5]    =
 g_taAITriggers[16+O5] =
