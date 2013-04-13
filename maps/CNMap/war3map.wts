@@ -24,12 +24,13 @@ STRING 49999
 此地图AI脚本主要由Cloud_str, RGB and BuffMePlz开发. 我(即PBMN)和PlayDota.com的AI制作组致力于完善AI以适应不断更新的Dota地图，但主要部分都是由前者完成的.
 AI地图的更新和开发进度请参阅 http://dota-pbmn.blogspot.com/
 
-地图的AI系统由 PleaseBugMeNot (PBMN), Cloud_str, Ciel(0飞鸟各投林0) & AITeam 合作完成.
+地图的AI系统由 PleaseBugMeNot (PBMN), Cloud_str, Ciel(0飞鸟各投林0) &  
+AITeam 合作完成.
 }
 
 STRING 50000
 {
-DotA v6.77c |c00dd8dffAI 1.4b Rev2 CN|r |c00fff864"Doomsday"|r
+DotA v6.77c |c00dd8dffAI 1.4bRev2 CN|r |c00fff864"Doomsday"|r
 }
 
 STRING 50001
