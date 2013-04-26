@@ -6,3 +6,10 @@ TB
 
 Jara
 (i1=='N016')or(i1=='N017')or(i1=='N02B')
+
+Wyvern
+
+(i1=='N0M7')or(i1=='N0MA')or(i1=='N0MB')or(i1=='N0MC')or(i1=='N0MO')
+
+Tiny
+(i1=='Ucrl')or(i1=='U01X')
