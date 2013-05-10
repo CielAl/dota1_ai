@@ -16,8 +16,8 @@ Gold bonus modifier gamemode:
 
 Hybrid modifier:
 |c00dd8dff-beginnermode (-bm)|r: Equal to normexp + normgold
-|c00dd8dff-advancedmode (-am)|r: Equal to normexp + normgold + dynaexp + dynagold
-|c00dd8dff-xtrememode   (-xm)|r: Equal to highexp + highgold + dynaexp + dynagold
+|c00dd8dff-advancedmode (-am)|r: Equal to highexp + highgold + dynaexp + dynagold
+|c00dd8dff-xtrememode   (-xm)|r: Equal to normexp + normgold + dynaexp + dynagold, but the dynamic bonus is much higher
 }
 STRING 49999
 {
