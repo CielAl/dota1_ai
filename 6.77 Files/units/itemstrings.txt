@@ -4941,10 +4941,10 @@ Name=All Allies
 Name=Order to Whom:
 [Y064]
 
-Name= |cffffcc00has been selected as AI leader of |r  
+Name= |cffffcc00has been selected as AI leader of |r
 [Y065]
 
-Name=AI missing hero report is automatically turned |c00ff9090off|r. 
+Name=AI missing hero report is automatically turned |c00ff9090off|r.
 [YA65]
 Name= Use
 [Y066]
@@ -5015,10 +5015,10 @@ Name=Type "-o","-c" or " c" before any of these.
 Name= You can order more than one by using ",": 
  
 [Y086]
-Name=t <Player no>[,<Player no2>] <target Player no>|r- ambush target hero.     
+Name=t <Player no>[,<Player no2>] <target Player no>|r- ambush target hero.
 
 [Y087]
-Name=t a <target Player no>|r- All allied bots ambush target hero    
+Name=t a <target Player no>|r- All allied bots ambush target hero
 [Y088]
 Name=|cffffcc00Commands: Go -|r 
 [YA88]
