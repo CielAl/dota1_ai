@@ -17,7 +17,7 @@
 上述模式命令的混合调用方式:
 |c00dd8dff-beginnermode (-bm) 新手模式|r: 等价于 normexp + normgold
 |c00dd8dff-advancedmode (-am) 高级模式|r: 等价于 normexp + normgold + dynaexp + dynagold
-|c00dd8dff-xtrememode   (-xm) 玩脱了|r: 等价于 highexp + highgold + dynaexp + dynagold
+|c00dd8dff-xtrememode   (-xm) 玩脱了|r: 等价于 normexp + normgold + dynaexp + dynagold, 但是动态部分的增幅将更高.
 }
 STRING 49999
 {
@@ -30,7 +30,7 @@ AITeam 合作完成.
 
 STRING 50000
 {
-DotA v6.77c |c00dd8dffAI 1.4bRev2 CN|r |c00fff864"Doomsday"|r
+DotA v6.77c |c00dd8dffAI 1.4c|r |c00fff864中文版 "Doomsday"|r
 }
 
 STRING 50001
