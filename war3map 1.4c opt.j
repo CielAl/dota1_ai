@@ -43480,12 +43480,12 @@ set w3=UN7(UC7,"TrapMax")
 set i=1
 loop
 exitwhen i>w3
-set w4=U87(UC7,"UMD"+I2S(i))
+set w4=U87(UC7,"Trap"+I2S(i))
 if w4==u then
 set x=i
 loop
 exitwhen x==w3
-call TU7(UC7,"UMD"+I2S(x),U87(UC7,"UMD"+I2S(x+1)))
+call TU7(UC7,"Trap"+I2S(x),U87(UC7,"Trap"+I2S(x+1)))
 set x=x+1
 endloop
 set i=w3
@@ -43502,7 +43502,7 @@ local integer UC7=GetHandleId(CO7)
 local integer w3=UN7(UC7,"TrapMax")
 call SaveReal(L7,(GetHandleId(u)),(786),(((TimerGetElapsed(W)))*1.0))
 set w3=w3+1
-call TU7(UC7,"UMD"+I2S(w3),u)
+call TU7(UC7,"Trap"+I2S(w3),u)
 call TQ7(UC7,"TrapMax",w3)
 if Ab[GetPlayerId(GetOwningPlayer(CO7))]then
 call SelectUnitAddForPlayer(u,GetOwningPlayer(CO7))
