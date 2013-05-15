@@ -1,4 +1,9 @@
-﻿STRING 49998
+﻿STRING 39999
+{
+声明: 此版本AI消息暂由Ciel汉化，其余Dota游戏内容的字符串均来源均为Dota CN汉化组.
+我将尽可能逐步把所有AI消息字符串和面板信息从脚本中分离至itemstring.txt的末端以便于其他译者翻译和语言版本的互通，详情可查看此文件.
+}
+STRING 49998
 {
 你可以在模式选择时使用相应AI gold/exp加成调整指令模式来控制电脑的金钱和经验获得率,金钱调整和经验调整可以同时调用.
 
@@ -6,7 +11,7 @@
 |c00dd8dff 默认情况|r:      根据难度, AI将得到+20%/45%/80% 的额外经验.
 |c00dd8dff-normexp (-ne)|r: AI将不再得到任何额外经验加成.
 |c00dd8dff-highexp (-he)|r: 根据难度的不同,AI将得到不同加成的额外经验,默认增幅为 +40%/70%/110%.
-|c00dd8dff-dynaexp (-de)|r: 动态经验模式---每次AI被击杀,其经验获得率都将得到额外的+35%增长. 每三分钟如果没有敌方英雄被AI击杀则其额外经验获得率将增长17.5%. 而每次AI获得击杀/助攻时, 额外经验获得率将降低 33% / 25%. AI总共能获得最大200%的额外经验.
+|c00dd8dff-dynaexp (-de)|r: 动态经验模式---每次AI被击杀,其经验获得率都将得到额外的(50+5*敌方主攻玩家数)%的增长. 每三分钟如果没有敌方英雄被AI击杀则其额外经验获得率将增长17.5%. 而每次AI获得击杀/助攻时, 额外经验获得率将降低 33% / 25%. AI总共能获得最大200%的额外经验.
 
 金钱加成调整:
 |c00dd8dff 默认情况|r: 根据难度, AI将得到每7秒 0/4/8 的额外金钱以及少量初始金钱的加成.
@@ -16,7 +21,7 @@
 
 上述模式命令的混合调用方式:
 |c00dd8dff-beginnermode (-bm) 新手模式|r: 等价于 normexp + normgold
-|c00dd8dff-advancedmode (-am) 高级模式|r: 等价于 normexp + normgold + dynaexp + dynagold
+|c00dd8dff-advancedmode (-am) 进阶模式|r: 等价于 normexp + normgold + dynaexp + dynagold
 |c00dd8dff-xtrememode   (-xm) 玩脱了|r: 等价于 normexp + normgold + dynaexp + dynagold, 但是动态部分的增幅将更高.
 }
 STRING 49999
@@ -30,7 +35,7 @@ AITeam 合作完成.
 
 STRING 50000
 {
-DotA v6.77c |c00dd8dffAI 1.4c|r |c00fff864中文版 "Doomsday"|r
+DotA v6.77c |c00dd8dffAI 1.4c Rev2|r |c00fff864中文版 "Doomsday"|r
 }
 
 STRING 50001
