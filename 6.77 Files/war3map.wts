@@ -1,3 +1,7 @@
+STRING 39999
+{
+Notice: Strings for AI-msg and Multiboards will be removed from the script. Now anyone can translate the AI-str by modifiying the bottom part of itemstrings.txt .
+}
 STRING 49998
 {
 You may put one gold bonus modifier and one exp bonus modifier gamemode. Alternatively, put one hybrid modifier.

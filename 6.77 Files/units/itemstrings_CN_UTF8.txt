@@ -4828,7 +4828,7 @@ Name=前往中路(下路太远了)
 [Y038]	
 Name=|r: 发现了
 [Y039]	
-Name=|r: 失去踪影(Miss)
+Name=|r: 不见了(Miss)
 [Y040]	
 Name=返还
 [Y041]	
@@ -4948,7 +4948,7 @@ Name=gr所选玩家序号 |r - 命令该玩家前往下路
 [Y091]	
 Name=gm所选玩家序号 |r - 命令该玩家前往中路.  示例: "-cgl7" 表示让友方天灾的灰色玩家(7号)前往上路. 
 [Y092]
-Name=AI送了只 |c00ffcc00动物信使|r 于能量圈中当作福利
+Name=AI为玩家购买 |c00ffcc00动物信使|r 并置于能量圈中
 
 [Y093]
 Name=AI的动态金钱/动态经验信息面板被 
@@ -4957,7 +4957,7 @@ Name=AI信息面板被
 [Y095]
 Name=AI自动防御符文系统已被 
 [Y096]
-Name=AI英雄全地图定位系统(报告miss)已被 
+Name=AI英雄定位系统(敌方位置)已被 
 [Y097]
 Name=AI消息系统已被 
 [Y098]
@@ -4965,7 +4965,7 @@ Name=玩家可通过模式命令调整AI的经验/金钱获得率.|r
 [Y099]
 Name=详情请参阅地图信息(按F9打开).|r
 [Y100]
-Name=您可以使用以下命令为双方AI选择英雄(友/敌): 
+Name=可以使用以下命令为双方AI选择英雄(友/敌): 
 [Y101]
 Name=使用该命令为敌方AI选择英雄(当敌方不存在人类玩家时): 
 [Y102]
@@ -4974,6 +4974,62 @@ Name=使用该命令为友方AI选择英雄:
 Name=关于AI
 [Y104]
 Name=AI经验/金钱相关模式
+[Y105]
+Name=选择英雄|r
+[Y106]
+Name=死亡|r
+[Y107]
+Name=待命|r
+[Y108]
+Name=移动
+[Y109]
+Name=撤退
+[Y110]
+Name=逃离
+[Y111]
+Name=守塔
+[Y112]
+Name=推进
+[Y113]
+Name=泉疗
+[Y114]
+Name=回防
+[Y115]
+Name=驻守基地
+[Y116]
+Name=换线中
+[Y117]
+Name=伏击 
+[Y118]
+Name=打野
+[Y119]
+Name=>|c00ffcc00Roshan|r
+[Y120]
+Name=进攻 |c00ffcc00Roshan|r
+[Y121]
+Name=攻击 
+[Y122]
+Name=>
+[Y123]
+Name=|c00ffcc00- 队长 -|r
+[Y124]
+Name=  - AI状态|r
+[Y125]
+Name=经验.|r
+[Y126]
+Name=金钱|r
+[Y127]
+Name=可使用该命令重选AI英雄 
+[YLA1]
+Name= (中路)
+[YLA2]
+Name= (上路)
+[YLA3]
+Name= (下路)
+[YLA4]
+Name= (世界之树)
+[YLA5]
+Name= (冰封王座)
 [Y1ON]
 Name=|c009090ff启用|r
 [YOOF]

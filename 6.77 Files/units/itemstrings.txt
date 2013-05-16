@@ -1,4 +1,4 @@
-[TWN1]
+﻿[TWN1]
 Name=Town Hall or Great Hall or Tree of Life or Necropolis
 [TWN2]
 Name=Keep or Stronghold or Tree of Ages or Halls of the Dead
@@ -5063,6 +5063,62 @@ Name=You can choose your AI allies' heroes using
 Name=About AI
 [Y104]
 Name=Exp/Gold Modes
+[Y105]
+Name=Select hero|r
+[Y106]
+Name=Dead|r
+[Y107]
+Name=Stand by|r
+[Y108]
+Name=Moving
+[Y109]
+Name=Retreating
+[Y110]
+Name=Fleeing
+[Y111]
+Name=Def Tower
+[Y112]
+Name=Push
+[Y113]
+Name=Healing
+[Y114]
+Name=Def
+[Y115]
+Name=S-Def
+[Y116]
+Name=Change lane
+[Y117]
+Name=Ambush 
+[Y118]
+Name=Jungling
+[Y119]
+Name=>|c00ffcc00Roshan|r
+[Y120]
+Name=vs |c00ffcc00Roshan|r
+[Y121]
+Name=vs 
+[Y122]
+Name=>
+[Y123]
+Name=|c00ffcc00- LEADER -|r
+[Y124]
+Name=  - AI|r
+[Y125]
+Name=Exp.|r
+[Y126]
+Name=Gold|r
+[Y127]
+Name=You can make AI repick their hero using 
+[YLA1]
+Name= (Mid)
+[YLA2]
+Name= (Left)
+[YLA3]
+Name= (Right)
+[YLA4]
+Name= (Tree)
+[YLA5]
+Name= (Throne)
 [Y1ON]
 Name=|c009090ffon|r
 [YOOF]
