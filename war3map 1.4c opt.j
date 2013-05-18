@@ -68019,7 +68019,6 @@ if(K07[144+O5]==M97)and(not K27[160+O5])then
 call GXF(O5,it,0,G6)
 call GXF(O5,u,1,DS4)
 call GXF(O5,it,2,DT4)
-call R97(1.)
 call GXF(O5,u,3,H2)
 call GXF(O5,it,4,D84)
 call GXF(O5,it,5,WL)
