@@ -4774,7 +4774,7 @@ Name=正在Gank
 [Y011]	
 Name=Gank
 [Y012]	
-Name=前往打|c00ffcc00Roshan|r
+Name=准备攻击|c00ffcc00Roshan|r
 [Y013]	
 Name=请求启动|c00ffcc00防御符文|r
 [Y014]	
@@ -4788,9 +4788,9 @@ Name=换线到下路
 [Y018]	
 Name=换线到上路
 [Y019]	
-Name=将使用远古祭祀替代大药罐进行恢复
+Name=将使用远古祭祀替代治疗药剂进行恢复
 [Y020]	
-Name=将使用大药罐替代远古祭祀进行恢复
+Name=将使用治疗药剂替代远古祭祀进行恢复
 [Y021]	
 Name=AI技能躲闪能力为弱
 [Y022]	
@@ -4828,7 +4828,7 @@ Name=前往中路(下路太远了)
 [Y038]	
 Name=|r: 发现了
 [Y039]	
-Name=|r: 不见了(Miss)
+Name=|r: (Miss消息)
 [Y040]	
 Name=返还
 [Y041]	
