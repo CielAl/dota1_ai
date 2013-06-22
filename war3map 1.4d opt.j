@@ -68853,7 +68853,7 @@ if(K57[144+O5]==ME7)or(K_7[160+O5])then
 set HCF[0]=T5
 set HCF[1]=B0
 endif
-elseif(i1==1432580716)then
+elseif(i1==1432580716)or(i1==1429221720)then
 if(K57[144+O5]==MD7)and(not K_7[160+O5])then
 call HSF(O5,it,0,N6)
 call HSF(O5,it,1,VB)
