@@ -68865,6 +68865,7 @@ endif
 if(K57[144+O5]==ME7)or(K_7[160+O5])then
 set HCF[0]=L5
 set HCF[1]=Y0
+set HCF[2]=T2
 endif
 elseif(i1==1214409837)then
 if(K57[144+O5]==MD7)and(not K_7[160+O5])then
