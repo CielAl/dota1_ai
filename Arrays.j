@@ -91,8 +91,8 @@ h9[32     - ??
 h9[48+id  - Techies' bomb spot
 h9[64+    - tower to defend
 ---integer hj
-hj[id  seems like the storage of waypoint index
-
+hj[id  - (???) probably the storage of the starting points of (???current) route (composed of a series of waypoints)
+hj[256+id - (???) end point of the (???current) route
 
 
 ---real hq
@@ -185,7 +185,7 @@ G0[352	  = temporarily disable tp
 
 ---boolean GZ
 GZ[16+O5]=true - AI Issued Order
-GZ[48+O5 =true -AI is Attacking(or holding position) under the control of script 
+GZ[48+O5 =true - AI is Attacking(or holding position) under the control of script || will not be issued for other orders when it is true (not to interrupt)
 
 GZ[64+O5]=true - -aid command used
 GZ[128+O5]=true - permission to attack (  GZ[128+O5]=(m5!=null)and((GetHeroLevel(Wqv)>5)or(AIIsHeroKillable(m5)))  )
