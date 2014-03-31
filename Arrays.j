@@ -90,6 +90,10 @@ h9[16+id] - End point to retreat (base???)
 h9[32     - ??
 h9[48+id  - Techies' bomb spot
 h9[64+    - tower to defend
+---integer hj
+hj[id  seems like the storage of waypoint index
+
+
 
 ---real hq
 hq[416+O5] - issued help signal for nearby allies
@@ -181,6 +185,8 @@ G0[352	  = temporarily disable tp
 
 ---boolean GZ
 GZ[16+O5]=true - AI Issued Order
+GZ[48+O5 =true -AI is Attacking(or holding position) under the control of script 
+
 GZ[64+O5]=true - -aid command used
 GZ[128+O5]=true - permission to attack (  GZ[128+O5]=(m5!=null)and((GetHeroLevel(Wqv)>5)or(AIIsHeroKillable(m5)))  )
 GZ[160+O5]=true - retreating
