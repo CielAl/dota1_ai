@@ -218,6 +218,9 @@ aiDefInt[8+   = number of allied heroes required
 
 aiDefInt[12+   = number of allied heroes defending
 
+aiDefInt[aID+19---23   = defense type 0 = mid, 1 = left, 2 = right, 3 = tree/throne;  while aID=0 for sent or 24 for scrg, 
+
+
 aiDefInt[48	= order of defense priority (+1-5 = Sent, +7-11 = scrg)
 aiDefInt[64+O5] = lane of defense
 aiDefInt[80	= template of order of defense priority (+1-5 = Sent, +7-11 = scrg)
