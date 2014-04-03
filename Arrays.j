@@ -212,7 +212,8 @@ udg_bAIMsg[96+ - AI board DEDG init (can be displayed or not)
 udg_bAIMsg[112+ - AI board DEDG display (user preference)
 
 --integer aiDefInt
-aiDefInt[0-3  = defense score. 0 = mid, 1 = left, 2 = right, 3 = tree/throne
+aiDefInt[0-3  = defense score. aiDefInt[0] = mid, 1 = left, 2 = right, 3 = tree/throne
+aiDefInt[24-27  same  
 aiDefInt[4+   = number of enemy heroes
 aiDefInt[8+   = number of allied heroes required
 
