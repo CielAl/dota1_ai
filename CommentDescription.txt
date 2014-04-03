@@ -1,0 +1,5 @@
+//WptFunc   function about wapoints
+//EndIssue  comment of things above
+//Mark notes of anything not important
+//Invalid  ---EndInvalid things should be removed
+//Change:
