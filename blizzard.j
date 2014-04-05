@@ -1002,7 +1002,7 @@ unit hy=null
     boolean array b_isAI
     trigger t_manipulateitem 
 
-
+hashtable hash_main= null
 //AI Operation
 boolean array GZ
 boolean array G0	
@@ -10605,6 +10605,154 @@ function UnitDropItem takes unit inUnit, integer inItemID returns item
 
     return droppedItem
 endfunction
+// Hashtable Operation
+function Flush takes integer Gu returns nothing
+    call FlushChildHashtable(hash_main,Gu)
+endfunction
+function FlushValue takes integer handle_id,string GW returns nothing
+    call RemoveSavedHandle(hash_main,handle_id,StringHash(GW))
+endfunction
+function SvInt takes integer Gu,string GW,integer Gy returns nothing
+    call SaveInteger(hash_main,Gu,StringHash(GW),Gy)
+endfunction
+function SvReal takes integer Gu,string GW,real Gy returns nothing
+    call SaveReal(hash_main,Gu,StringHash(GW),Gy)
+endfunction
+function SvStr takes integer Gu,string GW,string Gy returns nothing
+    call SaveStr(hash_main,Gu,StringHash(GW),Gy)
+endfunction
+function SvBool takes integer Gu,string GW,boolean Gy returns nothing
+    call SaveBoolean(hash_main,Gu,StringHash(GW),Gy)
+endfunction
+function SvUnit takes integer Gu,string GW,unit Gy returns nothing
+    call SaveUnitHandle(hash_main,Gu,StringHash(GW),Gy)
+endfunction
+function SvEff takes integer Gu,string GW,effect Gy returns nothing
+    call SaveEffectHandle(hash_main,Gu,StringHash(GW),Gy)
+endfunction
+function SvTr takes integer Gu,string GW,trigger Gy returns nothing
+    call SaveTriggerHandle(hash_main,Gu,StringHash(GW),Gy)
+endfunction
+function SvLi takes integer Gu,string GW,lightning Gy returns nothing
+    call SaveLightningHandle(hash_main,Gu,StringHash(GW),Gy)
+endfunction
+function SvFog takes integer Gu,string GW,fogmodifier Gy returns nothing
+    call SaveFogModifierHandle(hash_main,Gu,StringHash(GW),Gy)
+endfunction
+function SvDes takes integer Gu,string GW,destructable Gy returns nothing
+    call SaveDestructableHandle(hash_main,Gu,StringHash(GW),Gy)
+endfunction
+function SvPl takes integer Gu,string GW,player Gy returns nothing
+    call SavePlayerHandle(hash_main,Gu,StringHash(GW),Gy)
+endfunction
+function SvItem takes integer Gu,string GW,item Gy returns nothing
+    call SaveItemHandle(hash_main,Gu,StringHash(GW),Gy)
+endfunction
+function SvGr takes integer Gu,string GW,group Gy returns nothing
+    call SaveGroupHandle(hash_main,Gu,StringHash(GW),Gy)
+endfunction
+function SvTi takes integer Gu,string GW,timer Gy returns nothing
+    call SaveTimerHandle(hash_main,Gu,StringHash(GW),Gy)
+endfunction
+function SvWid takes integer Gu,string GW,widget Gy returns nothing
+    call SaveWidgetHandle(hash_main,Gu,StringHash(GW),Gy)
+endfunction
+function SvTT takes integer Gu,string GW,texttag Gy returns nothing
+    call SaveTextTagHandle(hash_main,Gu,StringHash(GW),Gy)
+endfunction
+function SvLoc takes integer Gu,string GW,location Gy returns nothing
+    call SaveLocationHandle(hash_main,Gu,StringHash(GW),Gy)
+endfunction
+function SvBoolExpr takes integer Gu,string GW,boolexpr Gy returns nothing
+    call SaveBooleanExprHandle(hash_main,Gu,StringHash(GW),Gy)
+endfunction
+function SvButt takes integer Gu,string GW,button Gy returns nothing
+    call SaveButtonHandle(hash_main,Gu,StringHash(GW),Gy)
+endfunction
+function SvImage takes integer Gu,string GW,image Gy returns nothing
+    call SaveImageHandle(hash_main,Gu,StringHash(GW),Gy)
+endfunction
+function SvForce takes integer Gu,string GW,force Gy returns nothing
+    call SaveForceHandle(hash_main,Gu,StringHash(GW),Gy)
+endfunction
+function LdFog takes integer Gu,string GW returns fogmodifier
+    return LoadFogModifierHandle(hash_main,Gu,StringHash(GW))
+endfunction
+function LdDes takes integer Gu,string GW returns destructable
+    return LoadDestructableHandle(hash_main,Gu,StringHash(GW))
+endfunction
+function LdUnit takes integer Gu,string GW returns unit
+    return LoadUnitHandle(hash_main,Gu,StringHash(GW))
+endfunction
+function LdTT takes integer Gu,string GW returns texttag
+    return LoadTextTagHandle(hash_main,Gu,StringHash(GW))
+endfunction
+function LdPl takes integer Gu,string GW returns player
+    return LoadPlayerHandle(hash_main,Gu,StringHash(GW))
+endfunction
+function LdTi takes integer Gu,string GW returns timer
+    return LoadTimerHandle(hash_main,Gu,StringHash(GW))
+endfunction
+function LdTr takes integer Gu,string GW returns trigger
+    return LoadTriggerHandle(hash_main,Gu,StringHash(GW))
+endfunction
+function LdGr takes integer Gu,string GW returns group
+    return LoadGroupHandle(hash_main,Gu,StringHash(GW))
+endfunction
+function LdEff takes integer Gu,string GW returns effect
+    return LoadEffectHandle(hash_main,Gu,StringHash(GW))
+endfunction
+function LdLi takes integer Gu,string GW returns lightning
+    return LoadLightningHandle(hash_main,Gu,StringHash(GW))
+endfunction
+function LdLoc takes integer Gu,string GW returns location
+    return LoadLocationHandle(hash_main,Gu,StringHash(GW))
+endfunction
+function LdItem takes integer Gu,string GW returns item
+    return LoadItemHandle(hash_main,Gu,StringHash(GW))
+endfunction
+function LdImage takes integer Gu,string GW returns image
+    return LoadImageHandle(hash_main,Gu,StringHash(GW))
+endfunction
+function LdInt takes integer Gu,string GW returns integer
+    return LoadInteger(hash_main,Gu,StringHash(GW))
+endfunction
+function LdReal takes integer Gu,string GW returns real
+    return LoadReal(hash_main,Gu,StringHash(GW))
+endfunction
+function LdBool takes integer Gu,string GW returns boolean
+    return LoadBoolean(hash_main,Gu,StringHash(GW))
+endfunction
+function LdStr takes integer Gu,string GW returns string
+    return LoadStr(hash_main,Gu,StringHash(GW))
+endfunction
+function LdButt takes integer ki,string kI returns button
+    return LoadButtonHandle(hash_main,ki,StringHash(kI))
+endfunction
+function LdBoolExpr takes integer ki,string kI returns boolexpr
+    return LoadBooleanExprHandle(hash_main,ki,StringHash(kI))
+endfunction
+function LdForce takes integer ki,string kI returns force
+    return LoadForceHandle(hash_main,ki,StringHash(kI))
+endfunction
+function CheckHeroState takes unit hI,string Hh returns boolean
+    return LoadInteger(hash_main,GetHandleId(hI),StringHash("state"+Hh))==1
+endfunction
+function vtv takes trigger hI,string Hh returns boolean
+    return LoadInteger(hash_main,GetHandleId(hI),StringHash("state"+Hh))==1
+endfunction
+function SetHeroStateOn takes unit hI,string Hh returns nothing
+    call SaveInteger(hash_main,GetHandleId(hI),StringHash("state"+Hh),1)
+endfunction
+function vuv takes trigger hI,string Hh returns nothing
+    call SaveInteger(hash_main,GetHandleId(hI),StringHash("state"+Hh),1)
+endfunction
+function SetHeroStateOff takes unit hI,string Hh returns nothing
+    call SaveInteger(hash_main,GetHandleId(hI),StringHash("state"+Hh),2)
+endfunction
+function vwv takes trigger hI,string Hh returns nothing
+    call SaveInteger(hash_main,GetHandleId(hI),StringHash("state"+Hh),2)
+endfunction
 
 //===========================================================================
 function WidgetDropItem takes widget inWidget, integer inItemID returns item
@@ -10730,13 +10878,32 @@ function DistanceBetweenRectAndUnit takes unit j4,rect Ja returns real
 endfunction
 
 //===========Condition Check===========
-
-function IsTree takes destructable d returns boolean
-    return GetDestructableTypeId(d)=='NTtc'or GetDestructableTypeId(d)=='NTtw'or GetDestructableTypeId(d)=='ATtr' or GetDestructableTypeId(d)=='B002' or GetDestructableTypeId(d)=='B003' or GetDestructableTypeId(d)=='B005'
-endfunction
 function IsCycloned takes unit u returns boolean
     return GetUnitAbilityLevel(u,'Bcyc')>0 or GetUnitAbilityLevel(u,'Bcy2')>0
 endfunction
+function IsNotAttackable takes unit u returns boolean
+    return GetUnitAbilityLevel(u,'Aetl')>0 or GetUnitAbilityLevel(u,'Bcyc')>0 or GetUnitAbilityLevel(u,'Bcy2')>0 or GetUnitAbilityLevel(u,'B01N')>0
+endfunction
+function IsEnsnared takes unit u returns boolean
+    return(GetUnitAbilityLevel((u),('B0C1'))>0)or(GetUnitAbilityLevel((u),('BEer'))>0)or(GetUnitAbilityLevel((u),('Beng'))>0)or(GetUnitAbilityLevel((u),('Bena'))>0)or(GetUnitAbilityLevel((u),('B017'))>0)or(GetUnitAbilityLevel((u),('B078'))>0)or(GetUnitAbilityLevel((u),('B08F'))>0)or(GetUnitAbilityLevel((u),('B08E'))>0)or(GetUnitAbilityLevel((u),('B0ER'))>0)or(GetUnitAbilityLevel((u),('B0FN'))>0)
+endfunction
+function IsStunned takes unit u returns boolean
+    return(GetUnitAbilityLevel((u),('B00H'))>0)or(GetUnitAbilityLevel((u),('BOhx'))>0)or(GetUnitAbilityLevel((u),('BPSE'))>0)or(GetUnitAbilityLevel((u),('B099'))>0)or(GetUnitAbilityLevel((u),('BSTN'))>0)or(GetUnitAbilityLevel((u),('B0CF'))>0)or(GetUnitAbilityLevel((u),('B0BM'))>0)or(GetUnitAbilityLevel((u),('B06M'))>0)or(GetUnitAbilityLevel((u),('B07N'))>0)or(GetUnitAbilityLevel((u),('B08S'))>0)or(GetUnitAbilityLevel((u),('B00Q'))>0)or(GetUnitAbilityLevel((u),('B04V'))>0)or(GetUnitAbilityLevel((u),('B072'))>0)or(GetUnitAbilityLevel((u),('BUan'))>0)or(GetUnitAbilityLevel((u),('B095'))>0)or(GetUnitAbilityLevel((u),('B03I'))>0)or(GetUnitAbilityLevel((u),('B0AD'))>0)or(GetUnitAbilityLevel((u),('B0AE'))>0)or(GetUnitAbilityLevel((u),('B0BE'))>0)or(GetUnitAbilityLevel((u),('B0BF'))>0)or(GetUnitAbilityLevel((u),('B008'))>0)or(GetUnitAbilityLevel((u),('B04B'))>0)or(GetUnitAbilityLevel((u),('B02F'))>0)or(GetUnitAbilityLevel((u),('BUsp'))>0)or(GetUnitAbilityLevel((u),('BUst'))>0)or(GetUnitAbilityLevel((u),('B0DD'))>0)or(CheckHeroState(u,"DisruptionState")==true)or(CheckHeroState(u,"AstralImprisonmentState")==true)or(GetUnitAbilityLevel((u),('B0C2'))>0)or(GetUnitAbilityLevel((u),('B06S'))>0)or(GetUnitAbilityLevel((u),('B02S'))>0)or(GetUnitAbilityLevel((u),('B07E'))>0)
+endfunction
+function IsReallyStunned takes unit u returns boolean
+    return IsStunned(u)or IsEnsnared(u)or IsUnitPaused(u)or IsCycloned(u)
+endfunction
+function aiIsDisabled takes unit whichUnit returns boolean
+    return (IsUnitType(whichUnit,UNIT_TYPE_STUNNED) or IsUnitType(whichUnit,UNIT_TYPE_SNARED) or IsUnitType(whichUnit,UNIT_TYPE_POLYMORPHED) or GetUnitMoveSpeed(whichUnit)<290 or IsUnitPaused(whichUnit)) or IsStunned(whichUnit) or IsEnsnared(whichUnit)
+endfunction
+function IsSilenced takes unit whichUnit returns boolean
+    call Rem("This function was removed in the official map. I`ll keep it for AI use, but it needs to be updated with all silence buff ids for every version!")
+    return GetUnitAbilityLevel(whichUnit,'B01T')>0 or GetUnitAbilityLevel(whichUnit,'BNsi')>0 or GetUnitAbilityLevel(whichUnit,'B01X')>0 or GetUnitAbilityLevel(whichUnit,'BNdo')>0 or GetUnitAbilityLevel(whichUnit,'B02M')>0 or GetUnitAbilityLevel(whichUnit,'Bhea')>0 or GetUnitAbilityLevel(whichUnit,'B07V')>0 or GetUnitAbilityLevel(whichUnit,'B0BY')>0 or GetUnitAbilityLevel(whichUnit,'B08O')>0 or GetUnitAbilityLevel(whichUnit,'B07U')>0 or GetUnitAbilityLevel(whichUnit,'B0DL')>0 or GetUnitAbilityLevel(whichUnit,'B08V')>0 or GetUnitAbilityLevel(whichUnit,'B031')>0 or GetUnitAbilityLevel(whichUnit,'B0FT')>0 or GetUnitAbilityLevel(whichUnit,'B0FG')>0
+endfunction
+function IsTree takes destructable d returns boolean
+    return GetDestructableTypeId(d)=='NTtc'or GetDestructableTypeId(d)=='NTtw'or GetDestructableTypeId(d)=='ATtr' or GetDestructableTypeId(d)=='B002' or GetDestructableTypeId(d)=='B003' or GetDestructableTypeId(d)=='B005'
+endfunction
+
 function Gargolye_IsFamiliar takes integer id returns boolean
     return id=='u014' or id=='u015' or id=='u016' or id=='u01D' or id=='u01E' or id=='u01F'or id=='u01R'or id=='u01S'or id=='u01T'
 endfunction
