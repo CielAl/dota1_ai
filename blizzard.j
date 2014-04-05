@@ -630,6 +630,30 @@ globals
 
     // Memory cleanup vars
     boolean            bj_wantDestroyGroup         = false
+	//Transport
+	 player g_aiPVisibilitySent=null
+     player g_aiPVisibilityScrg=null
+	 player array udg_SentPlayers 
+     player array udg_ScourgePlayers 
+     boolean array HeroDead 	
+     real Bz=0. //BJ
+     real array hq //BJ	 
+	 unit array h4
+	 unit array udg_Hero 
+	 integer array udg_LBDeaths
+	 integer array udg_LBKills
+	 real SigmaHpCounted=0.
+	 group ig=CreateGroup()
+     group H8=CreateGroup()
+     group H9=CreateGroup()
+     group iA=CreateGroup()
+     group iF=CreateGroup()	
+boolean isDebug=false 
+integer debugCurrent=-1	 
+unit GetWeakestHero_Exclude=null
+unit hy=null
+	//
+	group bj_globalGroup=null
 endglobals
 
 
@@ -3048,7 +3072,15 @@ function CreateUnitAtLocSaveLast takes player id, integer unitid, location loc, 
 
     return bj_lastCreatedUnit
 endfunction
+function CreateUnitXYSaveLast takes player id, integer unitid, real x,real y, real face returns unit
+    if (unitid == 'ugol') then
+        set bj_lastCreatedUnit = CreateBlightedGoldmine(id, x, y, face)
+    else
+        set bj_lastCreatedUnit = CreateUnit(id, unitid, x,y, face)
+    endif
 
+    return bj_lastCreatedUnit
+endfunction
 //===========================================================================
 function GetLastCreatedUnit takes nothing returns unit
     return bj_lastCreatedUnit
@@ -3061,6 +3093,17 @@ function CreateNUnitsAtLoc takes integer count, integer unitId, player whichPlay
         set count = count - 1
         exitwhen count < 0
         call CreateUnitAtLocSaveLast(whichPlayer, unitId, loc, face)
+        call GroupAddUnit(bj_lastCreatedGroup, bj_lastCreatedUnit)
+    endloop
+    return bj_lastCreatedGroup
+endfunction
+
+function CreateNUnits takes integer count, integer unitId, player whichPlayer, real x,real y, real face returns group
+    call GroupClear(bj_lastCreatedGroup)
+    loop
+        set count = count - 1
+        exitwhen count < 0
+        call CreateUnitXYSaveLast(whichPlayer, unitId, x,y, face)
         call GroupAddUnit(bj_lastCreatedGroup, bj_lastCreatedUnit)
     endloop
     return bj_lastCreatedGroup
@@ -3307,15 +3350,19 @@ endfunction
 function IsUnitDeadBJ takes unit whichUnit returns boolean
     return GetUnitState(whichUnit, UNIT_STATE_LIFE) <= 0
 endfunction
-
+function IsUnitDead takes unit whichUnit returns boolean
+	return IsUnitType(whichUnit,UNIT_TYPE_DEAD)==true
+endfunction
 //===========================================================================
 function IsUnitAliveBJ takes unit whichUnit returns boolean
-    return not IsUnitDeadBJ(whichUnit)
+    return  not IsUnitDeadBJ(whichUnit)
+endfunction 
+function IsUnitAlive takes unit whichUnit returns boolean 
+	return IsUnitType(whichUnit,UNIT_TYPE_DEAD)==false
 endfunction
-
 //===========================================================================
 function IsUnitGroupDeadBJEnum takes nothing returns nothing
-    if not IsUnitDeadBJ(GetEnumUnit()) then
+    if not IsUnitDead(GetEnumUnit()) then
         set bj_isUnitGroupDeadResult = false
     endif
 endfunction
@@ -3393,7 +3440,7 @@ endfunction
 //===========================================================================
 function ShowUnitShow takes unit whichUnit returns nothing
     // Prevent dead heroes from being unhidden.
-    if (IsUnitType(whichUnit, UNIT_TYPE_HERO) and IsUnitDeadBJ(whichUnit)) then
+    if (IsUnitType(whichUnit, UNIT_TYPE_HERO) and IsUnitDead(whichUnit)) then
         return
     endif
 
@@ -6696,7 +6743,7 @@ endfunction
 // and optionally a unit color change.
 //
 function RescueUnitBJ takes unit whichUnit, player rescuer, boolean changeColor returns nothing
-    if IsUnitDeadBJ(whichUnit) or (GetOwningPlayer(whichUnit) == rescuer) then
+    if IsUnitDead(whichUnit) or (GetOwningPlayer(whichUnit) == rescuer) then
         return
     endif
 
@@ -10227,5 +10274,293 @@ function WidgetDropItem takes widget inWidget, integer inItemID returns item
 
     return CreateItem(inItemID, x, y)
 endfunction
-//===========================================================================
-//D
+
+//======================================Tool Func
+function DbgMsg takes string s returns nothing
+    if(isDebug)and(debugCurrent==-1)then
+        call DisplayTimedTextToPlayer(GetLocalPlayer(),0,0,16.,s)
+    endif
+endfunction
+            function AIDEBUG_CRASHSCRIPT takes nothing returns nothing
+                set bj_forLoopAIndex=1/0
+            endfunction
+            function Rem takes string s returns nothing
+            endfunction
+            
+            function Rem2 takes integer O5, string s returns nothing
+            endfunction
+            function RemMultiline takes string s returns nothing
+            endfunction
+            function BoolRem takes string s returns boolean
+            return true
+            endfunction
+			
+function DebugBool takes string s,boolean b returns boolean
+    if(b)then
+        call DisplayTimedTextToPlayer(GetLocalPlayer(),0,0,16.,s+" is true")
+    else
+        call DisplayTimedTextToPlayer(GetLocalPlayer(),0,0,16.,s+" is false")
+    endif
+    return b
+endfunction			
+//=====================================================================
+ function aiChooseIntOnBool takes boolean bChooseFirst, integer iFirstChoose, integer iSecondChoose returns integer
+    if bChooseFirst then
+        return iFirstChoose
+    else
+        return iSecondChoose
+    endif
+    return 0
+endfunction
+function aiChooseStrOnBool takes boolean bChooseFirst, string sFirstChoose, string sSecondChoose returns string
+    if bChooseFirst then
+        return sFirstChoose
+    else
+        return sSecondChoose
+    endif
+    return ""
+endfunction
+function aiChooseRealOnBool takes boolean bChooseFirst, real iFirstChoose, real iSecondChoose returns real
+    if bChooseFirst then
+        return iFirstChoose
+    else
+        return iSecondChoose
+    endif
+    return 0.
+endfunction
+function aiChooseUnitOnBool takes boolean bChooseFirst, unit uFirstChoose, unit uSecondChoose returns unit
+    if bChooseFirst then
+        return uFirstChoose
+    else
+        return uSecondChoose
+    endif
+    return null
+endfunction
+
+function aiIsUnitFacing takes unit a, widget b, real rTolerance returns boolean
+    local real rBuff=(GetUnitFacing(a)-bj_RADTODEG*Atan2(GetWidgetY(b)-GetUnitY(a),GetWidgetX(b)-GetUnitX(a)))
+    
+    call DbgMsg(R2S(GetUnitFacing(a))+" "+R2S(bj_RADTODEG*Atan2(GetWidgetY(b)-GetUnitY(a),GetWidgetX(b)-GetUnitX(a))))
+    if rBuff>180 then
+        set rBuff=360-rBuff
+    endif
+    if rBuff<0 then
+        set rBuff=-rBuff
+    endif
+    
+    call DbgMsg(R2S(rBuff))
+    return rBuff<=rTolerance
+endfunction
+function DistanceBetween takes widget Source,widget m5 returns real
+    local real t5
+    local real w5
+    local real Y5
+    local real Z5
+
+    if Source!=null and m5!=null then
+        set t5=GetWidgetX(Source)
+        set w5=GetWidgetY(Source)
+        set Y5=GetWidgetX(m5)
+        set Z5=GetWidgetY(m5)
+        return SquareRoot((t5-Y5)*(t5-Y5)+(w5-Z5)*(w5-Z5))
+    endif
+    return 999999.
+endfunction
+function DistanceBetweenXY takes real x1,real y1,real x2,real y2 returns real
+    return SquareRoot(((x1-x2)*(x1-x2))+((y1-y2)*(y1-y2)))
+endfunction
+
+
+
+
+//==================Group Operate=====================================
+function aiIsUnitVisible takes unit whichUnit returns boolean
+    if IsUnitAlly(whichUnit,udg_SentPlayers[0]) then
+        return IsUnitVisible(whichUnit,g_aiPVisibilityScrg)
+    else
+        return IsUnitVisible(whichUnit,g_aiPVisibilitySent)
+    endif
+    return false
+endfunction
+function aiIsPointVisible takes unit whichUnit returns boolean
+    if IsUnitAlly(whichUnit,udg_SentPlayers[0]) then
+        return IsVisibleToPlayer(GetUnitX(whichUnit),GetUnitY(whichUnit),g_aiPVisibilityScrg)
+    else
+        return IsVisibleToPlayer(GetUnitX(whichUnit),GetUnitY(whichUnit),g_aiPVisibilitySent)
+    endif
+    return false
+endfunction
+function AIIsTargetAlive takes unit it returns boolean
+    return(GetWidgetLife(it)>.405 and ((not IsUnitType(it,UNIT_TYPE_HERO)) or (not HeroDead[GetPlayerId(GetOwningPlayer(it))])))
+endfunction
+function AIIsHeroKillableBy takes unit whichTarget,unit whichUnit returns boolean
+    local integer O5=GetPlayerId(GetOwningPlayer(whichUnit))
+    return((IsUnitType(whichTarget,UNIT_TYPE_HERO))and(((R2I(GetWidgetLife(whichTarget))<(300+(GetHeroLevel(whichTarget)*30)))and(GetUnitLifePercent(whichTarget)<40.))or((hq[624+O5]>Bz and h4[O5]==whichTarget)))and(AIIsTargetAlive(whichTarget)))
+endfunction
+function AIIsHeroKillable takes unit it returns boolean
+    return((IsUnitType(it,UNIT_TYPE_HERO))and(R2I(GetWidgetLife(it))<(300+(GetHeroLevel(it)*30)))and(GetUnitLifePercent(it)<40.)and(AIIsTargetAlive(it)))
+endfunction
+function aiGankGallantMode takes integer O5 returns boolean
+    return (hq[624+O5]>Bz and h4[O5]!=null) and (not AIIsHeroKillable(udg_Hero[O5]))
+endfunction
+function aiUnitHasUltiBuff takes unit it returns boolean
+    return((GetUnitAbilityLevel(it,'B0DP')>0)or(GetUnitAbilityLevel(it,'A0WR')>0)or(GetUnitAbilityLevel(it,'B02H')>0))
+endfunction
+function N5_2 takes unit it returns boolean
+    return((IsUnitType(it,UNIT_TYPE_HERO))and(R2I(GetWidgetLife(it))<(600+(GetHeroLevel(it)*30)))and(GetWidgetLife(it)>.405))
+endfunction
+function N5_3 takes unit it returns boolean
+    return((IsUnitType(it,UNIT_TYPE_HERO))and(R2I(GetWidgetLife(it))<(800+(GetHeroLevel(it)*30)))and(GetWidgetLife(it)>.405))
+endfunction
+function IsHeroPwnable takes unit it,unit IB returns boolean
+    return((IsUnitType(it,UNIT_TYPE_HERO))and(R2I(GetWidgetLife(it))<(300+(GetHeroLevel(it)*30)))and(GetUnitLifePercent(it)<40.)and(GetWidgetLife(it)>.405)and(GetUnitState(IB,UNIT_STATE_LIFE)>(GetUnitState(it,UNIT_STATE_LIFE)-(10.*GetHeroLevel(IB)))))
+endfunction
+function IC takes integer O5 returns boolean
+    return((udg_LBDeaths[O5]-3)>=udg_LBKills[O5])
+endfunction
+function Id takes integer O5 returns boolean
+    return((h4[O5]!=null)and(IsHeroPwnable(h4[O5],udg_Hero[O5])))
+endfunction
+function Ie takes rect r,boolexpr Ig returns unit
+    call GroupClear(ig)
+    call GroupEnumUnitsInRect(ig,r,Ig)
+    set bj_groupRandomConsidered=0
+    set bj_groupRandomCurrentPick=null
+    call ForGroup(ig,function GroupPickRandomUnitEnum)
+    call DestroyBoolExpr(Ig)
+    return bj_groupRandomCurrentPick
+endfunction
+function CountUnitsInGroupEnum_Hp takes nothing returns nothing
+     set bj_groupCountUnits = bj_groupCountUnits + 1
+	 set SigmaHpCounted=SigmaHpCounted+GetUnitState(GetEnumUnit(),UNIT_STATE_LIFE)
+endfunction
+function IH takes player pl,boolexpr Ig returns integer
+    call GroupClear(ig)
+    call GroupEnumUnitsOfPlayer(ig,pl,Ig)
+    set bj_groupCountUnits=0
+    call ForGroup(ig,function CountUnitsInGroupEnum)
+    call DestroyBoolExpr(Ig)
+    return bj_groupCountUnits
+endfunction
+function GetRandomUnitFromGroup takes real Im,location b5,boolexpr Ig returns unit
+    set bj_groupRandomConsidered=0
+    set bj_groupRandomCurrentPick=null
+    call GroupClear(H9)
+    call GroupEnumUnitsInRangeOfLoc(H9,b5,Im,Ig)
+    call ForGroup(H9,function GroupPickRandomUnitEnum)
+    call DestroyBoolExpr(Ig)
+    return bj_groupRandomCurrentPick
+endfunction
+function GetRandomUnitFromGroupInRange takes real Im,unit whichUnit,boolexpr Ig returns unit
+    set bj_groupRandomConsidered=0
+    set bj_groupRandomCurrentPick=null
+    call GroupClear(H9)
+    call GroupEnumUnitsInRange(H9,GetUnitX(whichUnit),GetUnitY(whichUnit),Im,Ig)
+    call ForGroup(H9,function GroupPickRandomUnitEnum)
+    call DestroyBoolExpr(Ig)
+    return bj_groupRandomCurrentPick
+endfunction
+function GetFirstUnitFromGroup takes real Im,location b5,boolexpr Ig returns unit
+    call GroupClear(H9)
+    call GroupEnumUnitsInRangeOfLoc(H9,b5,Im,Ig)
+    call DestroyBoolExpr(Ig)
+    return FirstOfGroup(H9)
+endfunction
+function GetFirstUnitFromGroupXY takes real Im,real x,real y,boolexpr Ig returns unit
+    call GroupClear(H9)
+    call GroupEnumUnitsInRange(H9,x,y,Im,Ig)
+    call DestroyBoolExpr(Ig)
+    return FirstOfGroup(H9)
+endfunction
+
+function GetFirstUnitFromGroupWidget takes real Im,widget Hero,boolexpr Ig returns unit
+    call GroupClear(H9)
+    call GroupEnumUnitsInRange(H9,GetWidgetX(Hero),GetWidgetY(Hero),Im,Ig)
+    call DestroyBoolExpr(Ig)
+    return FirstOfGroup(H9)
+endfunction
+function GetCountUnitsInLoc takes real Im,location b5,boolexpr Ig returns integer
+    call GroupClear(H8)
+    call GroupEnumUnitsInRangeOfLoc(H8,b5,Im,Ig)
+    set bj_groupCountUnits=0
+    call ForGroup(H8,function CountUnitsInGroupEnum)
+    call DestroyBoolExpr(Ig)
+    return bj_groupCountUnits
+endfunction
+function GetCountUnitsInRange takes real Im,unit it,boolexpr Ig returns integer
+    call GroupClear(H8)
+    call GroupEnumUnitsInRange(H8,GetUnitX(it),GetUnitY(it),Im,Ig)
+    set bj_groupCountUnits=0
+	set SigmaHpCounted=0.
+    call ForGroup(H8,function CountUnitsInGroupEnum_Hp)
+    call DestroyBoolExpr(Ig)
+    return bj_groupCountUnits
+endfunction
+function GetCountUnitsInXY takes real Im,real x,real y,boolexpr Ig returns integer
+    call GroupClear(H8)
+    call GroupEnumUnitsInRange(H8,x,y,Im,Ig)
+    set bj_groupCountUnits=0
+	set SigmaHpCounted=0.
+    call ForGroup(H8,function CountUnitsInGroupEnum_Hp)
+    call DestroyBoolExpr(Ig)
+    return bj_groupCountUnits
+endfunction
+function IV takes real x,real y,real IW,boolexpr Ig,code IX returns nothing
+    call GroupClear(iF)
+    call GroupEnumUnitsInRange(iF,x,y,IW,Ig)
+    call ForGroup(iF,IX)
+    call DestroyBoolExpr(Ig)
+endfunction
+function IsEnemyTowerInRangeBuff takes nothing returns boolean
+    local integer i1=GetUnitTypeId(GetFilterUnit())
+    return((IsUnitType(GetFilterUnit(),UNIT_TYPE_STRUCTURE))and(IsUnitEnemy(GetFilterUnit(),GetOwningPlayer(bj_lastLoadedUnit)))and(GetWidgetLife(GetFilterUnit())>.405)and((i1=='e00S')or(i1=='e011')or(i1=='e00R')or(i1=='e019')or(i1=='u00N')or(i1=='u00D')or(i1=='u00M')or(i1=='u00T')))
+endfunction 
+
+function IsEnemyTowerInRangeEnum takes nothing returns boolean
+    local integer i1=GetUnitTypeId(GetFilterUnit())
+    return((IsUnitType(GetFilterUnit(),UNIT_TYPE_STRUCTURE))and(IsUnitEnemy(GetFilterUnit(),GetOwningPlayer(GetEnumUnit())))and(GetWidgetLife(GetFilterUnit())>.405)and((i1=='e00S')or(i1=='e011')or(i1=='e00R')or(i1=='e019')or(i1=='u00N')or(i1=='u00D')or(i1=='u00M')or(i1=='u00T')))
+endfunction
+function IsEnemyEggInRangeTrig takes nothing returns boolean
+    local integer i1=GetUnitTypeId(GetFilterUnit())
+    return((IsUnitEnemy(GetFilterUnit(),GetOwningPlayer(GetEnumUnit())))and((i1=='h0CV')or(i1=='h0CX')or(i1=='h0CW')))
+endfunction
+function IsEnemyRangedCreep takes nothing returns boolean
+    local integer i1=GetUnitTypeId(GetFilterUnit())
+    return((IsUnitEnemy(GetFilterUnit(),GetOwningPlayer(GetEnumUnit())))and(GetWidgetLife(GetFilterUnit())>.405)and((i1=='unec') or (i1=='u002') or (i1=='edry') or (i1=='e00W')))
+endfunction
+function k6 takes nothing returns boolean
+    return((IsUnitType(GetFilterUnit(),UNIT_TYPE_HERO)==true)and(IsUnitEnemy(GetFilterUnit(),GetOwningPlayer(GetEnumUnit())))and(AIIsTargetAlive(GetFilterUnit()))and(IsUnitVisible(GetFilterUnit(),GetOwningPlayer(GetEnumUnit())))and(GetUnitAbilityLevel(GetFilterUnit(),'A04R')==0))
+endfunction
+function IsEnemyTowerInRangeEnum_2 takes nothing returns boolean
+    local integer i1=GetUnitTypeId(GetFilterUnit())
+    return((IsUnitType(GetFilterUnit(),UNIT_TYPE_STRUCTURE))and(IsUnitEnemy(GetFilterUnit(),GetOwningPlayer(GetEnumUnit())))and(GetWidgetLife(GetFilterUnit())>.405)and((i1=='e00S')or(i1=='e011')or(i1=='e00R')or(i1=='e019')or(i1=='u00N')or(i1=='u00D')or(i1=='u00M')or(i1=='u00T')))
+endfunction
+function ai_IsRockFilter takes nothing returns boolean
+	return (GetUnitTypeId(GetFilterUnit())=='o01X' or GetUnitTypeId(GetFilterUnit())=='o020' ) and GetWidgetLife(GetFilterUnit())>0.405
+endfunction
+function KZ takes nothing returns nothing
+    if ((hy==null)or(GetUnitState(hy,UNIT_STATE_LIFE)>GetUnitState(GetEnumUnit(),UNIT_STATE_LIFE))) and (GetEnumUnit()!=GetWeakestHero_Exclude or GetWeakestHero_Exclude==null) then
+        set hy=GetEnumUnit()
+    endif
+endfunction
+function GetWeakestHeroInRangeOfUnitCon takes real K1,unit IB, boolexpr Ig returns unit
+    //set AIDEBUG_LASTFUNC="GetWeakestHeroInRangeOfUnit"
+    set hy=null
+    call GroupClear(iA)
+    call GroupEnumUnitsInRange(iA,GetUnitX(IB),GetUnitY(IB),K1,Ig)
+    call ForGroup(iA,function KZ)
+    call DestroyBoolExpr(Ig)
+    return hy
+endfunction
+
+//====================================================================
+
+function FilterAlwaysTrue takes nothing returns boolean
+    return true
+endfunction
+function AllHumanHeroFilter takes nothing returns boolean
+	return GetPlayerController(GetOwningPlayer(GetFilterUnit()))==MAP_CONTROL_USER and IsUnitType(GetFilterUnit(),UNIT_TYPE_HERO)==true
+endfunction
+
+function AIFilter_Enemy takes nothing returns nothing
+endfunction

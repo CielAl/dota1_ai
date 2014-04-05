@@ -3,7 +3,10 @@
 //Mark notes of anything not important
 //Invalid  ---EndInvalid things should be removed
 //Change:
-
+//Move To BJ
+//BJ
+function toBJ...
+function ToBJ...
 
 
 Lib:
