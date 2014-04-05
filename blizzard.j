@@ -630,7 +630,346 @@ globals
 
     // Memory cleanup vars
     boolean            bj_wantDestroyGroup         = false
+//DataBase	//AI Item Array
+    integer array Item_Dummy
+    integer array Item_Real
+    integer array Item_Unit
+    integer array Item_Mute
+    string array Item_Icon
+    integer array Item_Cooldown
+    integer array Item_Main
+    integer Item_Max=0
+    integer gg_Item_BootsOfSpeed
+    integer gg_Item_GlovesOfHaste
+    integer gg_Item_BootsOfElvenskin
+    integer gg_Item_CircletOfNobility
+    integer gg_Item_BeltofGiantStrength
+    integer gg_Item_BladeofAlacrity
+    integer gg_Item_BladesOfAttack
+    integer gg_Item_Broadsword
+    integer gg_Item_Chainmail
+    integer gg_Item_Claymore
+    integer gg_Item_DemonEdge
+    integer gg_Item_Eaglehorn
+    integer gg_Item_EnergyBooster
+    integer gg_Item_GauntletsOfStrength
+    integer indexid_gemoftruesight
+    integer indexid_gemoftruesightcourier
+    integer gg_Item_HelmofIronWill
+    integer gg_Item_Hyperstone
+    integer gg_Item_IronwoodBranch
+    integer gg_Item_KelensDagger
+    integer gg_Item_KelensDagger_Disabled
+    integer gg_Item_MantleofIntelligence
+    integer gg_Item_MaskofDeath
+    integer gg_Item_MesserschmidtsReaver
+    integer gg_Item_MithrilHammer
+    integer gg_Item_MysticStaff
+    integer gg_Item_OgreAxe
+    integer gg_Item_PlaneswalkersCloak
+    integer gg_Item_PlateMail
+    integer gg_Item_PointBooster
+    integer gg_Item_Quarterstaff
+    integer gg_Item_RingOfHealth
+    integer gg_Item_RingOfProtection
+    integer gg_Item_RingofRegeneration
+    integer gg_Item_RobeOfTheMagi
+    integer gg_Item_SacredRelic
+    integer gg_Item_SlippersofAgility
+    integer gg_Item_SobiMask
+    integer gg_Item_StaffOfWizardry
+    integer gg_Item_StoutShield_Melee
+    integer gg_Item_StoutShield_Ranged
+    integer gg_Item_UltimateOrb
+    integer gg_Item_VitalityBooster
+    integer gg_Item_VoidStone
+    integer gg_Item_Javelin
+    integer gg_Item_EmptyBottle_Store
+    integer gg_Item_EmptyBottle
+    integer gg_Item_MagicalBottle_1
+    integer gg_Item_MagicalBottle_2
+    integer gg_Item_MagicalBottle_3
+    integer gg_Item_RuneBottleInvis
+    integer gg_Item_RuneBottleDoubleDamage
+    integer gg_Item_RuneBottleHaste
+    integer gg_Item_RuneBottleRegen
+    integer gg_Item_RuneBottleIllusion
+    integer gg_Item_MagicStick
+    integer gg_Item_QuellingBlade
+    integer gg_Item_QuellingBlade_Ranged
+    integer gg_Item_TalismanofEvasion
+    integer indexid_corruptor
+    integer indexid_corruptorranged
+    integer indexid_ancientjangoo
+    integer indexid_ancientjangooempty
+    integer indexid_bladeofthereaper
+    integer indexid_ironboots
+    integer indexid_ironboots_disabled
+    integer indexid_cripplingstaff
+    integer indexid_moonshard
+    integer indexid_ringofaquila
+    integer indexid_ringofaquilaheroes
+    integer gg_Item_ClarityPotion
+    integer gg_Item_GhostPotion
+    integer gg_Item_HealingSalve
+    integer gg_Item_Tango
+    integer gg_Item_ObserverWards
+    integer gg_Item_SentryWards
+    integer indexid_scrolloftownportal
+    integer indexid_scrolloftownportal_AI
+    integer gg_Item_AnimalCourier
+    integer gg_Item_Cheese
+    integer gg_Item_PoisonPowder
+    integer gg_Item_DustOfAppearance
+    integer gg_Item_WandOfIllusion
+    integer indexid_smokeofdeceit
+    integer indexid_medallionofcourage
+    integer indexid_veilofdiscord
+    integer indexid_prudence
+    integer indexid_annihilator
+    integer indexid_shadowamulet
+    integer indexid_glimmercape
+    integer gg_Item_Perseverance
+    integer gg_Item_HeaddressofRejuvenation
+    integer gg_Item_NathrezimBuckler
+    integer gg_Item_RingofBasilius
+    integer gg_Item_RingofBasilius_Hero
+    integer gg_Item_BootsOfTravel
+    integer gg_Item_PowerTreadsAgi
+    integer gg_Item_PowerTreadsStr
+    integer gg_Item_PowerTreadsInt
+    integer gg_Item_HandofMidas
+    integer indexid_handofmidascourier
+    integer gg_Item_OblivionStaff
+    integer gg_Item_Bracer
+    integer gg_Item_WraithBand
+    integer gg_Item_NullTalisman
+    integer gg_Item_Yasha
+    integer gg_Item_Sange
+    integer gg_Item_CraniumBasher
+    integer gg_Item_CraniumBasher_Ranged
+    integer gg_Item_BladeMail
+    integer gg_Item_Maelstrom
+    integer gg_Item_DiffusalBlade_1
+    integer gg_Item_DiffusalBlade_2
+    integer gg_Item_DiffusalBlade_1_Empty
+    integer gg_Item_DiffusalBlade_2_Empty
+    integer gg_Item_HelmoftheDominator
+    integer gg_Item_HelmoftheDominator_Courier
+    integer gg_Item_MaskofMadness
+    integer gg_Item_EulsScepter
+    integer gg_Item_SoulBooster
+    integer gg_Item_Mekansm
+    integer gg_Item_SangeAndYasha
+    integer gg_Item_StygianDesolator
+    integer gg_Item_BattleFury
+    integer gg_Item_Crystalys
+    integer gg_Item_BKB10
+    integer gg_Item_BKB9
+    integer gg_Item_BKB8
+    integer gg_Item_BKB7
+    integer gg_Item_BKB6
+    integer gg_Item_BKB5
+    integer gg_Item_BKB4
+    integer indexid_aegis
+    integer gg_Item_MantaStyle_Melee
+    integer gg_Item_MantaStyle_Ranged
+    integer gg_Item_LotharsEdge
+    integer gg_Item_Dagon_1
+    integer gg_Item_Dagon_2
+    integer gg_Item_Dagon_3
+    integer gg_Item_Dagon_4
+    integer gg_Item_Dagon_5
+    integer gg_Item_Necronomicon_1
+    integer gg_Item_Necronomicon_2
+    integer gg_Item_Necronomicon_3
+    integer gg_Item_LinkensSphere
+    integer gg_Item_LinkensSphere_too
+    integer gg_Item_DivineRapier
+    integer gg_Item_DivineRapier_Free
+    integer gg_Item_BurizaDoKyanon
+    integer gg_Item_MonkeyKingBar
+    integer gg_Item_MonkeyKingBar_Inactive
+    integer gg_Item_Radiance
+    integer gg_Item_Radiance_Off
+    integer gg_Item_HeartofTarrasque
+    integer gg_Item_HeartofTarrasque_Disabled
+    integer gg_Item_Satanic
+    integer gg_Item_EyeofSkadi
+    integer gg_Item_EyeofSkadi_Ranged
+    integer gg_Item_TheButterfly
+    integer gg_Item_RefresherOrb
+    integer gg_Item_Guinsoo
+    integer gg_Item_Vanguard
+    integer gg_Item_Vanguard_Ranged
+    integer gg_Item_ArcaneRing
+    integer gg_Item_Mjollnir
+    integer gg_Item_FlyingCourier
+    integer gg_Item_VladmirsOffering
+    integer gg_Item_AssaultCuirass
+    integer indexid_bloodstone
+    integer gg_Item_HoodofDefiance
+    integer indexid_armletofmordiggianon
+    integer indexid_armletofmordiggianoff
+    integer gg_Item_ArmletofMordiggian_On_Courier
+    integer gg_Item_ArmletofMordiggian_Off_Courier
+    integer gg_Item_ShivasGuard
+    integer gg_Item_ShivasGuardCourier
+    integer gg_Item_OrchidMalevolence
+    integer gg_Item_PhaseBoots
+    integer indexid_magicwand
+    integer gg_Item_ForceStaff
+    integer gg_Item_KhadgarsPipeofInsight
+    integer gg_Item_PoorMansShield_Melee
+    integer gg_Item_PoorMansShield_Ranged
+    integer gg_Item_UrnofShadows
+    integer gg_Item_UrnofShadows_Empty
+    integer gg_Item_GhostScepter
+    integer gg_Item_HeaddressRecipe
+    integer gg_Item_NathrezimBucklerRecipe
+    integer gg_Item_BootsOfTravelRecipe
+    integer gg_Item_PowerTreads_Store
+    integer gg_Item_HandofMidasRecipe
+    integer gg_Item_BracerRecipe
+    integer gg_Item_WraithBandRecipe
+    integer gg_Item_NullTalismanRecipe
+    integer gg_Item_YashaRecipe
+    integer gg_Item_SangeRecipe
+    integer gg_Item_CraniumBasherRecipe
+    integer gg_Item_MaelstromRecipe
+    integer gg_Item_DiffusalBladeRecipe
+    integer gg_Item_MaskofMadnessRecipe
+    integer gg_Item_EulsScepterRecipe
+    integer gg_Item_MekansmRecipe
+    integer gg_Item_SangeAndYasha_Store
+    integer gg_Item_StygianDesolatorRecipe
+    integer gg_Item_CrystalysRecipe
+    integer gg_Item_BKBRecipe
+    integer gg_Item_MantaStyleRecipe
+    integer gg_Item_LotharsEdgeRecipe
+    integer gg_Item_DagonRecipe
+    integer gg_Item_NecronomiconRecipe
+    integer gg_Item_LinkensSphereRecipe
+    integer gg_Item_BurizaDoKyanonRecipe
+    integer gg_Item_RadianceRecipe
+    integer gg_Item_HeartofTarrasqueRecipe
+    integer gg_Item_SatanicRecipe
+    integer gg_Item_TheButterfly_Store
+    integer gg_Item_RefresherOrbRecipe
+    integer gg_Item_ArcaneRingRecipe
+    integer indexid_recipe_flyingcourier
+    integer gg_Item_VladsOfferingRecipe
+    integer gg_Item_AssaultCuirassRecipe
+    integer gg_Item_ArmletofMordiggianRecipe
+    integer gg_Item_ShivasGuardRecipe
+    integer gg_Item_MagicWandRecipe
+    integer gg_Item_ForceStaffRecipe
+    integer gg_Item_KhadgarsPipeofInsightRecipe
+    integer gg_Item_MjollnirRecipe
+    integer gg_Item_UrnofShadowsRecipe
+    integer gg_Item_SoulRingRecipe
+    integer gg_Item_SoulRing
+    integer gg_Item_EtherealBlade
+    integer gg_Item_OrbOfVenom
+    integer gg_Item_OrbOfVenom_Ranged
+    integer gg_Item_ArcaneBoots
+    integer indexid_recipe_ancientjangoo
+    integer indexid_recipe_medallionofcourage
+    integer indexid_recipe_veilofdiscord
+    integer indexid_recipe_orchidmalevolence
+    integer indexid_recipe_bladeofthereaper
+    integer indexid_recipe_ironboots
+    integer indexid_recipe_prudence
+    integer indexid_recipe_cripplingstaff
+    
+    integer powerup_previous=-1
+    integer array Recipe_Component_1
+    integer array Recipe_Component_2
+    integer array Recipe_Component_3
+    integer array Recipe_Component_4
+    integer array Recipe_Component_5
+    integer array Recipe_Result
+    integer Recipe_Max=0
+    integer gg_Item_AghanimsScepter
+    integer gg_Item_AghanimsScepter_Furion
+    integer gg_Item_AghanimsScepter_KOTL
+    integer gg_Item_AghanimsScepter_Leshrac
+    integer gg_Item_AghanimsScepter_Lich
+    integer gg_Item_AghanimsScepter_Lina
+    integer gg_Item_AghanimsScepter_Lion
+    integer gg_Item_AghanimsScepter_Lucifer
+    integer gg_Item_AghanimsScepter_Luna
+    integer gg_Item_AghanimsScepter_Necro
+    integer gg_Item_AghanimsScepter_Ogre
+    integer gg_Item_AghanimsScepter_Undying
+    integer gg_Item_AghanimsScepter_Pugna
+    integer gg_Item_AghanimsScepter_QoP
+    integer gg_Item_AghanimsScepter_Rhasta
+    integer gg_Item_AghanimsScepter_Rylai
+    integer gg_Item_AghanimsScepter_Veno
+    integer gg_Item_AghanimsScepter_WitchDoctor
+    integer gg_Item_AghanimsScepter_Zeus
+    integer gg_Item_AghanimsScepter_Sniper
+    integer gg_Item_AghanimsScepter_Clockwerk
+    integer gg_Item_AghanimsScepter_VengefulSpirit
+    integer gg_Item_AghanimsScepter_Juggernaut
+    integer gg_Item_AghanimsScepter_ChaosKnight
+    integer gg_Item_AghanimsScepter_Chen
+    integer gg_Item_AghanimsScepter_Nightstalker
+    integer gg_Item_AghanimsScepter_Jakiro
+    integer gg_Item_AghanimsScepter_SandKing
+    integer gg_Item_AghanimsScepter_Huskar
+    integer gg_Item_AghanimsScepter_Invoker
+    integer gg_Item_AghanimsScepter_Panda
+    integer gg_Item_AghanimsScepter_Pudge
+    integer gg_Item_AghanimsScepter_Windrunner
+    integer gg_Item_AghanimsScepter_Void
+    integer gg_Item_AghanimsScepter_Spiritbreaker
+    integer gg_Item_AghanimsScepter_Bane
+    integer gg_Item_AghanimsScepter_Abaddon
+    integer gg_Item_AghanimsScepter_Dazzle
+    integer gg_Item_AghanimsScepter_Techies
+    integer gg_Item_AghanimsScepter_Axe
+    integer gg_Item_AghanimsScepter_Earthshaker
+    integer gg_Item_AghanimsScepter_Puck
+    integer gg_Item_AghanimsScepter_Warlock
+    integer indexid_aghanimsscepterrazor
+    integer indexid_aghanimsscepterviper
+    integer gg_Item_AghanimsScepter_Tiny
+    integer indexid_aghanimsscepterdestroyer
+    integer indexid_aghanimsscepterenchantress
+    integer indexid_aghanimsscepterdarkseer
+    integer indexid_aghanimssceptergyrocopter
+    integer indexid_aghanimssceptermeepo
+    integer indexid_aghanimsscepterbeastmaster
+    integer indexid_aghanimssceptervisage
+    integer indexid_aghanimssceptersilencer
+    integer indexid_aghanimsscepteraa
+    integer indexid_aghanimsscepteromni	
+	    constant integer unitid_goodcourier0   ='e01H'
+    constant integer unitid_goodcourier1   ='n00I'
+    constant integer unitid_goodcourier2   ='n022'
+    constant integer unitid_goodcourier3   ='n021'
+    constant integer unitid_goodcourier4   ='n0KY'
+    constant integer unitid_goodcourier5   ='n0KZ'
+    constant integer unitid_goodcourier6   ='n0LE'
+    constant integer unitid_badcourier0    ='e01Z'
+    constant integer unitid_badcourier1    ='n023'
+    constant integer unitid_badcourier2    ='n024'
+    constant integer unitid_badcourier3    ='n025'
+    constant integer unitid_badcourier4    ='n0L0'
+    constant integer unitid_badcourier5    ='n0L1'
+    constant integer unitid_badcourier6    ='n0M4'
+    constant integer unitid_flyingcourier1 ='e02T'
+    constant integer unitid_flyingcourier2 ='e02S'
+    constant integer unitid_flyingcourier3 ='e030'
+    constant integer unitid_jokecourier1   ='n00M'
+    constant integer unitid_jokecourier2   ='n0HV'
+    constant integer unitid_jokecourier3   ='e02R'
+    constant integer unitid_jokecourier4   ='n0LS'
+	
 	//Transport
+	string AIDEBUG_LASTFUNC=null
 	 player g_aiPVisibilitySent=null
      player g_aiPVisibilityScrg=null
 	 player array udg_SentPlayers 
@@ -652,8 +991,21 @@ boolean isDebug=false
 integer debugCurrent=-1	 
 unit GetWeakestHero_Exclude=null
 unit hy=null
-	//
+    player g_pSentinelLeader=null
+    player g_pScourgeLeader=null
+    player g_pPickingSent=null
+    player g_pPickingScrg=null
 	group bj_globalGroup=null
+    integer g_iSentinelPlayerCount=0
+    integer g_iScourgePlayerCount=0
+    force g_fAIForce=CreateForce()
+    boolean array b_isAI
+    trigger t_manipulateitem 
+
+
+//AI Operation
+boolean array GZ
+boolean array G0	
 endglobals
 
 
@@ -10370,9 +10722,349 @@ function DistanceBetweenXY takes real x1,real y1,real x2,real y2 returns real
     return SquareRoot(((x1-x2)*(x1-x2))+((y1-y2)*(y1-y2)))
 endfunction
 
+function DistanceBetweenRectAndUnit takes unit j4,rect Ja returns real
+    local real JD=GetRectCenterX(Ja)-GetUnitX(j4)
+    local real Je=GetRectCenterY(Ja)-GetUnitY(j4)
+
+    return SquareRoot(JD*JD+Je*Je)
+endfunction
+
+//===========Condition Check===========
+
+function IsTree takes destructable d returns boolean
+    return GetDestructableTypeId(d)=='NTtc'or GetDestructableTypeId(d)=='NTtw'or GetDestructableTypeId(d)=='ATtr' or GetDestructableTypeId(d)=='B002' or GetDestructableTypeId(d)=='B003' or GetDestructableTypeId(d)=='B005'
+endfunction
+function IsCycloned takes unit u returns boolean
+    return GetUnitAbilityLevel(u,'Bcyc')>0 or GetUnitAbilityLevel(u,'Bcy2')>0
+endfunction
+function Gargolye_IsFamiliar takes integer id returns boolean
+    return id=='u014' or id=='u015' or id=='u016' or id=='u01D' or id=='u01E' or id=='u01F'or id=='u01R'or id=='u01S'or id=='u01T'
+endfunction
+function IsHexed takes unit u returns boolean
+    return GetUnitAbilityLevel(u,'BOhx')>0 or GetUnitAbilityLevel(u,'B00H')>0
+endfunction
+function PrimalSplit_IsPanda takes integer uid returns boolean
+    if uid=='npn3' or uid=='npn6' or uid=='n010' or uid=='n0GZ' then
+        return true
+    endif
+    if uid=='npn2' or uid=='npn5' or uid=='n012' or uid=='n0H1' then
+        return true
+    endif
+    if uid=='npn1' or uid=='npn4' or uid=='n011' or uid=='n0H0' then
+        return true
+    endif
+    return false
+endfunction
+function GetTowerLevel takes unit tower returns integer
+    local integer uid=GetUnitTypeId(tower)
+    if uid=='e00R' or uid=='u00M' then
+        return 1
+    elseif uid=='e011' or uid=='u00D' then
+        return 2
+    elseif uid=='e00S' or uid=='u00N' then
+        return 3
+    elseif uid=='e019' or uid=='u00T' then
+        return 4
+    endif
+    return 0
+endfunction
+function ai_EnumInvisible takes unit who returns boolean 
+return GetUnitAbilityLevel(who,'A1HW')>0 or GetUnitAbilityLevel(who,'A1HX')>0 or GetUnitAbilityLevel(who,'B00K')>0 or GetUnitAbilityLevel(who,'B076')>0 or GetUnitAbilityLevel(who,'B07T')>0  or GetUnitAbilityLevel(who,'A021')>0 or GetUnitAbilityLevel(who,'A29C')>0 or GetUnitAbilityLevel(who,'BHfs')>0  or GetUnitAbilityLevel(who,'B08K')>0  or GetUnitAbilityLevel(who,'B068')>0 or GetUnitAbilityLevel(who,'B039')>0 or GetUnitAbilityLevel(who,'A00J')>0 or GetUnitAbilityLevel(who,'A0KT')>0
+endfunction
 
 
+//===========================Team Operate
+function IsSent takes player hd returns boolean
+    return((hd==udg_SentPlayers[0])or(hd==udg_SentPlayers[1])or(hd==udg_SentPlayers[2])or(hd==udg_SentPlayers[3])or(hd==udg_SentPlayers[4])or(hd==udg_SentPlayers[5]))
+endfunction
+function IsScourge takes player hd returns boolean
+    return((hd==udg_ScourgePlayers[0])or(hd==udg_ScourgePlayers[1])or(hd==udg_ScourgePlayers[2])or(hd==udg_ScourgePlayers[3])or(hd==udg_ScourgePlayers[4])or(hd==udg_ScourgePlayers[5]))
+endfunction
+function IsRealPlayer takes player p returns boolean
+    return p==udg_SentPlayers[1]or p==udg_SentPlayers[2]or p==udg_SentPlayers[3]or p==udg_SentPlayers[4]or p==udg_SentPlayers[5]or p==udg_ScourgePlayers[1]or p==udg_ScourgePlayers[2]or p==udg_ScourgePlayers[3]or p==udg_ScourgePlayers[4]or p==udg_ScourgePlayers[5]
+endfunction
+function IsPlayerHuman takes player j8 returns boolean
+    return((GetPlayerSlotState(j8)==PLAYER_SLOT_STATE_PLAYING)and(GetPlayerController(j8)==MAP_CONTROL_USER))
+endfunction
+function IsPlayerAI takes player j8 returns boolean
+    return((GetPlayerSlotState(j8)==PLAYER_SLOT_STATE_PLAYING)and(GetPlayerController(j8)==MAP_CONTROL_COMPUTER))
+endfunction
+function IsPlayerHumanOrAI takes player j8 returns boolean
+    return((GetPlayerSlotState(j8)==PLAYER_SLOT_STATE_PLAYING)and((GetPlayerController(j8)==MAP_CONTROL_USER)or(GetPlayerController(j8)==MAP_CONTROL_COMPUTER)))
+endfunction
+function IsPlayerHumanOrAI2 takes player j8 returns boolean
+    return((GetPlayerSlotState(j8)==PLAYER_SLOT_STATE_PLAYING)and((GetPlayerController(j8)==MAP_CONTROL_USER)or(b_isAI[GetPlayerId(j8)])))
+endfunction
+function AIGetForceCount takes boolean bOfSentinel returns integer
+    if(bOfSentinel)then
+        return g_iScourgePlayerCount
+    else
+        return g_iSentinelPlayerCount
+    endif
+endfunction
+function AI_GetPlayerForce takes integer O5,boolean bOfSentinel returns player
+    if(bOfSentinel)then
+        return udg_SentPlayers[O5]
+    else
+        return udg_ScourgePlayers[O5]
+    endif
+endfunction
+function AI_GetTeamLeader takes boolean bOfSentinel returns player
+    if(bOfSentinel)then
+        return g_pSentinelLeader
+    else
+        return g_pScourgeLeader
+    endif
+endfunction
+function AI_GetPickingPlayer takes boolean bOfSentinel returns player
+    if(bOfSentinel)then
+        return g_pPickingSent
+    else
+        return g_pPickingScrg
+    endif
+endfunction
+function IsExistedHeroPlayer takes player j8 returns boolean
+    if(GetPlayerSlotState(j8)==PLAYER_SLOT_STATE_PLAYING or GetPlayerSlotState(j8)==PLAYER_SLOT_STATE_LEFT)then
+        if(GetPlayerController(j8)==MAP_CONTROL_USER or GetPlayerController(j8)==MAP_CONTROL_COMPUTER)then
+            return true
+        endif
+    endif
+    return false
+endfunction
+function Callback_CountRealPlayer takes nothing returns nothing
+    if(IsPlayerHumanOrAI(GetEnumPlayer())==true)then
+        set bj_forceCountPlayers=bj_forceCountPlayers+1
+    endif
+endfunction
+function CountRealPlayersInForce takes force f returns integer
+    set bj_forceCountPlayers=0
+    call ForForce(f,function Callback_CountRealPlayer)
+    return bj_forceCountPlayers
+endfunction
+function Callback_PlayerCount takes nothing returns nothing
+    if GetPlayerSlotState(GetEnumPlayer())==PLAYER_SLOT_STATE_PLAYING then
+        if GetEnumPlayer()!=Player(13)and GetEnumPlayer()!=Player(14)then
+            set bj_forceCountPlayers=bj_forceCountPlayers+1
+        endif
+    endif
+endfunction
+function CountHeroPlayersInForceInGame takes force f returns integer
+    set bj_forceCountPlayers=0
+    call ForForce(f,function Callback_PlayerCount)
+    return bj_forceCountPlayers
+endfunction
+//======Item Check==========
+function IsBasicCourier takes unit whichUnit returns boolean
+    local integer id=GetUnitTypeId(whichUnit)
+    return id==unitid_goodcourier1 or id==unitid_goodcourier2 or id==unitid_goodcourier3 or id==unitid_goodcourier4 or id==unitid_goodcourier5 or id==unitid_goodcourier6 or id==unitid_badcourier1 or id==unitid_badcourier2 or id==unitid_badcourier3 or id==unitid_badcourier4 or id==unitid_badcourier5 or id==unitid_badcourier6 or id==unitid_jokecourier1 or id==unitid_jokecourier2 or id==unitid_jokecourier4
+endfunction
+function IsFlyingCourier takes unit whichUnit returns boolean
+    local integer id=GetUnitTypeId(whichUnit)
+    return id==unitid_goodcourier0 or id==unitid_badcourier0 or id==unitid_jokecourier3 or id==unitid_flyingcourier1 or id==unitid_flyingcourier2 or id==unitid_flyingcourier3
+endfunction
+function IsCourier takes unit whichUnit returns boolean
+    return IsBasicCourier(whichUnit)or IsFlyingCourier(whichUnit)
+endfunction
+function DestroyItem takes item Z4 returns nothing
+    call DisableTrigger(t_manipulateitem)
+	call SetWidgetLife(Z4,1)
+    call RemoveItem(Z4)
+    call EnableTrigger(t_manipulateitem)
+endfunction
+function GetIndex takes item whichItem returns integer
+    local integer itemId
+    local integer i=1
 
+    if whichItem==null then
+        return-2
+    endif
+    set itemId=GetItemTypeId(whichItem)
+    loop
+        exitwhen i>Item_Max
+        if Item_Dummy[i]==itemId or Item_Real[i]==itemId or Item_Mute[i]==itemId then
+            return i
+        endif
+        set i=i+1
+    endloop
+    return-1
+endfunction
+function ItemToIndex takes item whichItem returns integer
+    local integer itemId
+    local integer i=1
+    
+    if whichItem==null then
+        return-2
+    endif
+    set itemId=GetItemTypeId(whichItem)
+    loop
+        exitwhen i>Item_Max
+        if Item_Dummy[i]==itemId or Item_Real[i]==itemId then
+            return i
+        endif
+        set i=i+1
+    endloop
+    return-1
+endfunction
+function GetItemIndex_Mute takes item whichItem returns integer
+    local integer itemId
+    local integer i=1
+
+    if whichItem==null then
+        return-2
+    endif
+    set itemId=GetItemTypeId(whichItem)
+    loop
+        exitwhen i>Item_Max
+        if Item_Mute[i]==itemId then
+            return i
+        endif
+        set i=i+1
+    endloop
+    return-1
+endfunction
+function isBKB takes integer i1 returns boolean
+    return (i1==Item_Real[gg_Item_BKB10] or i1==Item_Real[gg_Item_BKB9] or i1==Item_Real[gg_Item_BKB8] or i1==Item_Real[gg_Item_BKB7] or i1==Item_Real[gg_Item_BKB6] or i1==Item_Real[gg_Item_BKB5] or i1==Item_Real[gg_Item_BKB4])
+endfunction
+function CompareItemAltForm takes integer i1, integer Iz, boolean bDifferLevel returns boolean
+    if i1==Iz then
+        return true
+    elseif (i1==gg_Item_PoorMansShield_Melee or i1==gg_Item_PoorMansShield_Ranged) and (Iz==gg_Item_PoorMansShield_Melee or Iz==gg_Item_PoorMansShield_Ranged) then
+        return true
+    elseif (i1==gg_Item_StoutShield_Melee or i1==gg_Item_StoutShield_Ranged) and (Iz==gg_Item_StoutShield_Melee or Iz==gg_Item_StoutShield_Ranged) then
+        return true
+    elseif (i1==gg_Item_QuellingBlade or i1==gg_Item_QuellingBlade_Ranged) and (Iz==gg_Item_QuellingBlade or Iz==gg_Item_QuellingBlade_Ranged) then
+        return true
+    elseif (i1==gg_Item_CraniumBasher or i1==gg_Item_CraniumBasher_Ranged) and (Iz==gg_Item_CraniumBasher or Iz==gg_Item_CraniumBasher_Ranged) then
+        return true
+    elseif (i1==indexid_corruptor or i1==indexid_corruptorranged) and (Iz==indexid_corruptor or Iz==indexid_corruptorranged) then
+        return true
+    elseif (i1==gg_Item_MantaStyle_Melee or i1==gg_Item_MantaStyle_Ranged)and(Iz==gg_Item_MantaStyle_Melee or Iz==gg_Item_MantaStyle_Ranged) then
+        return true
+    elseif (i1==gg_Item_EyeofSkadi or i1==gg_Item_EyeofSkadi_Ranged) and (Iz==gg_Item_EyeofSkadi or Iz==gg_Item_EyeofSkadi_Ranged) then
+        return true
+    elseif (i1==gg_Item_Vanguard or i1==gg_Item_Vanguard_Ranged) and (Iz==gg_Item_Vanguard or Iz==gg_Item_Vanguard_Ranged) then
+        return true                                                
+
+    elseif (i1==gg_Item_EmptyBottle_Store or i1==gg_Item_EmptyBottle or i1==gg_Item_MagicalBottle_1 or i1==gg_Item_MagicalBottle_2 or i1==gg_Item_MagicalBottle_3 or i1==gg_Item_RuneBottleInvis or i1==gg_Item_RuneBottleDoubleDamage or i1==gg_Item_RuneBottleHaste or i1==gg_Item_RuneBottleRegen or i1==gg_Item_RuneBottleIllusion) and (Iz==gg_Item_EmptyBottle_Store or Iz==gg_Item_EmptyBottle or Iz==gg_Item_MagicalBottle_1 or Iz==gg_Item_MagicalBottle_2 or Iz==gg_Item_MagicalBottle_3 or Iz==gg_Item_RuneBottleInvis or Iz==gg_Item_RuneBottleDoubleDamage or Iz==gg_Item_RuneBottleHaste or Iz==gg_Item_RuneBottleRegen or Iz==gg_Item_RuneBottleIllusion) then
+        return true                
+    elseif (i1==indexid_ancientjangoo or i1==indexid_ancientjangooempty) and (Iz==indexid_ancientjangoo or Iz==indexid_ancientjangooempty) then
+        return true
+    elseif (i1==gg_Item_PowerTreadsAgi or i1==gg_Item_PowerTreadsStr or i1==gg_Item_PowerTreadsInt) and (Iz==gg_Item_PowerTreadsAgi or Iz==gg_Item_PowerTreadsStr or Iz==gg_Item_PowerTreadsInt) then
+        return true
+    elseif (i1==gg_Item_UrnofShadows or i1==gg_Item_UrnofShadows_Empty) and (Iz==gg_Item_UrnofShadows or Iz==gg_Item_UrnofShadows_Empty) then
+        return true
+    
+    elseif bDifferLevel and ((i1==gg_Item_DiffusalBlade_1 or i1==gg_Item_DiffusalBlade_1_Empty or i1==gg_Item_DiffusalBlade_2 or i1==gg_Item_DiffusalBlade_2_Empty) and (Iz==gg_Item_DiffusalBlade_1 or Iz==gg_Item_DiffusalBlade_1_Empty or Iz==gg_Item_DiffusalBlade_2 or Iz==gg_Item_DiffusalBlade_2_Empty)) then
+        return true                            
+    elseif (i1==gg_Item_DiffusalBlade_1 or i1==gg_Item_DiffusalBlade_1_Empty) and (Iz==gg_Item_DiffusalBlade_1 or Iz==gg_Item_DiffusalBlade_1_Empty) then
+        return true                            
+    elseif (i1==gg_Item_DiffusalBlade_2 or i1==gg_Item_DiffusalBlade_2_Empty) and (Iz==gg_Item_DiffusalBlade_2 or Iz==gg_Item_DiffusalBlade_2_Empty) then
+        return true                            
+    elseif bDifferLevel and ((i1==gg_Item_Dagon_1 or i1==gg_Item_Dagon_2 or i1==gg_Item_Dagon_3 or i1==gg_Item_Dagon_4 or i1==gg_Item_Dagon_5) and (Iz==gg_Item_Dagon_1 or Iz==gg_Item_Dagon_2 or Iz==gg_Item_Dagon_3 or Iz==gg_Item_Dagon_4 or Iz==gg_Item_Dagon_5)) then
+        return true
+    elseif bDifferLevel and ((i1==gg_Item_Necronomicon_1 or i1==gg_Item_Necronomicon_2 or i1==gg_Item_Necronomicon_3) and (Iz==gg_Item_Necronomicon_1 or Iz==gg_Item_Necronomicon_2 or Iz==gg_Item_Necronomicon_3)) then
+        return true
+
+    elseif (i1==gg_Item_BKB10 or i1==gg_Item_BKB9 or i1==gg_Item_BKB8 or i1==gg_Item_BKB7 or i1==gg_Item_BKB6 or i1==gg_Item_BKB5 or i1==gg_Item_BKB4) and (Iz==gg_Item_BKB10 or Iz==gg_Item_BKB9 or Iz==gg_Item_BKB8 or Iz==gg_Item_BKB7 or Iz==gg_Item_BKB6 or Iz==gg_Item_BKB5 or Iz==gg_Item_BKB4) then
+        return true
+    elseif (i1==gg_Item_RingofBasilius or i1==gg_Item_RingofBasilius_Hero) and (Iz==gg_Item_RingofBasilius or Iz==gg_Item_RingofBasilius_Hero) then
+        return true                
+    elseif (i1==indexid_ringofaquila or i1==indexid_ringofaquilaheroes) and (Iz==indexid_ringofaquila or Iz==indexid_ringofaquilaheroes) then
+        return true                
+    elseif (i1==gg_Item_Radiance or i1==gg_Item_Radiance_Off) and (Iz==gg_Item_Radiance or Iz==gg_Item_Radiance_Off) then
+        return true
+    elseif (i1==gg_Item_MonkeyKingBar or i1==gg_Item_MonkeyKingBar_Inactive)and(Iz==gg_Item_MonkeyKingBar or Iz==gg_Item_MonkeyKingBar_Inactive) then
+        return true
+    elseif (i1==gg_Item_HeartofTarrasque or i1==gg_Item_HeartofTarrasque_Disabled)and(Iz==gg_Item_HeartofTarrasque or Iz==gg_Item_HeartofTarrasque_Disabled) then
+        return true
+    elseif (i1==indexid_armletofmordiggianon or i1==indexid_armletofmordiggianoff or i1==gg_Item_ArmletofMordiggian_On_Courier or i1==gg_Item_ArmletofMordiggian_Off_Courier) and(Iz==indexid_armletofmordiggianon or Iz==indexid_armletofmordiggianoff or Iz==gg_Item_ArmletofMordiggian_On_Courier or Iz==gg_Item_ArmletofMordiggian_Off_Courier) then
+        return true
+                    
+    elseif (i1==indexid_scrolloftownportal or i1==indexid_scrolloftownportal_AI) and (Iz==indexid_scrolloftownportal or Iz==indexid_scrolloftownportal_AI) then
+        return true
+    elseif (i1==gg_Item_LinkensSphere or i1==gg_Item_LinkensSphere_too)and(Iz==gg_Item_LinkensSphere or Iz==gg_Item_LinkensSphere_too) then
+        return true
+    elseif (i1==gg_Item_DivineRapier or i1==gg_Item_DivineRapier_Free)and(Iz==gg_Item_DivineRapier or Iz==gg_Item_DivineRapier_Free) then
+        return true
+        
+    elseif (i1==gg_Item_HelmoftheDominator or i1==gg_Item_HelmoftheDominator_Courier) and (Iz==gg_Item_HelmoftheDominator or Iz==gg_Item_HelmoftheDominator_Courier) then
+        return true
+    elseif (i1==indexid_gemoftruesight or i1==indexid_gemoftruesightcourier) and (Iz==indexid_gemoftruesight or Iz==indexid_gemoftruesightcourier) then
+        return true
+    elseif (i1==gg_Item_HandofMidas or i1==indexid_handofmidascourier) and (Iz==gg_Item_HandofMidas or Iz==indexid_handofmidascourier) then
+        return true
+    elseif (i1==gg_Item_ShivasGuard or i1==gg_Item_ShivasGuardCourier) and (Iz==gg_Item_ShivasGuard or Iz==gg_Item_ShivasGuardCourier) then
+        return true
+    endif
+    return false
+endfunction
+function UnitHasItemOfBasicType takes unit it,integer Iz returns boolean
+    local integer i=0
+    local item ja
+    local integer i1
+    local boolean bRes=false
+    
+    set i=0
+    loop
+        exitwhen i>Item_Max
+        if Item_Dummy[i]==Iz or Item_Real[i]==Iz or Item_Mute[i]==Iz then
+            set Iz=i
+            exitwhen true
+        endif
+        set i=i+1
+    endloop  
+    if i>Item_Max then
+        return false
+    endif  
+    
+    set i=0
+    set bj_lastCreatedItem=null
+    loop
+        set ja=UnitItemInSlot(it,i)
+        if ja!=null then
+            set i1=GetIndex(ja)
+            if CompareItemAltForm(i1,Iz,true) then
+                set bj_lastCreatedItem=ja
+                set ja=null
+                return true
+            endif
+        endif
+        
+        set i=i+1
+        exitwhen i>=bj_MAX_INVENTORY
+    endloop
+    set ja=null
+    return false
+endfunction
+function UnitHasMagicStickWand takes unit it returns boolean
+    local integer I8=0
+    local item ja
+    set bj_lastCreatedItem=null
+    loop
+        set ja=UnitItemInSlot(it,I8)
+        if((ja!=null)and(GetItemTypeId(ja)==Item_Real[indexid_magicwand] or GetItemTypeId(ja)==Item_Real[gg_Item_MagicStick]) )then
+            set bj_lastCreatedItem=ja
+            set ja=null
+            return true
+        endif
+        set I8=I8+1
+        exitwhen I8>=bj_MAX_INVENTORY
+    endloop
+    set ja=null
+    return false
+endfunction
+function aiUseItemOfBasicType takes unit j5,integer Iz returns boolean
+    local boolean jR=false
+    local integer O5
+    //set AIDEBUG_LASTFUNC="aiUseItemOfBasicType"
+    if(UnitHasItemOfBasicType(j5,Iz))then
+        set O5=GetPlayerId(GetOwningPlayer(j5))
+        set GZ[224+O5]=true
+        set jR=UnitUseItem(j5,bj_lastCreatedItem)
+        set GZ[224+O5]=false
+    endif
+    return jR
+endfunction
 //==================Group Operate=====================================
 function aiIsUnitVisible takes unit whichUnit returns boolean
     if IsUnitAlly(whichUnit,udg_SentPlayers[0]) then
