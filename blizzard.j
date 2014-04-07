@@ -11413,7 +11413,11 @@ function GetWeakestHeroInRangeOfUnitCon takes real K1,unit IB, boolexpr Ig retur
 endfunction
 
 //====================================================================
-
+function ai_IsSiege takes unit u returns boolean //Duplication of IsSiege
+    local integer id=GetUnitTypeId(u)
+    set AIDEBUG_LASTFUNC="IsSiege"
+    return id=='u00R' or id=='umtw' or id=='e026' or id=='ebal'
+endfunction
 function FilterAlwaysTrue takes nothing returns boolean
     return true
 endfunction

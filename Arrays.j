@@ -214,6 +214,7 @@ udg_bAIMsg[112+ - AI board DEDG display (user preference)
 --integer aiDefInt
 aiDefInt[0-3  = defense score. aiDefInt[0] = mid, 1 = left, 2 = right, 3 = tree/throne
 aiDefInt[24-27  same  
+aiDefInt[aID+8,9,10 -- mark for each lane whether it needs defense.   1--need, 0--abort
 aiDefInt[4+   = number of enemy heroes
 aiDefInt[8+   = number of allied heroes required
 
