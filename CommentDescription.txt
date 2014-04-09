@@ -12,3 +12,27 @@ function ToBJ...
 Lib:
 StateTransWpt
 AI_InitAI
+
+
+--------Note
+function AIIsHeroKillableBy takes unit whichTarget,unit whichUnit returns boolean
+    local integer O5=GetPlayerId(GetOwningPlayer(whichUnit))
+    return((IsUnitType(whichTarget,UNIT_TYPE_HERO))and(((R2I(GetWidgetLife(whichTarget))<(300+(GetHeroLevel(whichTarget)*30)))and(GetUnitLifePercent(whichTarget)<40.))or((hq[624+O5]>Bz and h4[O5]==whichTarget)))and(AIIsTargetAlive(whichTarget)))
+ endfunction
+ 
+Attack Value
+Armor Value
+
+300+30*Lvl
+----------
+(300/Inc+Inc)*lvl
+
+hq[624+O5]---> Extends to more than gank mode?
+
+
+300Inc                         1
+---------            +     -------
+300+Inc*Inc
+
+
+tmv takes

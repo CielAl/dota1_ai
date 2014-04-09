@@ -976,8 +976,7 @@ globals
      player array udg_ScourgePlayers 
      boolean array HeroDead 	
      real Bz=0. //BJ
-     real array hq //BJ	 
-	 unit array h4
+
 	 unit array udg_Hero 
 	 integer array udg_LBDeaths
 	 integer array udg_LBKills
@@ -1001,11 +1000,15 @@ unit hy=null
     force g_fAIForce=CreateForce()
     boolean array b_isAI
     trigger t_manipulateitem 
-
+constant integer COMPARE_LESSTHAN=1 //BJ
+constant integer COMPARE_MORETHAN=2
 hashtable hash_main= null
 //AI Operation
 boolean array GZ
-boolean array G0	
+boolean array G0
+real array hq	
+
+	 unit array h4
 endglobals
 
 
@@ -10877,7 +10880,28 @@ function DistanceBetweenRectAndUnit takes unit j4,rect Ja returns real
     return SquareRoot(JD*JD+Je*Je)
 endfunction
 
+function AngleBetweenUnits takes unit a,unit b returns real
+    return bj_RADTODEG*Atan2(GetUnitY(b)-GetUnitY(a),GetUnitX(b)-GetUnitX(a))
+endfunction
+function AngleBetweenXY takes real x1,real y1,real x2,real y2 returns real
+    return bj_RADTODEG*Atan2(y2-y1,x2-x1)
+endfunction
 //===========Condition Check===========
+function GetUnitEHP takes unit whichUnit returns real
+    return GetWidgetLife(whichUnit)*hq[752+GetPlayerId(GetOwningPlayer(whichUnit))]
+endfunction
+function ai_CheckUnitMana takes unit whichUnit,real manaPercent,real manaVar ,integer compare returns boolean
+	if compare==COMPARE_MORETHAN then
+		return GetUnitManaPercent(whichUnit)>=manaPercent or GetUnitState(whichUnit,UNIT_STATE_MANA)>=manaVar
+	endif
+		return GetUnitManaPercent(whichUnit)<=manaPercent or GetUnitState(whichUnit,UNIT_STATE_MANA)<=manaVar
+endfunction 
+function ai_CheckUnitLife takes unit whichUnit,real lifePercent,real lifeVar,integer compare returns boolean
+	if compare==COMPARE_MORETHAN then
+		return GetUnitManaPercent(whichUnit)>=lifePercent or GetUnitState(whichUnit,UNIT_STATE_MANA)>=lifeVar
+	endif
+		return GetUnitManaPercent(whichUnit)<=lifePercent or GetUnitState(whichUnit,UNIT_STATE_MANA)<=lifeVar
+endfunction 
 function IsCycloned takes unit u returns boolean
     return GetUnitAbilityLevel(u,'Bcyc')>0 or GetUnitAbilityLevel(u,'Bcy2')>0
 endfunction
@@ -10938,7 +10962,49 @@ endfunction
 function ai_EnumInvisible takes unit who returns boolean 
 return GetUnitAbilityLevel(who,'A1HW')>0 or GetUnitAbilityLevel(who,'A1HX')>0 or GetUnitAbilityLevel(who,'B00K')>0 or GetUnitAbilityLevel(who,'B076')>0 or GetUnitAbilityLevel(who,'B07T')>0  or GetUnitAbilityLevel(who,'A021')>0 or GetUnitAbilityLevel(who,'A29C')>0 or GetUnitAbilityLevel(who,'BHfs')>0  or GetUnitAbilityLevel(who,'B08K')>0  or GetUnitAbilityLevel(who,'B068')>0 or GetUnitAbilityLevel(who,'B039')>0 or GetUnitAbilityLevel(who,'A00J')>0 or GetUnitAbilityLevel(who,'A0KT')>0
 endfunction
+function AI_hero_attack_range takes unit it returns real
+    local integer i1=GetUnitTypeId(it)
 
+    if (i1=='Usyl') then
+        return 550.+ I2R(75*GetUnitAbilityLevel(it,'A03U'))
+    elseif((i1=='H000')or(i1=='Harf')or(i1=='Npbm')or(i1=='Hamg')or(i1=='H008')or(i1=='O00J')or(i1=='U00C')or(i1=='U008')or(i1=='Udre')or(i1=='N00R')or(i1=='UC91')or(i1=='H00R')or(i1=='Edem')or(i1=='Nbbc')or(i1=='HC49')or(i1=='Ogrh')or(i1=='H00I')or(i1=='Huth')or(i1=='Hvsh')or(i1=='Ewar')or(i1=='Eevi')or(i1=='E01B')or(i1=='Hmkg'))then
+        return 100.
+    elseif((i1=='H00T')or(i1=='HC92'))then
+        return 125.
+    elseif((i1=='H06S')or(i1=='Otch')or(i1=='N01I')or(i1=='U00K')or(i1=='U00F')or(i1=='Naka')or(i1=='EC45')or(i1=='U000')or(i1=='O015')or(i1=='H071')or(i1=='E02I')or(i1=='N0M0')or(i1=='E02K')or(i1=='E032'))then
+        return 128.
+    elseif((i1=='UC42')or(i1=='Udea')or(i1=='Hlgr'))then
+        return 150.
+    elseif((i1=='H00D')or(i1=='H001')or(i1=='Ucrl')or(i1=='U01X')or(i1=='UC11')or(i1=='Ofar')or(i1=='Opgh')or(i1=='U00A')or(i1=='NC00')or(i1=='H00N'))then
+        return 200.
+    elseif(i1=='U006')then
+        return 250.
+    elseif((i1=='O00P')or(i1=='Hmbr'))then
+        return 350.
+    elseif((i1=='H00Q')or(i1=='E00P'))then
+        return 400.
+    elseif(i1=='Ubal')or(i1=='N0M7')then
+        return 425.
+    elseif((i1=='EC57')or(i1=='U00P'))then
+        return 450.
+    elseif(i1=='E002')then
+        return 475.
+    elseif(i1=='H00S')then
+        return 480.
+    elseif((i1=='Nfir')or(i1=='Ntin')or(i1=='Orkn')or(i1=='N01W'))then
+        return 500.
+    elseif (i1=='N01O')or(i1=='Emoo')or(i1=='UC01')or(i1=='N00B') then
+        return 550.
+    elseif(i1=='EC77')then
+        return 575.
+    elseif((i1=='N01V')or(i1=='Nbrn')or((i1=='H00V')or(i1=='H08D')or(i1=='H08C')or(i1=='H084')or(i1=='H08B'))or(i1=='E004')or(i1=='H00A')or(i1=='N01A')or(i1=='H004')or(i1=='Ekee')or(i1=='E01A')or(i1=='UC76')or(i1=='UC18')or(i1=='H00U')or(i1=='U00E')or(i1=='H00H')or(i1=='E01C')or(i1=='N0HP')or(i1=='E02X')or(i1=='H0DO'))then
+        return 600.
+    elseif (i1=='N0MK')then
+        return 625.
+    else
+        return 0.
+    endif
+endfunction
 
 //===========================Team Operate
 function IsSent takes player hd returns boolean
