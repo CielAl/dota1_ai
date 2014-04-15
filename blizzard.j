@@ -630,6 +630,333 @@ globals
 
     // Memory cleanup vars
     boolean            bj_wantDestroyGroup         = false
+	//Inboundart code
+	    integer array Item_Dummy
+    integer array Item_Real
+    integer array Item_Unit
+    integer array Item_Mute
+    string array Item_Icon
+    integer array Item_Cooldown
+    integer array Item_Main
+    integer Item_Max=0
+integer gg_Item_BootsOfSpeed
+    integer gg_Item_GlovesOfHaste
+    integer gg_Item_BootsOfElvenskin
+    integer gg_Item_CircletOfNobility
+    integer gg_Item_BeltofGiantStrength
+    integer gg_Item_BladeofAlacrity
+    integer gg_Item_BladesOfAttack
+    integer gg_Item_Broadsword
+    integer gg_Item_Chainmail
+    integer gg_Item_Claymore
+    integer gg_Item_DemonEdge
+    integer gg_Item_Eaglehorn
+    integer gg_Item_EnergyBooster
+    integer gg_Item_GauntletsOfStrength
+    integer indexid_gemoftruesight
+    integer indexid_gemoftruesightcourier
+    integer gg_Item_HelmofIronWill
+    integer gg_Item_Hyperstone
+    integer gg_Item_IronwoodBranch
+    integer gg_Item_KelensDagger
+    integer gg_Item_KelensDagger_Disabled
+    integer gg_Item_MantleofIntelligence
+    integer gg_Item_MaskofDeath
+    integer gg_Item_MesserschmidtsReaver
+    integer gg_Item_MithrilHammer
+    integer gg_Item_MysticStaff
+    integer gg_Item_OgreAxe
+    integer gg_Item_PlaneswalkersCloak
+    integer gg_Item_PlateMail
+    integer gg_Item_PointBooster
+    integer gg_Item_Quarterstaff
+    integer gg_Item_RingOfHealth
+    integer gg_Item_RingOfProtection
+    integer gg_Item_RingofRegeneration
+    integer gg_Item_RobeOfTheMagi
+    integer gg_Item_SacredRelic
+    integer gg_Item_SlippersofAgility
+    integer gg_Item_SobiMask
+    integer gg_Item_StaffOfWizardry
+    integer gg_Item_StoutShield_Melee
+    integer gg_Item_StoutShield_Ranged
+    integer gg_Item_UltimateOrb
+    integer gg_Item_VitalityBooster
+    integer gg_Item_VoidStone
+    integer gg_Item_Javelin
+    integer gg_Item_EmptyBottle_Store
+    integer gg_Item_EmptyBottle
+    integer gg_Item_MagicalBottle_1
+    integer gg_Item_MagicalBottle_2
+    integer gg_Item_MagicalBottle_3
+    integer gg_Item_RuneBottleInvis
+    integer gg_Item_RuneBottleDoubleDamage
+    integer gg_Item_RuneBottleHaste
+    integer gg_Item_RuneBottleRegen
+    integer gg_Item_RuneBottleIllusion
+    integer gg_Item_MagicStick
+    integer gg_Item_QuellingBlade
+    integer gg_Item_QuellingBlade_Ranged
+    integer gg_Item_TalismanofEvasion
+    integer indexid_corruptor
+    integer indexid_corruptorranged
+    integer indexid_ancientjangoo
+    integer indexid_ancientjangooempty
+    integer indexid_bladeofthereaper
+    integer indexid_ironboots
+    integer indexid_ironboots_disabled
+    integer indexid_cripplingstaff
+    integer indexid_moonshard
+    integer indexid_ringofaquila
+    integer indexid_ringofaquilaheroes
+    integer gg_Item_ClarityPotion
+    integer gg_Item_GhostPotion
+    integer gg_Item_HealingSalve
+    integer gg_Item_Tango
+    integer gg_Item_ObserverWards
+    integer gg_Item_SentryWards
+    integer indexid_scrolloftownportal
+    integer indexid_scrolloftownportal_AI
+    integer gg_Item_AnimalCourier
+    integer gg_Item_Cheese
+    integer gg_Item_PoisonPowder
+    integer gg_Item_DustOfAppearance
+    integer gg_Item_WandOfIllusion
+    integer indexid_smokeofdeceit
+    integer indexid_medallionofcourage
+    integer indexid_veilofdiscord
+    integer indexid_prudence
+    integer indexid_annihilator
+    integer indexid_shadowamulet
+    integer indexid_glimmercape
+    integer gg_Item_Perseverance
+    integer gg_Item_HeaddressofRejuvenation
+    integer gg_Item_NathrezimBuckler
+    integer gg_Item_RingofBasilius
+    integer gg_Item_RingofBasilius_Hero
+    integer gg_Item_BootsOfTravel
+    integer gg_Item_PowerTreadsAgi
+    integer gg_Item_PowerTreadsStr
+    integer gg_Item_PowerTreadsInt
+    integer gg_Item_HandofMidas
+    integer indexid_handofmidascourier
+    integer gg_Item_OblivionStaff
+    integer gg_Item_Bracer
+    integer gg_Item_WraithBand
+    integer gg_Item_NullTalisman
+    integer gg_Item_Yasha
+    integer gg_Item_Sange
+    integer gg_Item_CraniumBasher
+    integer gg_Item_CraniumBasher_Ranged
+    integer gg_Item_BladeMail
+    integer gg_Item_Maelstrom
+    integer gg_Item_DiffusalBlade_1
+    integer gg_Item_DiffusalBlade_2
+    integer gg_Item_DiffusalBlade_1_Empty
+    integer gg_Item_DiffusalBlade_2_Empty
+    integer gg_Item_HelmoftheDominator
+    integer gg_Item_HelmoftheDominator_Courier
+    integer gg_Item_MaskofMadness
+    integer gg_Item_EulsScepter
+    integer gg_Item_SoulBooster
+    integer gg_Item_Mekansm
+    integer gg_Item_SangeAndYasha
+    integer gg_Item_StygianDesolator
+    integer gg_Item_BattleFury
+    integer gg_Item_Crystalys
+    integer gg_Item_BKB10
+    integer gg_Item_BKB9
+    integer gg_Item_BKB8
+    integer gg_Item_BKB7
+    integer gg_Item_BKB6
+    integer gg_Item_BKB5
+    integer gg_Item_BKB4
+    integer indexid_aegis
+    integer gg_Item_MantaStyle_Melee
+    integer gg_Item_MantaStyle_Ranged
+    integer gg_Item_LotharsEdge
+    integer gg_Item_Dagon_1
+    integer gg_Item_Dagon_2
+    integer gg_Item_Dagon_3
+    integer gg_Item_Dagon_4
+    integer gg_Item_Dagon_5
+    integer gg_Item_Necronomicon_1
+    integer gg_Item_Necronomicon_2
+    integer gg_Item_Necronomicon_3
+    integer gg_Item_LinkensSphere
+    integer gg_Item_LinkensSphere_too
+    integer gg_Item_DivineRapier
+    integer gg_Item_DivineRapier_Free
+    integer gg_Item_BurizaDoKyanon
+    integer gg_Item_MonkeyKingBar
+    integer gg_Item_MonkeyKingBar_Inactive
+    integer gg_Item_Radiance
+    integer gg_Item_Radiance_Off
+    integer gg_Item_HeartofTarrasque
+    integer gg_Item_HeartofTarrasque_Disabled
+    integer gg_Item_Satanic
+    integer gg_Item_EyeofSkadi
+    integer gg_Item_EyeofSkadi_Ranged
+    integer gg_Item_TheButterfly
+    integer gg_Item_RefresherOrb
+    integer gg_Item_Guinsoo
+    integer gg_Item_Vanguard
+    integer gg_Item_Vanguard_Ranged
+    integer gg_Item_ArcaneRing
+    integer gg_Item_Mjollnir
+    integer gg_Item_FlyingCourier
+    integer gg_Item_VladmirsOffering
+    integer gg_Item_AssaultCuirass
+    integer indexid_bloodstone
+    integer gg_Item_HoodofDefiance
+    integer indexid_armletofmordiggianon
+    integer indexid_armletofmordiggianoff
+    integer gg_Item_ArmletofMordiggian_On_Courier
+    integer gg_Item_ArmletofMordiggian_Off_Courier
+    integer gg_Item_ShivasGuard
+    integer gg_Item_ShivasGuardCourier
+    integer gg_Item_OrchidMalevolence
+    integer gg_Item_PhaseBoots
+    integer indexid_magicwand
+    integer gg_Item_ForceStaff
+    integer gg_Item_KhadgarsPipeofInsight
+    integer gg_Item_PoorMansShield_Melee
+    integer gg_Item_PoorMansShield_Ranged
+    integer gg_Item_UrnofShadows
+    integer gg_Item_UrnofShadows_Empty
+    integer gg_Item_GhostScepter
+    integer gg_Item_HeaddressRecipe
+    integer gg_Item_NathrezimBucklerRecipe
+    integer gg_Item_BootsOfTravelRecipe
+    integer gg_Item_PowerTreads_Store
+    integer gg_Item_HandofMidasRecipe
+    integer gg_Item_BracerRecipe
+    integer gg_Item_WraithBandRecipe
+    integer gg_Item_NullTalismanRecipe
+    integer gg_Item_YashaRecipe
+    integer gg_Item_SangeRecipe
+    integer gg_Item_CraniumBasherRecipe
+    integer gg_Item_MaelstromRecipe
+    integer gg_Item_DiffusalBladeRecipe
+    integer gg_Item_MaskofMadnessRecipe
+    integer gg_Item_EulsScepterRecipe
+    integer gg_Item_MekansmRecipe
+    integer gg_Item_SangeAndYasha_Store
+    integer gg_Item_StygianDesolatorRecipe
+    integer gg_Item_CrystalysRecipe
+    integer gg_Item_BKBRecipe
+    integer gg_Item_MantaStyleRecipe
+    integer gg_Item_LotharsEdgeRecipe
+    integer gg_Item_DagonRecipe
+    integer gg_Item_NecronomiconRecipe
+    integer gg_Item_LinkensSphereRecipe
+    integer gg_Item_BurizaDoKyanonRecipe
+    integer gg_Item_RadianceRecipe
+    integer gg_Item_HeartofTarrasqueRecipe
+    integer gg_Item_SatanicRecipe
+    integer gg_Item_TheButterfly_Store
+    integer gg_Item_RefresherOrbRecipe
+    integer gg_Item_ArcaneRingRecipe
+    integer indexid_recipe_flyingcourier
+    integer gg_Item_VladsOfferingRecipe
+    integer gg_Item_AssaultCuirassRecipe
+    integer gg_Item_ArmletofMordiggianRecipe
+    integer gg_Item_ShivasGuardRecipe
+    integer gg_Item_MagicWandRecipe
+    integer gg_Item_ForceStaffRecipe
+    integer gg_Item_KhadgarsPipeofInsightRecipe
+    integer gg_Item_MjollnirRecipe
+    integer gg_Item_UrnofShadowsRecipe
+    integer gg_Item_SoulRingRecipe
+    integer gg_Item_SoulRing
+    integer gg_Item_EtherealBlade
+    integer gg_Item_OrbOfVenom
+    integer gg_Item_OrbOfVenom_Ranged
+    integer gg_Item_ArcaneBoots
+    integer indexid_recipe_ancientjangoo
+    integer indexid_recipe_medallionofcourage
+    integer indexid_recipe_veilofdiscord
+    integer indexid_recipe_orchidmalevolence
+    integer indexid_recipe_bladeofthereaper
+    integer indexid_recipe_ironboots
+    integer indexid_recipe_prudence
+    integer indexid_recipe_cripplingstaff
+    
+    integer powerup_previous=-1
+    integer array Recipe_Component_1
+    integer array Recipe_Component_2
+    integer array Recipe_Component_3
+    integer array Recipe_Component_4
+    integer array Recipe_Component_5
+    integer array Recipe_Result
+    integer Recipe_Max=0
+    integer gg_Item_AghanimsScepter
+    integer gg_Item_AghanimsScepter_Furion
+    integer gg_Item_AghanimsScepter_KOTL
+    integer gg_Item_AghanimsScepter_Leshrac
+    integer gg_Item_AghanimsScepter_Lich
+    integer gg_Item_AghanimsScepter_Lina
+    integer gg_Item_AghanimsScepter_Lion
+    integer gg_Item_AghanimsScepter_Lucifer
+    integer gg_Item_AghanimsScepter_Luna
+    integer gg_Item_AghanimsScepter_Necro
+    integer gg_Item_AghanimsScepter_Ogre
+    integer gg_Item_AghanimsScepter_Undying
+    integer gg_Item_AghanimsScepter_Pugna
+    integer gg_Item_AghanimsScepter_QoP
+    integer gg_Item_AghanimsScepter_Rhasta
+    integer gg_Item_AghanimsScepter_Rylai
+    integer gg_Item_AghanimsScepter_Veno
+    integer gg_Item_AghanimsScepter_WitchDoctor
+    integer gg_Item_AghanimsScepter_Zeus
+    integer gg_Item_AghanimsScepter_Sniper
+    integer gg_Item_AghanimsScepter_Clockwerk
+    integer gg_Item_AghanimsScepter_VengefulSpirit
+    integer gg_Item_AghanimsScepter_Juggernaut
+    integer gg_Item_AghanimsScepter_ChaosKnight
+    integer gg_Item_AghanimsScepter_Chen
+    integer gg_Item_AghanimsScepter_Nightstalker
+    integer gg_Item_AghanimsScepter_Jakiro
+    integer gg_Item_AghanimsScepter_SandKing
+    integer gg_Item_AghanimsScepter_Huskar
+    integer gg_Item_AghanimsScepter_Invoker
+    integer gg_Item_AghanimsScepter_Panda
+    integer gg_Item_AghanimsScepter_Pudge
+    integer gg_Item_AghanimsScepter_Windrunner
+    integer gg_Item_AghanimsScepter_Void
+    integer gg_Item_AghanimsScepter_Spiritbreaker
+    integer gg_Item_AghanimsScepter_Bane
+    integer gg_Item_AghanimsScepter_Abaddon
+    integer gg_Item_AghanimsScepter_Dazzle
+    integer gg_Item_AghanimsScepter_Techies
+    integer gg_Item_AghanimsScepter_Axe
+    integer gg_Item_AghanimsScepter_Earthshaker
+    integer gg_Item_AghanimsScepter_Puck
+    integer gg_Item_AghanimsScepter_Warlock
+    integer indexid_aghanimsscepterrazor
+    integer indexid_aghanimsscepterviper
+    integer gg_Item_AghanimsScepter_Tiny
+    integer indexid_aghanimsscepterdestroyer
+    integer indexid_aghanimsscepterenchantress
+    integer indexid_aghanimsscepterdarkseer
+    integer indexid_aghanimssceptergyrocopter
+    integer indexid_aghanimssceptermeepo
+    integer indexid_aghanimsscepterbeastmaster
+    integer indexid_aghanimssceptervisage
+    integer indexid_aghanimssceptersilencer
+    integer indexid_aghanimsscepteraa
+    integer indexid_aghanimsscepteromni	
+	string AIDEBUG_LASTFUNC=null
+	
+	integer array AgilityHero
+    integer AgilityHeroCount
+    integer array StrengthHero
+    integer StrengthHeroCount
+    integer array IntelligenceHero
+    integer IntelligenceHeroCount
+	constant integer HEROTYPE_AGI=2
+    constant integer HEROTYPE_STR=3
+    constant integer HEROTYPE_INT=1	
 	//Transport
 	 player g_aiPVisibilitySent=null
      player g_aiPVisibilityScrg=null
@@ -637,7 +964,7 @@ globals
      player array udg_ScourgePlayers 
      boolean array HeroDead 	
      real Bz=0. //BJ
-
+	 location HA
 	 unit array udg_Hero 
 	 integer array udg_LBDeaths
 	 integer array udg_LBKills
@@ -664,9 +991,9 @@ hashtable hash_main= null
 //AI Operation
 
 real array hq	
-
-	 unit array h4
-
+unit array h4
+boolean array G0
+boolean array GZ
 endglobals
 
 
@@ -10356,6 +10683,19 @@ function aiChooseUnitOnBool takes boolean bChooseFirst, unit uFirstChoose, unit 
     return null
 endfunction
 
+//Math=====================
+function ai_DistanceBetweenUnits takes unit Source,unit Target returns real
+    local real SourceX=GetUnitX(Source)
+    local real SourceY=GetUnitY(Source)
+    local real TargetX=GetUnitX(Target)
+    local real TargetY=GetUnitY(Target)
+    set AIDEBUG_LASTFUNC="DistanceBetweenUnits"
+    if Source==null or Target==null then
+        return I2R(9999999999)
+    else
+        return SquareRoot((SourceX-TargetX)*(SourceX-TargetX)+(SourceY-TargetY)*(SourceY-TargetY))
+    endif
+endfunction
 function aiIsUnitFacing takes unit a, widget b, real rTolerance returns boolean
     local real rBuff=(GetUnitFacing(a)-bj_RADTODEG*Atan2(GetWidgetY(b)-GetUnitY(a),GetWidgetX(b)-GetUnitX(a)))
     
@@ -10390,14 +10730,37 @@ function DistanceBetweenXY takes real x1,real y1,real x2,real y2 returns real
 endfunction
 
 
-
-
+function DistanceBetweenUnitAndPoint takes unit Source,location Target returns real
+    local real SourceX=GetUnitX(Source)
+    local real SourceY=GetUnitY(Source)
+    local real TargetX=GetLocationX(Target)
+    local real TargetY=GetLocationY(Target)
+    set AIDEBUG_LASTFUNC="DistanceBetweenUnitAndPoint"
+    if Source==null then
+        return I2R(9999999999)
+    else
+        return SquareRoot((SourceX-TargetX)*(SourceX-TargetX)+(SourceY-TargetY)*(SourceY-TargetY))
+    endif
+endfunction
 
 function AngleBetweenUnits takes unit a,unit b returns real
     return bj_RADTODEG*Atan2(GetUnitY(b)-GetUnitY(a),GetUnitX(b)-GetUnitX(a))
 endfunction
 function AngleBetweenXY takes real x1,real y1,real x2,real y2 returns real
     return bj_RADTODEG*Atan2(y2-y1,x2-x1)
+endfunction
+function ai_GetDistanceToRect takes unit j4,rect Ja returns real
+    local real JD=GetRectCenterX(Ja)-GetUnitX(j4)
+    local real Je=GetRectCenterY(Ja)-GetUnitY(j4)
+
+
+    return SquareRoot(JD*JD+Je*Je)
+endfunction
+
+//Get Func
+function ai_GetLocation takes widget it returns location
+    call MoveLocation(HA,GetWidgetX(it),GetWidgetY(it))
+    return HA
 endfunction
 //===========Condition Check===========
 function GetUnitEHP takes unit whichUnit returns real
@@ -10415,6 +10778,9 @@ function ai_CheckUnitLife takes unit whichUnit,real lifePercent,real lifeVar,int
 	endif
 		return GetUnitManaPercent(whichUnit)<=lifePercent or GetUnitState(whichUnit,UNIT_STATE_MANA)<=lifeVar
 endfunction 
+function ai_IsDead takes unit u returns boolean //Duplication of IsDead
+    return GetUnitTypeId(u)<1 or IsUnitType(u,UNIT_TYPE_DEAD)==true
+endfunction
 function IsCycloned takes unit u returns boolean
     return GetUnitAbilityLevel(u,'Bcyc')>0 or GetUnitAbilityLevel(u,'Bcy2')>0
 endfunction
@@ -10439,6 +10805,14 @@ function IsSilenced takes unit whichUnit returns boolean
 endfunction
 function IsTree takes destructable d returns boolean
     return GetDestructableTypeId(d)=='NTtc'or GetDestructableTypeId(d)=='NTtw'or GetDestructableTypeId(d)=='ATtr' or GetDestructableTypeId(d)=='B002' or GetDestructableTypeId(d)=='B003' or GetDestructableTypeId(d)=='B005'
+endfunction
+function ai_HasUnitInvisibility takes unit u returns boolean
+    return((GetUnitAbilityLevel(u,'B07T')>0)or(GetUnitAbilityLevel(u,'B076')>0)or(GetUnitAbilityLevel(u,'B068')>0)or(GetUnitAbilityLevel(u,'BHfs')>0)or(GetUnitAbilityLevel(u,'B00K')>0)or(GetUnitAbilityLevel(u,'B021')>0)or(GetUnitAbilityLevel(u,'B01Q')>0)or(GetUnitAbilityLevel(u,'B039')>0)or(GetUnitAbilityLevel(u,'A00J')>0)or(GetUnitAbilityLevel(u,'A0KT')>0)or(GetUnitAbilityLevel(u,'A021')>0)or(GetUnitAbilityLevel(u,'BOwk')>0))
+endfunction
+function ai_IsSiege takes unit u returns boolean //Duplication of IsSiege
+    local integer id=GetUnitTypeId(u)
+    //set AIDEBUG_LASTFUNC="IsSiege"
+    return id=='u00R' or id=='umtw' or id=='e026' or id=='ebal'
 endfunction
 
 function Gargolye_IsFamiliar takes integer id returns boolean
@@ -10518,7 +10892,82 @@ function AI_hero_attack_range takes unit it returns real
         return 0.
     endif
 endfunction
-
+function GetHeroType takes unit v1v returns integer
+    local integer x
+    local integer id=GetUnitTypeId(v1v)
+    set AIDEBUG_LASTFUNC="GetHeroType"
+    set x=1
+    loop
+        exitwhen x>AgilityHeroCount
+        if id==AgilityHero[x]then
+            return HEROTYPE_AGI
+        endif
+        set x=x+1
+    endloop
+    set x=1
+    loop
+        exitwhen x>StrengthHeroCount
+        if id==StrengthHero[x]then
+            return HEROTYPE_STR
+        endif
+        set x=x+1
+    endloop
+    set x=1
+    loop
+        exitwhen x>IntelligenceHeroCount
+        if id==IntelligenceHero[x]then
+            return HEROTYPE_INT
+        endif
+        set x=x+1
+    endloop
+    if id=='Eevm' or id=='E02V' or id=='E02W' or id=='E02U' or id=='N02B' or id=='N017' or id=='H08D' or id=='H08C' or id=='H084' or id=='H08B' or id=='N013' or id=='N014' or id=='N015' or id=='E02O' or id=='N0MM' then
+        return HEROTYPE_AGI
+    endif
+    if id=='N01H' or id=='N01T' or id=='N01J' or id=='H00E' or id=='H00G' or id=='H00F' or id=='H07I' or id=='E015' or id=='H0CQ' or id=='H0E3' or id=='H0E4' or id=='H0E5' or id=='U01X' or id=='N0MW' then
+        return HEROTYPE_STR
+    endif
+    if id=='H06X' or id=='H06Y' or id=='H06W' or id=='H0BC' or id=='O017' or id=='N0MB' or id=='N0MC' or id=='N0MO' or id=='N0MA' then
+        return HEROTYPE_INT
+    endif
+    return 0
+endfunction
+function GetHeroTypeById takes integer id returns integer
+    local integer x
+    set x=1
+    loop
+        exitwhen x>AgilityHeroCount
+        if id==AgilityHero[x]then
+            return HEROTYPE_AGI
+        endif
+        set x=x+1
+    endloop
+    set x=1
+    loop
+        exitwhen x>StrengthHeroCount
+        if id==StrengthHero[x]then
+            return HEROTYPE_STR
+        endif
+        set x=x+1
+    endloop
+    set x=1
+    loop
+        exitwhen x>IntelligenceHeroCount
+        if id==IntelligenceHero[x]then
+            return HEROTYPE_INT
+        endif
+        set x=x+1
+    endloop
+    if id=='Eevm' or id=='E02V' or id=='E02W' or id=='E02U' or id=='N02B' or id=='N017' or id=='H08D' or id=='H08C' or id=='H084' or id=='H08B' or id=='N013' or id=='N014' or id=='N015' or id=='E02O' or id=='N0MM' then
+        return HEROTYPE_AGI
+    endif
+    if id=='N01H' or id=='N01T' or id=='N01J' or id=='H00E' or id=='H00G' or id=='H00F' or id=='H07I' or id=='E015' or id=='H0CQ' or id=='H0E3' or id=='H0E4' or id=='H0E5' or id=='U01X' then
+        return HEROTYPE_STR
+    endif
+    if id=='H06X' or id=='H06Y' or id=='H06W' or id=='H0BC' or id=='O017' or id=='N0MB' or id=='N0MC' or id=='N0MO' or id=='N0MA' then
+        return HEROTYPE_INT
+    endif
+    return 0
+endfunction
 //==================Group Operate=====================================
 function aiIsUnitVisible takes unit whichUnit returns boolean
     if IsUnitAlly(whichUnit,udg_SentPlayers[0]) then
@@ -10698,13 +11147,116 @@ function GetWeakestHeroInRangeOfUnitCon takes real K1,unit IB, boolexpr Ig retur
     call DestroyBoolExpr(Ig)
     return hy
 endfunction
-
-//====================================================================
-function ai_IsSiege takes unit u returns boolean //Duplication of IsSiege
-    local integer id=GetUnitTypeId(u)
-    //set AIDEBUG_LASTFUNC="IsSiege"
-    return id=='u00R' or id=='umtw' or id=='e026' or id=='ebal'
+//=======================More Complicate Check
+function ai_IsUnitIdle takes unit UnitObject returns boolean
+    return ((GetUnitCurrentOrder(UnitObject)<852000)and(Bz>hq[832+GetPlayerId(GetOwningPlayer(UnitObject))]))
 endfunction
+function IsUnitStops takes unit Unit returns boolean
+    local integer Order=GetUnitCurrentOrder(Unit)
+    return(Order==0)or(Order==851973)or(Order==851975)or(Order==851987)or(Order==851993)
+endfunction
+function ai_UnitNotSpelling takes unit UnitObject returns boolean
+    local integer X5=GetUnitCurrentOrder(UnitObject)
+	//oreder<852000 means not using abilities. 
+    return((X5<852000)and BoolRem("(GetUnitAbilityLevel(UnitObject,'B01Z')==0)")and (not LoadBoolean(hash_main,GetHandleId(UnitObject),'DARK')) and((X5!=851983)or(not GZ[48+GetPlayerId(GetOwningPlayer(UnitObject))]))and(Bz>hq[832+GetPlayerId(GetOwningPlayer(UnitObject))])and(GetUnitAbilityLevel(UnitObject,'B0FG')==0) ) 
+endfunction
+function ai_HasMainTarget takes unit UnitObject returns boolean
+    local integer O5=GetPlayerId(GetOwningPlayer(UnitObject))
+
+    return((h4[O5]==null)and((h4[160+O5]==null)or(GetWidgetLife(h4[160+O5])<=.405)or(not IsUnitInRange(h4[160+O5],UnitObject,1000.)))and(not G0[144+O5]))
+endfunction
+function AI_Not_Channeling_Emergency takes unit UnitObject returns boolean
+local integer X5=GetUnitCurrentOrder(UnitObject)
+    local integer i1=GetUnitTypeId(UnitObject)
+	local integer DummyCache=GetHandleId(UnitObject)
+    if hq[832+GetPlayerId(GetOwningPlayer(UnitObject))]>Bz then
+        return false
+    elseif((X5==851973)or(GetWidgetLife(UnitObject)<=.405)or(IsUnitPaused(UnitObject)))then
+        return false
+    elseif(X5>852007)and(X5<852014)and((GetItemTypeId(UnitItemInSlot(UnitObject,X5-852007))==Item_Real[indexid_scrolloftownportal_AI])or(GetItemTypeId(UnitItemInSlot(UnitObject,X5-852007))==Item_Real[gg_Item_BootsOfTravel]))then
+        return false
+    elseif((X5<852008)and((i1!='O00J')or((LoadBoolean(hash_main,DummyCache,'DARK')==false))))then
+        return true
+    elseif (GetUnitAbilityLevel(UnitObject,'B0FG')!=0) then
+        return false
+    endif
+	return((X5>852013)and(X5!=852480)and(X5!=852525)and(X5!=852487)and(X5!=852597)and((i1!='E01C')or(X5!=852089))and((i1!='U00K')or(X5!=852581))and((X5!=852600)or((i1!='Hjai')and(i1!='Ntin')and(i1!='Hblm')))and(((i1!='Eevi')and(i1!='Eevm')and(i1!='E02V')and(i1!='E02W')and(i1!='E02U'))or(X5!=852189))and((i1!='N00R')or(X5!=852238))and((i1!='N0EG')or(X5!=852662))and((i1!='O015')or(X5!=852581))and(i1!='N0MD' or X5!=852095))    
+endfunction
+function AI_Not_Channeling takes unit UnitObject returns boolean
+    local integer X5=GetUnitCurrentOrder(UnitObject)
+    local integer i1=GetUnitTypeId(UnitObject)
+	local integer DummyCache=GetHandleId(UnitObject)
+    if hq[832+GetPlayerId(GetOwningPlayer(UnitObject))]>Bz then
+        return false
+    elseif((X5==851973)or(GetWidgetLife(UnitObject)<=.405)or(IsUnitPaused(UnitObject)))then
+        return false
+    elseif(X5>852007)and(X5<852014)and((GetItemTypeId(UnitItemInSlot(UnitObject,X5-852007))==Item_Real[indexid_scrolloftownportal_AI])or(GetItemTypeId(UnitItemInSlot(UnitObject,X5-852007))==Item_Real[gg_Item_BootsOfTravel]))then
+        return false
+    elseif((X5<852008)and((i1!='O00J')or((LoadBoolean(hash_main,DummyCache,'DARK')==false))))then
+        return true
+    elseif (X5==852600)and((i1=='HC49')) then
+		call Rem("852600-- ult of Naga. Is that necessary?")
+        return false
+    elseif (GetUnitAbilityLevel(UnitObject,'B0FG')!=0) then
+        return false
+    endif
+	call Rem("Check the Last line as some of the channeling cast like 852089 of E01C will not be so Important if emergency occurs")
+    call Rem("same to Ult of Nfir, and code (X5!=852127) should be X5!=852273")
+	return((X5>852013)and(X5!=852480)and(X5!=852525)and(X5!=852487)and(X5!=852597)and((i1!='E01C')or(X5!=852089))and((i1!='Nfir')or(X5!=852127))and((i1!='U00K')or(X5!=852581))and((X5!=852553)or((i1!='H00I')and(i1!='H00J')))and((X5!=852600)or((i1!='Hjai')and(i1!='Ntin')and(i1!='Hblm')))and(((i1!='Eevi')and(i1!='Eevm')and(i1!='E02V')and(i1!='E02W')and(i1!='E02U'))or(X5!=852189))and((i1!='N00R')or(X5!=852238))and((i1!='N0EG')or(X5!=852662))and((i1!='O015')or(X5!=852581))and((i1!='U00K')or(X5!=852503))and((i1!='N00B')or(X5!=852514))and(((i1=='H06X')or(i1=='H06Y')or(i1=='H06W'))or(X5!=852248))or(i1!='N0MD' or X5!=852095))    
+endfunction
+function ai_IsUnitChanneling takes unit UnitObject returns boolean
+    local integer X5=GetUnitCurrentOrder(UnitObject)
+    local integer i1=GetUnitTypeId(UnitObject)
+
+    if(X5<852008)then
+        return false
+    endif
+    return((X5<=852013)or(X5==852480)or(X5==852487)or(X5==852597)or((i1=='O00J')and(BoolRem("GetUnitAbilityLevel(UnitObject,'B01Z')>0"))and LoadBoolean(hash_main,GetHandleId(UnitObject),'DARK'))or((i1=='E01C')and(X5==852089))or((i1=='Nfir')and(X5==852127))or((i1=='U00K')and(X5==852581))or(((i1=='Hjai')or(i1=='Ntin')or(i1=='Hblm'))and(X5==852600)))
+endfunction
+function AI_ClearWay_CountHP takes unit Hero, unit Target, real X, real Y, real r, boolexpr filter returns boolean
+    local group g=CreateGroup()
+    local real Hx=GetUnitX(Hero)
+    local real Hy=GetUnitY(Hero)
+    local player p=GetOwningPlayer(Hero)
+    local real dx=(X-Hx)*.5
+    local real dy=(Y-Hy)*.5
+    local real R=SquareRoot(dx*dx+dy*dy)
+    local unit u
+    local real d
+    local real rDist1=99999.
+    local real rDist2=0.
+    local real rBuff
+	set SigmaHpCounted=0
+		call Rem("Group g won`t get group from table any more")
+    call GroupEnumUnitsInRange(g,Hx+dx,Hy+dy,R,filter)
+    set bj_lastReplacedUnit=null
+    set bj_lastLoadedUnit=null
+    set bj_forLoopAIndex=0
+    loop
+        set u=FirstOfGroup(g)
+        exitwhen u==null
+        call GroupRemoveUnit(g,u)
+        set d=((GetUnitX(u)-Hx)*dy-(GetUnitY(u)-Hy)*dx)/R
+        if u!=Hero and u!=Target and IsUnitVisible(u,p) and d*d<=r*r then
+            set rBuff=DistanceBetween(Hero,u)
+            if rBuff<rDist1 then
+                set rDist1=rBuff
+                set bj_lastReplacedUnit=u
+            endif
+            if rBuff>rDist2 then
+                set rDist2=rBuff
+                set bj_lastLoadedUnit=u
+            endif
+            set bj_forLoopAIndex=bj_forLoopAIndex+1
+			set SigmaHpCounted=SigmaHpCounted+GetWidgetLife(u)
+        endif
+    endloop
+    call DestroyGroup(g)
+    set g=null
+    return bj_forLoopAIndex==0
+endfunction
+//====================================================================
+
 function FilterAlwaysTrue takes nothing returns boolean
     return true
 endfunction
@@ -10713,4 +11265,7 @@ function AllHumanHeroFilter takes nothing returns boolean
 endfunction
 
 function AIFilter_Enemy takes nothing returns nothing
+endfunction
+function ai_HeroIsChanneling takes nothing returns boolean
+	return AI_Not_Channeling(GetFilterUnit())==false
 endfunction
