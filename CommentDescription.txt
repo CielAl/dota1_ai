@@ -53,3 +53,6 @@ AICancelKill     // if need improved -->b_RealBuff2=GetWidgetLife(h4[i])  replac
 AIAttackedByHumanHero  Should be Discussed
 
 AskNearbyHeroForAssist
+T8v_Part1   check i and k   about GZ[204
+
+  T8v      //anyway kc=0 means safe--- need to tweak when even base is not safe

@@ -162,7 +162,7 @@ G0[64+id]=true - Moving to h9[id] (retreating)
 G0[32+O5]=true - Used Healing Salve, Tango
 G0[48+O5]      - activated g_taAITriggers[64+O5] (temporary back-off)
 G0[128			= have chance to win based on T8v
-G0[144  = ??? (T9v = T8v_Part1)
+G0[144  = ??? (T9v = T8v_Part1)  || If there is Enemy Meepo clone nearby
 G0[176	= changelane reached invisible point
 G0[192	= gank set waiting time (hq[652])
 G0[208+O5] = allow use of closer forest gankpoint on ganking riverside
@@ -193,12 +193,12 @@ GZ[160+O5]=true - retreating
 
 GZ[176+O5 = true  - no permission to continue with item build (waiting TriggerAddCondition(t,Condition(function eme)) )
 GZ[192+O5         - item reset order
-GZ[208            - war mode
+GZ[208            - war mode || 60% of all Ally hero is valid nearby
 
 GZ[224		  - Io's temporary tether      '
 GZ[304+     - "OrbOn" doubled for AI
 
-GZ[320+		- false = 1-hero deny
+GZ[320+		- false = 1-hero deny || Ally in Range 
 GZ[336+	    - jungling initiated (anti-sleep bug)
 
 --boolean udg_bAIMsg
@@ -259,6 +259,7 @@ g_taAITriggers[128+O5] = antistuck in fountain
 hq[528+O5] = defense
 hq[320+O5] = tower defense
 hq[480+O5] = udv asking help
+hq[496+O5] = valued in T8v and AIAttackedByHero  
 hq[576+O5] = changing lane
 hq[848+O5] = gank cd (for lane-lock system)
 
