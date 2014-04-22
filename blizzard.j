@@ -11031,10 +11031,10 @@ endfunction
 function IsHeroPwnable takes unit it,unit IB returns boolean
     return((IsUnitType(it,UNIT_TYPE_HERO))and(R2I(GetWidgetLife(it))<(300+(GetHeroLevel(it)*30)))and(GetUnitLifePercent(it)<40.)and(GetWidgetLife(it)>.405)and(GetUnitState(IB,UNIT_STATE_LIFE)>(GetUnitState(it,UNIT_STATE_LIFE)-(10.*GetHeroLevel(IB)))))
 endfunction
-function IC takes integer O5 returns boolean
+function ai_DoesPlayerAlwaysDie takes integer O5 returns boolean
     return((udg_LBDeaths[O5]-3)>=udg_LBKills[O5])
 endfunction
-function Id takes integer O5 returns boolean
+function ai_IsMainTargetKillable takes integer O5 returns boolean
     return((h4[O5]!=null)and(IsHeroPwnable(h4[O5],udg_Hero[O5])))
 endfunction
 function Ie takes rect r,boolexpr Ig returns unit
