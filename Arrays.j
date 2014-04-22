@@ -133,7 +133,7 @@ hq[880      - courier burst script CD
 hq[896      - courier usage CD
 hq[912		- EnumPoint CD - currently deprecated
 hq[928		- aiEngage CD
-hq[944		- AIAttackedByTower timer (timer started by hero attacks. if under few seconds the AI is hit by tower, AI will fall back)
+hq[944		- AIAttackedByTower timer (timer started by hero attacks. if under few seconds the AI is hit by tower, AI will fall back)|| A Time Counter for Tolerance
 
 ---integer hG (item related)
 hG[O5] = current item ID
@@ -376,3 +376,4 @@ g_aiItemBool[320+ = AI is able to buy scroll from sideshop
 				ga_rSkillCD[16+O5] = spell1
 				ga_rSkillCD[32+O5] = spell2
 				ga_rSkillCD[48+O5] = spell3
+				ga_rSkillCD[64+O5] = Sub spell 

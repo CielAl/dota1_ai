@@ -42,3 +42,12 @@ tmv takes
 Important:
 J3_ChaseThroughFog
 aiRetreat_J1
+AIAttackedByUnit
+IsAIAttackerUnit
+
+Need:
+udv
+AICancelKill     // if need improved -->b_RealBuff2=GetWidgetLife(h4[i])  replaced by other condition
+
+=============
+AIAttackedByHumanHero  Should be Discussed
