@@ -989,7 +989,7 @@ constant integer COMPARE_LESSTHAN=1 //BJ
 constant integer COMPARE_MORETHAN=2
 hashtable hash_main= null
 //AI Operation
-
+real array ga_rSkillCD
 real array hq	
 unit array h4
 boolean array G0
@@ -10856,11 +10856,13 @@ function AI_hero_attack_range takes unit it returns real
         return 550.+ I2R(80*GetUnitAbilityLevel(it,'A03U'))
 	elseif (i1=='E01Y') then
 		return 140+ I2R(60*GetUnitAbilityLevel(it,'A0RO'))
-    elseif((i1=='H000')or(i1=='Harf')or(i1=='Npbm')or(i1=='Hamg')or(i1=='H008')or(i1=='O00J')or(i1=='U00C')or(i1=='U008')or(i1=='Udre')or(i1=='N00R')or(i1=='UC91')or(i1=='H00R')or(i1=='Edem')or(i1=='Nbbc')or(i1=='HC49')or(i1=='Ogrh')or(i1=='H00I')or(i1=='Huth')or(i1=='Hvsh')or(i1=='Ewar')or(i1=='Eevi')or(i1=='E01B')or(i1=='Hmkg'))then
+    elseif((i1=='H000')or(i1=='Harf')or(i1=='Npbm')or(i1=='Hamg')or(i1=='H008')or(i1=='O00J')or(i1=='U00C')or(i1=='U008')or(i1=='Udre')or(i1=='N00R')or(i1=='UC91')or(i1=='H00R')or(i1=='H07I')or(i1=='Edem')or(i1=='Nbbc')or(i1=='HC49')or(i1=='Ogrh')or(i1=='H00I')or(i1=='H00J')or(i1=='Huth')or(i1=='Hvsh')or(i1=='Eevi')or(i1=='E01B')or(i1=='Hmkg'))then
         return 128.
     elseif((i1=='H00T')or(i1=='HC92'))then
         return 128.
-    elseif((i1=='H06S')or(i1=='Otch')or(i1=='N01I')or(i1=='N01H')or(i1=='N01T')or(i1=='N01J')or(i1=='U00K')or(i1=='U00F')or(i1=='Naka')or(i1=='EC45')or(i1=='U000')or(i1=='O015')or(i1=='H071')or(i1=='E02I')or(i1=='N0M0')or(i1=='E02K')or(i1=='E032'))then
+	elseif (i1=='E02N') then
+		return 365.
+    elseif((i1=='H06S')or(i1=='N0MU')or(i1=='Otch')or(i1=='N01I')or(i1=='N01H')or(i1=='N01T')or(i1=='N01J')or(i1=='U00K')or(i1=='U00F')or(i1=='Naka')or(i1=='EC45')or(i1=='U000')or(i1=='O015')or(i1=='H071')or(i1=='E02I')or(i1=='N0M0')or(i1=='E02K')or(i1=='E032'))then
         return 128.
     elseif((i1=='UC42')or(i1=='Udea')or(i1=='Hlgr'))then
         return 128.
@@ -10870,7 +10872,9 @@ function AI_hero_attack_range takes unit it returns real
         return 128.  //250
     elseif((i1=='O00P')or(i1=='Hmbr') or (i1=='E005')) then //Actually E005 is 330
         return 350.
-    elseif((i1=='H00Q')or(i1=='E00P') or (i1=='Hvwd'))then
+	elseif (i1=='O016') or i1=='O017' then
+		return 375.
+    elseif((i1=='H00Q')or(i1=='E00P') or (i1=='Hvwd')or(i1=='Oshd'))then
         return 400.
     elseif(i1=='Ubal')or(i1=='N0M7')then
         return 425.
@@ -10880,20 +10884,29 @@ function AI_hero_attack_range takes unit it returns real
         return 475.
     elseif(i1=='H00S')then
         return 480.
-    elseif((i1=='Nfir')or(i1=='Ntin')or(i1=='Orkn')or(i1=='N01W') or (i1=='Uktl') or (i1=='N016')or (i1=='H00E')or(i1=='H00G')or(i1=='H00F'))then
+    elseif((i1=='Nfir')or(i1=='E02F')or(i1=='E02H')or(i1=='Ntin')or(i1=='Orkn')or(i1=='N01W') or (i1=='Uktl') or (i1=='N016')or (i1=='H00E')or(i1=='H00G')or(i1=='H00F'))then
         return 500.
-    elseif (i1=='N01O')or(i1=='Emoo')or(i1=='UC01')or(i1=='N00B') or ((i1=='Eevm')or(i1=='E02V')or(i1=='E02W')or(i1=='E02U')) or (i1=='Ulic') then
+    elseif (i1=='N01O')or(i1=='Emoo')or(i1=='UC01')or(i1=='N00B') or ((i1=='Eevm')or(i1=='E02V')or(i1=='E02W')or(i1=='E02U')) or (i1=='Ulic')or(i1=='U00E') then
         return 550.
-    elseif(i1=='EC77')then
+    elseif(i1=='EC77')or(i1=='O01F')then
         return 575.
-    elseif((i1=='N01V')or(i1=='N0EG')or(i1=='Emns')or(i1=='Hjai')or(i1=='Hblm')or(i1=='H06W')or(i1=='H06X')or(i1=='H06Y')or((i1=='H00V')or(i1=='H08D')or(i1=='H08C')or(i1=='H084')or(i1=='H08B'))or(i1=='E004')or(i1=='H00A')or(i1=='N01A')or(i1=='Ekee')or(i1=='E01A')or(i1=='UC76')or(i1=='UC18')or(i1=='H00U')or(i1=='U00E')or(i1=='H00H')or(i1=='E01C')or(i1=='N0HP')or(i1=='E02X')or(i1=='H0DO'))then
+    elseif((i1=='N01V')or(i1=='E02J')or(i1=='UC60')or(i1=='N0EG')or(i1=='Emns')or(i1=='Hjai')or(i1=='Hblm')or(i1=='H06W')or(i1=='H06X')or(i1=='H06Y')or((i1=='H00V')or(i1=='H08D')or(i1=='H08C')or(i1=='H084')or(i1=='H08B'))or(i1=='E004')or(i1=='H00A')or(i1=='N01A')or(i1=='Ekee')or(i1=='E01A')or(i1=='UC76')or(i1=='UC18')or(i1=='H00U')or(i1=='H00H')or(i1=='E01C')or(i1=='N0HP')or(i1=='E02X')or(i1=='H0DO'))then
         return 600.
-    elseif (i1=='N0MK') or (i1=='H004')or(i1=='Nbrn')then
+	elseif (i1=='N0MD') then
+		return 620.
+    elseif (i1=='N0MK')or(i1=='N0MM')or(i1=='H004')or(i1=='Nbrn')then
         return 625.
 	elseif (i1=='H00K') then
 		return 700.
 	elseif (i1=='N017') or (i1=='N02B') then //Troll Warlord Melee	
 		return 128.+100.  //Tough
+	elseif (i1=='E015') then //Lyc metaform
+		return 128.+250.
+	elseif ((i1=='Ewar')) then
+		if ga_rSkillCD[32+GetPlayerId(GetOwningPlayer(it))]<Bz and GetUnitState(it,UNIT_STATE_MANA)>50. then
+			return 600.
+		endif
+			return 128.
     elseif  IsUnitType(it,UNIT_TYPE_MELEE_ATTACKER) then
         return 128.
 	else
