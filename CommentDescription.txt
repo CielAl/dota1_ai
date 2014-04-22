@@ -51,3 +51,5 @@ AICancelKill     // if need improved -->b_RealBuff2=GetWidgetLife(h4[i])  replac
 
 =============
 AIAttackedByHumanHero  Should be Discussed
+
+AskNearbyHeroForAssist

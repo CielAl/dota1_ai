@@ -10853,7 +10853,7 @@ function AI_hero_attack_range takes unit it returns real
     local integer i1=GetUnitTypeId(it)
 
     if (i1=='Usyl') then
-        return 550.+ I2R(75*GetUnitAbilityLevel(it,'A03U'))
+        return 550.+ I2R(80*GetUnitAbilityLevel(it,'A03U'))
     elseif((i1=='H000')or(i1=='Harf')or(i1=='Npbm')or(i1=='Hamg')or(i1=='H008')or(i1=='O00J')or(i1=='U00C')or(i1=='U008')or(i1=='Udre')or(i1=='N00R')or(i1=='UC91')or(i1=='H00R')or(i1=='Edem')or(i1=='Nbbc')or(i1=='HC49')or(i1=='Ogrh')or(i1=='H00I')or(i1=='Huth')or(i1=='Hvsh')or(i1=='Ewar')or(i1=='Eevi')or(i1=='E01B')or(i1=='Hmkg'))then
         return 100.
     elseif((i1=='H00T')or(i1=='HC92'))then
@@ -10884,9 +10884,9 @@ function AI_hero_attack_range takes unit it returns real
         return 550.
     elseif(i1=='EC77')then
         return 575.
-    elseif((i1=='N01V')or(i1=='Nbrn')or((i1=='H00V')or(i1=='H08D')or(i1=='H08C')or(i1=='H084')or(i1=='H08B'))or(i1=='E004')or(i1=='H00A')or(i1=='N01A')or(i1=='H004')or(i1=='Ekee')or(i1=='E01A')or(i1=='UC76')or(i1=='UC18')or(i1=='H00U')or(i1=='U00E')or(i1=='H00H')or(i1=='E01C')or(i1=='N0HP')or(i1=='E02X')or(i1=='H0DO'))then
+    elseif((i1=='N01V')or(i1=='Nbrn')or((i1=='H00V')or(i1=='H08D')or(i1=='H08C')or(i1=='H084')or(i1=='H08B'))or(i1=='E004')or(i1=='H00A')or(i1=='N01A')or(i1=='Ekee')or(i1=='E01A')or(i1=='UC76')or(i1=='UC18')or(i1=='H00U')or(i1=='U00E')or(i1=='H00H')or(i1=='E01C')or(i1=='N0HP')or(i1=='E02X')or(i1=='H0DO'))then
         return 600.
-    elseif (i1=='N0MK')then
+    elseif (i1=='N0MK') or (i1=='H004')then
         return 625.
     else
         return 0.
