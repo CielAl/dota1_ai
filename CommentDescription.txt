@@ -60,3 +60,9 @@ T8v_Part1   check i and k   about GZ[204
 		//if everything is not good, kc will be increased by 2, then if kc is not >2 then kc`s init value must =<0; if kc should not >1; init value must <0; i.e. need ally support
 		//actually only where there is more enemies (count value is fixed by ratio) than allies, kc could be >2  
 		//Probably can be improved by a precise calculation of single hero, when it is too tough thus it should not be counted as 1 unit in ratio in war balance
+		Lanes CHanging:1v5//  continuesly died -->assist
+		
+		
+========================
+SF, DS, Ember Spirit		
+		//
