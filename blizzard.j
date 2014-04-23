@@ -10765,7 +10765,9 @@ function ai_GetLocation takes widget it returns location
     return HA
 endfunction
 //Test Function
-
+function IsTestDmg takes unit u returns boolean
+	return LoadInteger(hash_main,GetHandleId(u),StringHash("DamageRegisterAlready"))==1
+endfunction
 function ai_GetHeroArmor takes unit u returns real //MaxLife of Hero is not likely to be very low
 local real OriginLife=GetWidgetLife(u)
 local real life=OriginLife
@@ -10784,13 +10786,15 @@ if u!=null and life>0.405 then
 		set life=DAMAGECONST
 	endif
 	call DisableTrigger(LoadTriggerHandle(hash_main,GetHandleId(u),StringHash("DamageRegisterAlready")))
-    call UnitDamageTarget(u,u,DAMAGECONST,true,false,ATTACK_TYPE_HERO,DAMAGE_TYPE_NORMAL,WEAPON_TYPE_WHOKNOWS)
+    call SaveInteger(hash_main,GetHandleId(u),StringHash("DamageRegisterAlready"),1)
+	call UnitDamageTarget(u,u,DAMAGECONST,true,false,ATTACK_TYPE_HERO,DAMAGE_TYPE_NORMAL,WEAPON_TYPE_WHOKNOWS)
+    call SaveInteger(hash_main,GetHandleId(u),StringHash("DamageRegisterAlready"),0)
 	call EnableTrigger(LoadTriggerHandle(hash_main,GetHandleId(u),StringHash("DamageRegisterAlready")))	
     if Switch then
         call EnableTrigger(t)
     endif
 set end=GetWidgetLife(u)
-call BJDebugMsg("1000*Delta "+R2S(1000*(life)-1000*end))
+//call BJDebugMsg("1000*Delta "+R2S(1000*(life)-1000*end))
 set reduct=1-((life-end))/DAMAGECONST
 set reduct=(1/(1-reduct)-1)/0.06
 
@@ -10882,6 +10886,9 @@ call SvItemAtkDmg('I0OX',100) //Abyssal Blade
 endfunction
 //================
 //===========Condition Check===========
+function ai_HasUnitRegenBuff takes unit whichUnit returns boolean
+	return GetUnitAbilityLevel(whichUnit,'B02Z')>0 or GetUnitAbilityLevel(whichUnit,'BIrg')>0 or GetUnitAbilityLevel(whichUnit,'B0CG')>0
+endfunction
 function GetUnitEHP takes unit whichUnit returns real
     return GetWidgetLife(whichUnit)*hq[752+GetPlayerId(GetOwningPlayer(whichUnit))]
 endfunction
