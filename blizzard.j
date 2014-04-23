@@ -988,12 +988,14 @@ unit hy=null
 constant integer COMPARE_LESSTHAN=1 //BJ
 constant integer COMPARE_MORETHAN=2
 hashtable hash_main= null
+hashtable hash_database=InitHashtable()
 //AI Operation
 real array ga_rSkillCD
 real array hq	
 unit array h4
 boolean array G0
 boolean array GZ
+constant real DAMAGECONST=5
 endglobals
 
 
@@ -10762,6 +10764,123 @@ function ai_GetLocation takes widget it returns location
     call MoveLocation(HA,GetWidgetX(it),GetWidgetY(it))
     return HA
 endfunction
+//Test Function
+
+function ai_GetHeroArmor takes unit u returns real //MaxLife of Hero is not likely to be very low
+local real OriginLife=GetWidgetLife(u)
+local real life=OriginLife
+local real end=0.
+local real reduct=0.
+local trigger t=GetTriggeringTrigger()
+local boolean Switch=false
+
+if u!=null and life>0.405 then
+    if t!=null and IsTriggerEnabled(t) then
+        call DisableTrigger(t)
+        set Switch=true
+    endif    
+	if OriginLife<=DAMAGECONST then
+		call SetWidgetLife(u,DAMAGECONST)
+		set life=DAMAGECONST
+	endif
+	call DisableTrigger(LoadTriggerHandle(hash_main,GetHandleId(u),StringHash("DamageRegisterAlready")))
+    call UnitDamageTarget(u,u,DAMAGECONST,true,false,ATTACK_TYPE_HERO,DAMAGE_TYPE_NORMAL,WEAPON_TYPE_WHOKNOWS)
+	call EnableTrigger(LoadTriggerHandle(hash_main,GetHandleId(u),StringHash("DamageRegisterAlready")))	
+    if Switch then
+        call EnableTrigger(t)
+    endif
+set end=GetWidgetLife(u)
+call BJDebugMsg("1000*Delta "+R2S(1000*(life)-1000*end))
+set reduct=1-((life-end))/DAMAGECONST
+set reduct=(1/(1-reduct)-1)/0.06
+
+	call SetWidgetLife(u,OriginLife)
+	return reduct
+endif
+return 0.
+endfunction
+
+
+
+
+//Data
+function SvItemAtkDmg takes integer ItemId, real AttackDmg returns nothing
+	call SaveReal(hash_database,StringHash("ItemData")+ItemId,'Aatk',AttackDmg)
+endfunction
+function LoadItemAtkDmg takes integer ItemId returns real
+	return LoadReal(hash_database,StringHash("ItemData")+ItemId,'Aatk')
+endfunction
+function ai_GetUnitAtkItemBonus takes unit whichUnit returns real
+	local integer i=0
+	local real Sum=0.
+	loop
+		exitwhen i>5
+		set Sum=Sum+LoadItemAtkDmg(GetItemTypeId(UnitItemInSlot(whichUnit,i)))
+		set i=i+1
+	endloop	
+	
+	return Sum
+endfunction
+function ai_InitItemAtkDmg takes nothing returns nothing
+call SvItemAtkDmg('I045',9) //"Blades of Attack"
+call SvItemAtkDmg('I046',18) //"BroadSword"
+call SvItemAtkDmg('I04S',10) //"QuarterStaff"
+call SvItemAtkDmg('I048',21) //Claymore
+call SvItemAtkDmg('I04M',24) //Mythril
+call SvItemAtkDmg('I055',21) //Javelin
+call SvItemAtkDmg('I06F',15) //OblivonStaff
+call SvItemAtkDmg('I06H',3) //Bracer
+call SvItemAtkDmg('I06J',3) //Wraith Band
+call SvItemAtkDmg('I06L',3) //Null Talisman
+call SvItemAtkDmg('I062',10) //Preserverance
+call SvItemAtkDmg('I0GJ',24) //Phase Boots
+call SvItemAtkDmg('I06H',9) //Ring of Aquila
+call SvItemAtkDmg('I0NE',3) //AncientJanggo
+call SvItemAtkDmg('I067',6) //Ring of Basilius
+call SvItemAtkDmg('I09M',9) //Dagon1
+call SvItemAtkDmg('I09P',9) //Dagon2
+call SvItemAtkDmg('I09N',9) //Dagon3
+call SvItemAtkDmg('I09O',9) //Dagon4
+call SvItemAtkDmg('I09L',9) //Dagon5
+call SvItemAtkDmg('I012',30) //Orchid Malevolence
+call SvItemAtkDmg('I0AJ',40) //RefreshOrb
+call SvItemAtkDmg('I0FZ',24) //BKB10
+call SvItemAtkDmg('I0G0',24) //BKB9
+call SvItemAtkDmg('I0FY',24) //BKB8
+call SvItemAtkDmg('I0FS',24) //BKB7
+call SvItemAtkDmg('I09D',24) //BKB6
+call SvItemAtkDmg('I0G1',24) //BKB5
+call SvItemAtkDmg('I0P8',24) //BKB4
+call SvItemAtkDmg('I08O',22) //BladeMail
+call SvItemAtkDmg('I09Z',10) //Linken Main
+call SvItemAtkDmg('I0HJ',10) //Linken in CD
+call SvItemAtkDmg('I096',16) //Sange Yasha
+call SvItemAtkDmg('I08H',10) //Sange
+call SvItemAtkDmg('I0AB',20) //Satanic
+call SvItemAtkDmg('I08T',20) //Helm of Dominator
+call SvItemAtkDmg('I08R',20)	//Diffusal Lv2, COnditionally
+call SvItemAtkDmg('I0J9',36) //Diffusal Lv2, COnditionally
+call SvItemAtkDmg('I0OV',25) //Heaven`s Halberd
+call SvItemAtkDmg('I097',60) //Stygian Desolator , -7 armor
+call SvItemAtkDmg('I08P',24) //Maelstrom
+call SvItemAtkDmg('I0BE',24) //Mjollnir
+call SvItemAtkDmg('I049',46) //Demon Edge
+call SvItemAtkDmg('I04X',60) //Scared Ralic
+call SvItemAtkDmg('I0A8',60) //Radiance
+call SvItemAtkDmg('I0A1',300) //Devine Main
+call SvItemAtkDmg('L0LK',300) //Devine Dummy
+call SvItemAtkDmg('I0A3',81) //´óÅÚ
+call SvItemAtkDmg('I09C',30) //Crystalys
+call SvItemAtkDmg('I0A5',88) //MKB¡¡Active
+call SvItemAtkDmg('I0K7',88) //MKB Inactive
+call SvItemAtkDmg('I0AI',30) //ButterFly
+call SvItemAtkDmg('I00Q',40) //Armlet Inactive Conditional;;; can be switched by anytime
+call SvItemAtkDmg('I00M',40) //Armlet Active
+call SvItemAtkDmg('I09H',22) //Lothar
+call SvItemAtkDmg('I08K',40) //Basher
+call SvItemAtkDmg('I0OX',100) //Abyssal Blade
+endfunction
+//================
 //===========Condition Check===========
 function GetUnitEHP takes unit whichUnit returns real
     return GetWidgetLife(whichUnit)*hq[752+GetPlayerId(GetOwningPlayer(whichUnit))]
