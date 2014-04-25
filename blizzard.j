@@ -10892,6 +10892,11 @@ call SvItemAtkDmg('I09H',22) //Lothar
 call SvItemAtkDmg('I08K',40) //Basher
 call SvItemAtkDmg('I0OX',100) //Abyssal Blade
 endfunction
+function GetHeroBATime takes unit Hero returns real
+	return 1.
+endfunction
+
+
 
 function datSvReal takes integer pKey,string cKey,real value returns nothing
 	call SaveReal(hash_database,pKey,StringHash(cKey),value)
