@@ -262,7 +262,7 @@ hq[480+O5] = udv asking help
 hq[496+O5] = valued in T8v and AIAttackedByHero  
 hq[576+O5] = changing lane
 hq[848+O5] = gank cd (for lane-lock system)
-
+hq[860+O5] = Armor Value
 new item system:
 =================================================================
 ga_uCirclesOfPower[O5] = usual COP
@@ -304,7 +304,7 @@ g_aiItemInt[176+O5] = substituting isUnitAtFountain by Bz (new item func only)
 
 g_aiItemInt[192+O5] = total gold spent in sim mode
 
-g_aiItemInt[208+O5] = child identifier for simulation mode's Sv/LdBool
+g_aiItemInt[208+O5] = child identifier for simulation mode's Sv/LdBool      
 g_aiItemInt[224+O5] = child identifier for sell mode's Sv/LdInt (prevent selling of fresh items, prevent double item combines)
 g_aiItemInt[240+O5] = total core item step
 g_aiItemInt[256+O5] = child identifier for bear items Sv/LdBool
