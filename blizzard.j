@@ -960,7 +960,7 @@ integer gg_Item_BootsOfSpeed
 	constant integer ATK_SIEGE=3
 	constant integer ATK_HERO=6
 	constant integer ATK_PIERCE=2	
-	constant integer ATK_NORMAL=0 // string normal, need to confirm		
+	constant integer ATK_NORMAL=1 // string normal, need to confirm		
 	constant integer ATK_CHAOS=5
 	//Transport
 	 player g_aiPVisibilitySent=null
@@ -1001,6 +1001,25 @@ unit array h4
 boolean array G0
 boolean array GZ
 constant real DAMAGECONST=5
+
+//boolexpr Buff
+integer ibuff_UnitType=0
+unit ubuff_CoreUnit=null
+player pbuff_CoreUnit=null
+
+
+//IAS
+constant integer IASCheck_BySelf=0
+constant integer IASCheck_Ally=1
+constant integer IASCheck_Enemy=2
+constant integer IASCheck_BySkill=3
+constant integer IASUnitType_All=-1
+constant integer IASUnitType_PANDAREN=-2
+//group Operate of IAS
+group ai_IAS_Pool=CreateGroup()
+unit ai_IAS_Enum=null
+integer ai_IAS_Level=0
+integer aiBuff_IAS_Abil=0
 endglobals
 
 
@@ -10600,6 +10619,30 @@ function UnitDropItem takes unit inUnit, integer inItemID returns item
 
     return droppedItem
 endfunction
+//StartAI
+
+//Fundamental Filters ||Atoms
+function FilterAlwaysTrue takes nothing returns boolean
+    return true
+endfunction
+function AllHumanHeroFilter takes nothing returns boolean
+	return GetPlayerController(GetOwningPlayer(GetFilterUnit()))==MAP_CONTROL_USER and IsUnitType(GetFilterUnit(),UNIT_TYPE_HERO)==true
+endfunction
+
+function AIFilter_Enemy takes nothing returns nothing
+	
+endfunction
+
+function ai_FilterSelectTypeBuff takes nothing returns boolean
+	return GetUnitTypeId(GetFilterUnit())== ibuff_UnitType
+endfunction
+function ai_FilterEnemyBuff takes nothing returns boolean
+	return IsUnitEnemy(GetFilterUnit(),pbuff_CoreUnit)
+endfunction
+function ai_FilterAllyBuff takes nothing returns boolean
+	return IsUnitAlly(GetFilterUnit(),pbuff_CoreUnit)
+endfunction
+
 // Hashtable Operation
 
 function CheckHeroState takes unit hI,string Hh returns boolean
@@ -10866,7 +10909,7 @@ call SvItemAtkDmg('I0P8',24) //BKB4
 call SvItemAtkDmg('I08O',22) //BladeMail
 call SvItemAtkDmg('I09Z',10) //Linken Main
 call SvItemAtkDmg('I0HJ',10) //Linken in CD
-call SvItemAtkDmg('I096',16) //Sange Yasha
+call SvItemAtkDmg('I095',16) //Sange Yasha
 call SvItemAtkDmg('I08H',10) //Sange
 call SvItemAtkDmg('I0AB',20) //Satanic
 call SvItemAtkDmg('I08T',20) //Helm of Dominator
@@ -11140,6 +11183,125 @@ function InitHeroDataMain takes nothing returns nothing
 	call ExecuteFunc("InitDataBaseElder")	
 endfunction
 //================
+
+function SvItemIAS takes integer ItemId, real IAS returns nothing
+	call SaveReal(hash_database,StringHash("ItemData")+ItemId,'vIAS',IAS)
+endfunction
+//Item IAS 
+function ai_LoadItemIAS takes nothing returns nothing
+call SvItemIAS('I02T',30)
+call SvItemIAS('I05Y',30)
+call SvItemIAS('I05Z',30) //Power Threads
+call SvItemIAS('I06D',30) //Midas
+call SvItemIAS('I012',30)
+call SvItemIAS('I04S',10)//Quarterstaff 
+call SvItemIAS('I06F',10)//Oblivon Staff
+call SvItemIAS('I0AI',30)//Butterfly
+call SvItemIAS('I09H',30)//Lothar
+call SvItemIAS('I0PB',30)//Shadow Amulet
+call SvItemIAS('I04F',55)//Hyperstone
+call SvItemIAS('I08P',25)//Maelstrom
+call SvItemIAS('I0BE',80)//Mjollnir
+call SvItemIAS('I095',16)//SangeAndYasha
+call SvItemIAS('I08G',15)//Yasha
+call SvItemIAS('I00Q',25)//Armlet , should be 15--> take the maxium value 25 of the activated mode
+call SvItemIAS('I00M',25)//Armlet (Activated)
+call SvItemIAS('I0A5',15)//MKB (Activated)
+call SvItemIAS('I0K7',15)//MKB (deactivated)
+call SvItemIAS('I09F',15) //Mantastyle
+call SvItemIAS('I0MU',15)//Mantastyle ranged
+call SvItemIAS('I0BJ',35)//Assault Cuirass
+endfunction
+
+function ai_SvIASBuff takes integer AbilCode,integer BuffId,integer UnitType,integer Check,real IAS1,real IAS2, real IAS3,real IAS4 returns nothing
+	call SaveInteger(hash_database,StringHash("IASBuff")+BuffId,'Abil',AbilCode)
+	call SaveInteger(hash_database,StringHash("IASBuff")+BuffId,'CHEC',Check)
+	call SaveInteger(hash_database,StringHash("IASBuff")+BuffId,'TYPE',UnitType)
+	call SaveReal(hash_database,StringHash("IASBuff")+BuffId,1,IAS1)
+		call SaveReal(hash_database,StringHash("IASBuff")+BuffId,2,IAS2)
+			call SaveReal(hash_database,StringHash("IASBuff")+BuffId,3,IAS3)
+				call SaveReal(hash_database,StringHash("IASBuff")+BuffId,4,IAS4)
+endfunction
+function ai_LoadIASBuff takes nothing returns nothing
+call ai_SvIASBuff('AIxk','B07S',IASUnitType_All,IASCheck_BySelf,100,100,100,100)//Mask of Madness //Byself-- Single Data. The values are independent of skill level
+//if it is a Aura only impacts on oneself, plz use Abilcode as the buff code in the System
+// Hope IceFrog  the bastard won`t be a bit more wise to use Different buffID for each lvl, damn it.
+call ai_SvIASBuff('A1ZX','B0DX',IASUnitType_All,IASCheck_BySkill,10,10,10,10) //Janggoo boost //Bounding skill. like aura
+call ai_SvIASBuff('A20Q','B0E3',IASUnitType_All,IASCheck_BySelf,5,5,5,5) //Janggoo Aura
+call ai_SvIASBuff('A0Q4','B07Q',IASUnitType_All,IASCheck_BySelf,15,15,15,15) //Assault Cuirass Aura
+call ai_SvIASBuff('A0SY','B08P',IASUnitType_All,IASCheck_BySelf,-40,-40,-40,-40) //Shivas Guard Aura
+
+call ai_SvIASBuff('A06A','B01B','Harf',IASCheck_Enemy,-7,-14,-21,-28) //Omniknight Degen Aura ȫŜǯʿ
+call ai_SvIASBuff('A0BD','B00E','H00D',IASCheck_Ally,18,26,32,40) //Beast Master  Aura ||Rexar
+
+
+call ai_SvIASBuff('A0OO','B06Z','H00D',IASCheck_Enemy,-20,-20,-20,-35) //lvl1 QuilBeast of BM   Aura ||Rexar 
+//Redirect B06Z venom buff of quilbeast to BM`s summon skill
+
+endfunction
+// group ai_IAS_Pool=CreateGroup()
+// unit ai_IAS_Enum=null
+// integer ai_IAS_Level=0
+// integer aiBuff_IAS_Abil=0
+function ai_BuffCheckSource_Enum takes nothing returns nothing
+local integer Lvl=GetUnitAbilityLevel(GetEnumUnit(),aiBuff_IAS_Abil)
+	if (ai_IAS_Enum==null) or Lvl>=ai_IAS_Level then
+		set ai_IAS_Enum=GetEnumUnit()
+		set aiBuff_IAS_Abil=Lvl
+	endif
+endfunction 
+function ai_GetBuffSourceUnit takes unit whichUnit,integer SourceUnitType,integer SourceAbility,integer Check returns unit
+local boolexpr bxpr_Force=null
+	call GroupClear(ai_IAS_Pool)
+	set aiBuff_IAS_Abil=SourceAbility
+	//Boolexpr Init
+	set pbuff_CoreUnit=GetOwningPlayer(whichUnit)
+	if Check== IASCheck_Ally then
+		set bxpr_Force=Condition(function ai_FilterAllyBuff)
+	else 
+	//Check==IASCheck_Enemy then
+		set bxpr_Force=Condition(function ai_FilterEnemyBuff)	
+	//else	
+	endif
+	if SourceUnitType>1 then
+		set ibuff_UnitType=SourceUnitType
+		set bxpr_Force=And(Condition(function ai_FilterSelectTypeBuff),bxpr_Force)
+	endif	
+	call GroupEnumUnitsInRect(ai_IAS_Pool,bj_mapInitialPlayableArea,bxpr_Force)
+	call ForGroup(ai_IAS_Pool,function ai_BuffCheckSource_Enum)
+	call DestroyBoolExpr(bxpr_Force)
+	set bxpr_Force=null
+	set pbuff_CoreUnit=null
+	return ai_IAS_Enum
+endfunction
+function GetIASDataBuff takes unit whichUnit,integer BuffID returns real
+	local integer pKey=StringHash("IASBuff")+BuffID
+	local integer Check=LoadInteger(hash_database,pKey,'CHEC')
+	local integer Abil=0
+	local integer SourceType=0
+	//local boolexpr bxpr_Force=null
+	if Check==IASCheck_BySelf then
+		return LoadReal(hash_database,pKey,GetUnitAbilityLevel(whichUnit,BuffID)) //Level, only useful to those self-aura--as thus the buffID will be replaced by Abilcode, nothing else.
+	elseif Check==IASCheck_BySkill then
+		set Abil=LoadInteger(hash_database,pKey,'Abil')
+		return LoadReal(hash_database,pKey,GetUnitAbilityLevel(whichUnit,Abil)) //Return Lvl of bounding skill
+	elseif Check==IASCheck_Ally or Check==IASCheck_Enemy then
+		set SourceType=LoadInteger(hash_database,pKey,'TYPE')
+		set Abil=LoadInteger(hash_database,pKey,'Abil')		
+		return LoadReal(hash_database,pKey,GetUnitAbilityLevel(ai_GetBuffSourceUnit(whichUnit,SourceType,Abil,Check),Abil))
+		//call DestroyBoolExpr(bxpr_Force)
+		//set bxpr_Force=null
+	elseif true then
+	
+	
+	endif
+	return 0.
+endfunction
+
+
+function ai_InitIASData takes nothing returns nothing
+	call ExecuteFunc("ai_LoadIASBuff")
+endfunction
 //===========Condition Check===========
 function ai_HasUnitRegenBuff takes unit whichUnit returns boolean
 	return GetUnitAbilityLevel(whichUnit,'B02Z')>0 or GetUnitAbilityLevel(whichUnit,'BIrg')>0 or GetUnitAbilityLevel(whichUnit,'B0CG')>0
@@ -11658,16 +11820,7 @@ function AI_ClearWay_CountHP takes unit Hero, unit Target, real X, real Y, real 
     return bj_forLoopAIndex==0
 endfunction
 //====================================================================
-
-function FilterAlwaysTrue takes nothing returns boolean
-    return true
-endfunction
-function AllHumanHeroFilter takes nothing returns boolean
-	return GetPlayerController(GetOwningPlayer(GetFilterUnit()))==MAP_CONTROL_USER and IsUnitType(GetFilterUnit(),UNIT_TYPE_HERO)==true
-endfunction
-
-function AIFilter_Enemy takes nothing returns nothing
-endfunction
+//Complex Filters
 function ai_HeroIsChanneling takes nothing returns boolean
 	return AI_Not_Channeling(GetFilterUnit())==false
 endfunction
