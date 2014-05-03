@@ -1020,6 +1020,10 @@ group ai_IAS_Pool=CreateGroup()
 unit ai_IAS_Enum=null
 integer ai_IAS_Level=0
 integer aiBuff_IAS_Abil=0
+integer array ai_IASItem
+integer ai_IASList_Top=0
+integer array ai_IASBuff
+integer  ai_IASBuff_Top=0
 endglobals
 
 
@@ -10620,7 +10624,40 @@ function UnitDropItem takes unit inUnit, integer inItemID returns item
     return droppedItem
 endfunction
 //StartAI
-
+            function DEBUGid2s_Help takes integer i returns string 
+                local string s_1 = "0123456789"
+                local string s_2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                local string s_3 = "abcdefghijklmnopqrstuvwxyz"
+            
+                if i >= 48 and i <= 57 then
+                    return SubString(s_1, i - 48, i - 47)
+                elseif i >= 65 and i <= 90 then
+                    return SubString(s_2, i - 65, i - 64)
+                elseif i >= 97 and i <= 122 then
+                    return SubString(s_3, i - 97, i - 96)
+                endif
+                return ""
+            endfunction
+            function dID2S takes integer i returns string
+                local integer j
+                local string s=""
+                local integer k=0
+            
+                loop
+                    exitwhen k>3
+                    set j = ModuloInteger(i,256)
+                        set i = (i - j) / 256
+                        set s = DEBUGid2s_Help(j) + s
+                        
+                    set k=k+1
+                endloop
+                
+                if StringLength(s)==4 then
+                    return s
+                endif
+                return "?"
+            endfunction
+            
 //Fundamental Filters ||Atoms
 function FilterAlwaysTrue takes nothing returns boolean
     return true
@@ -11183,12 +11220,20 @@ function InitHeroDataMain takes nothing returns nothing
 	call ExecuteFunc("InitDataBaseElder")	
 endfunction
 //================
-
+//integer array ai_IASItem
+//integer ai_IASList_Top=0
+//integer array ai_IASBuff
+//integer  ai_IASBuff_Top=0
 function SvItemIAS takes integer ItemId, real IAS returns nothing
+if not HaveSavedReal(hash_database,StringHash("ItemData")+ItemId,'vIAS') then
+	set ai_IASItem[ai_IASList_Top]=ItemId
+	set ai_IASList_Top=ai_IASList_Top+1
+endif	
 	call SaveReal(hash_database,StringHash("ItemData")+ItemId,'vIAS',IAS)
 endfunction
 //Item IAS 
 function ai_LoadItemIAS takes nothing returns nothing
+call SvItemIAS('I02P',15) //Glove
 call SvItemIAS('I02T',30)
 call SvItemIAS('I05Y',30)
 call SvItemIAS('I05Z',30) //Power Threads
@@ -11213,31 +11258,97 @@ call SvItemIAS('I0MU',15)//Mantastyle ranged
 call SvItemIAS('I0BJ',35)//Assault Cuirass
 endfunction
 
-function ai_SvIASBuff takes integer AbilCode,integer BuffId,integer UnitType,integer Check,real IAS1,real IAS2, real IAS3,real IAS4 returns nothing
-	call SaveInteger(hash_database,StringHash("IASBuff")+BuffId,'Abil',AbilCode)
-	call SaveInteger(hash_database,StringHash("IASBuff")+BuffId,'CHEC',Check)
-	call SaveInteger(hash_database,StringHash("IASBuff")+BuffId,'TYPE',UnitType)
-	call SaveReal(hash_database,StringHash("IASBuff")+BuffId,1,IAS1)
-		call SaveReal(hash_database,StringHash("IASBuff")+BuffId,2,IAS2)
-			call SaveReal(hash_database,StringHash("IASBuff")+BuffId,3,IAS3)
-				call SaveReal(hash_database,StringHash("IASBuff")+BuffId,4,IAS4)
+function ai_SvIASBuff takes integer AbilCode,integer BuffId,integer UnitType,integer Check,real IAS1,real IAS2, real IAS3,real IAS4,boolean Mark returns nothing
+local integer pKey=StringHash("IASBuff")+BuffId
+if (not HaveSavedInteger(hash_database,pKey,'Abil')) and (not Mark) then			
+	set ai_IASBuff[ai_IASBuff_Top]=BuffId
+	set  ai_IASBuff_Top=ai_IASBuff_Top+1		
+elseif not Mark then 
+	 //call ai_SvIASBuff(AbilCode,BuffId-StringHash("IASBuff")+StringHash("PhaseB"),UnitType,Check,IAS1,IAS2,IAS3,IAS4,true) 
+	set pKey=BuffId+StringHash("PhaseB")
+	//return
+endif	
+	call SaveInteger(hash_database,pKey,'Abil',AbilCode)
+	call SaveInteger(hash_database,pKey,'CHEC',Check)
+	call SaveInteger(hash_database,pKey,'TYPE',UnitType)
+	call SaveReal(hash_database,pKey,1,IAS1)
+	call SaveReal(hash_database,pKey,2,IAS2)
+	call SaveReal(hash_database,pKey,3,IAS3)
+	call SaveReal(hash_database,pKey,4,IAS4)
+
 endfunction
 function ai_LoadIASBuff takes nothing returns nothing
-call ai_SvIASBuff('AIxk','B07S',IASUnitType_All,IASCheck_BySelf,100,100,100,100)//Mask of Madness //Byself-- Single Data. The values are independent of skill level
+call ai_SvIASBuff('AIxk','B07S',IASUnitType_All,IASCheck_BySelf,100,100,100,100,false)//Mask of Madness //Byself-- Single Data. The values are independent of skill level
 //if it is a Aura only impacts on oneself, plz use Abilcode as the buff code in the System
 // Hope IceFrog  the bastard won`t be a bit more wise to use Different buffID for each lvl, damn it.
-call ai_SvIASBuff('A1ZX','B0DX',IASUnitType_All,IASCheck_BySkill,10,10,10,10) //Janggoo boost //Bounding skill. like aura
-call ai_SvIASBuff('A20Q','B0E3',IASUnitType_All,IASCheck_BySelf,5,5,5,5) //Janggoo Aura
-call ai_SvIASBuff('A0Q4','B07Q',IASUnitType_All,IASCheck_BySelf,15,15,15,15) //Assault Cuirass Aura
-call ai_SvIASBuff('A0SY','B08P',IASUnitType_All,IASCheck_BySelf,-40,-40,-40,-40) //Shivas Guard Aura
+call ai_SvIASBuff('A1ZX','B0DX',IASUnitType_All,IASCheck_BySkill,10,10,10,10,false) //Janggoo boost //Bounding skill. like aura
+call ai_SvIASBuff('A20Q','B0E3',IASUnitType_All,IASCheck_BySelf,5,5,5,5,false) //Janggoo Aura
+call ai_SvIASBuff('A0Q4','B07Q',IASUnitType_All,IASCheck_BySelf,20,20,20,20,false) //Assault Cuirass Aura
+call ai_SvIASBuff('A0SY','B08P',IASUnitType_All,IASCheck_BySelf,-40,-40,-40,-40,false) //Shivas Guard Aura
 
-call ai_SvIASBuff('A06A','B01B','Harf',IASCheck_Enemy,-7,-14,-21,-28) //Omniknight Degen Aura ȫŜǯʿ
-call ai_SvIASBuff('A0BD','B00E','H00D',IASCheck_Ally,18,26,32,40) //Beast Master  Aura ||Rexar
+call ai_SvIASBuff('A06A','B01B','Harf',IASCheck_Enemy,-7,-14,-21,-28,false) //Omniknight Degen Aura ȫŜǯʿ
+call ai_SvIASBuff('A0BD','B00E','H00D',IASCheck_Ally,18,26,32,40,false) //Beast Master  Aura ||Rexar
 
 
-call ai_SvIASBuff('A0OO','B06Z','H00D',IASCheck_Enemy,-20,-20,-20,-35) //lvl1 QuilBeast of BM   Aura ||Rexar 
+call ai_SvIASBuff('A0OO','B06Z','H00D',IASCheck_Enemy,-20,-20,-20,-35,false) //lvl1 QuilBeast of BM   Aura ||Rexar 
 //Redirect B06Z venom buff of quilbeast to BM`s summon skill
+call ai_SvIASBuff('A06M','BHtc','Npbm',IASCheck_Enemy,-25,-35,-45,-55,false) //Even The ElementPanda counts the lvl of HeroThunderClap
+call ai_SvIASBuff('A1TS','A1TS',IASUnitType_All,IASCheck_BySelf,40,40,40,40,false) //IO A28Q Lvl1
+call ai_SvIASBuff('A1TR','A1TR',IASUnitType_All,IASCheck_BySelf,50,50,50,50,false) //IO A28Q Lvl2
+call ai_SvIASBuff('A1TT','A1TT',IASUnitType_All,IASCheck_BySelf,60,60,60,60,false) //IO A28Q Lvl3
+call ai_SvIASBuff('A10A','B09C','e01V',IASCheck_BySelf,-35,35,35,35,false) //Tiny Grow Lvl2 Plus
+call ai_SvIASBuff('A10B','B04E','e01V',IASCheck_BySelf,-20,-20,-20,-20,false) //Tiny Grow Lvl1
+call ai_SvIASBuff('A0ZS','B09E','e01V',IASCheck_BySelf,-50,-50,-50,-50,false)//Tiny Grow lv3
+//The IAS is impacted by all 3 aura --(For tiny,false),i.e. once upgraded then add a new aura to the global dummy. Calculate the sum
+call ai_SvIASBuff('Afrb','Bfro',IASUnitType_All,IASCheck_BySelf,-20,-20,-20,-20,false)//Frost Attack of DK Knight  Davion
+																													//Also Lich-->shared constant of Frost Attack 
+ call ai_SvIASBuff('A1YS','B0DT','o01J',IASCheck_BySelf,-30,-30,-30,-30,false)  //Tuskar`s Rune(Ymir,false)
+ call ai_SvIASBuff('A1YU','B0DU','o01K',IASCheck_BySelf,-40,-40,-40,-40,false)
+ call ai_SvIASBuff('A1YV','B0DS','o01L',IASCheck_BySelf,-50,-50,-50,-50,false)
+ call ai_SvIASBuff('A1YT','B0DR','o01M',IASCheck_BySelf,-60,-60,-60,-60,false)
+  call ai_SvIASBuff('A1YX','A2L8','E02F',IASCheck_BySelf,-150,-150,-150,-150,false)// Icarus Phoenix FireSpirit Disarm
+  //Tresdin--Should count as double attack by chance-- similar to criticle 2Xattack
+call ai_SvIASBuff('A0T2','A0SR','U00C',IASCheck_BySelf,30,45,60,80,false) //Naix Rage
+ call ai_SvIASBuff('A0MG','B065','Udea',IASCheck_Ally,10,20,30,40,false) //Abbadon Frostmourne  ||Avoid GroupEnum Aloc units in range
+ call ai_SvIASBuff('A0MG','B066','Udea',IASCheck_Enemy,-5,-10,-15,-20,false) //Abbadon Frostmourne-Enemy  
+ call ai_SvIASBuff('A01Y','B0EP','NC00',IASCheck_Enemy,-30,-30,-30,-30,false) //SNK Ult		
+ call ai_SvIASBuff('A06R','B02V','U00K',IASCheck_BySelf,-30,-30,-30,-30,false) //SK Ult		
+ call ai_SvIASBuff('A12R','A12R',IASUnitType_All,IASCheck_BySelf,999,999,999,999,false) //WindRunner Ult 
+  call ai_SvIASBuff('A03R','B09J',IASUnitType_All,IASCheck_Enemy,-20,-20,-20,-20,false) //Crystal Maiden Ult 
+  call ai_SvIASBuff('A0AV','B09J',IASUnitType_All,IASCheck_Enemy,-50,-50,-50,-50,false) 
+   
+   call ai_SvIASBuff('A18Y','B0B1',IASUnitType_All,IASCheck_BySelf,40,40,40,40,false) // Lina Lust
+    call ai_SvIASBuff('A19I','B0B8',IASUnitType_All,IASCheck_BySelf,55,55,55,55,false) //
+   call ai_SvIASBuff('A19K','B0B3',IASUnitType_All,IASCheck_BySelf,70,70,70,70,false) //
+   call ai_SvIASBuff('A19L','B0B5',IASUnitType_All,IASCheck_BySelf,85,85,85,85,false) //  
+   call ai_SvIASBuff('A1IQ','A1IW',IASUnitType_All,IASCheck_BySelf,-25,-25,-25,-25,false) //  Bounty Hunder Passive
+   call ai_SvIASBuff('A10D','B03C',IASUnitType_All,IASCheck_Enemy,-10,-20,-30,-40,false) //  Bounty Hunder Passive   
+      call ai_SvIASBuff('A0O8','A1G5',IASUnitType_All,IASCheck_BySelf,-20,-20,-20,-20,false)
+	  call ai_SvIASBuff('A0O8','A1G3',IASUnitType_All,IASCheck_BySelf,-30,-30,-30,-30,false)
+	  call ai_SvIASBuff('A0O8','A1G6',IASUnitType_All,IASCheck_BySelf,-40,-40,-40,-40,false)
+	 call ai_SvIASBuff('A0O8','A1G4',IASUnitType_All,IASCheck_BySelf,-50,-50,-50,-50,false)
+ call ai_SvIASBuff('A08X','Bcri',IASUnitType_All,IASCheck_BySelf,-64,-64,-64,-64,false)	  //Vissage Enemy - 1st skill
+  call ai_SvIASBuff('A09C','Bcrs',IASUnitType_All,IASCheck_BySelf,64,64,64,64,false)	 //Vissage Self Bonus- 1st skill
+    call ai_SvIASBuff('A0DW','B043','Emoo',IASCheck_Enemy,-20,-50,-80,-110,false)	//Enchantress Skin
+    call ai_SvIASBuff('A09V','Bpoi','EC77',IASCheck_Enemy,-10,-20,-30,-40,false)	 //Viper Orb
+	 call ai_SvIASBuff('A0MM','A23W','EC77',IASCheck_BySelf,-10,-10,-10,-10,false)//Corrosive Skin of Vip
+	 call ai_SvIASBuff('A0MM','A23U','EC77',IASCheck_BySelf,-15,-15,-15,-15,false)
+	 call ai_SvIASBuff('A0MM','A23V','EC77',IASCheck_BySelf,-20,-20,-20,-20,false)
+	 call ai_SvIASBuff('A0MM','A23X','EC77',IASCheck_BySelf,-25,-25,-25,-25,false)	 
 
+	 call ai_SvIASBuff('A080','B001','EC77',IASCheck_Enemy,-40,-60,-80,-25,false)		 //VIP Ult
+	 call ai_SvIASBuff('A030','B00S','E004',IASCheck_BySelf,130,130,130,130,false)	 //Clinkz|| Bone Fletcher`s 1st skill
+	 call ai_SvIASBuff('A1SA','B0D9',IASUnitType_All,IASCheck_Enemy,-50,-50,-50,-50,false)	 //Clinkz|| Bone Fletcher`s 1st skill 
+	 call ai_SvIASBuff('A0XE','B00B',IASUnitType_All,IASCheck_BySkill,60,120,180,180,false) //Troll Rampage
+	 call ai_SvIASBuff('A0AE','B016',IASUnitType_All,IASCheck_Ally,10,20,30,40,false)   //Druid`s 2nd skill
+	 call ai_SvIASBuff('A2LM','A2M4',IASUnitType_All,IASCheck_BySelf,50,50,50,50,false) //Zet
+	 call ai_SvIASBuff('A2LM','A2M5',IASUnitType_All,IASCheck_BySelf,60,60,60,60,false) 
+	 call ai_SvIASBuff('A2LM','A2M6',IASUnitType_All,IASCheck_BySelf,70,70,70,70,false) 
+	call ai_SvIASBuff('A2LM','A2M7',IASUnitType_All,IASCheck_BySelf,80,80,80,80,false) 
+	call ai_SvIASBuff('A02R','B00P',IASUnitType_All,IASCheck_BySelf,-35,-35,-35,-35,false) 		
+endfunction
+function ai_XtraAbilityIAS takes unit whichUnit returns real
+	return GetUnitAbilityLevel(whichUnit,'A0VE')*2+ GetUnitAbilityLevel(whichUnit,'A0VE')*20. //Wex, Troll`s Passive
 endfunction
 // group ai_IAS_Pool=CreateGroup()
 // unit ai_IAS_Enum=null
@@ -11245,14 +11356,19 @@ endfunction
 // integer aiBuff_IAS_Abil=0
 function ai_BuffCheckSource_Enum takes nothing returns nothing
 local integer Lvl=GetUnitAbilityLevel(GetEnumUnit(),aiBuff_IAS_Abil)
-	if (ai_IAS_Enum==null) or Lvl>=ai_IAS_Level then
+	if (ai_IAS_Enum==null) or Lvl>ai_IAS_Level then
 		set ai_IAS_Enum=GetEnumUnit()
 		set aiBuff_IAS_Abil=Lvl
+		
 	endif
 endfunction 
 function ai_GetBuffSourceUnit takes unit whichUnit,integer SourceUnitType,integer SourceAbility,integer Check returns unit
 local boolexpr bxpr_Force=null
 	call GroupClear(ai_IAS_Pool)
+	set ai_IAS_Enum=null
+	if SourceAbility==0 then
+		call BJDebugMsg("Source Skill Code =0")
+	endif
 	set aiBuff_IAS_Abil=SourceAbility
 	//Boolexpr Init
 	set pbuff_CoreUnit=GetOwningPlayer(whichUnit)
@@ -11266,19 +11382,25 @@ local boolexpr bxpr_Force=null
 	if SourceUnitType>1 then
 		set ibuff_UnitType=SourceUnitType
 		set bxpr_Force=And(Condition(function ai_FilterSelectTypeBuff),bxpr_Force)
+	else
+	
 	endif	
 	call GroupEnumUnitsInRect(ai_IAS_Pool,bj_mapInitialPlayableArea,bxpr_Force)
 	call ForGroup(ai_IAS_Pool,function ai_BuffCheckSource_Enum)
 	call DestroyBoolExpr(bxpr_Force)
 	set bxpr_Force=null
 	set pbuff_CoreUnit=null
+	//call BJDebugMsg("Name "+GetUnitName(ai_IAS_Enum))
 	return ai_IAS_Enum
 endfunction
-function GetIASDataBuff takes unit whichUnit,integer BuffID returns real
+function GetIASDataBuff takes unit whichUnit,integer BuffID,boolean Mark returns real
 	local integer pKey=StringHash("IASBuff")+BuffID
 	local integer Check=LoadInteger(hash_database,pKey,'CHEC')
 	local integer Abil=0
 	local integer SourceType=0
+	local unit Source=null
+	local real Result=0.
+if GetUnitAbilityLevel(whichUnit,BuffID)!=0 then
 	//local boolexpr bxpr_Force=null
 	if Check==IASCheck_BySelf then
 		return LoadReal(hash_database,pKey,GetUnitAbilityLevel(whichUnit,BuffID)) //Level, only useful to those self-aura--as thus the buffID will be replaced by Abilcode, nothing else.
@@ -11287,19 +11409,67 @@ function GetIASDataBuff takes unit whichUnit,integer BuffID returns real
 		return LoadReal(hash_database,pKey,GetUnitAbilityLevel(whichUnit,Abil)) //Return Lvl of bounding skill
 	elseif Check==IASCheck_Ally or Check==IASCheck_Enemy then
 		set SourceType=LoadInteger(hash_database,pKey,'TYPE')
-		set Abil=LoadInteger(hash_database,pKey,'Abil')		
-		return LoadReal(hash_database,pKey,GetUnitAbilityLevel(ai_GetBuffSourceUnit(whichUnit,SourceType,Abil,Check),Abil))
+		set Abil=LoadInteger(hash_database,pKey,'Abil')	
+		set Source=ai_GetBuffSourceUnit(whichUnit,SourceType,Abil,Check)
+		set Result=LoadReal(hash_database,pKey,GetUnitAbilityLevel(Source,Abil) )
+		if Result==0. and not Mark then
+
+			set Abil=LoadInteger(hash_database,BuffID+StringHash("PhaseB"),'Abil')	
+		call BJDebugMsg("Iterate! "+dID2S(Abil)+" "+GetUnitName(Source))			
+			set Result=LoadReal(hash_database,BuffID+StringHash("PhaseB"),GetUnitAbilityLevel(Source,Abil))			
+			set Source=null
+			return Result
+			//return GetIASDataBuff(whichUnit,BuffID-StringHash("IASBuff")+StringHash("PhaseB"),true)
+		endif
+		set Source=null
+		return Result
 		//call DestroyBoolExpr(bxpr_Force)
 		//set bxpr_Force=null
 	elseif true then
 	
 	
 	endif
+endif	
 	return 0.
 endfunction
-
-
+function ai_GetItemIASValue takes integer ItemID returns real
+//call BJDebugMsg("Item: "+GetObjectName(ItemID)+" "+R2S(LoadReal(hash_database,StringHash("ItemData")+ItemID,'vIAS')))
+	return  LoadReal(hash_database,StringHash("ItemData")+ItemID,'vIAS')
+endfunction
+function ai_GetUnitItemIAS takes unit whichUnit returns real
+local integer i=0
+local real Result=0.
+loop
+	exitwhen i>5
+	set Result=Result+ ai_GetItemIASValue(GetItemTypeId(UnitItemInSlot(whichUnit,i)))
+	set i=i+1
+endloop	
+//	call BJDebugMsg("ItemSum IAS "+R2S(Result))
+	return Result
+endfunction
+function ai_GetUnitBasicIAS takes unit whichUnit returns real
+//	call BJDebugMsg("Stat IAS "+R2S(0.+GetHeroAgi(whichUnit,true)))
+	return 0.+GetHeroAgi(whichUnit,true)
+endfunction
+function ai_GetUnitBuffIAS takes unit whichUnit returns real
+	local integer i=0
+	local real Result=0.
+	loop 
+		exitwhen i>=ai_IASBuff_Top
+		set Result=Result+GetIASDataBuff(whichUnit,ai_IASBuff[i],false)
+		set i=i+1
+	endloop
+	call BJDebugMsg("SumBuffIAS "+R2S(Result))
+	return Result
+endfunction
+//==================================
+function ai_GetTotalIAS takes unit whichUnit returns real
+call Rem("Need Test")
+	return ai_GetUnitItemIAS(whichUnit)+ai_GetUnitBasicIAS(whichUnit)+ai_GetUnitBuffIAS(whichUnit)+ai_XtraAbilityIAS(whichUnit)
+endfunction
+//==================================
 function ai_InitIASData takes nothing returns nothing
+	call ExecuteFunc("ai_LoadItemIAS")
 	call ExecuteFunc("ai_LoadIASBuff")
 endfunction
 //===========Condition Check===========
@@ -11334,7 +11504,7 @@ function IsEnsnared takes unit u returns boolean
     return(GetUnitAbilityLevel((u),('B0C1'))>0)or(GetUnitAbilityLevel((u),('BEer'))>0)or(GetUnitAbilityLevel((u),('Beng'))>0)or(GetUnitAbilityLevel((u),('Bena'))>0)or(GetUnitAbilityLevel((u),('B017'))>0)or(GetUnitAbilityLevel((u),('B078'))>0)or(GetUnitAbilityLevel((u),('B08F'))>0)or(GetUnitAbilityLevel((u),('B08E'))>0)or(GetUnitAbilityLevel((u),('B0ER'))>0)or(GetUnitAbilityLevel((u),('B0FN'))>0)
 endfunction
 function IsStunned takes unit u returns boolean
-    return(GetUnitAbilityLevel((u),('B00H'))>0)or(GetUnitAbilityLevel((u),('BOhx'))>0)or(GetUnitAbilityLevel((u),('BPSE'))>0)or(GetUnitAbilityLevel((u),('B099'))>0)or(GetUnitAbilityLevel((u),('BSTN'))>0)or(GetUnitAbilityLevel((u),('B0CF'))>0)or(GetUnitAbilityLevel((u),('B0BM'))>0)or(GetUnitAbilityLevel((u),('B06M'))>0)or(GetUnitAbilityLevel((u),('B07N'))>0)or(GetUnitAbilityLevel((u),('B08S'))>0)or(GetUnitAbilityLevel((u),('B00Q'))>0)or(GetUnitAbilityLevel((u),('B04V'))>0)or(GetUnitAbilityLevel((u),('B072'))>0)or(GetUnitAbilityLevel((u),('BUan'))>0)or(GetUnitAbilityLevel((u),('B095'))>0)or(GetUnitAbilityLevel((u),('B03I'))>0)or(GetUnitAbilityLevel((u),('B0AD'))>0)or(GetUnitAbilityLevel((u),('B0AE'))>0)or(GetUnitAbilityLevel((u),('B0BE'))>0)or(GetUnitAbilityLevel((u),('B0BF'))>0)or(GetUnitAbilityLevel((u),('B008'))>0)or(GetUnitAbilityLevel((u),('B04B'))>0)or(GetUnitAbilityLevel((u),('B02F'))>0)or(GetUnitAbilityLevel((u),('BUsp'))>0)or(GetUnitAbilityLevel((u),('BUst'))>0)or(GetUnitAbilityLevel((u),('B0DD'))>0)or(CheckHeroState(u,"DisruptionState")==true)or(CheckHeroState(u,"AstralImprisonmentState")==true)or(GetUnitAbilityLevel((u),('B0C2'))>0)or(GetUnitAbilityLevel((u),('B06S'))>0)or(GetUnitAbilityLevel((u),('B02S'))>0)or(GetUnitAbilityLevel((u),('B07E'))>0)
+    return (GetUnitCurrentOrder(u)==851973) or (GetUnitAbilityLevel((u),('B00H'))>0)or(GetUnitAbilityLevel((u),('BOhx'))>0)or(GetUnitAbilityLevel((u),('BPSE'))>0)or(GetUnitAbilityLevel((u),('B099'))>0)or(GetUnitAbilityLevel((u),('BSTN'))>0)or(GetUnitAbilityLevel((u),('B0CF'))>0)or(GetUnitAbilityLevel((u),('B0BM'))>0)or(GetUnitAbilityLevel((u),('B06M'))>0)or(GetUnitAbilityLevel((u),('B07N'))>0)or(GetUnitAbilityLevel((u),('B08S'))>0)or(GetUnitAbilityLevel((u),('B00Q'))>0)or(GetUnitAbilityLevel((u),('B04V'))>0)or(GetUnitAbilityLevel((u),('B072'))>0)or(GetUnitAbilityLevel((u),('BUan'))>0)or(GetUnitAbilityLevel((u),('B095'))>0)or(GetUnitAbilityLevel((u),('B03I'))>0)or(GetUnitAbilityLevel((u),('B0AD'))>0)or(GetUnitAbilityLevel((u),('B0AE'))>0)or(GetUnitAbilityLevel((u),('B0BE'))>0)or(GetUnitAbilityLevel((u),('B0BF'))>0)or(GetUnitAbilityLevel((u),('B008'))>0)or(GetUnitAbilityLevel((u),('B04B'))>0)or(GetUnitAbilityLevel((u),('B02F'))>0)or(GetUnitAbilityLevel((u),('BUsp'))>0)or(GetUnitAbilityLevel((u),('BUst'))>0)or(GetUnitAbilityLevel((u),('B0DD'))>0)or(CheckHeroState(u,"DisruptionState")==true)or(CheckHeroState(u,"AstralImprisonmentState")==true)or(GetUnitAbilityLevel((u),('B0C2'))>0)or(GetUnitAbilityLevel((u),('B06S'))>0)or(GetUnitAbilityLevel((u),('B02S'))>0)or(GetUnitAbilityLevel((u),('B07E'))>0)
 endfunction
 function IsReallyStunned takes unit u returns boolean
     return IsStunned(u)or IsEnsnared(u)or IsUnitPaused(u)or IsCycloned(u)
