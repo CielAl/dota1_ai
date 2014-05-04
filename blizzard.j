@@ -983,8 +983,12 @@ boolean isDebug=false
 integer debugCurrent=-1	 
 unit GetWeakestHero_Exclude=null
 unit hy=null
+
+//Transported DataArray
+integer array presstheattack_speed
+integer array AttSpeedBonusBit
 	//
-	group bj_globalGroup=null
+group bj_globalGroup=null
 
 
 
@@ -11462,10 +11466,36 @@ function ai_GetUnitBuffIAS takes unit whichUnit returns real
 	call BJDebugMsg("SumBuffIAS "+R2S(Result))
 	return Result
 endfunction
+function ai_GetInternalIASBonus takes unit whichUnit returns real
+local integer ListEnd=8 
+local integer i=0
+local real Result=0.
+	loop
+		exitwhen i>ListEnd
+		if GetUnitAbilityLevel(whichUnit,AttSpeedBonusBit[i])>0 then
+			set Result=Result+Pow(2,i) 
+		endif
+		set i=i+1
+	endloop
+return Result	
+endfunction
+function ai_GetPressAttackBonus takes unit whichUnit returns real //Tresdin
+local integer ListEnd=4
+local integer i=1
+local real Result=0.
+	loop
+		exitwhen i>ListEnd
+		if GetUnitAbilityLevel(whichUnit,presstheattack_speed[i])>0 then
+			set Result=Result+i*20+40
+		endif
+		set i=i+1
+	endloop
+return Result	
+endfunction
 //==================================
 function ai_GetTotalIAS takes unit whichUnit returns real
 call Rem("Need Test")
-	return ai_GetUnitItemIAS(whichUnit)+ai_GetUnitBasicIAS(whichUnit)+ai_GetUnitBuffIAS(whichUnit)+ai_XtraAbilityIAS(whichUnit)
+	return  ai_GetPressAttackBonus(whichUnit)+ai_GetInternalIASBonus(whichUnit)+ai_GetUnitItemIAS(whichUnit)+ai_GetUnitBasicIAS(whichUnit)+ai_GetUnitBuffIAS(whichUnit)+ai_XtraAbilityIAS(whichUnit)
 endfunction
 //==================================
 function ai_InitIASData takes nothing returns nothing
