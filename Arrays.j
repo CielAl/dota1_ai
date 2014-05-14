@@ -158,6 +158,7 @@ HW[16+  = misc items
 HC[O5] - last hero order location (updated every point or target order)
 
 ---boolean G0
+G0[id]=true  - being attacked by a tower
 G0[64+id]=true - Moving to h9[id] (retreating)
 G0[32+O5]=true - Used Healing Salve, Tango
 G0[48+O5]      - activated g_taAITriggers[64+O5] (temporary back-off)
@@ -181,6 +182,8 @@ G0[320    = returning to base for item purpose
 G0[336	  = gank issue kill signal
 
 G0[352	  = temporarily disable tp
+
+G0[396 =WQv State
 
 
 ---boolean GZ
@@ -261,8 +264,12 @@ hq[320+O5] = tower defense
 hq[480+O5] = udv asking help
 hq[496+O5] = valued in T8v and AIAttackedByHero  
 hq[576+O5] = changing lane
+hq[752+O5] = EHP Bonus Rate
 hq[848+O5] = gank cd (for lane-lock system)
 hq[860+O5] = Armor Value
+hq[884+O5]= Evasion Rate
+hq[872+O5]= Fraction of Dmg
+
 new item system:
 =================================================================
 ga_uCirclesOfPower[O5] = usual COP

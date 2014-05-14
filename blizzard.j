@@ -987,6 +987,10 @@ unit hy=null
 //Transported DataArray
 integer array presstheattack_speed
 integer array AttSpeedBonusBit
+integer array duel_damagebonus_ability
+integer array DamageBonusBit
+integer array StaticLink_DmgBonus
+integer array StaticLink_DmgReduce
 	//
 group bj_globalGroup=null
 
@@ -1019,6 +1023,9 @@ constant integer IASCheck_Enemy=2
 constant integer IASCheck_BySkill=3
 constant integer IASUnitType_All=-1
 constant integer IASUnitType_PANDAREN=-2
+
+
+
 //group Operate of IAS
 group ai_IAS_Pool=CreateGroup()
 unit ai_IAS_Enum=null
@@ -1028,6 +1035,18 @@ integer array ai_IASItem
 integer ai_IASList_Top=0
 integer array ai_IASBuff
 integer  ai_IASBuff_Top=0
+//Atk
+integer array ai_AbilAtkList
+real array ai_AbilAtkVar
+real array ai_AbilAtkOffset
+real array ai_AbilAtkManaReq
+real array ai_AbilAtkLifeReq
+integer ai_AbilAtkTop=0
+            
+//integer array duel_damagebonus_ability
+//integer array DamageBonusBit
+
+boolean b_TestV2=false
 endglobals
 
 
@@ -10661,7 +10680,11 @@ endfunction
                 endif
                 return "?"
             endfunction
-            
+            function DbgMsg3 takes integer O5 ,string s returns nothing
+			if b_TestV2 then
+				call DisplayTextToPlayer(GetLocalPlayer(),0,0,s)
+			endif	
+			endfunction
 //Fundamental Filters ||Atoms
 function FilterAlwaysTrue takes nothing returns boolean
     return true
@@ -10690,7 +10713,23 @@ function CheckHeroState takes unit hI,string Hh returns boolean
     return LoadInteger(hash_main,GetHandleId(hI),StringHash("state"+Hh))==1
 endfunction
 
-
+function UnitHasItemOfType takes unit it,integer Iz returns boolean
+    local integer I8=0
+    local item ja
+    set bj_lastCreatedItem=null
+    loop
+        set ja=UnitItemInSlot(it,I8)
+        if((ja!=null)and(GetItemTypeId(ja)==Iz))then
+            set bj_lastCreatedItem=ja
+            set ja=null
+            return true
+        endif
+        set I8=I8+1
+        exitwhen I8>=bj_MAX_INVENTORY
+    endloop
+    set ja=null
+    return false
+endfunction
 //===========================================================================
 function WidgetDropItem takes widget inWidget, integer inItemID returns item
     local real x
@@ -10731,7 +10770,9 @@ endfunction
             function BoolRem takes string s returns boolean
             return true
             endfunction
-			
+            function BoolRemForOr takes string s returns boolean
+            return false
+            endfunction			
 function DebugBool takes string s,boolean b returns boolean
     if(b)then
         call DisplayTimedTextToPlayer(GetLocalPlayer(),0,0,16.,s+" is true")
@@ -10857,6 +10898,27 @@ endfunction
 function IsTestDmg takes unit u returns boolean
 	return LoadInteger(hash_main,GetHandleId(u),StringHash("DamageRegisterAlready"))==1
 endfunction
+function ai_GetEvasion takes unit whichUnit returns real
+	if GetUnitAbilityLevel(whichUnit,'ACes')>0 or  GetUnitAbilityLevel(whichUnit,'A135')>0 then
+		return 1.
+	elseif 	GetUnitAbilityLevel(whichUnit,'A03P')==4 then
+		return 0.4
+	elseif  GetUnitAbilityLevel(whichUnit,'AIev')>0	then
+		return 0.35
+	elseif 	GetUnitAbilityLevel(whichUnit,'A03P')==3 then
+		return 0.3		
+	elseif 	GetUnitAbilityLevel(whichUnit,'A03P')==2 or GetUnitAbilityLevel(whichUnit,'A0MX')==4 or GetUnitAbilityLevel(whichUnit,'A1BZ')>0 or  GetUnitAbilityLevel(whichUnit,'A2K6')>0 then
+		return 0.25
+	elseif GetUnitAbilityLevel(whichUnit,'A03P')==1 or GetUnitAbilityLevel(whichUnit,'A0MX')==3  then
+		return 0.2
+	elseif GetUnitAbilityLevel(whichUnit,'A0MX')==2 then 
+		return 0.15
+	elseif GetUnitAbilityLevel(whichUnit,'A0MX')==1 then
+		return 0.1
+	endif
+		return 0.
+endfunction
+
 function ai_GetHeroArmor takes unit u returns real //MaxLife of Hero is not likely to be very low
 local real OriginLife=GetWidgetLife(u)
 local real life=OriginLife
@@ -10896,8 +10958,87 @@ endif
 return 0.
 endfunction
 
+function ai_SaveAtkLinearBonus takes integer AbilCode, real DmgLvl1,real Offset,real ManaReq,real LifeReq returns nothing
+	set ai_AbilAtkList[ai_AbilAtkTop]=AbilCode
+	set ai_AbilAtkVar[ai_AbilAtkTop]=DmgLvl1
+	set ai_AbilAtkOffset[ai_AbilAtkTop]=Offset
+	set ai_AbilAtkManaReq[ai_AbilAtkTop]=ManaReq 
+	set ai_AbilAtkLifeReq[ai_AbilAtkTop]=LifeReq
+	set ai_AbilAtkTop=ai_AbilAtkTop+1
+	
+endfunction
+function ai_LoadLinearAtkAbil takes nothing returns nothing
+	call ai_SaveAtkLinearBonus('A11O',15.,0.,0.,0.) //Kunkka- TideBringer
+	call ai_SaveAtkLinearBonus('A0CY',50.,0.,0.,0.) //Tiny`s Ult
+	call ai_SaveAtkLinearBonus('A0RF',20.,0.,0.,0.) //TA`s Refraction
+	call ai_SaveAtkLinearBonus('A0CQ',2.,-2.,0.,0.) //Shadow Fiend`s Necromastry
+	call ai_SaveAtkLinearBonus('A2OG',-30.,0.,0.,0.) //Enfeeble(Bane)
+	call ai_SaveAtkLinearBonus('A2OA',-60.,0.,0.,0.)
+	call ai_SaveAtkLinearBonus('A2OF',-90.,0.,0.,0.)
+	call ai_SaveAtkLinearBonus('A2OH',-120.,0.,0.,0.)	
+	call ai_SaveAtkLinearBonus('AHfa',10.,10.,8.,0.)	
+	call ai_SaveAtkLinearBonus('A109',10.,10.,0.,0.) //Alarcrity of Involker 
+	call ai_SaveAtkLinearBonus('A0V7',3.,0.,0.,0.)//Exort of Involker
+endfunction
+function ai_GetInternalDmgBonus takes unit whichUnit returns real //RealityRift||Ancestral Charge||Ursa||Bristleback`s Warpaths||Bone Fletcher
+local integer PowerEnd=8
+local integer i=0
+local real Result=0.
+	loop
+		exitwhen i>PowerEnd
+		if GetUnitAbilityLevel(whichUnit,DamageBonusBit[i])>0 then
+			set Result=Result+Pow(2,i)
+		endif
+		//Tresdin`s Duel Bonus
+		if GetUnitAbilityLevel(whichUnit,duel_damagebonus_ability[i])>0 then
+				set Result=Result+Pow(2,i)	
+		endif
+		set i=i+1
+	endloop
+return Result	
+endfunction
+function ai_StaticLinkCalculate takes unit whichUnit returns real
+local integer PowerEnd=7
+local integer i=0
+local real Result=0.
+	loop
+		exitwhen i>PowerEnd
+		if GetUnitAbilityLevel(whichUnit,StaticLink_DmgBonus[i])>0 then
+			set Result=Result+Pow(2,i)
+		endif
+		//Razor`s StaticLink Bonus
+		if GetUnitAbilityLevel(whichUnit,StaticLink_DmgReduce[i])>0 then
+				set Result=Result-Pow(2,i)	
+		endif
+		set i=i+1
+	endloop
+return Result	
+endfunction
+function ai_AtkDmgAbilityByLvl takes integer IndexID, integer Lvl returns real
+if Lvl==0 then
+	return 0.
+endif
+	return ai_AbilAtkVar[IndexID]*Lvl+ai_AbilAtkOffset[IndexID]
 
 
+endfunction
+function ai_AtkGetSum takes unit whichUnit returns real
+	local real Result=0.
+	local integer i=0
+		loop 
+			exitwhen i>=ai_AbilAtkTop
+			if GetUnitState(whichUnit,UNIT_STATE_MANA)>=ai_AbilAtkManaReq[i] and  GetUnitState(whichUnit,UNIT_STATE_LIFE)>= ai_AbilAtkLifeReq[i] then
+				set Result=Result+ai_AtkDmgAbilityByLvl(i,GetUnitAbilityLevel(whichUnit,ai_AbilAtkList[i]))
+			else
+				set Result=Result+20.
+			endif
+		endloop	
+	
+		
+		return Result
+endfunction
+
+//=============================================
 
 //Data
 function SvItemAtkDmg takes integer ItemId, real AttackDmg returns nothing
@@ -10965,9 +11106,9 @@ call SvItemAtkDmg('I04X',60) //Scared Ralic
 call SvItemAtkDmg('I0A8',60) //Radiance
 call SvItemAtkDmg('I0A1',300) //Devine Main
 call SvItemAtkDmg('L0LK',300) //Devine Dummy
-call SvItemAtkDmg('I0A3',81) //´óÅÚ
+call SvItemAtkDmg('I0A3',81) //
 call SvItemAtkDmg('I09C',30) //Crystalys
-call SvItemAtkDmg('I0A5',88) //MKB¡¡Active
+call SvItemAtkDmg('I0A5',88) //MKBActive
 call SvItemAtkDmg('I0K7',88) //MKB Inactive
 call SvItemAtkDmg('I0AI',30) //ButterFly
 call SvItemAtkDmg('I00Q',40) //Armlet Inactive Conditional;;; can be switched by anytime
@@ -10976,11 +11117,6 @@ call SvItemAtkDmg('I09H',22) //Lothar
 call SvItemAtkDmg('I08K',40) //Basher
 call SvItemAtkDmg('I0OX',100) //Abyssal Blade
 endfunction
-function GetHeroBATime takes unit Hero returns real
-	return 1.
-endfunction
-
-
 
 function datSvReal takes integer pKey,string cKey,real value returns nothing
 	call SaveReal(hash_database,pKey,StringHash(cKey),value)
@@ -10997,6 +11133,7 @@ endfunction
 function datSvAgent takes integer pKey,string cKey,agent value returns nothing
 	call SaveAgentHandle(hash_database,pKey,StringHash(cKey),value)
 endfunction
+//dmgplus1 
 
 function InitUnitBalanceData takes integer HeroID,real castpt,real castbsw,real RngBuff1,real atkType1,real cool1,real dice1,real sides1,real dmgplus1,real mindmg1,real avgdmg1,real maxdmg1,real dmgpt1,real backSw1,integer STR,integer INT,integer AGI,real STRplus,real INTplus,real AGIplus,integer Primary,real sight,real nsight,real def,real uHP,real realHP,real regenHP returns nothing
 	call datSvReal(HeroID,"castpt",castpt)
@@ -11223,6 +11360,49 @@ function InitHeroDataMain takes nothing returns nothing
 	call ExecuteFunc("InitDataBaseChild2")
 	call ExecuteFunc("InitDataBaseElder")	
 endfunction
+function ai_IsAbilTypeChannel takes integer AbilCode returns boolean
+	if AbilCode=='A0AV' or AbilCode=='A03R' then //Crystal Maiden
+		return true
+	endif	
+	if AbilCode=='A1AA' then //TC
+		return  true
+	endif
+	if AbilCode=='A06P' then  //Wl
+		return  true
+	endif	
+	if AbilCode=='A02Q' or AbilCode=='A1D9' then //Bane
+		return  true
+	endif	
+	if AbilCode=='A085' then  //Elazor
+		return  true
+	endif
+	if AbilCode=='A00P' then  //Shadow Shaman -3
+		return  true
+	endif
+	if AbilCode=='A0NT' then  //Witch Doctor -4
+		return  true
+	endif
+	if AbilCode=='A1BX' then  //Enigma -4  -Blachhole
+		return  true
+	endif	
+	if AbilCode=='A0FL' or AbilCode=='A06D' then //Butcher-4 
+		return  true
+	endif		
+	if AbilCode=='A0H0'  then//Sand King -2 
+		return  true
+	endif		
+	if AbilCode=='A06R' or AbilCode=='A1B4' then //Sand King-4 
+		return  true
+	endif		
+	if AbilCode=='A0CC' or AbilCode=='A02Z' then //Oblivion -4 
+		return  true
+	endif			
+	if AbilCode=='A02N'  then//Demon Witch -3 
+		return  true
+	endif		
+	
+	return false
+endfunction
 //================
 //integer array ai_IASItem
 //integer ai_IASList_Top=0
@@ -11320,7 +11500,7 @@ call ai_SvIASBuff('A0T2','A0SR','U00C',IASCheck_BySelf,30,45,60,80,false) //Naix
  call ai_SvIASBuff('A12R','A12R',IASUnitType_All,IASCheck_BySelf,999,999,999,999,false) //WindRunner Ult 
   call ai_SvIASBuff('A03R','B09J',IASUnitType_All,IASCheck_Enemy,-20,-20,-20,-20,false) //Crystal Maiden Ult 
   call ai_SvIASBuff('A0AV','B09J',IASUnitType_All,IASCheck_Enemy,-50,-50,-50,-50,false) 
-   
+   call ai_SvIASBuff('A083','Bblo',IASUnitType_All,IASCheck_Ally,20,30,40,50,false) 
    call ai_SvIASBuff('A18Y','B0B1',IASUnitType_All,IASCheck_BySelf,40,40,40,40,false) // Lina Lust
     call ai_SvIASBuff('A19I','B0B8',IASUnitType_All,IASCheck_BySelf,55,55,55,55,false) //
    call ai_SvIASBuff('A19K','B0B3',IASUnitType_All,IASCheck_BySelf,70,70,70,70,false) //
@@ -11453,7 +11633,7 @@ endloop
 endfunction
 function ai_GetUnitBasicIAS takes unit whichUnit returns real
 //	call BJDebugMsg("Stat IAS "+R2S(0.+GetHeroAgi(whichUnit,true)))
-	return 0.+GetHeroAgi(whichUnit,true)
+	return 0.+I2R(GetHeroAgi(whichUnit,true))
 endfunction
 function ai_GetUnitBuffIAS takes unit whichUnit returns real
 	local integer i=0
@@ -11495,12 +11675,70 @@ endfunction
 //==================================
 function ai_GetTotalIAS takes unit whichUnit returns real
 call Rem("Need Test")
+
 	return  ai_GetPressAttackBonus(whichUnit)+ai_GetInternalIASBonus(whichUnit)+ai_GetUnitItemIAS(whichUnit)+ai_GetUnitBasicIAS(whichUnit)+ai_GetUnitBuffIAS(whichUnit)+ai_XtraAbilityIAS(whichUnit)
 endfunction
 //==================================
 function ai_InitIASData takes nothing returns nothing
 	call ExecuteFunc("ai_LoadItemIAS")
 	call ExecuteFunc("ai_LoadIASBuff")
+endfunction
+
+// //DPS Calculate
+function ai_GetHeroActualBATime takes unit Hero returns real
+local real IAS_var=ai_GetTotalIAS(Hero)
+ local real BATime=LoadReal(hash_database,GetUnitTypeId(Hero),StringHash("cool1"))
+	if IAS_var>400 then
+		set IAS_var=400
+	elseif IAS_var<-80 then
+		set IAS_var=-80
+	endif
+	if BATime==0 then
+		return 1
+	endif	
+	return BATime*100/(100+IAS_var)
+endfunction
+function ai_GetGroundAttack takes unit whichUnit returns real
+local integer pKey=GetUnitTypeId(whichUnit)
+	return LoadReal(hash_database,pKey,StringHash("dmgplus1"))+ LoadReal(hash_database,pKey,StringHash("dice1"))*0.5*(1+LoadReal(hash_database,pKey,StringHash("sides1")))
+endfunction
+function ai_GetStatAttack takes unit whichUnit,boolean IsBonus returns real
+	local integer pKey=GetUnitTypeId(whichUnit)
+	local integer Type=LoadInteger(hash_database,pKey,StringHash("Primary"))
+	if Type==HEROTYPE_STR then
+		return GetHeroStr(whichUnit,IsBonus)
+	elseif Type==HEROTYPE_AGI then
+		return GetHeroAgi(whichUnit,IsBonus)	
+	elseif Type==HEROTYPE_INT then
+		return GetHeroInt(whichUnit,IsBonus)	
+	elseif  IsUnitType(whichUnit,UNIT_TYPE_HERO)==false then
+		return 0.
+	endif
+		return  20.14
+endfunction
+function ai_GetBasicAttack takes unit whichUnit returns  real //Calculate for  Buff Bonus only
+	return  ai_GetGroundAttack(whichUnit)+ai_GetStatAttack(whichUnit,false)
+endfunction
+function ai_GetUnitAttack takes unit whichUnit returns real
+local real NonAbil= ai_GetGroundAttack(whichUnit)+ai_GetStatAttack(whichUnit,true)+ai_GetUnitAtkItemBonus(whichUnit)
+	local real VonAbil=ai_StaticLinkCalculate(whichUnit)+ai_GetInternalDmgBonus(whichUnit)+ai_AtkGetSum(whichUnit)
+	return NonAbil+VonAbil
+endfunction
+function ai_GetDmgByAttackInTime takes unit Source,unit Target,real SupposedTime returns real
+	local real AtkTime=SupposedTime/ai_GetHeroActualBATime(Source)
+	if AtkTime<=0 then
+		set AtkTime=1 
+	endif	
+	return ai_GetUnitAttack(Source)*AtkTime*hq[872+GetPlayerId(GetOwningPlayer(Target))]*(1-ai_GetEvasion(Target))
+endfunction 
+function ai_GetCriticleExpection takes unit whichUnit returns real
+		return 1.*ai_GetUnitAttack(whichUnit)
+endfunction
+function ai_GetCleaveArea takes unit whichUnit returns real
+		return  0.
+endfunction
+function ai_GetCleaveCoeff takes unit whichUnit returns real
+		return  1.
 endfunction
 //===========Condition Check===========
 function ai_HasUnitRegenBuff takes unit whichUnit returns boolean
@@ -12019,8 +12257,32 @@ function AI_ClearWay_CountHP takes unit Hero, unit Target, real X, real Y, real 
     set g=null
     return bj_forLoopAIndex==0
 endfunction
+//StartAI Dynamic Constants
+function ai_GetThresholdLifeChange takes integer O5 returns real
+	if G0[128+O5] then
+		return -0.12
+	endif
+	return 0.05
+	//0.05 //serve for LifePercent Change
+endfunction
 //====================================================================
 //Complex Filters
 function ai_HeroIsChanneling takes nothing returns boolean
 	return AI_Not_Channeling(GetFilterUnit())==false
+endfunction
+function ai_IsAIAtkCheck takes unit whichUnit returns real
+	if GetUnitAbilityLevel(whichUnit,'Abun')>0 or  GetUnitAbilityLevel(whichUnit,'B017')>0 or  GetUnitAbilityLevel(whichUnit,'B0ER')>0 then
+		return 0.
+	elseif IsStunned(whichUnit) or IsUnitPaused(whichUnit) then
+		return 0.
+	elseif 	UnitHasItemOfType(whichUnit,Item_Real[gg_Item_MonkeyKingBar])==false then
+		if  GetUnitAbilityLevel(whichUnit,'B02P')>0 then
+			return 0.
+		elseif GetUnitAbilityLevel(whichUnit,'BNdh')>0 then
+			return 0.3
+		elseif GetLocationZ(ai_GetLocation(whichUnit))>GetLocationZ(ai_GetLocation(h4[GetPlayerId(GetOwningPlayer(whichUnit))])) then
+			return 0.85
+		endif
+	endif
+		return 1.
 endfunction

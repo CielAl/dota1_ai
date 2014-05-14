@@ -5,18 +5,14 @@
 //Change:
 //Move To BJ
 //BJ
-
-
 //AIModify:    Modified for AI but does not matter
-
 //AIModify2:  Modified for AI but might cause difference.
-
-
 function toBJ...
 function ToBJ...
 
 
 Lib:
+h4[O5] and h4[UP]
 StateTransWpt
 AI_InitAI
 
