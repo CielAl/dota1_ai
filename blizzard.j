@@ -1459,7 +1459,7 @@ function QueuedTriggerRemoveBJ takes trigger trig returns nothing
     set trigIndex = QueuedTriggerGetIndex(trig)
     if (trigIndex == -1) then
         return
-    endif
+    endif 
 
     // Shuffle the other trigger entries down to fill in the gap.
     call QueuedTriggerRemoveByIndex(trigIndex)
@@ -12286,3 +12286,4 @@ function ai_IsAIAtkCheck takes unit whichUnit returns real
 	endif
 		return 1.
 endfunction
+
